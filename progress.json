@@ -1,0 +1,80 @@
+{
+  "project": "ai-huiyilu-prototype v18 重设计",
+  "description": "将 prototype-v17 的 17 屏小程序原型整体重设计为「暖阳奶油」风格（#FAF6F0 底 + 陶土橙 #D96C47 + 白卡圆角 + 微信小程序胶囊规范），保留全部交互",
+  "created_at": "2026-07-05T22:55:00+08:00",
+  "updated_at": "2026-07-05T22:55:00+08:00",
+  "tasks": [
+    {
+      "id": 1,
+      "title": "初始化：复制 v17 为 v18，git init",
+      "description": "复制 prototype-v17.html → prototype-v18.html，git init 并首次提交基线",
+      "acceptance_criteria": ["prototype-v18.html 存在且与 v17 一致", "git log 有 init 提交"],
+      "priority": 1,
+      "status": "in_progress",
+      "depends_on": [],
+      "started_at": "2026-07-05T22:55:00+08:00",
+      "completed_at": null,
+      "notes": ""
+    },
+    {
+      "id": 2,
+      "title": "重写设计 token 与全局样式",
+      "description": "替换 :root 色板与字体/圆角/阴影体系为暖阳奶油系统，去照片背景依赖，类名不动",
+      "acceptance_criteria": ["新 token 生效", "无组件引用已删除的旧 token（Chrome 渲染无回退异常）"],
+      "priority": 2,
+      "status": "pending",
+      "depends_on": [1],
+      "started_at": null,
+      "completed_at": null,
+      "notes": ""
+    },
+    {
+      "id": 3,
+      "title": "重设计讲述 Tab 各屏",
+      "description": "session（含采访各态）/summary/onboarding/permfail 按方向 A 样稿重做，session 首页去满铺照片",
+      "acceptance_criteria": ["截图与方向 A 样稿风格一致", "采访状态机交互可用"],
+      "priority": 3,
+      "status": "pending",
+      "depends_on": [2],
+      "started_at": null,
+      "completed_at": null,
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "title": "重设计书房 Tab 各屏",
+      "description": "shelf/book/story/share/quotecard/invite/collaborators 重样式",
+      "acceptance_criteria": ["逐屏截图风格统一", "翻书/付费浮层交互可用"],
+      "priority": 4,
+      "status": "pending",
+      "depends_on": [2],
+      "started_at": null,
+      "completed_at": null,
+      "notes": ""
+    },
+    {
+      "id": 5,
+      "title": "重设计我的 Tab + 外部页",
+      "description": "mine/profile/plans/msgs/landing/contribute 重样式",
+      "acceptance_criteria": ["逐屏截图风格统一"],
+      "priority": 5,
+      "status": "pending",
+      "depends_on": [2],
+      "started_at": null,
+      "completed_at": null,
+      "notes": ""
+    },
+    {
+      "id": 6,
+      "title": "全量验收与交付",
+      "description": "17 屏逐一截图检查布局/对比度/残留旧色，修完 commit 并交老板验收",
+      "acceptance_criteria": ["17 屏截图无破损", "无旧棕金残留", "老板验收"],
+      "priority": 6,
+      "status": "pending",
+      "depends_on": [3, 4, 5],
+      "started_at": null,
+      "completed_at": null,
+      "notes": ""
+    }
+  ]
+}
