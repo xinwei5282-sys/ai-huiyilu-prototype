@@ -9,31 +9,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --cream:#FBF6EC; --cream-2:#FDFAF3; --card:#FFFFFF;
-  --brown:#6B4423; --brown-h:#5A3A1E; --brown-500:#8B5A3C;
-  --gold:#C9A961; --gold-btn1:#E0BE7E; --gold-btn2:#C4934F; --gold-deep:#8A6A2E;   /* 调深至适老对比达标(~4.4:1) */
-  --green:#3D5A4C; --green-2:#42663E; --green-700:#2F4B39;
-  /* v13 色阶精修：副文本在米底(#FBF6EC)上对比拉到 >=4.5:1（适老达标） */
-  --text:#2B2620; --text-2:#5E5544; --text-3:#7B7059;
-  --gold-ink:#8A6A2E;
-  --paper-line:#E6D9BF; --error:#B94A3A; --line:#EBE3D3;
+  /* v18 暖阳奶油：奶油底 + 纯白卡 + 陶土橙点缀（保留旧 token 名，语义整体迁移，组件无需改类） */
+  --cream:#FAF6F0; --cream-2:#FFFFFF; --card:#FFFFFF;
+  --brown:#33291F; --brown-h:#241D15; --brown-500:#8A6F5C;   /* 标题→暖炭黑更现代，副标题→暖棕 */
+  --gold:#D96C47; --gold-btn1:#EC8A62; --gold-btn2:#D96C47; --gold-deep:#A84E2C;   /* 陶土橙：按钮亮、文字用 --gold-deep 达标(~5:1) */
+  --green:#4C7A5C; --green-2:#3F6B4C; --green-700:#345C40;   /* 鼠尾草绿，作次级/成功语义 */
+  --text:#241F19; --text-2:#6B5F52; --text-3:#8A7E6F;
+  --gold-ink:#A84E2C;
+  --paper-line:#EEE5D9; --error:#B23A2E; --line:#F0E9E0;
   /* v15 统一设计系统 token */
   /* 字阶：适老基线上移（副文14 / 正文16 / 中标20 / 大标24），大标题另用34px 字面值 */
   --fs-sm:14px; --fs-md:16px; --fs-lg:20px; --fs-xl:24px;
   /* 字重：对齐 foundation §3.3（细400 / 正文500 / 标题600） */
   --fw-reg:400; --fw-med:500; --fw-bold:600;
   /* 圆角：对齐 foundation §4.2（6 / 8 / 12），xl 收敛到 12，胶囊保留 */
-  --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:12px; --r-pill:999px;
-  /* 语义色收口（每色唯一用途 + 配图标）：成功=墨绿 危险=朱红 进行中=暖琥珀 提示=黛蓝 */
-  --success:#3C5A43; --success-bg:#DCE7DA;
-  --danger:#B23A2E;  --danger-bg:#F2D9D2;
-  --progress:#CC7A33; --progress-bg:#F2E2C4;
-  --info:#4E6E78;    --info-bg:#DCE7E8;
-  --pine-100:#DCE7DA;
-  --sh-1:0 6px 16px -12px rgba(107,68,35,.5);
-  --sh-2:0 14px 30px -20px rgba(107,68,35,.55);
-  --sh-3:0 24px 50px -24px rgba(107,68,35,.6);
-  --sh-card:0 1px 3px rgba(107,68,35,.10);   /* 对齐 foundation §5.4 卡片阴影（暖化） */
+  --r-sm:10px; --r-md:14px; --r-lg:18px; --r-xl:22px; --r-pill:999px;   /* v18 圆润化：Airbnb 式大圆角 */
+  /* 语义色收口（每色唯一用途 + 配图标）：成功=鼠尾草绿 危险=朱红 进行中=陶土橙 提示=黛蓝 */
+  --success:#3F6B4C; --success-bg:#E0EBE1;
+  --danger:#B23A2E;  --danger-bg:#F5E0DA;
+  --progress:#D9784A; --progress-bg:#FBE7D8;
+  --info:#4E6E78;    --info-bg:#DEE9EA;
+  --pine-100:#E0EBE1;
+  --sh-1:0 6px 18px -12px rgba(178,91,56,.30);
+  --sh-2:0 14px 30px -18px rgba(178,91,56,.32);
+  --sh-3:0 24px 48px -22px rgba(178,91,56,.38);
+  --sh-card:0 2px 12px rgba(178,91,56,.09);   /* v18 陶土橙暖调软阴影 */
   --uic:22px;
   --serif:"Noto Serif SC",serif; --sans:"Noto Sans SC",sans-serif;
   --home-bg:url("https://oss-yhdct.jiazucloud.com/img/2026-06-19/0a8c638440554bd6923d7af968cf73e2.png");
@@ -45,7 +45,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:var(--sans);color:var(--text);line-height:1.6;
-  background:radial-gradient(120% 60% at 50% 0%, #F2E7D2 0%, transparent 55%), #E4D8C0;
+  background:radial-gradient(90% 50% at 50% 0%, #F7EFE4 0%, transparent 60%), #ECE7DF;
   min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:36px 16px 60px}
 .head{text-align:center;margin-bottom:24px}
 .head .k{font-size:var(--fs-sm);letter-spacing:.4em;color:var(--gold-deep);font-weight:600;text-transform:uppercase}
@@ -62,8 +62,8 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 @media(max-width:860px){.map{position:static;width:100%;max-width:380px;margin-bottom:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.map .mt{grid-column:1/-1}.map button{margin:0}}
 
 /* phone */
-.phone{width:380px;background:#241A10;border-radius:44px;padding:12px;box-shadow:0 40px 80px -40px rgba(107,68,35,.6);position:relative}
-.phone::after{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:92px;height:24px;background:#241A10;border-radius:0 0 15px 15px;z-index:30}
+.phone{width:380px;background:#1C1B1A;border-radius:46px;padding:12px;box-shadow:0 50px 90px -44px rgba(120,70,40,.55),0 0 0 1px rgba(0,0,0,.04);position:relative}
+.phone::after{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:92px;height:24px;background:#1C1B1A;border-radius:0 0 16px 16px;z-index:30}
 .screens{position:relative;width:100%;height:770px;border-radius:36px;overflow:hidden;background:var(--cream)}
 .screen{position:absolute;inset:0;display:none;flex-direction:column;background:var(--cream)}
 .screen.on{display:flex;animation:fade .3s ease}
@@ -780,9 +780,9 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 /* tabBar 选中态强化 */
 .tabbar .t{gap:4px;font-size:var(--fs-sm);font-weight:600;color:var(--text-3);transition:color .18s}
 .tabbar .t .uic{width:25px;height:25px;stroke-width:1.8}
-.tabbar .t.on{color:var(--green);font-weight:600}
+.tabbar .t.on{color:var(--gold-deep);font-weight:600}
 .tabbar .t.on .uic{stroke-width:2.3}
-.tabbar .t .tabdot{width:5px;height:5px;border-radius:50%;background:var(--green);opacity:0;margin-top:-1px}
+.tabbar .t .tabdot{width:5px;height:5px;border-radius:50%;background:var(--gold-deep);opacity:0;margin-top:-1px}
 .tabbar .t.on .tabdot{opacity:1}
 /* 卡片/行/按钮：投影层级 + 按下态 */
 .mine-row,.scn,.msg-item,.share-opt,.wb2 .x,.mode,.hm-seg,.collab,.cs-item{transition:transform .12s ease,box-shadow .18s ease,background .15s ease}
