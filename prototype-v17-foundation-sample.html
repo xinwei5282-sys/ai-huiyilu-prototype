@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云忆 · 讲述 · 样板页（design-foundation 结构 + 回忆录暖色）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================================
+   样板页 · 设计 token
+   结构（间距/圆角/字重/组件规格）严格遵循 _refs/design/design-foundation.md
+   颜色值替换为「回忆录·云忆」项目暖色（金棕 / 米 / 墨绿语义色），非生财绿 Teal
+   ========================================================================= */
+:root{
+  /* —— 品牌主色：金棕（替代 foundation 的 Teal #5DD4CC）—— */
+  --primary:#B8894F;        /* 主色：主按钮、强调、链接 */
+  --primary-h:#A5763D;      /* hover */
+  --primary-a:#8A6230;      /* active */
+  --primary-bg:#F3E9D4;     /* 浅背景：标签底、hover 底（替代 #E8F5F4）*/
+  --primary-bg-2:#FAF4E6;   /* 更浅背景 */
+  --brown:#6B4423; --gold:#C9A961; --gold-deep:#8A6A2E;
+
+  /* —— 文字色（对应 foundation §2.2，暖化并保适老对比≥4.5:1）—— */
+  --text:#2B2620;           /* 主要文字（替代 #333）*/
+  --text-2:#5E5544;         /* 次要文字（替代 #666）*/
+  --text-3:#7B7059;         /* 辅助文字（替代 #999）*/
+  --text-disabled:#B9AF98;  /* 禁用（替代 #CCC）*/
+  --on-primary:#FFFFFF;
+
+  /* —— 背景（foundation §2.3，换暖色）—— */
+  --page-grad:radial-gradient(120% 60% at 50% 0%, #F2E7D2 0%, transparent 55%), #E4D8C0;
+  --screen-bg:#FBF6EC;      /* 页面米底 */
+  --card:#FFFFFF;
+  --gray-bg:#F7F1E4;        /* 浅灰→浅米（内容区分）*/
+
+  /* —— 语义色（foundation §2.4，换回忆录暖语义）—— */
+  --success:#3C5A43; --success-bg:#DCE7DA;
+  --danger:#B23A2E;  --danger-bg:#F2D9D2;
+  --warning:#CC7A33; --warning-bg:#F2E2C4;
+  --info:#4E6E78;    --info-bg:#DCE7E8;
+
+  /* —— 间距（foundation §4：4px 基数）—— */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px;
+
+  /* —— 圆角（foundation §4.2：6 / 8 / 12）—— */
+  --r-sm:6px; --r-md:8px; --r-lg:12px; --r-modal:16px;
+
+  /* —— 字号（foundation §3.2 的分级；正文/标题为适老上调一档，见页尾说明）—— */
+  --fs-h1:20px;   /* 页面大标题（foundation 18 → 适老 20）*/
+  --fs-h2:17px;   /* 卡片/模态标题（foundation 16 → 17）*/
+  --fs-h3:15px;   /* 列表项标题 */
+  --fs-body:15px; /* 正文（foundation 14 → 适老 15）*/
+  --fs-aux:13px;  /* 辅助（foundation 12 → 13）*/
+  --fw-reg:400; --fw-med:500; --fw-bold:600;
+
+  /* —— 阴影（foundation §5.4 卡片阴影，暖化）—— */
+  --sh-card:0 1px 3px rgba(107,68,35,.10);
+  --sh-float:0 12px 30px -18px rgba(107,68,35,.5);
+
+  --serif:"Noto Serif SC",serif;
+  --sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:var(--sans);color:var(--text);line-height:1.6;
+  background:var(--page-grad);min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;padding:36px 16px 60px;
+}
+
+/* 顶部说明 */
+.caption{text-align:center;margin-bottom:24px;max-width:420px}
+.caption .k{font-size:var(--fs-aux);letter-spacing:.32em;color:var(--gold-deep);font-weight:var(--fw-bold);text-transform:uppercase}
+.caption h1{font-family:var(--serif);font-weight:var(--fw-bold);font-size:var(--fs-h1);color:var(--brown);margin-top:8px}
+.caption p{font-size:var(--fs-aux);color:var(--text-2);margin-top:8px;line-height:1.7}
+
+/* 手机外壳（沿用 v16 尺寸以便对比） */
+.phone{width:380px;background:#241A10;border-radius:44px;padding:12px;box-shadow:0 40px 80px -40px rgba(107,68,35,.6);position:relative}
+.phone::after{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:92px;height:24px;background:#241A10;border-radius:0 0 15px 15px;z-index:30}
+.screen{position:relative;width:100%;height:770px;border-radius:36px;overflow:hidden;background:var(--screen-bg);display:flex;flex-direction:column}
+
+/* 状态栏 */
+.sbar{height:38px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:var(--fs-aux);font-weight:var(--fw-bold);color:#3D2916;z-index:20}
+.sbar .bat{width:19px;height:10px;border:1.5px solid currentColor;border-radius:2.5px;position:relative;opacity:.85}
+.sbar .bat::after{content:"";position:absolute;inset:1.5px;right:6px;background:currentColor;border-radius:1px}
+.wxcap{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.85);border-radius:var(--r-lg);padding:3px 12px;font-size:var(--fs-aux);color:#5A3A1E;font-weight:var(--fw-bold);z-index:22}
+
+/* 顶栏（foundation §8.3 标题栏：白底 padding 12/16，居中标题）*/
+.top{flex:none;text-align:center;padding:var(--sp-3) var(--sp-4);background:transparent}
+.top .tt{font-family:var(--serif);font-weight:var(--fw-bold);font-size:var(--fs-h2);color:var(--brown)}
+
+/* 采访者 */
+.who{flex:none;display:flex;align-items:center;gap:var(--sp-3);padding:0 var(--sp-4) var(--sp-4)}
+.who .av{width:44px;height:44px;border-radius:var(--r-lg);flex:none;background:linear-gradient(140deg,#4A6B5C,#3D5A4C);color:#fff;font-family:var(--serif);font-weight:var(--fw-bold);display:grid;place-items:center;font-size:var(--fs-h2)}
+.who .n{font-family:var(--serif);font-weight:var(--fw-bold);font-size:var(--fs-h3);color:var(--brown)}
+.who .s{font-size:var(--fs-aux);color:var(--text-3);margin-top:2px}
+
+/* 内容区（foundation §8.4：flex:1 overflow padding 16）*/
+.body{flex:1;overflow-y:auto;padding:var(--sp-4);display:flex;flex-direction:column}
+.body::-webkit-scrollbar{width:0}
+
+/* 家人回音 pill（foundation §5.3 标签 → 放大为可点 pill）*/
+.fam-pill{align-self:flex-start;display:inline-flex;align-items:center;gap:var(--sp-2);
+  background:var(--primary-bg);color:var(--gold-deep);border:1px solid #E7D3A8;
+  font-size:var(--fs-aux);font-weight:var(--fw-bold);padding:8px 12px;border-radius:999px;cursor:pointer}
+.fam-pill .dot{width:14px;height:14px;border-radius:50%;background:var(--gold);flex:none}
+
+.ambient{text-align:center;font-family:var(--serif);color:var(--text-3);font-size:var(--fs-aux);letter-spacing:.12em;margin:var(--sp-5) 0 var(--sp-3)}
+
+/* 问题卡（foundation §5.4 卡片：白底 radius-lg padding16 card阴影）*/
+.qcard{background:var(--card);border-radius:var(--r-lg);padding:var(--sp-4);box-shadow:var(--sh-card);border:1px solid var(--primary-bg)}
+.qcard .q{font-family:var(--serif);font-weight:var(--fw-bold);font-size:var(--fs-h1);line-height:1.5;color:var(--text)}
+.qcard .replay{margin-top:var(--sp-3);display:inline-flex;align-items:center;gap:var(--sp-2);
+  background:var(--primary-bg-2);color:var(--gold-deep);border:1px solid #EBDCBB;border-radius:var(--r-md);
+  height:32px;padding:0 var(--sp-3);font-size:var(--fs-aux);font-weight:var(--fw-bold);cursor:pointer}
+
+.spacer{flex:1}
+
+/* 底部操作（foundation §5.1 按钮：主按钮 44px / 小按钮 32px）*/
+.foot{flex:none;padding-top:var(--sp-4)}
+.btn-say{width:100%;min-height:56px;border:none;border-radius:var(--r-lg);
+  background:linear-gradient(180deg,#E0BE7E,var(--primary));color:var(--on-primary);
+  font-family:var(--serif);font-weight:var(--fw-bold);font-size:var(--fs-h2);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:var(--sp-2);
+  box-shadow:0 10px 20px -10px rgba(184,137,79,.7)}
+.btn-say .em{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.35);display:grid;place-items:center;font-size:12px}
+.btn-say:hover{background:linear-gradient(180deg,#DBB874,var(--primary-h))}
+.btn-say:active{background:var(--primary-a)}
+
+.subrow{display:flex;gap:var(--sp-2);margin-top:var(--sp-3)}
+.btn-sub{flex:1;height:44px;border:1px solid var(--line,#EBE3D3);border-radius:var(--r-md);
+  background:var(--gray-bg);color:var(--brown);font-size:var(--fs-aux);font-weight:var(--fw-bold);
+  display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer}
+.btn-sub:hover{background:var(--primary-bg);border-color:#E7D3A8}
+
+/* 图标：内联 SVG 线性风，尺寸随场景，currentColor 继承文字色 */
+.ic{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ic-14{width:14px;height:14px}
+.ic-16{width:16px;height:16px}
+.ic-18{width:18px;height:18px}
+.ic-22{width:22px;height:22px}
+
+/* token 对照（说明用，不属于原型页面本身）*/
+.legend{max-width:420px;margin-top:28px;background:rgba(255,255,255,.7);border:1px solid #E7DCC5;border-radius:var(--r-lg);padding:16px;font-size:13px;color:var(--text-2);line-height:1.9}
+.legend b{color:var(--brown)}
+.legend .sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;border:1px solid rgba(0,0,0,.08)}
+</style>
+</head>
+<body>
+
+  <div class="caption">
+    <div class="k">SAMPLE · 样板页</div>
+    <h1>讲述 · 采访访谈式（默认首页）</h1>
+    <p>结构 = design-foundation 规范（4px 间距制 · 圆角 6/8/12 · 按钮 44px · 卡片规范）<br>颜色 = 回忆录暖色（金棕主色，非生财绿）</p>
+  </div>
+
+  <div class="phone">
+    <div class="screen">
+      <div class="sbar"><span>9:41</span><span class="bat"></span></div>
+      <div class="wxcap">··· ◉</div>
+
+      <div class="top"><span class="tt">讲述</span></div>
+
+      <div class="who">
+        <div class="av">云</div>
+        <div>
+          <div class="n">小云</div>
+          <div class="s">在陪您聊天</div>
+        </div>
+      </div>
+
+      <div class="body">
+        <button class="fam-pill">
+          <svg class="ic ic-14" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+          晓晓看过您的故事 ›</button>
+
+        <div class="ambient">听见来路，照见归途</div>
+
+        <div class="qcard">
+          <div class="q">秀英，您的名字，是谁给取的呀？</div>
+          <button class="replay">
+            <svg class="ic ic-16" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8 8 0 0 1 0 12"/></svg>
+            念给我听</button>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="foot">
+          <button class="btn-say">
+            <span class="em"><svg class="ic ic-16" viewBox="0 0 24 24" style="stroke-width:2"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/><path d="M8.5 21h7"/></svg></span>
+            点这里，跟我说</button>
+          <div class="subrow">
+            <button class="btn-sub">
+              <svg class="ic ic-18" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/></svg>
+              换个话题</button>
+            <button class="btn-sub">
+              <svg class="ic ic-18" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.6L3 8"/><path d="M3 3.5V8h4.5"/><path d="M12 7.5V12l3 2"/></svg>
+              回看</button>
+            <button class="btn-sub">
+              <svg class="ic ic-18" viewBox="0 0 24 24"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5V4.5Z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 21H19"/><path d="M9 7h6"/></svg>
+              我的书房</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <b>颜色替换对照</b>（foundation 值 → 回忆录值）<br>
+    <span class="sw" style="background:#5DD4CC"></span>主色 <code>#5DD4CC</code> → <span class="sw" style="background:#B8894F"></span><b>金棕 #B8894F</b><br>
+    <span class="sw" style="background:#E8F5F4"></span>浅背景 <code>#E8F5F4</code> → <span class="sw" style="background:#F3E9D4"></span><b>浅金 #F3E9D4</b><br>
+    <span class="sw" style="background:#52C41A"></span>成功 → <span class="sw" style="background:#3C5A43"></span><b>墨绿 #3C5A43</b> ·
+    <span class="sw" style="background:#F54A45"></span>危险 → <span class="sw" style="background:#B23A2E"></span><b>朱红 #B23A2E</b><br>
+    <b>结构未改</b>：间距 4px 倍数 · 圆角 6/8/12 · 主按钮≥44px · 卡片阴影 <code>0 1px 3px</code> · 标题栏/内容区布局<br>
+    <b>为适老的 2 处保留</b>：正文 15px（规范 14）· 标题用宋体 —— 老人可读性优先，可改回严格 follow 规范。
+  </div>
+
+</body>
+</html>

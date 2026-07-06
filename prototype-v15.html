@@ -9,69 +9,67 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* v18 暖阳奶油：奶油底 + 纯白卡 + 陶土橙点缀（保留旧 token 名，语义整体迁移，组件无需改类） */
-  --cream:#FAF6F0; --cream-2:#FFFFFF; --card:#FFFFFF;
-  --brown:#33291F; --brown-h:#241D15; --brown-500:#8A6F5C;   /* 标题→暖炭黑更现代，副标题→暖棕 */
-  --gold:#D96C47; --gold-btn1:#EC8A62; --gold-btn2:#D96C47; --gold-deep:#A84E2C;   /* 陶土橙：按钮亮、文字用 --gold-deep 达标(~5:1) */
-  --green:#4C7A5C; --green-2:#3F6B4C; --green-700:#345C40;   /* 鼠尾草绿，作次级/成功语义 */
-  --text:#241F19; --text-2:#6B5F52; --text-3:#8A7E6F;
-  --gold-ink:#A84E2C;
-  --paper-line:#EEE5D9; --error:#B23A2E; --line:#F0E9E0;
+  --cream:#FBF6EC; --cream-2:#FDFAF3; --card:#FFFFFF;
+  --brown:#6B4423; --brown-h:#5A3A1E; --brown-500:#8B5A3C;
+  --gold:#C9A961; --gold-btn1:#E0BE7E; --gold-btn2:#C4934F; --gold-deep:#B8894F;
+  --green:#3D5A4C; --green-2:#42663E; --green-700:#2F4B39;
+  /* v13 色阶精修：副文本在米底(#FBF6EC)上对比拉到 >=4.5:1（适老达标） */
+  --text:#2B2620; --text-2:#5E5544; --text-3:#7B7059;
+  --gold-ink:#8A6A2E;
+  --paper-line:#E6D9BF; --error:#B94A3A; --line:#EBE3D3;
   /* v15 统一设计系统 token */
-  /* 字阶：适老基线上移（副文14 / 正文16 / 中标20 / 大标24），大标题另用34px 字面值 */
-  --fs-sm:14px; --fs-md:16px; --fs-lg:20px; --fs-xl:24px;
-  /* 字重：对齐 foundation §3.3（细400 / 正文500 / 标题600） */
-  --fw-reg:400; --fw-med:500; --fw-bold:600;
-  /* 圆角：对齐 foundation §4.2（6 / 8 / 12），xl 收敛到 12，胶囊保留 */
-  --r-sm:10px; --r-md:14px; --r-lg:18px; --r-xl:22px; --r-pill:999px;   /* v18 圆润化：Airbnb 式大圆角 */
-  /* 语义色收口（每色唯一用途 + 配图标）：成功=鼠尾草绿 危险=朱红 进行中=陶土橙 提示=黛蓝 */
-  --success:#3F6B4C; --success-bg:#E0EBE1;
-  --danger:#B23A2E;  --danger-bg:#F5E0DA;
-  --progress:#D9784A; --progress-bg:#FBE7D8;
-  --info:#4E6E78;    --info-bg:#DEE9EA;
-  --pine-100:#E0EBE1;
-  --sh-1:0 6px 18px -12px rgba(178,91,56,.30);
-  --sh-2:0 14px 30px -18px rgba(178,91,56,.32);
-  --sh-3:0 24px 48px -22px rgba(178,91,56,.38);
-  --sh-card:0 2px 12px rgba(178,91,56,.09);   /* v18 陶土橙暖调软阴影 */
+  /* 字阶：正常移动端 4 档 + 2 字重（≤4字号/2字重铁律） */
+  --fs-sm:13px; --fs-md:15px; --fs-lg:20px; --fs-xl:28px;
+  --fw-reg:400; --fw-bold:700;
+  /* 圆角：暖而稳重，4 档 + 胶囊 */
+  --r-sm:12px; --r-md:16px; --r-lg:20px; --r-xl:28px; --r-pill:999px;
+  /* 语义色收口（每色唯一用途 + 配图标）：成功=墨绿 危险=朱红 进行中=暖琥珀 提示=黛蓝 */
+  --success:#3C5A43; --success-bg:#DCE7DA;
+  --danger:#B23A2E;  --danger-bg:#F2D9D2;
+  --progress:#CC7A33; --progress-bg:#F2E2C4;
+  --info:#4E6E78;    --info-bg:#DCE7E8;
+  --pine-100:#DCE7DA;
+  --sh-1:0 6px 16px -12px rgba(107,68,35,.5);
+  --sh-2:0 14px 30px -20px rgba(107,68,35,.55);
+  --sh-3:0 24px 50px -24px rgba(107,68,35,.6);
   --uic:22px;
   --serif:"Noto Serif SC",serif; --sans:"Noto Sans SC",sans-serif;
   --home-bg:url("https://oss-yhdct.jiazucloud.com/img/2026-06-19/0a8c638440554bd6923d7af968cf73e2.png");
   --brand:url("https://oss-yhdct.jiazucloud.com/img/2026-06-19/866516c752084303b818bc869993423f.png");
   --bubble:url("https://oss-yhdct.jiazucloud.com/img/2026-06-19/881679a25cab4f3d83e2f993ac64a8fc.png");
   --svc-bg:url("https://oss-yhdct.jiazucloud.com/img/2026-06-19/16c8308fc37e4b1ca5b4aa12996ecf4f.png");
-  --session-paper:none;   /* 纸纹本地图缺失，回退米底 */
-  --session-scene:url("https://oss-yhdct.jiazucloud.com/img/2026-06-19/0a8c638440554bd6923d7af968cf73e2.png");   /* 讲述页场景图：复用 home-bg 女子书桌图 */
+  --session-paper:url("static/memoir/session-paper-bg.png");
+  --session-scene:url("static/memoir/session-scene-bg.jpg");
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:var(--sans);color:var(--text);line-height:1.6;
-  background:radial-gradient(90% 50% at 50% 0%, #F7EFE4 0%, transparent 60%), #ECE7DF;
+  background:radial-gradient(120% 60% at 50% 0%, #F2E7D2 0%, transparent 55%), #E4D8C0;
   min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:36px 16px 60px}
 .head{text-align:center;margin-bottom:24px}
-.head .k{font-size:var(--fs-sm);letter-spacing:.4em;color:var(--gold-deep);font-weight:600;text-transform:uppercase}
-.head h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-xl);color:var(--brown-h);margin-top:8px}
+.head .k{font-size:var(--fs-sm);letter-spacing:.4em;color:var(--gold-deep);font-weight:700;text-transform:uppercase}
+.head h1{font-family:var(--serif);font-weight:700;font-size:var(--fs-xl);color:var(--brown-h);margin-top:8px}
 .head p{font-size:var(--fs-sm);color:var(--text-2);margin-top:8px}
-.head .hint{margin-top:12px;font-size:var(--fs-sm);color:var(--gold-deep);font-weight:600}
+.head .hint{margin-top:12px;font-size:var(--fs-sm);color:var(--gold-deep);font-weight:700}
 
 /* screen map */
 .map{position:fixed;left:18px;top:18px;z-index:100;background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px;box-shadow:0 16px 40px -24px rgba(107,68,35,.6);width:150px}
-.map .mt{font-family:var(--serif);font-weight:600;font-size:var(--fs-sm);color:var(--brown);margin-bottom:8px}
+.map .mt{font-family:var(--serif);font-weight:700;font-size:var(--fs-sm);color:var(--brown);margin-bottom:8px}
 .map button{display:block;width:100%;text-align:left;border:none;background:var(--cream-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 8px;margin-bottom:4px;font-size:var(--fs-sm);color:var(--brown);font-weight:400;cursor:pointer;font-family:var(--sans)}
 .map button:hover{background:rgba(201,169,97,.15);border-color:var(--gold)}
 .map button.act{background:var(--brown);color:#FBF3E4;border-color:var(--brown)}
 @media(max-width:860px){.map{position:static;width:100%;max-width:380px;margin-bottom:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.map .mt{grid-column:1/-1}.map button{margin:0}}
 
 /* phone */
-.phone{width:380px;background:#1C1B1A;border-radius:46px;padding:12px;box-shadow:0 50px 90px -44px rgba(120,70,40,.55),0 0 0 1px rgba(0,0,0,.04);position:relative}
-.phone::after{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:92px;height:24px;background:#1C1B1A;border-radius:0 0 16px 16px;z-index:30}
+.phone{width:380px;background:#241A10;border-radius:44px;padding:12px;box-shadow:0 40px 80px -40px rgba(107,68,35,.6);position:relative}
+.phone::after{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:92px;height:24px;background:#241A10;border-radius:0 0 15px 15px;z-index:30}
 .screens{position:relative;width:100%;height:770px;border-radius:36px;overflow:hidden;background:var(--cream)}
 .screen{position:absolute;inset:0;display:none;flex-direction:column;background:var(--cream)}
 .screen.on{display:flex;animation:fade .3s ease}
 @keyframes fade{from{opacity:.4}}
-.sbar{height:38px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:var(--fs-sm);font-weight:600;z-index:20;position:relative}
+.sbar{height:38px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:var(--fs-sm);font-weight:700;z-index:20;position:relative}
 .sbar .bat{width:19px;height:10px;border:1.5px solid currentColor;border-radius:2.5px;position:relative;opacity:.85}
 .sbar .bat::after{content:"";position:absolute;inset:1.5px;right:6px;background:currentColor;border-radius:1px}
-.wxcap{position:absolute;top:12px;right:14px;background:rgba(255,255,255,.9);border-radius:var(--r-md);padding:3px 12px;font-size:var(--fs-sm);color:#5A3A1E;font-weight:600;z-index:22}
+.wxcap{position:absolute;top:12px;right:14px;background:rgba(255,255,255,.9);border-radius:var(--r-md);padding:3px 12px;font-size:var(--fs-sm);color:#5A3A1E;font-weight:700;z-index:22}
 
 .tabbar{flex:none;height:56px;display:flex;border-top:1px solid var(--line);background:var(--cream-2);z-index:20}
 .tabbar .t{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:var(--fs-sm);color:var(--text-3);cursor:pointer}
@@ -79,30 +77,30 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .body{flex:1;overflow-y:auto;position:relative;z-index:2}
 .body::-webkit-scrollbar{width:0}
 
-.btnp{border:none;border-radius:var(--r-md);padding:16px;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff;font-family:var(--serif);font-weight:600;font-size:var(--fs-md);cursor:pointer;width:100%;box-shadow:0 10px 20px -10px rgba(196,147,79,.8)}
-.btng{border:1.5px solid var(--paper-line);border-radius:var(--r-md);padding:12px;background:var(--cream-2);color:var(--brown);font-weight:600;font-size:var(--fs-md);cursor:pointer;width:100%}
+.btnp{border:none;border-radius:var(--r-md);padding:16px;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff;font-family:var(--serif);font-weight:700;font-size:var(--fs-md);cursor:pointer;width:100%;box-shadow:0 10px 20px -10px rgba(196,147,79,.8)}
+.btng{border:1.5px solid var(--paper-line);border-radius:var(--r-md);padding:12px;background:var(--cream-2);color:var(--brown);font-weight:700;font-size:var(--fs-md);cursor:pointer;width:100%}
 .navbar{flex:none;display:flex;align-items:center;gap:12px;padding:8px 20px 12px;z-index:10}
-.navbar .b{font-size:var(--fs-xl);color:var(--brown-500);cursor:pointer;width:48px;height:48px;display:inline-flex;align-items:center;justify-content:center;margin:-6px 0 -6px -10px}
-.navbar .h{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown)}
-.navbar .r{margin-left:auto;font-size:var(--fs-sm);color:var(--gold-deep);font-weight:600;cursor:pointer}
+.navbar .b{font-size:var(--fs-lg);color:var(--brown-500);cursor:pointer;width:26px}
+.navbar .h{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown)}
+.navbar .r{margin-left:auto;font-size:var(--fs-sm);color:var(--gold-deep);font-weight:700;cursor:pointer}
 
 /* ---- HOME ---- */
 #home .body{overflow-y:auto}
 .hm-hero{position:relative;padding:0 20px 20px;background:var(--home-bg) center/cover no-repeat;flex:none;min-height:430px}
-.hm-hero .navt{text-align:center;font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:#3D2916;padding:8px 0 2px}
+.hm-hero .navt{text-align:center;font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:#3D2916;padding:8px 0 2px}
 .hm-brand{margin-top:16px;width:164px;height:38px;background:var(--brand) left center/contain no-repeat}
-.hm-title{font-family:var(--serif);font-weight:600;font-size:var(--fs-xl);color:#2B1B0C;line-height:1.22;margin-top:76px;text-shadow:0 1px 10px rgba(255,247,232,.5)}
+.hm-title{font-family:var(--serif);font-weight:700;font-size:var(--fs-xl);color:#2B1B0C;line-height:1.22;margin-top:76px;text-shadow:0 1px 10px rgba(255,247,232,.5)}
 .hm-sub{font-family:var(--serif);font-size:var(--fs-md);color:#3D2916;margin-top:8px;text-shadow:0 1px 8px rgba(255,247,232,.6)}
-.hm-bubble{margin-top:16px;display:inline-flex;background:var(--bubble) center/100% 100% no-repeat;padding:12px 24px;font-family:var(--serif);font-size:var(--fs-md);color:#5A3A1E;font-weight:600;cursor:pointer}
+.hm-bubble{margin-top:16px;display:inline-flex;background:var(--bubble) center/100% 100% no-repeat;padding:12px 24px;font-family:var(--serif);font-size:var(--fs-md);color:#5A3A1E;font-weight:700;cursor:pointer}
 .hm-body{padding:0 16px 16px;background:linear-gradient(180deg,rgba(214,178,120,.3),var(--cream) 30%)}
 .hm-continue{margin-top:16px;background:var(--card);border:1.5px solid var(--gold);border-radius:var(--r-md);padding:16px;box-shadow:0 12px 26px -18px rgba(107,68,35,.6)}
 .hm-continue .top{display:flex;align-items:center;gap:12px}
-.hm-continue .av{width:42px;height:42px;border-radius:var(--r-sm);flex:none;background:linear-gradient(140deg,#4A6B5C,var(--green));color:#fff;font-family:var(--serif);font-weight:600;display:grid;place-items:center;font-size:var(--fs-md)}
+.hm-continue .av{width:42px;height:42px;border-radius:var(--r-sm);flex:none;background:linear-gradient(140deg,#4A6B5C,var(--green));color:#fff;font-family:var(--serif);font-weight:700;display:grid;place-items:center;font-size:var(--fs-md)}
 .hm-continue .info{flex:1;min-width:0}
-.hm-continue .info .k{font-size:var(--fs-sm);color:var(--text-3);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hm-continue .info .n{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hm-continue .info .k{font-size:var(--fs-sm);color:var(--text-3);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hm-continue .info .n{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hm-continue .btns{display:flex;gap:12px;margin-top:12px}
-.hm-continue .cb{flex:1;text-align:center;border-radius:var(--r-sm);padding:12px 0;font-size:var(--fs-md);font-weight:600;cursor:pointer}
+.hm-continue .cb{flex:1;text-align:center;border-radius:var(--r-sm);padding:12px 0;font-size:var(--fs-md);font-weight:700;cursor:pointer}
 .hm-continue .cb.p{background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff}
 .hm-continue .cb.g{background:var(--cream-2);border:1px solid var(--paper-line);color:var(--brown)}
 .hm-cards{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -111,29 +109,29 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 /* ---- SERVICE ---- */
 .svc-hero{background:var(--svc-bg) center/cover no-repeat,#E9D9B8;padding:16px 16px 20px;position:relative;flex:none}
 .svc-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(233,217,184,.3),rgba(233,217,184,.72))}
-.svc-hero .navt{position:relative;z-index:2;text-align:center;font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:#3D2916;padding:8px 0}
+.svc-hero .navt{position:relative;z-index:2;text-align:center;font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:#3D2916;padding:8px 0}
 .svc-hero .bn{position:relative;z-index:2;width:150px;height:30px;background:var(--brand) left center/contain no-repeat;margin-top:8px}
-.svc-hero .bt{position:relative;z-index:2;font-family:var(--serif);font-weight:600;font-size:var(--fs-xl);color:var(--brown-h);margin-top:12px}
+.svc-hero .bt{position:relative;z-index:2;font-family:var(--serif);font-weight:700;font-size:var(--fs-xl);color:var(--brown-h);margin-top:12px}
 .svc-hero .bt::after{content:"";display:block;width:44px;height:3px;background:var(--gold-deep);margin-top:8px;border-radius:2px}
 .svc-hero .sl{position:relative;z-index:2;font-size:var(--fs-sm);color:var(--brown-500);margin-top:12px}
 .svc-grid{padding:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .svc-grid figure{margin:0;text-align:center;cursor:pointer}
 .svc-grid img{width:100%;border-radius:var(--r-md);display:block;box-shadow:0 8px 18px -12px rgba(107,68,35,.45)}
-.svc-grid figcaption{font-size:var(--fs-sm);font-weight:600;color:var(--brown);margin-top:8px}
+.svc-grid figcaption{font-size:var(--fs-sm);font-weight:700;color:var(--brown);margin-top:8px}
 .svc-grid figure.lock{opacity:.62}
-.svc-grid .tagx{font-size:var(--fs-sm);color:var(--gold-deep);font-weight:600}
+.svc-grid .tagx{font-size:var(--fs-sm);color:var(--gold-deep);font-weight:700}
 
 /* ---- MINE ---- */
 .mine-body{padding:16px}
-.mine-nav{text-align:center;font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown);padding:8px 0 16px}
+.mine-nav{text-align:center;font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown);padding:8px 0 16px}
 .mine-user{background:linear-gradient(140deg,#FBF1DE,#F1DFBE);border:1px solid var(--paper-line);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;gap:16px}
-.mine-user .av{width:54px;height:54px;border-radius:50%;background:linear-gradient(140deg,var(--gold-soft,#DAB97E),var(--gold-deep));color:#fff;font-family:var(--serif);font-weight:600;font-size:var(--fs-lg);display:grid;place-items:center;flex:none}
-.mine-user .k{font-size:var(--fs-sm);color:var(--brown-500);font-weight:600}
-.mine-user .n{font-family:var(--serif);font-weight:600;font-size:var(--fs-lg);color:var(--brown);margin-top:2px}
+.mine-user .av{width:54px;height:54px;border-radius:50%;background:linear-gradient(140deg,var(--gold-soft,#DAB97E),var(--gold-deep));color:#fff;font-family:var(--serif);font-weight:700;font-size:var(--fs-lg);display:grid;place-items:center;flex:none}
+.mine-user .k{font-size:var(--fs-sm);color:var(--brown-500);font-weight:700}
+.mine-user .n{font-family:var(--serif);font-weight:700;font-size:var(--fs-lg);color:var(--brown);margin-top:2px}
 .mine-user .s{font-size:var(--fs-sm);color:var(--text-2);margin-top:3px}
 .mine-row{margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:16px;display:flex;align-items:center;gap:16px;cursor:pointer}
-.mine-row .i{width:44px;height:44px;border-radius:var(--r-sm);background:rgba(201,169,97,.16);color:var(--gold-deep);font-family:var(--serif);font-weight:600;display:grid;place-items:center;font-size:var(--fs-lg);flex:none}
-.mine-row .a{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown)}
+.mine-row .i{width:44px;height:44px;border-radius:var(--r-sm);background:rgba(201,169,97,.16);color:var(--gold-deep);font-family:var(--serif);font-weight:700;display:grid;place-items:center;font-size:var(--fs-lg);flex:none}
+.mine-row .a{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown)}
 .mine-row .b{font-size:var(--fs-sm);color:var(--text-3);margin-top:2px}
 .mine-row .ar{margin-left:auto;color:var(--text-3);font-size:var(--fs-lg)}
 
@@ -144,26 +142,26 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .scn{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:12px 12px;margin-bottom:12px;cursor:pointer;transition:transform .25s,box-shadow .25s}
 .scn:active{transform:scale(.98)}
 .scn:hover{box-shadow:0 14px 26px -18px rgba(107,68,35,.5);border-color:var(--gold)}
-.scn .seal{width:46px;height:46px;border-radius:var(--r-sm);font-family:var(--serif);color:#fff;display:grid;place-items:center;font-size:var(--fs-lg);font-weight:600;flex:none;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.28)}
+.scn .seal{width:46px;height:46px;border-radius:var(--r-sm);font-family:var(--serif);color:#fff;display:grid;place-items:center;font-size:var(--fs-lg);font-weight:700;flex:none;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.28)}
 .scn .seal.gold{background:linear-gradient(140deg,var(--gold-btn1),var(--gold-btn2))}
 .scn .seal.green{background:linear-gradient(140deg,#6E8F6A,var(--green))}
-.scn .t{flex:1;min-width:0}.scn .t .n{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown)}
+.scn .t{flex:1;min-width:0}.scn .t .n{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown)}
 .scn .t .g{font-size:var(--fs-sm);color:var(--text-3);margin-top:2px}
-.scn .r{font-family:var(--serif);font-weight:600;font-size:var(--fs-sm);color:var(--gold-deep);flex:none}
+.scn .r{font-family:var(--serif);font-weight:700;font-size:var(--fs-sm);color:var(--gold-deep);flex:none}
 .scn .r.r-done{color:var(--gold-deep);background:rgba(201,169,97,.16);border:1px solid rgba(201,169,97,.4);border-radius:999px;padding:4px 12px;white-space:nowrap}
 .scn .r.r-todo{color:var(--text-3);font-weight:400;font-size:var(--fs-sm);white-space:nowrap}
-.scv-free{margin-top:4px;border:1.5px solid var(--paper-line);border-radius:var(--r-sm);padding:12px;text-align:center;font-weight:600;font-size:var(--fs-md);color:var(--brown);background:var(--cream-2);cursor:pointer}
+.scv-free{margin-top:4px;border:1.5px solid var(--paper-line);border-radius:var(--r-sm);padding:12px;text-align:center;font-weight:700;font-size:var(--fs-md);color:var(--brown);background:var(--cream-2);cursor:pointer}
 
 /* ---- SESSION ---- */
 #session .screens,#session{overflow:hidden}
-.ss-hero{position:relative;padding:0 16px 10px;background:transparent;flex:none}   /* 非沉浸态（说话中等）不铺图带，干净米底 */
-.ss-hero::after{content:"";position:absolute;inset:0;background:none}
-.ss-top{display:none}   /* “讲述”标题冗余，全局隐藏 */
-.ss-top .tb{display:inline-flex;align-items:center;gap:4px;font-size:var(--fs-sm);font-weight:600;color:#3D2916;background:rgba(255,253,247,.88);border:1px solid rgba(107,68,35,.16);border-radius:var(--r-sm);padding:8px 12px;cursor:pointer}
-.ss-top .tt{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:#3D2916}
+.ss-hero{position:relative;padding:0 16px 12px;background:var(--session-scene) center/cover no-repeat;flex:none}
+.ss-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,26,16,.04),rgba(251,246,236,.14))}
+.ss-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:8px 0 8px}
+.ss-top .tb{display:inline-flex;align-items:center;gap:4px;font-size:var(--fs-sm);font-weight:700;color:#3D2916;background:rgba(255,253,247,.88);border:1px solid rgba(107,68,35,.16);border-radius:var(--r-sm);padding:8px 12px;cursor:pointer}
+.ss-top .tt{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:#3D2916}
 .ss-brand{position:relative;z-index:2;width:120px;height:24px;background:var(--brand) left center/contain no-repeat}
-.ss-prog{position:relative;z-index:2;margin-top:8px;font-family:var(--serif);font-size:var(--fs-md);color:#3D2916;font-weight:600}
-.ss-prog .seg{color:var(--green);font-weight:600}
+.ss-prog{position:relative;z-index:2;margin-top:8px;font-family:var(--serif);font-size:var(--fs-md);color:#3D2916;font-weight:700}
+.ss-prog .seg{color:var(--green);font-weight:700}
 .ss-track{position:relative;z-index:2;margin-top:8px;height:6px;border-radius:4px;background:rgba(61,41,22,.2);overflow:hidden}
 .ss-track i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,var(--green),var(--green-2));width:22%}
 .torn{height:15px;margin-top:-2px;background:var(--cream);position:relative;z-index:3;
@@ -171,12 +169,12 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
   mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='15'><path d='M0 15 V5 Q7 1 14 5 T28 5 T42 5 T60 5 V15 Z' fill='black'/></svg>") repeat-x top/60px 15px}
 .ss-body{flex:1;background:var(--session-paper) center/cover no-repeat,var(--cream);padding:8px 20px 12px;display:flex;flex-direction:column;position:relative;z-index:2;min-height:0}
 .qh{display:flex;align-items:center;gap:12px}
-.qh .qn{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown-h)}
-.qh .qs{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown);border-left:1px solid var(--paper-line);padding-left:12px}
-.qh .save{margin-left:auto;background:rgba(201,169,97,.14);border:1px solid rgba(201,169,97,.42);border-radius:var(--r-sm);padding:8px 16px;font-size:var(--fs-sm);color:var(--gold-deep);font-weight:600;cursor:pointer;white-space:nowrap}
+.qh .qn{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown-h)}
+.qh .qs{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown);border-left:1px solid var(--paper-line);padding-left:12px}
+.qh .save{margin-left:auto;background:rgba(201,169,97,.14);border:1px solid rgba(201,169,97,.42);border-radius:var(--r-sm);padding:8px 16px;font-size:var(--fs-sm);color:var(--gold-deep);font-weight:700;cursor:pointer;white-space:nowrap}
 .qdiv{text-align:center;color:var(--gold);margin:8px 0 8px;font-size:var(--fs-sm)}
 .qtext{font-family:var(--serif);font-size:var(--fs-md);line-height:1.7;color:var(--brown-h)}
-.qtext .lab{display:inline-block;background:rgba(201,169,97,.22);color:var(--gold-deep);font-size:var(--fs-sm);font-weight:600;padding:2px 8px;border-radius:5px;margin-right:8px;vertical-align:2px}
+.qtext .lab{display:inline-block;background:rgba(201,169,97,.22);color:var(--gold-deep);font-size:var(--fs-sm);font-weight:700;padding:2px 8px;border-radius:5px;margin-right:8px;vertical-align:2px}
 .rec{text-align:center;color:var(--gold-deep);font-size:var(--fs-sm);margin:12px 0 4px;min-height:18px}
 .ruled{flex:1;min-height:80px;background:repeating-linear-gradient(0deg,transparent 0 26px,rgba(180,138,62,.28) 26px 27px);position:relative}
 .ruled .typed{font-family:var(--serif);font-size:var(--fs-md);line-height:27px;color:var(--brown-h)}
@@ -184,9 +182,9 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 @keyframes bk{50%{opacity:0}}
 .ss-actbar{flex:none;background:rgba(253,250,243,.94);border-top:1px solid var(--line);padding:12px 16px;display:flex;align-items:center;gap:12px}
 .ss-actbar .ic{width:44px;height:44px;border-radius:var(--r-sm);flex:none;background:var(--cream-2);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;color:var(--text-3);cursor:pointer}
-.ss-actbar .ic .ig{font-size:var(--fs-md);font-weight:600;line-height:1}
+.ss-actbar .ic .ig{font-size:var(--fs-md);font-weight:700;line-height:1}
 .ss-actbar .ic .il{font-size:var(--fs-sm);font-weight:400;line-height:1;letter-spacing:.02em}
-.mic{flex:1;height:46px;border:none;border-radius:var(--r-lg);background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff;font-family:var(--serif);font-weight:600;font-size:var(--fs-md);display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;box-shadow:0 8px 16px -8px rgba(196,147,79,.8)}
+.mic{flex:1;height:46px;border:none;border-radius:var(--r-lg);background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff;font-family:var(--serif);font-weight:700;font-size:var(--fs-md);display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;box-shadow:0 8px 16px -8px rgba(196,147,79,.8)}
 .mic.rec-on{background:linear-gradient(180deg,#E0A24E,var(--progress))}
 .mic .wave{display:none;gap:3px;align-items:center}
 .mic.rec-on .wave{display:flex}
@@ -194,7 +192,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .mic .wave i:nth-child(2){height:19px;animation-delay:.15s}.mic .wave i:nth-child(3){height:9px;animation-delay:.3s}.mic .wave i:nth-child(4){height:17px;animation-delay:.45s}
 @keyframes wv{0%,100%{transform:scaleY(.5)}50%{transform:scaleY(1)}}
 /* 容错：自动保存 + 草稿恢复 */
-.autosave{display:inline-flex;align-items:center;gap:4px;font-size:var(--fs-sm);font-weight:600;color:var(--green-2);background:rgba(74,107,71,.12);padding:3px 8px;border-radius:999px;opacity:0;transition:opacity .35s}
+.autosave{display:inline-flex;align-items:center;gap:4px;font-size:var(--fs-sm);font-weight:700;color:var(--green-2);background:rgba(74,107,71,.12);padding:3px 8px;border-radius:999px;opacity:0;transition:opacity .35s}
 .autosave.show{opacity:1}
 .recover-bar{display:flex;align-items:center;gap:8px;background:rgba(201,169,97,.14);border:1px solid rgba(201,169,97,.38);border-radius:var(--r-sm);padding:8px 12px;margin:2px 0 8px;font-size:var(--fs-sm);color:var(--brown);line-height:1.4}
 .recover-bar .x{margin:-8px -12px -8px auto;width:40px;height:40px;display:grid;place-items:center;color:var(--text-3);cursor:pointer;font-size:var(--fs-lg);flex:none}
@@ -204,29 +202,29 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .stoast{position:absolute;left:18px;right:18px;bottom:80px;z-index:25;background:var(--cream);border:1px solid var(--gold);border-radius:var(--r-md);padding:12px 16px;display:none;align-items:center;gap:12px;box-shadow:0 18px 40px -18px rgba(107,68,35,.7)}
 .stoast.show{display:flex;animation:rise .5s cubic-bezier(.2,.8,.2,1)}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}}
-.stoast .bn{width:42px;height:42px;border-radius:var(--r-sm);flex:none;background:linear-gradient(140deg,#DAB97E,var(--gold-deep));color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:600;font-size:var(--fs-sm);line-height:1.1;text-align:center}
-.stoast .t{font-weight:600;font-size:var(--fs-md);color:var(--brown)}.stoast .s{font-size:var(--fs-sm);color:var(--text-3)}
-.stoast .look{margin-left:auto;color:var(--gold-deep);font-weight:600;font-size:var(--fs-sm);cursor:pointer}
+.stoast .bn{width:42px;height:42px;border-radius:var(--r-sm);flex:none;background:linear-gradient(140deg,#DAB97E,var(--gold-deep));color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:var(--fs-sm);line-height:1.1;text-align:center}
+.stoast .t{font-weight:700;font-size:var(--fs-md);color:var(--brown)}.stoast .s{font-size:var(--fs-sm);color:var(--text-3)}
+.stoast .look{margin-left:auto;color:var(--gold-deep);font-weight:700;font-size:var(--fs-sm);cursor:pointer}
 /* drawer */
 .dw-scrim{position:absolute;inset:0;background:rgba(40,26,16,.42);z-index:26;display:none}
 .dw-scrim.open{display:block}
 .dw{position:absolute;top:0;right:0;bottom:0;width:82%;background:var(--cream-2);z-index:27;display:flex;flex-direction:column;box-shadow:-14px 0 34px -16px rgba(40,26,16,.55);transform:translateX(100%);transition:transform .34s cubic-bezier(.2,.8,.2,1)}
 .dw.open{transform:translateX(0)}
 .dw-h{display:flex;align-items:center;justify-content:space-between;padding:20px 16px 8px}
-.dw-h .a{font-family:var(--serif);font-weight:600;font-size:var(--fs-lg);color:var(--brown)}
+.dw-h .a{font-family:var(--serif);font-weight:700;font-size:var(--fs-lg);color:var(--brown)}
 .dw-h .x{font-size:var(--fs-lg);color:var(--text-3);cursor:pointer}
 .dw-sub{padding:0 16px 12px;font-size:var(--fs-sm);color:var(--text-2);border-bottom:1px solid var(--line)}
 .dw-sub b{color:var(--gold-deep)}
 .dw-list{flex:1;overflow-y:auto;padding:8px 12px 16px}
-.dw-scene{display:flex;align-items:center;justify-content:space-between;font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown);margin:12px 4px 8px}
-.dw-scene .c{font-size:var(--fs-sm);color:var(--gold-deep);font-weight:600}
+.dw-scene{display:flex;align-items:center;justify-content:space-between;font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown);margin:12px 4px 8px}
+.dw-scene .c{font-size:var(--fs-sm);color:var(--gold-deep);font-weight:700}
 .dw-item{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:var(--r-sm);font-size:var(--fs-sm);color:var(--text);background:var(--card);margin-bottom:8px;border:1px solid var(--line);cursor:pointer}
 .dw-item.now{border-color:var(--gold);background:rgba(201,169,97,.1)}
 .dw-item.done .nm{color:var(--text-2)}
 .dw-item .nm{display:flex;align-items:center;gap:8px;min-width:0}
 .dw-item .nm .dot{width:7px;height:7px;border-radius:50%;flex:none}
 .dw-item.done .nm .dot{background:var(--green-2)}.dw-item.now .nm .dot{background:var(--gold-deep)}.dw-item.todo .nm .dot{background:#CFC3AE}
-.dwb{font-size:var(--fs-sm);font-weight:600;padding:2px 8px;border-radius:6px;flex:none}
+.dwb{font-size:var(--fs-sm);font-weight:700;padding:2px 8px;border-radius:6px;flex:none}
 .dwb.done{background:rgba(74,107,71,.15);color:var(--green-2)}.dwb.now{background:rgba(201,169,97,.22);color:var(--gold-deep)}.dwb.todo{background:#EDE6D8;color:var(--text-3)}
 
 /* ---- WORKBENCH ---- */
@@ -234,19 +232,19 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:16px;margin-bottom:12px}
 .card.warm{background:linear-gradient(140deg,#FBF1DE,#F3E3C4);border-color:var(--paper-line)}
 .wb-sect{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.wb-sect .a{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown)}
-.wb-sect .b{font-size:var(--fs-sm);color:var(--gold-deep);font-weight:600;cursor:pointer}
+.wb-sect .a{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown)}
+.wb-sect .b{font-size:var(--fs-sm);color:var(--gold-deep);font-weight:700;cursor:pointer}
 .wb-stat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
-.wb-stat .num{font-family:var(--serif);font-weight:600;font-size:var(--fs-lg);color:var(--brown-h)}
+.wb-stat .num{font-family:var(--serif);font-weight:700;font-size:var(--fs-lg);color:var(--brown-h)}
 .wb-stat .num.ok{color:var(--green-2);font-size:var(--fs-lg)}
 .wb-stat .lab{font-size:var(--fs-sm);color:var(--brown-500);margin-top:2px}
 .wb-good{margin-top:12px;background:rgba(74,107,71,.09);border:1px solid rgba(74,107,71,.22);border-radius:var(--r-sm);padding:12px 16px;font-size:var(--fs-sm);color:var(--green);line-height:1.6}
 .wb-good b{color:var(--green-2)}
 .wb2{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .wb2 .x{background:var(--cream-2);border:1px solid var(--paper-line);border-radius:var(--r-sm);padding:12px;display:flex;gap:8px;align-items:center;cursor:pointer}
-.wb2 .x .i{width:32px;height:32px;border-radius:var(--r-sm);background:rgba(201,169,97,.18);display:grid;place-items:center;color:var(--gold-deep);font-size:var(--fs-md);font-weight:600;flex:none}
-.wb2 .x .t{font-size:var(--fs-sm);font-weight:600;color:var(--brown)}.wb2 .x .s{font-size:var(--fs-sm);color:var(--text-3)}
-.cont .kk{font-size:var(--fs-sm);color:var(--text-3)}.cont .hh{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown);margin:2px 0 8px}
+.wb2 .x .i{width:32px;height:32px;border-radius:var(--r-sm);background:rgba(201,169,97,.18);display:grid;place-items:center;color:var(--gold-deep);font-size:var(--fs-md);font-weight:700;flex:none}
+.wb2 .x .t{font-size:var(--fs-sm);font-weight:700;color:var(--brown)}.wb2 .x .s{font-size:var(--fs-sm);color:var(--text-3)}
+.cont .kk{font-size:var(--fs-sm);color:var(--text-3)}.cont .hh{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown);margin:2px 0 8px}
 .cont .qz{background:var(--cream-2);border-radius:var(--r-sm);padding:12px 16px;font-family:var(--serif);font-size:var(--fs-md);line-height:1.6;color:var(--brown-h)}
 .cont .go{margin-top:12px}
 
@@ -256,14 +254,14 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .cover .spine{width:36%;background:linear-gradient(160deg,#4A6B5C,var(--green))}
 .cover .face{flex:1;background:linear-gradient(150deg,#FBF3E1,#EFDDBB);padding:20px 16px;display:flex;flex-direction:column;justify-content:center}
 .cover .k{font-size:var(--fs-sm);letter-spacing:.35em;color:var(--gold-deep)}
-.cover .t{font-family:var(--serif);font-weight:600;font-size:var(--fs-lg);color:var(--brown-h);margin-top:8px}
+.cover .t{font-family:var(--serif);font-weight:700;font-size:var(--fs-lg);color:var(--brown-h);margin-top:8px}
 .cover .s{font-size:var(--fs-sm);color:var(--text-2);margin-top:4px}
 .cover .a{font-size:var(--fs-sm);color:var(--text-3);margin-top:12px;border-top:1px solid var(--paper-line);padding-top:8px}
 .toch{display:flex;align-items:center;justify-content:space-between;margin:16px 2px 8px}
-.toch .a{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown)}.toch .b{font-size:var(--fs-sm);color:var(--text-3)}
+.toch .a{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown)}.toch .b{font-size:var(--fs-sm);color:var(--text-3)}
 .toc a{display:flex;align-items:baseline;gap:12px;padding:12px 8px;border-radius:var(--r-sm);cursor:pointer}
 .toc a:hover{background:rgba(201,169,97,.1)}
-.toc .cn{font-family:var(--serif);font-weight:600;color:var(--gold-deep);font-size:var(--fs-md);width:22px;flex:none}
+.toc .cn{font-family:var(--serif);font-weight:700;color:var(--gold-deep);font-size:var(--fs-md);width:22px;flex:none}
 .toc .ct{font-family:var(--serif);font-size:var(--fs-md);color:var(--brown)}
 .toc .fill{flex:1;border-bottom:1.4px dotted var(--paper-line);transform:translateY(-3px);min-width:8px}
 .toc .pg{font-size:var(--fs-sm);color:var(--text-3)}
@@ -272,14 +270,14 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 
 /* ---- STORY ---- */
 .se-body{padding:8px 16px 16px;display:flex;flex-direction:column;min-height:100%}
-.se-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(201,169,97,.18);border-radius:var(--r-sm);padding:4px 12px;font-size:var(--fs-sm);color:var(--gold-deep);font-weight:600;align-self:flex-start}
-.se-h{font-family:var(--serif);font-weight:600;font-size:var(--fs-lg);color:var(--brown-h);margin-top:12px}
+.se-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(201,169,97,.18);border-radius:var(--r-sm);padding:4px 12px;font-size:var(--fs-sm);color:var(--gold-deep);font-weight:700;align-self:flex-start}
+.se-h{font-family:var(--serif);font-weight:700;font-size:var(--fs-lg);color:var(--brown-h);margin-top:12px}
 .se-q{font-family:var(--serif);font-style:italic;color:var(--gold-deep);font-size:var(--fs-md);border-left:3px solid var(--gold);padding:3px 0 3px 12px;margin-top:12px;line-height:1.65}
 .se-photo{margin-top:16px;height:140px;border-radius:var(--r-sm);position:relative;overflow:hidden;border:1px solid rgba(201,169,97,.45);display:grid;place-items:center;
   background:radial-gradient(rgba(201,169,97,.16) 1.5px,transparent 1.6px) 0 0/16px 16px,linear-gradient(140deg,#FBF1DE,#EFDCB6)}
-.se-photo .ph-empty{text-align:center;color:var(--gold-deep);font-family:var(--serif);font-weight:600;font-size:var(--fs-md);line-height:1.6;padding:0 16px}
+.se-photo .ph-empty{text-align:center;color:var(--gold-deep);font-family:var(--serif);font-weight:700;font-size:var(--fs-md);line-height:1.6;padding:0 16px}
 .se-photo .ph-empty .ic{font-size:var(--fs-xl);display:block;margin-bottom:4px;opacity:.85}
-.se-photo .add{position:absolute;right:10px;bottom:10px;background:rgba(61,41,22,.85);color:#FBF3E4;font-size:var(--fs-sm);font-weight:600;padding:8px 12px;border-radius:var(--r-sm);cursor:pointer}
+.se-photo .add{position:absolute;right:10px;bottom:10px;background:rgba(61,41,22,.85);color:#FBF3E4;font-size:var(--fs-sm);font-weight:700;padding:8px 12px;border-radius:var(--r-sm);cursor:pointer}
 .se-txt{margin-top:16px;font-size:var(--fs-md);line-height:1.95;color:var(--text)}
 .se-txt .hl{background:rgba(201,169,97,.24);border-bottom:2px solid var(--gold);padding:0 2px}
 .se-foot{margin-top:auto;display:flex;gap:12px;padding-top:16px}
@@ -289,12 +287,12 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 #bookRead{position:absolute;inset:0;z-index:60;background:#241a10;flex-direction:column}
 .fb-top{position:absolute;top:38px;left:0;right:0;z-index:30;display:flex;align-items:center;gap:12px;padding:8px 12px;background:rgba(36,26,16,.92);border-bottom:1px solid rgba(251,243,228,.14)}
 .fb-top .b{font-size:var(--fs-lg);color:#FBF3E4;cursor:pointer;width:44px;height:44px;border-radius:50%;background:rgba(251,243,228,.14);display:grid;place-items:center;flex:none}
-.fb-top .h{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:#FBF3E4}
-.fb-top .sh{margin-left:auto;width:44px;height:44px;border-radius:50%;background:rgba(201,169,97,.24);color:var(--gold-btn1);display:grid;place-items:center;font-size:var(--fs-md);font-weight:600;cursor:pointer;flex:none}
+.fb-top .h{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:#FBF3E4}
+.fb-top .sh{margin-left:auto;width:44px;height:44px;border-radius:50%;background:rgba(201,169,97,.24);color:var(--gold-btn1);display:grid;place-items:center;font-size:var(--fs-md);font-weight:700;cursor:pointer;flex:none}
 .fb-stage{flex:1;position:relative;overflow:hidden;perspective:2600px;background:radial-gradient(140% 100% at 50% 42%,#5A4A34,#241a10)}
 .fb-open{opacity:0;transform:scale(.9);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
 .fb-open.in{opacity:1;transform:scale(1)}
-.fb-hint{position:absolute;bottom:66px;left:0;right:0;text-align:center;z-index:26;font-size:var(--fs-sm);font-weight:600;color:rgba(251,243,228,.82);pointer-events:none;transition:opacity .5s;animation:fbBreath 1.8s ease-in-out infinite}
+.fb-hint{position:absolute;bottom:66px;left:0;right:0;text-align:center;z-index:26;font-size:var(--fs-sm);font-weight:700;color:rgba(251,243,228,.82);pointer-events:none;transition:opacity .5s;animation:fbBreath 1.8s ease-in-out infinite}
 @keyframes fbBreath{0%,100%{opacity:.6;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
 .fb-hint.hide{opacity:0;animation:none}
 .tapzone{position:absolute;top:0;bottom:0;width:50%;z-index:20;cursor:pointer}
@@ -307,28 +305,28 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .face.back{transform:rotateY(180deg)}
 .pg{padding:60px 32px 48px;height:100%;display:flex;flex-direction:column;position:relative}
 .pg .no{position:absolute;bottom:16px;left:0;right:0;text-align:center;font-size:var(--fs-sm);color:var(--text-3);font-family:var(--serif)}
-.pg .pk{font-size:var(--fs-sm);letter-spacing:.34em;color:var(--gold-deep);font-weight:600}
-.pg .ttl{font-family:var(--serif);font-weight:600;font-size:var(--fs-xl);color:var(--brown-h);margin-top:12px;line-height:1.3}
+.pg .pk{font-size:var(--fs-sm);letter-spacing:.34em;color:var(--gold-deep);font-weight:700}
+.pg .ttl{font-family:var(--serif);font-weight:700;font-size:var(--fs-xl);color:var(--brown-h);margin-top:12px;line-height:1.3}
 .pg .body{font-family:var(--serif);font-size:var(--fs-md);line-height:2.05;color:var(--text);margin-top:16px;flex:1}
 .pg .pic{height:172px;border-radius:var(--r-sm);margin:16px 0;position:relative;overflow:hidden;border:1px solid rgba(201,169,97,.45);display:grid;place-items:center;
   background:radial-gradient(rgba(201,169,97,.16) 1.5px,transparent 1.6px) 0 0/14px 14px,linear-gradient(140deg,#FBF1DE,#EFDCB6)}
-.pg .pic::after{content:"这里可以放张老照片";color:var(--gold-deep);font-family:var(--serif);font-weight:600;font-size:var(--fs-sm);line-height:1.5;text-align:center;padding:0 12px;opacity:.9}
+.pg .pic::after{content:"这里可以放张老照片";color:var(--gold-deep);font-family:var(--serif);font-weight:700;font-size:var(--fs-sm);line-height:1.5;text-align:center;padding:0 12px;opacity:.9}
 .pg .toc-l{font-family:var(--serif);font-size:var(--fs-md);color:var(--brown);display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px dotted var(--paper-line)}
 .pg.cover3d{background:linear-gradient(150deg,#6A8A73,var(--green));color:#FBF3E4;justify-content:center;padding:48px 36px}
 .pg.cover3d .lk{font-size:var(--fs-sm);letter-spacing:.42em;color:rgba(251,243,228,.75)}
-.pg.cover3d .bt{font-family:var(--serif);font-weight:600;font-size:var(--fs-xl);margin-top:16px;line-height:1.25}
+.pg.cover3d .bt{font-family:var(--serif);font-weight:700;font-size:var(--fs-xl);margin-top:16px;line-height:1.25}
 .pg.cover3d .bs{font-size:var(--fs-md);color:rgba(251,243,228,.82);margin-top:16px}
 .pg.cover3d .ba{margin-top:auto;font-size:var(--fs-sm);color:rgba(251,243,228,.75);border-top:1px solid rgba(251,243,228,.3);padding-top:16px}
 .pg.endc{background:linear-gradient(150deg,#5A7A64,var(--green));color:#FBF3E4;justify-content:center;align-items:center;text-align:center}
 .pg.endc .logo{width:54px;height:54px;border-radius:50%;background:conic-gradient(from 0deg,#E86,#EC6,#8C6,#6AD,#86E,#E86);margin-bottom:20px}
 .pg.endc .w{font-family:var(--serif);font-size:var(--fs-lg);line-height:1.9;opacity:.92;padding:0 24px}
 .fb-ctrl{position:absolute;bottom:0;left:0;right:0;z-index:26;display:flex;gap:16px;align-items:center;justify-content:center;padding:12px;background:linear-gradient(0deg,rgba(36,26,16,.55),transparent)}
-.fb-ctrl button{border:1px solid rgba(251,243,228,.32);background:rgba(36,26,16,.42);border-radius:var(--r-sm);padding:8px 20px;font-weight:600;color:#FBF3E4;cursor:pointer;font-family:var(--sans);font-size:var(--fs-md)}
+.fb-ctrl button{border:1px solid rgba(251,243,228,.32);background:rgba(36,26,16,.42);border-radius:var(--r-sm);padding:8px 20px;font-weight:700;color:#FBF3E4;cursor:pointer;font-family:var(--sans);font-size:var(--fs-md)}
 .fb-ctrl button:disabled{opacity:.35}
 .fb-ctrl .pgnum{font-family:var(--serif);color:rgba(251,243,228,.88);font-size:var(--fs-md);min-width:60px;text-align:center}
 /* ---- 协作 / 分享 通用 ---- */
 .gp-hero{padding:16px 20px;background:linear-gradient(160deg,#F4E8D1,#E6D2AD)}
-.gp-hero .h{font-family:var(--serif);font-weight:600;font-size:var(--fs-lg);color:var(--brown-h);line-height:1.35}
+.gp-hero .h{font-family:var(--serif);font-weight:700;font-size:var(--fs-lg);color:var(--brown-h);line-height:1.35}
 .gp-hero .s{font-size:var(--fs-sm);color:var(--text-2);margin-top:8px;line-height:1.6}
 .pad{padding:16px 16px}
 /* 邀请卡 */
@@ -336,46 +334,46 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .invcard .pic{height:110px;position:relative;
   background:radial-gradient(rgba(255,255,255,.14) 1.4px,transparent 1.5px) 0 0/15px 15px,linear-gradient(140deg,#E0C58C,#C39A57)}
 .invcard .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,26,16,.02),rgba(40,26,16,.34))}
-.invcard .pic .bn{position:absolute;left:12px;bottom:10px;color:#FBF3E4;font-family:var(--serif);font-weight:600;font-size:var(--fs-md);z-index:2;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+.invcard .pic .bn{position:absolute;left:12px;bottom:10px;color:#FBF3E4;font-family:var(--serif);font-weight:700;font-size:var(--fs-md);z-index:2;text-shadow:0 1px 6px rgba(0,0,0,.4)}
 .invcard .in{padding:16px 16px}
-.invcard .in .t{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown)}
+.invcard .in .t{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown)}
 .invcard .in .s{font-size:var(--fs-sm);color:var(--text-2);margin-top:4px}
 .invcard .in .brand{width:110px;height:22px;background:var(--brand) left center/contain no-repeat;margin-top:12px}
-.sect-lbl{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown);margin:20px 0 12px}
+.sect-lbl{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown);margin:20px 0 12px}
 .chip-row{display:flex;flex-wrap:wrap;gap:8px}
-.chip{padding:8px 16px;border-radius:999px;border:1px solid var(--paper-line);background:var(--cream-2);font-size:var(--fs-sm);font-weight:600;color:var(--brown);cursor:pointer}
+.chip{padding:8px 16px;border-radius:999px;border:1px solid var(--paper-line);background:var(--cream-2);font-size:var(--fs-sm);font-weight:700;color:var(--brown);cursor:pointer}
 .chip.on{background:var(--brown);color:#FBF3E4;border-color:var(--brown)}
 .mode-list{display:grid;gap:12px}
 .mode{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px;cursor:pointer}
 .mode.on{border-color:var(--gold);background:rgba(201,169,97,.08)}
 .mode .i{width:38px;height:38px;border-radius:var(--r-sm);background:rgba(201,169,97,.16);color:var(--gold-deep);display:grid;place-items:center;font-size:var(--fs-lg);flex:none}
-.mode .t{font-weight:600;font-size:var(--fs-md);color:var(--brown)}.mode .d{font-size:var(--fs-sm);color:var(--text-3);margin-top:2px}
+.mode .t{font-weight:700;font-size:var(--fs-md);color:var(--brown)}.mode .d{font-size:var(--fs-sm);color:var(--text-3);margin-top:2px}
 .miniavs{display:flex;align-items:center;gap:-8px;margin-top:16px;cursor:pointer}
-.miniavs .a{width:30px;height:30px;border-radius:50%;border:2px solid var(--cream);margin-left:-8px;display:grid;place-items:center;font-size:var(--fs-sm);font-weight:600;color:#fff;font-family:var(--serif)}
+.miniavs .a{width:30px;height:30px;border-radius:50%;border:2px solid var(--cream);margin-left:-8px;display:grid;place-items:center;font-size:var(--fs-sm);font-weight:700;color:#fff;font-family:var(--serif)}
 .miniavs .a:first-child{margin-left:0}
-.miniavs .more{font-size:var(--fs-sm);color:var(--gold-deep);font-weight:600;margin-left:12px}
+.miniavs .more{font-size:var(--fs-sm);color:var(--gold-deep);font-weight:700;margin-left:12px}
 /* 协作者 */
 .collab{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 12px;margin-bottom:12px}
-.collab .av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:var(--fs-md);font-weight:600;color:#fff;font-family:var(--serif);flex:none}
-.collab .n{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown)}
+.collab .av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:var(--fs-md);font-weight:700;color:#fff;font-family:var(--serif);flex:none}
+.collab .n{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown)}
 .collab .r{font-size:var(--fs-sm);color:var(--text-3);margin-top:1px}
-.collab .c{margin-left:auto;font-size:var(--fs-sm);color:var(--gold-deep);font-weight:600;text-align:right;line-height:1.5}
+.collab .c{margin-left:auto;font-size:var(--fs-sm);color:var(--gold-deep);font-weight:700;text-align:right;line-height:1.5}
 .qask{background:rgba(201,169,97,.1);border:1px solid rgba(201,169,97,.32);border-radius:var(--r-sm);padding:12px;margin-bottom:12px}
-.qask .who{font-size:var(--fs-sm);color:var(--gold-deep);font-weight:600}
+.qask .who{font-size:var(--fs-sm);color:var(--gold-deep);font-weight:700}
 .qask .q{font-family:var(--serif);font-size:var(--fs-md);color:var(--brown-h);margin:4px 0 12px;line-height:1.5}
-.qask .go{display:inline-block;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff;font-weight:600;font-size:var(--fs-sm);padding:8px 16px;border-radius:var(--r-sm);cursor:pointer}
+.qask .go{display:inline-block;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff;font-weight:700;font-size:var(--fs-sm);padding:8px 16px;border-radius:var(--r-sm);cursor:pointer}
 .voice-note{background:var(--cream-2);border:1px dashed var(--paper-line);border-radius:var(--r-sm);padding:12px 16px;font-size:var(--fs-sm);color:var(--text-2);line-height:1.6;margin-top:8px}
 .voice-note b{color:var(--brown)}
 /* 分享 */
 .share-opt{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:16px;margin-bottom:12px;display:flex;gap:12px;align-items:center;cursor:pointer}
 .share-opt:hover{border-color:var(--gold)}
 .share-opt .i{width:46px;height:46px;border-radius:var(--r-sm);background:rgba(201,169,97,.16);color:var(--gold-deep);display:grid;place-items:center;font-size:var(--fs-lg);flex:none}
-.share-opt .t{font-weight:600;font-size:var(--fs-md);color:var(--brown)}
+.share-opt .t{font-weight:700;font-size:var(--fs-md);color:var(--brown)}
 .share-opt .d{font-size:var(--fs-sm);color:var(--text-3);margin-top:2px}
-.share-opt .tp{font-size:var(--fs-sm);font-weight:600;padding:3px 8px;border-radius:6px;margin-left:auto;flex:none}
+.share-opt .tp{font-size:var(--fs-sm);font-weight:700;padding:3px 8px;border-radius:6px;margin-left:auto;flex:none}
 .tp.priv{background:rgba(74,107,71,.15);color:var(--green-2)}.tp.pub{background:rgba(201,169,97,.2);color:var(--gold-deep)}
 .priv-row{background:var(--cream-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 16px;margin-top:4px}
-.priv-row .pl{font-size:var(--fs-sm);color:var(--text-2);margin-bottom:8px;font-weight:600}
+.priv-row .pl{font-size:var(--fs-sm);color:var(--text-2);margin-bottom:8px;font-weight:700}
 /* 金句卡 */
 .qcard{width:282px;margin:4px auto 0;border-radius:var(--r-md);overflow:hidden;box-shadow:0 24px 50px -24px rgba(61,41,22,.6);background:var(--cream)}
 .qcard .top{height:184px;position:relative;
@@ -386,36 +384,36 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .qcard .from{padding:2px 24px;font-size:var(--fs-sm);color:var(--text-2)}
 .qcard .foot{margin-top:16px;border-top:1px solid var(--line);padding:16px 20px;display:flex;align-items:center;gap:12px}
 .qcard .qr{width:52px;height:52px;border-radius:var(--r-sm);flex:none;background:repeating-conic-gradient(#3A2E22 0 25%,#fff 0 50%) 0/12px 12px;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
-.qcard .cta .a{font-family:var(--serif);font-weight:600;font-size:var(--fs-sm);color:var(--brown)}
+.qcard .cta .a{font-family:var(--serif);font-weight:700;font-size:var(--fs-sm);color:var(--brown)}
 .qcard .cta .b{font-size:var(--fs-sm);color:var(--text-3);margin-top:2px}
 /* 亲友视角录入 */
 .ct-banner{background:linear-gradient(135deg,#EAF0E8,#D6E3D1);border:1px solid #B9CDB3;border-radius:var(--r-md);padding:16px 16px;margin-bottom:16px}
-.ct-banner .r{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--green-700)}
+.ct-banner .r{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--green-700)}
 .ct-banner .p{font-size:var(--fs-sm);color:#436450;margin-top:8px;display:flex;gap:8px;align-items:flex-start;line-height:1.55}
 .ct-q{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--green-2);border-radius:0 16px 16px 16px;padding:16px;margin-bottom:16px}
-.ct-q .w{font-size:var(--fs-sm);color:var(--green-2);font-weight:600;letter-spacing:.06em}
+.ct-q .w{font-size:var(--fs-sm);color:var(--green-2);font-weight:700;letter-spacing:.06em}
 .ct-q .q{font-family:var(--serif);font-size:var(--fs-lg);line-height:1.65;color:var(--brown-h);margin-top:8px}
 .ct-mic{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-.ct-mic .ic{width:44px;height:44px;border-radius:var(--r-sm);flex:none;background:#fff;border:1px solid var(--paper-line);display:grid;place-items:center;color:var(--green-2);font-weight:600;font-size:var(--fs-md)}
-.ct-mic .talk{flex:1;height:46px;border-radius:var(--r-lg);border:none;background:linear-gradient(180deg,#6E9068,#3D5A4C);color:#fff;font-family:var(--serif);font-weight:600;font-size:var(--fs-md);display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;box-shadow:0 8px 16px -8px rgba(61,90,76,.7)}
-.ct-mine .h{font-size:var(--fs-sm);color:var(--text-3);font-weight:600;margin:8px 0 12px;display:flex;align-items:center;gap:8px}
+.ct-mic .ic{width:44px;height:44px;border-radius:var(--r-sm);flex:none;background:#fff;border:1px solid var(--paper-line);display:grid;place-items:center;color:var(--green-2);font-weight:700;font-size:var(--fs-md)}
+.ct-mic .talk{flex:1;height:46px;border-radius:var(--r-lg);border:none;background:linear-gradient(180deg,#6E9068,#3D5A4C);color:#fff;font-family:var(--serif);font-weight:700;font-size:var(--fs-md);display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;box-shadow:0 8px 16px -8px rgba(61,90,76,.7)}
+.ct-mine .h{font-size:var(--fs-sm);color:var(--text-3);font-weight:700;margin:8px 0 12px;display:flex;align-items:center;gap:8px}
 .ct-mine .it{background:var(--cream-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 12px;margin-bottom:8px;font-size:var(--fs-sm);color:var(--text);line-height:1.6}
-.ct-mine .it .qq{font-size:var(--fs-sm);color:var(--green-2);font-weight:600;margin-bottom:3px}
+.ct-mine .it .qq{font-size:var(--fs-sm);color:var(--green-2);font-weight:700;margin-bottom:3px}
 /* 参与中心 hub / 我的补充 / 消息 */
-.hub-lbl{font-family:var(--serif);font-weight:600;font-size:var(--fs-sm);color:var(--gold-deep);margin:20px 2px 12px;display:flex;align-items:center;gap:8px}
+.hub-lbl{font-family:var(--serif);font-weight:700;font-size:var(--fs-sm);color:var(--gold-deep);margin:20px 2px 12px;display:flex;align-items:center;gap:8px}
 .hub-lbl::after{content:"";flex:1;height:1px;background:var(--line)}
-.mine-row .st{margin-left:auto;text-align:right;font-size:var(--fs-sm);color:var(--gold-deep);font-weight:600;line-height:1.5;flex:none}
+.mine-row .st{margin-left:auto;text-align:right;font-size:var(--fs-sm);color:var(--gold-deep);font-weight:700;line-height:1.5;flex:none}
 .mine-row .st .dot{color:var(--gold-deep)}
 .bell{position:relative;margin-left:auto;font-size:var(--fs-lg);cursor:pointer}
 .bell .rd{position:absolute;top:-1px;right:-2px;width:8px;height:8px;border-radius:50%;background:var(--gold-deep);border:1.5px solid var(--cream)}
 .cs-item{background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);padding:16px;margin-bottom:12px}
-.cs-item .t{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown)}
-.cs-badge{display:inline-block;margin-top:8px;font-size:var(--fs-sm);font-weight:600;padding:3px 12px;border-radius:var(--r-sm)}
+.cs-item .t{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown)}
+.cs-badge{display:inline-block;margin-top:8px;font-size:var(--fs-sm);font-weight:700;padding:3px 12px;border-radius:var(--r-sm)}
 .cs-badge.done{background:rgba(74,107,71,.15);color:var(--green-2)}
 .cs-badge.wait{background:#EDE6D8;color:var(--text-3)}
 .cs-badge.proc{background:rgba(201,169,97,.2);color:var(--gold-deep)}
 .cs-fb{margin-top:12px;background:var(--cream-2);border-radius:var(--r-sm);padding:8px 12px;font-size:var(--fs-sm);color:var(--text);display:flex;gap:8px;align-items:flex-start;line-height:1.5}
-.cs-fb .who{color:var(--gold-deep);font-weight:600;flex:none}
+.cs-fb .who{color:var(--gold-deep);font-weight:700;flex:none}
 .msg-item{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 12px;margin-bottom:8px}
 .msg-item .mi{width:34px;height:34px;border-radius:var(--r-sm);flex:none;display:grid;place-items:center;font-size:var(--fs-md);background:rgba(201,169,97,.15)}
 .msg-item .mt{font-size:var(--fs-sm);color:var(--text);line-height:1.5}
@@ -425,25 +423,25 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .land-hero{min-height:280px;background:var(--home-bg) center/cover no-repeat;position:relative;padding:20px;display:flex;flex-direction:column;justify-content:flex-end}
 .land-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(251,246,236,.1),rgba(251,246,236,.6))}
 .land-hero .bn{position:relative;z-index:2;width:120px;height:26px;background:var(--brand) left center/contain no-repeat}
-.land-hero .t{position:relative;z-index:2;font-family:var(--serif);font-weight:600;font-size:var(--fs-lg);color:#2B1B0C;margin-top:auto;line-height:1.3}
+.land-hero .t{position:relative;z-index:2;font-family:var(--serif);font-weight:700;font-size:var(--fs-lg);color:#2B1B0C;margin-top:auto;line-height:1.3}
 .land-quote{background:var(--card);border:1px solid var(--gold);border-radius:var(--r-md);padding:16px 20px;font-family:var(--serif);font-style:italic;font-size:var(--fs-md);color:var(--brown-h);line-height:1.7;position:relative}
 .land-quote .lock{margin-top:12px;font-style:normal;font-size:var(--fs-sm);color:var(--text-3)}
 .land-sell{display:grid;gap:12px;margin-top:16px}
 .land-sell .li{display:flex;gap:12px;align-items:flex-start;font-size:var(--fs-md);color:var(--text)}
 .land-sell .li b{color:var(--brown)}
-.land-sell .li .k{color:var(--gold-deep);font-weight:600;flex:none}
+.land-sell .li .k{color:var(--gold-deep);font-weight:700;flex:none}
 /* 套餐 */
 .plan{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:20px;margin-bottom:16px;position:relative}
 .plan.hot{border:1.5px solid var(--gold);box-shadow:0 16px 36px -24px rgba(201,169,97,.9)}
-.plan .pbadge{position:absolute;top:-11px;left:18px;background:var(--gold-deep);color:#fff;font-size:var(--fs-sm);font-weight:600;padding:4px 12px;border-radius:var(--r-sm)}
-.plan .lv{font-family:var(--serif);font-weight:600;font-size:var(--fs-lg);color:var(--brown-h)}
-.plan .qn{display:inline-block;margin-top:8px;font-size:var(--fs-sm);font-weight:600;color:var(--gold-deep);background:rgba(201,169,97,.14);padding:3px 12px;border-radius:999px}
+.plan .pbadge{position:absolute;top:-11px;left:18px;background:var(--gold-deep);color:#fff;font-size:var(--fs-sm);font-weight:700;padding:4px 12px;border-radius:var(--r-sm)}
+.plan .lv{font-family:var(--serif);font-weight:700;font-size:var(--fs-lg);color:var(--brown-h)}
+.plan .qn{display:inline-block;margin-top:8px;font-size:var(--fs-sm);font-weight:700;color:var(--gold-deep);background:rgba(201,169,97,.14);padding:3px 12px;border-radius:999px}
 .plan .price{font-family:var(--serif);color:var(--brown);font-size:var(--fs-md);margin-top:12px}
-.plan .price b{font-size:var(--fs-lg);font-weight:600;color:var(--brown-h)}
+.plan .price b{font-size:var(--fs-lg);font-weight:700;color:var(--brown-h)}
 .plan ul{list-style:none;margin-top:12px;display:grid;gap:8px}
 .plan li{font-size:var(--fs-sm);color:var(--text-2);display:flex;gap:8px;line-height:1.5}
-.plan li::before{content:"✓";color:var(--green-2);font-weight:600;flex:none}
-.plan .pick{margin-top:16px;width:100%;border:none;border-radius:var(--r-sm);padding:12px;font-family:var(--serif);font-weight:600;font-size:var(--fs-md);cursor:pointer}
+.plan li::before{content:"✓";color:var(--green-2);font-weight:700;flex:none}
+.plan .pick{margin-top:16px;width:100%;border:none;border-radius:var(--r-sm);padding:12px;font-family:var(--serif);font-weight:700;font-size:var(--fs-md);cursor:pointer}
 .plan .pick.p{background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff}
 .plan .pick.g{background:var(--cream-2);border:1px solid var(--paper-line);color:var(--brown)}
 .plan-note{background:rgba(74,107,71,.09);border:1px solid rgba(74,107,71,.22);border-radius:var(--r-sm);padding:12px 16px;font-size:var(--fs-sm);color:var(--green);line-height:1.65;margin-top:2px}
@@ -453,17 +451,17 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .modal-scrim.open{display:flex}
 .upmodal{width:100%;background:var(--cream);border-radius:var(--r-lg) 24px 0 0;padding:24px 20px 24px;box-shadow:0 -20px 50px -20px rgba(0,0,0,.45);animation:upin .35s cubic-bezier(.2,.8,.2,1)}
 @keyframes upin{from{transform:translateY(50px);opacity:.5}}
-.upmodal .uh{font-family:var(--serif);font-weight:600;font-size:var(--fs-lg);color:var(--brown-h);text-align:center}
+.upmodal .uh{font-family:var(--serif);font-weight:700;font-size:var(--fs-lg);color:var(--brown-h);text-align:center}
 .upmodal .ub{font-size:var(--fs-md);color:var(--text-2);text-align:center;margin-top:8px;line-height:1.65}
 .upmodal .ub b{color:var(--gold-deep)}
 .upmini{margin-top:16px;display:flex;gap:8px}
 .upmini .m{flex:1;border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 8px;text-align:center;background:var(--card)}
 .upmini .m.hot{border-color:var(--gold);background:linear-gradient(180deg,#FFF9EE,#F5E8CE)}
-.upmini .m .n{font-family:var(--serif);font-weight:600;font-size:var(--fs-sm);color:var(--brown)}
-.upmini .m .q{font-size:var(--fs-sm);color:var(--gold-deep);font-weight:600;margin-top:3px}
-.upmini .m .pp{font-size:var(--fs-sm);color:var(--brown-h);margin-top:8px;font-weight:600;font-family:var(--serif)}
+.upmini .m .n{font-family:var(--serif);font-weight:700;font-size:var(--fs-sm);color:var(--brown)}
+.upmini .m .q{font-size:var(--fs-sm);color:var(--gold-deep);font-weight:700;margin-top:3px}
+.upmini .m .pp{font-size:var(--fs-sm);color:var(--brown-h);margin-top:8px;font-weight:700;font-family:var(--serif)}
 .upmodal .uact{margin-top:20px;display:flex;gap:12px}
-.upmodal .uact button{flex:1;border:none;border-radius:var(--r-sm);padding:12px;font-family:var(--serif);font-weight:600;font-size:var(--fs-md);cursor:pointer}
+.upmodal .uact button{flex:1;border:none;border-radius:var(--r-sm);padding:12px;font-family:var(--serif);font-weight:700;font-size:var(--fs-md);cursor:pointer}
 .upmodal .uact .p{background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff}
 .upmodal .uact .g{background:var(--cream-2);border:1px solid var(--paper-line);color:var(--brown)}
 .toastc{position:fixed;left:50%;bottom:40px;transform:translateX(-50%);background:rgba(58,40,24,.94);color:#FBF3E4;padding:12px 24px;border-radius:var(--r-sm);font-size:var(--fs-md);font-weight:400;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none}
@@ -472,116 +470,37 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 /* ============ 采访页·访谈式对话流（移植 elder-v1 循环，套 v4 视觉）============ */
 #session .iv-body{display:flex;flex-direction:column}
 .iv-who{position:relative;z-index:2;display:flex;align-items:center;gap:12px;margin-top:8px}
-.iv-who .iv-av{width:46px;height:46px;border-radius:var(--r-sm);flex:none;background:linear-gradient(140deg,#4A6B5C,var(--green));color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:600;font-size:var(--fs-lg);box-shadow:0 10px 22px -12px rgba(46,68,56,.8)}
-.iv-whot .n{font-size:var(--fs-md);font-weight:600;color:#3D2916}
+.iv-who .iv-av{width:46px;height:46px;border-radius:var(--r-sm);flex:none;background:linear-gradient(140deg,#4A6B5C,var(--green));color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:var(--fs-lg);box-shadow:0 10px 22px -12px rgba(46,68,56,.8)}
+.iv-whot .n{font-size:var(--fs-md);font-weight:700;color:#3D2916}
 .iv-whot .s{font-size:var(--fs-sm);color:var(--brown-500);margin-top:1px}
 .iv-pane{flex:1;display:flex;flex-direction:column;min-height:0}
 .iv-foot{flex:none;display:flex;flex-direction:column;gap:12px;padding-top:8px}
 .iv-qwrap{flex:1;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:8px 0}
-.iv-lead{font-size:var(--fs-md);font-weight:600;color:var(--gold-deep)}
-.iv-q{font-family:var(--serif);font-size:var(--fs-xl);line-height:1.45;font-weight:600;color:var(--brown-h)}
+.iv-lead{font-size:var(--fs-md);font-weight:700;color:var(--gold-deep)}
+.iv-q{font-family:var(--serif);font-size:var(--fs-xl);line-height:1.45;font-weight:700;color:var(--brown-h)}
 .iv-q b{color:var(--green)}
-.iv-replay{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:transparent;border:2px solid var(--gold);color:var(--brown-h);border-radius:var(--r-sm);padding:8px 16px;font-size:var(--fs-md);font-weight:600;cursor:pointer;min-height:48px}
+.iv-replay{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:transparent;border:2px solid var(--gold);color:var(--brown-h);border-radius:var(--r-sm);padding:8px 16px;font-size:var(--fs-md);font-weight:700;cursor:pointer;min-height:48px}
 .iv-replay:active{background:rgba(201,169,97,.16)}
-/* 换个话题：问题左上角小胶囊，暗色半透，图上可读 */
-.iv-topicswap{display:inline-flex;align-items:center;gap:6px;vertical-align:middle;background:rgba(38,24,12,.55);border:1px solid rgba(255,253,247,.38);color:#FCF5E8;border-radius:var(--r-pill);padding:6px 12px;font-size:var(--fs-sm);font-weight:600;cursor:pointer;margin-left:10px;text-shadow:0 1px 3px rgba(18,9,2,.7)}
-.iv-topicswap svg{width:15px;height:15px}
-.iv-topicswap:active{background:rgba(38,24,12,.75)}
-/* 随便讲讲徽章 */
-.free-badge{align-self:center;display:inline-flex;align-items:center;gap:6px;background:rgba(184,137,79,.92);color:#fff;border-radius:var(--r-pill);padding:7px 16px;font-size:var(--fs-sm);font-weight:600;box-shadow:0 8px 20px -10px rgba(138,106,46,.85);margin:0 auto}
-.free-badge svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
-/* AI 归类结果卡 */
-.cate-card{background:linear-gradient(180deg,#FBF1DC,#FAF4E6);border:1.5px solid var(--gold);border-radius:var(--r-lg);padding:16px;margin-bottom:16px;box-shadow:var(--sh-card)}
-.cate-card .ct-h{display:flex;align-items:center;gap:8px;font-family:var(--serif);font-weight:600;font-size:var(--fs-lg);color:var(--brown-h)}
-.cate-card .ct-h svg{width:22px;height:22px;fill:none;stroke:var(--gold-deep);stroke-width:1.8;stroke-linejoin:round}
-.cate-card .ct-sub{font-size:var(--fs-sm);color:var(--text-2);margin:8px 0 6px}
-.cate-card .ct-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px dashed var(--paper-line);font-size:var(--fs-md);color:var(--text);font-weight:600}
-.cate-card .ct-item .tag{flex:none;background:rgba(201,169,97,.2);color:var(--gold-deep);font-size:var(--fs-sm);font-weight:600;padding:3px 10px;border-radius:999px}
-/* 一行布局：主按钮居中撑大，两侧窄按钮（书房·点这里·回看 / 重说·我说完了·暂停） */
-.iv-sayrow{display:flex;align-items:stretch;gap:10px}
-.iv-sayrow .iv-say{flex:1;width:auto;min-width:0}
-.iv-sayrow .iv-sub,.iv-sayrow .iv-minibtn{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;line-height:1.15;padding:8px 12px;min-width:66px}
-.iv-sayrow .iv-sub svg,.iv-sayrow .iv-minibtn svg{width:20px;height:20px}
-/* 圆形录音控制组：三按钮统一为圆按钮，中间(暂停)大且实心 */
-.iv-recctrl{display:flex;align-items:flex-end;justify-content:space-around;gap:10px;padding-top:2px}
-.iv-rbtn{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:none;cursor:pointer;padding:0}
-.iv-rbtn .ic{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:var(--cream-2);border:2px solid var(--paper-line);color:var(--brown-h)}
-.iv-rbtn .ic svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.iv-rbtn .lb{font-size:var(--fs-sm);font-weight:600;color:var(--brown-h)}
-.iv-rbtn:active .ic{transform:translateY(1px)}
-.iv-rbtn.primary .ic{width:74px;height:74px;background:linear-gradient(180deg,#E0A24E,var(--progress));border:none;color:#fff;box-shadow:0 12px 26px -10px rgba(196,147,79,.95)}
-.iv-rbtn.primary .ic svg{width:30px;height:30px;fill:currentColor;stroke:none}
-.iv-rbtn.primary .lb{color:var(--progress)}
-/* 念给我听：问题末尾，只留喇叭图标（圆形按钮） */
-.iv-qtts{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;flex:none;border-radius:50%;border:2px solid var(--gold);background:transparent;color:var(--brown-h);cursor:pointer;vertical-align:middle;margin-left:10px}
-.iv-qtts svg{width:20px;height:20px}
-#session.sess-imm #ivAskPane.ask-hero .iv-qtts{border-color:rgba(255,253,247,.6);color:#FCF5E8;background:rgba(38,24,12,.4)}
-.iv-say{border:none;border-radius:var(--r-lg);width:100%;min-height:56px;cursor:pointer;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff;font-family:var(--sans);font-weight:600;font-size:var(--fs-lg);text-shadow:0 1px 2px rgba(60,35,10,.4);box-shadow:0 18px 36px -16px rgba(196,147,79,.95);display:flex;flex-direction:row;align-items:center;justify-content:center;gap:10px}
-.iv-say .em{font-size:var(--fs-lg);line-height:1;display:inline-flex;align-items:center}
+.iv-say{border:none;border-radius:var(--r-lg);width:100%;min-height:56px;cursor:pointer;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff;font-family:var(--sans);font-weight:700;font-size:var(--fs-lg);text-shadow:0 1px 2px rgba(60,35,10,.4);box-shadow:0 18px 36px -16px rgba(196,147,79,.95);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.iv-say .em{font-size:var(--fs-xl);line-height:1}
 .iv-say:active{transform:translateY(2px)}
 .iv-say.green{background:linear-gradient(180deg,#E0A24E,var(--progress))}
 .iv-subrow{display:flex;gap:12px}
-.iv-sub{flex:1;background:var(--cream-2);border:2px solid var(--line);border-radius:var(--r-md);padding:12px 12px;font-size:var(--fs-md);font-weight:600;color:var(--brown-500);cursor:pointer;min-height:48px}
+.iv-sub{flex:1;background:var(--cream-2);border:2px solid var(--line);border-radius:var(--r-md);padding:12px 12px;font-size:var(--fs-md);font-weight:700;color:var(--brown-500);cursor:pointer;min-height:48px}
 .iv-sub:active{background:rgba(201,169,97,.15)}
 /* v9: 【讲述】开场屏 —— 实拍人物氛围图（上）+ 底部由深到透暖色蒙层(scrim)，操作区落在可读暖面板上 */
 #ivAskPane.ask-hero{position:relative;overflow:hidden;border-radius:var(--r-md);isolation:isolate}
 #ivAskPane.ask-hero::before{content:"";position:absolute;inset:0;background:var(--home-bg) center top/cover no-repeat;z-index:-2}
 #ivAskPane.ask-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(43,27,12,0) 0%,rgba(43,27,12,.06) 24%,rgba(43,27,12,.02) 38%,transparent 46%)}
 .ask-ambient{display:none}
-#ivAskPane.ask-hero .ask-ambient{display:block;flex:none;text-align:left;padding:8px 20px 0;font-family:var(--serif);line-height:1.18}
-.ask-ambient .hl{display:block;font-size:34px;font-weight:600;color:var(--brown-h);line-height:1.16;text-shadow:0 1px 10px rgba(255,251,240,.9)}
-.ask-ambient .sb{display:block;margin-top:12px;font-size:var(--fs-lg);font-weight:600;color:var(--brown-500);letter-spacing:.02em;text-shadow:0 1px 8px rgba(255,251,240,.85)}
-/* v18 首页轻量进度条：暖阳奶油方向 A 的数据感，织进大图顶部（半透奶油胶囊，图上可读） */
-.ss-prog3{display:flex;gap:8px;margin:16px 0 2px;flex-wrap:wrap;font-family:var(--sans)}
-.ss-prog3 .p{display:inline-flex;align-items:baseline;gap:5px;background:rgba(255,252,247,.86);backdrop-filter:blur(5px);border:1px solid rgba(255,255,255,.55);border-radius:var(--r-pill);padding:7px 14px;box-shadow:0 8px 18px -12px rgba(120,70,40,.55)}
-.ss-prog3 .p b{font-size:var(--fs-md);font-weight:600;color:var(--gold-deep)}
-.ss-prog3 .p span{font-size:var(--fs-sm);color:var(--brown-500);font-weight:600}
-.ask-ambient{display:none}   /* 仅 ask-hero 内显示，见下方规则 */
+#ivAskPane.ask-hero .ask-ambient{display:block;flex:none;text-align:center;padding:16px 12px 4px;font-family:var(--serif);font-weight:700;font-size:var(--fs-lg);letter-spacing:.04em;color:#FCF5E8;text-shadow:0 2px 10px rgba(43,27,12,.6),0 1px 3px rgba(43,27,12,.7);line-height:1.35}
+.ask-ambient span{display:block;margin-top:4px;font-size:var(--fs-md);font-weight:700;letter-spacing:.02em;text-shadow:0 1px 6px rgba(43,27,12,.7)}
 #ivAskPane.ask-hero .iv-qwrap{justify-content:flex-end;padding:40px 16px 8px;background:linear-gradient(180deg,rgba(250,244,234,0) 0%,rgba(250,244,234,.5) 32%,var(--cream) 50%,var(--cream) 100%)}
 #ivAskPane.ask-hero .iv-foot{padding:8px 16px 12px;background:var(--cream)}
 #ivAskPane.ask-hero .iv-lead{color:var(--gold-deep)}
-/* ===== v16 讲述开场：女子实拍图全屏沉浸（沿用 v15 token） ===== */
-/* #session 基类已是 position:absolute;inset:0（自带定位上下文），不要覆盖 position，否则屏幕塌成内容高度 */
-#session.sess-imm::before{content:"";position:absolute;inset:0;background:var(--home-bg) center/cover no-repeat;z-index:0}
-#session.sess-imm::after{content:"";position:absolute;left:0;right:0;top:0;height:340px;z-index:1;pointer-events:none;background:linear-gradient(165deg,rgba(251,246,236,.72) 0%,rgba(251,246,236,.3) 40%,rgba(251,246,236,0) 72%)}
-#session.sess-imm .sbar{position:relative;z-index:20;color:#3D2916!important}   /* 顶部转浅底，状态栏改深色 */
-#session.sess-imm .ss-hero{position:relative;z-index:3;background:none;padding-top:2px}
-#session.sess-imm .ss-hero::after{display:none}
-#session.sess-imm .torn{display:none}
-#session.sess-imm .ss-body{position:relative;z-index:3;background:none;padding:0}
-/* ② 顶部信息层级：去冗余标题、品牌缩角标、小云卡成为唯一锚点 */
-#session.sess-imm .ss-top{display:none}                                   /* “讲述”标题冗余，隐藏 */
-#session.sess-imm .ss-brand{width:160px;height:34px;margin-top:2px;opacity:1;filter:drop-shadow(0 1px 5px rgba(255,251,240,.9))}  /* 品牌置顶左·放大（参考稿） */
-/* 小云身份卡：半透暗背板 + 放大，作为顶部唯一视觉锚点 */
-#session.sess-imm .iv-who{display:none}   /* 参考稿以品牌+大标题领衔，隐藏绿色小云卡 */
-#session.sess-imm .iv-av{width:50px;height:50px;font-size:var(--fs-xl)}
-#session.sess-imm .iv-whot .n{color:#FCF5E8;text-shadow:0 1px 6px rgba(43,27,12,.85);font-size:var(--fs-lg)}
-#session.sess-imm .iv-whot .s{color:#F0E4CE;text-shadow:0 1px 5px rgba(43,27,12,.85);font-size:var(--fs-md)}
-/* 开场 ask 面板：图由 #session 提供，面板本身透明铺满 */
-#session.sess-imm #ivAskPane.ask-hero{overflow:visible;border-radius:0}
-#session.sess-imm #ivAskPane.ask-hero::before,
-#session.sess-imm #ivAskPane.ask-hero::after{display:none}
-#session.sess-imm #ivAskPane.ask-hero .fam-pill{align-self:flex-start;margin:8px 0 0}   /* 家人回音左对齐同轴 */
-#session.sess-imm #ivAskPane.ask-hero .ask-ambient{padding:14px 20px 4px}
-/* 大问题压在底部 scrim（深→透暖色，图上依然清晰可读） */
-#session.sess-imm #ivAskPane.ask-hero .iv-qwrap{flex:none;align-items:flex-start;justify-content:flex-start;gap:12px;padding:16px 20px 0;background:none}
-#session.sess-imm #ivAskPane.ask-hero .iv-q{color:var(--brown-h);text-shadow:none}
-/* 问题做成米色对话气泡（参考稿），左下尖角 */
-#session.sess-imm #ivAskPane.ask-hero .iv-qbox{position:relative;display:inline-block;background:rgba(251,243,225,.96);border-radius:22px 22px 22px 7px;padding:14px 18px;box-shadow:0 14px 32px -14px rgba(107,68,35,.55);max-width:90%}
-#session.sess-imm #ivAskPane.ask-hero .iv-qbox::before{content:"";position:absolute;top:-7px;left:24px;width:15px;height:15px;background:rgba(251,243,225,.96);border-radius:3px;transform:rotate(45deg)}   /* 气泡小尾巴，指向上方“小云” */
-/* 底部操作行推到底部，中间留出人像 */
-#session.sess-imm #ivAskPane.ask-hero .iv-foot{margin-top:auto}
-/* 念给我听：降级为图上轻描边 ghost */
-#session.sess-imm #ivAskPane.ask-hero .iv-replay{border:1.5px solid rgba(252,245,232,.6);color:#FCF5E8;background:rgba(255,255,255,.08);padding:6px 14px;min-height:40px;font-size:var(--fs-md)}
-#session.sess-imm #ivAskPane.ask-hero .iv-replay:active{background:rgba(255,255,255,.18)}
-/* foot：延续 scrim，主按钮"点这里跟我说"落底部拇指区 */
-#session.sess-imm #ivAskPane.ask-hero .iv-foot{background:rgba(38,24,12,.88);padding:6px 20px 12px;gap:10px}
-/* 次级动作行：换个话题／回看／我的书房 三个并排，收小 + 图上 ghost */
-#session.sess-imm #ivAskPane.ask-hero .iv-subrow .iv-sub{background:rgba(255,255,255,.1);border:1.5px solid rgba(252,245,232,.4);color:#F0E4CE;padding:9px 6px;min-height:42px;font-size:var(--fs-sm)}
-#session.sess-imm #ivAskPane.ask-hero .iv-subrow .iv-sub:active{background:rgba(255,255,255,.2)}
 .iv-listening{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;text-align:center;padding:8px 8px}
-.iv-qmini{font-size:var(--fs-lg);font-weight:600;color:var(--text-2);line-height:1.4}
-.iv-recdot{font-size:var(--fs-lg);font-weight:600;color:var(--progress);display:flex;align-items:center;gap:12px}
+.iv-qmini{font-size:var(--fs-lg);font-weight:700;color:var(--text-2);line-height:1.4}
+.iv-recdot{font-size:var(--fs-lg);font-weight:700;color:var(--progress);display:flex;align-items:center;gap:12px}
 .iv-recdot .d{width:18px;height:18px;border-radius:50%;background:var(--progress);animation:ivpulse 1.1s ease-in-out infinite}
 @keyframes ivpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
 .iv-wave{display:flex;align-items:flex-end;gap:8px;height:82px}
@@ -595,72 +514,52 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .iv-wave i:nth-child(7){height:64px;animation-delay:.18s}
 .iv-wave i:nth-child(8){height:44px;animation-delay:.05s}
 .iv-wave i:nth-child(9){height:76px;animation-delay:.26s}
-/* 说话中：顶部固定区（状态+提醒） */
-.iv-listen-top{flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:8px 8px 0}
-.iv-statusrow{display:flex;align-items:center;justify-content:center;gap:14px}
-.iv-wave.sm{height:40px;gap:5px;overflow:hidden}
-.iv-wave.sm i{width:6px}
-.iv-mictrouble{display:inline-flex;align-items:center;gap:5px;font-size:var(--fs-sm);color:var(--gold-deep);font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer;opacity:.85}
-.iv-mictrouble svg{width:15px;height:15px}
-/* 实时转写字幕卡：撑满中部、文字往下、可滚动 */
-.iv-live{flex:1;overflow-y:auto;align-self:stretch;margin:12px 4px 0;background:var(--cream-2);border:1.5px solid var(--paper-line);border-radius:var(--r-lg);padding:16px 16px 18px;min-height:70px;text-align:left;box-shadow:var(--sh-card)}
-.iv-live .ll{font-size:var(--fs-sm);font-weight:600;color:var(--danger);letter-spacing:.04em;margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.iv-live .ll::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--danger);animation:ivpulse 1s infinite}
-.iv-live .lt{font-family:var(--serif);font-size:var(--fs-xl);line-height:1.7;color:var(--text);font-weight:600}
-.iv-live .lcur{display:inline-block;width:3px;height:1.05em;background:var(--gold-deep);vertical-align:-3px;margin-left:1px;animation:ivblink 1s step-end infinite}
-@keyframes ivblink{50%{opacity:0}}
-/* 录音暂停态：波形与红点静止、变淡 */
-.rec-paused .iv-wave i{animation-play-state:paused;opacity:.4}
-.rec-paused .iv-recdot{color:var(--text-3)}
-.rec-paused .iv-recdot .d{background:var(--text-3);animation-play-state:paused}
-.rec-paused .iv-live .ll{color:var(--text-3)}
-.rec-paused .iv-live .ll::before{animation-play-state:paused;background:var(--text-3)}
 @keyframes iveq{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
 .iv-hintsoft{font-size:var(--fs-md);color:var(--text-3);line-height:1.6}
 .iv-hintsoft .autosave{margin-left:2px}
-.iv-mini2{display:flex;gap:12px}
-.iv-minibtn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;background:var(--cream-2);border:2px solid var(--paper-line);border-radius:var(--r-md);padding:12px 16px;font-size:var(--fs-md);font-weight:600;color:var(--brown-h);cursor:pointer;min-height:48px}
+.iv-mini2{display:flex;gap:12px;justify-content:center}
+.iv-minibtn{background:var(--cream-2);border:2px solid var(--paper-line);border-radius:var(--r-md);padding:12px 24px;font-size:var(--fs-md);font-weight:700;color:var(--brown-h);cursor:pointer;min-height:48px;min-width:100px}
 .iv-minibtn:active{background:rgba(201,169,97,.15)}
 /* 默认路径：一闪即过的轻确认（无需点击，约 1 秒自动进下一问） */
 .iv-flashpane{align-items:center;justify-content:center}
 .iv-flash{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;animation:ivFlashIn .28s ease}
 .iv-flash .iv-saved{font-size:var(--fs-xl)}
 .iv-flash .iv-saved .ck{width:52px;height:52px;font-size:var(--fs-xl);animation:ivPop .42s cubic-bezier(.2,1.5,.5,1)}
-.iv-flashsub{font-family:var(--serif);font-size:var(--fs-lg);color:var(--text-2);font-weight:600;display:flex;align-items:center;gap:8px}
-.iv-cd{display:inline-grid;place-items:center;min-width:48px;height:48px;padding:0 8px;border-radius:50%;background:rgba(74,107,71,.14);color:var(--green);font-family:var(--sans);font-size:var(--fs-xl);font-weight:600;line-height:1}
+.iv-flashsub{font-family:var(--serif);font-size:var(--fs-lg);color:var(--text-2);font-weight:700;display:flex;align-items:center;gap:8px}
+.iv-cd{display:inline-grid;place-items:center;min-width:48px;height:48px;padding:0 8px;border-radius:50%;background:rgba(74,107,71,.14);color:var(--green);font-family:var(--sans);font-size:var(--fs-xl);font-weight:700;line-height:1}
 @keyframes ivFlashIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @keyframes ivPop{0%{transform:scale(.35);opacity:0}62%{transform:scale(1.16)}100%{transform:scale(1);opacity:1}}
 .iv-recorded{flex:1;display:flex;flex-direction:column;justify-content:center;gap:16px}
-.iv-saved{display:flex;align-items:center;gap:12px;font-size:var(--fs-xl);font-weight:600;color:var(--green)}
+.iv-saved{display:flex;align-items:center;gap:12px;font-size:var(--fs-xl);font-weight:700;color:var(--green)}
 .iv-saved .ck{width:46px;height:46px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:var(--fs-xl);flex:none}
 .iv-recap{background:var(--card);border:2px solid var(--line);border-left:6px solid var(--gold);border-radius:var(--r-md);padding:20px 20px 16px;box-shadow:0 14px 30px -22px rgba(107,68,35,.6)}
-.iv-recap .rt{font-family:var(--serif);font-size:var(--fs-lg);line-height:1.6;color:var(--text);font-weight:600}
-.iv-recap .rt b{color:var(--green);font-weight:600}
+.iv-recap .rt{font-family:var(--serif);font-size:var(--fs-lg);line-height:1.6;color:var(--text);font-weight:700}
+.iv-recap .rt b{color:var(--green);font-weight:700}
 .iv-recap .iv-replay{margin-top:16px}
-.iv-askok{font-size:var(--fs-lg);font-weight:600;color:var(--brown-h);text-align:center}
+.iv-askok{font-size:var(--fs-lg);font-weight:700;color:var(--brown-h);text-align:center}
 .iv-big2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.iv-bigeq{border:none;border-radius:var(--r-lg);min-height:52px;cursor:pointer;font-family:var(--sans);font-weight:600;font-size:var(--fs-md);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px}
+.iv-bigeq{border:none;border-radius:var(--r-lg);min-height:52px;cursor:pointer;font-family:var(--sans);font-weight:700;font-size:var(--fs-md);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px}
 .iv-bigeq .em{font-size:var(--fs-xl);line-height:1}
 .iv-bigeq.pri{background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff;text-shadow:0 1px 2px rgba(60,35,10,.4);box-shadow:0 14px 28px -16px rgba(196,147,79,.9)}
 .iv-bigeq.sec{background:var(--card);border:2.5px solid var(--paper-line);color:var(--brown-h)}
 .iv-bigeq:active{transform:translateY(2px)}
 .iv-bridge{flex:1;display:flex;flex-direction:column;justify-content:center;gap:20px;text-align:center;padding:8px 4px}
-.iv-bridge .lead{font-size:var(--fs-lg);font-weight:600;color:var(--text-2);line-height:1.5}
-.iv-rule{display:flex;align-items:center;gap:12px;color:var(--gold-deep);font-size:var(--fs-md);font-weight:600;justify-content:center;margin:2px 0}
+.iv-bridge .lead{font-size:var(--fs-lg);font-weight:700;color:var(--text-2);line-height:1.5}
+.iv-rule{display:flex;align-items:center;gap:12px;color:var(--gold-deep);font-size:var(--fs-md);font-weight:700;justify-content:center;margin:2px 0}
 .iv-rule::before,.iv-rule::after{content:"";height:2px;width:40px;background:var(--gold);opacity:.6;border-radius:2px}
-.iv-bridge .nq{font-family:var(--serif);font-size:var(--fs-xl);font-weight:600;color:var(--brown-h);line-height:1.4}
+.iv-bridge .nq{font-family:var(--serif);font-size:var(--fs-xl);font-weight:700;color:var(--brown-h);line-height:1.4}
 .iv-bridge .comfort-ic{font-size:var(--fs-xl)}
-.iv-rest{margin:0 auto;background:transparent;border:none;color:var(--text-2);font-size:var(--fs-md);font-weight:600;text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:12px;min-height:50px}
+.iv-rest{margin:0 auto;background:transparent;border:none;color:var(--text-2);font-size:var(--fs-md);font-weight:700;text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:12px;min-height:50px}
 
 /* ============ 更多：统一收纳次级功能（低调入口）============ */
 .more-hd{flex:none;display:flex;align-items:center;gap:12px;padding:8px 16px 12px}
 .more-hd .bk{background:var(--cream-2);border:1.5px solid var(--paper-line);border-radius:var(--r-sm);width:44px;height:44px;font-size:var(--fs-lg);color:var(--brown-h);cursor:pointer;flex:none}
-.more-hd .ti{font-family:var(--serif);font-size:var(--fs-lg);font-weight:600;color:var(--brown-h)}
+.more-hd .ti{font-family:var(--serif);font-size:var(--fs-lg);font-weight:700;color:var(--brown-h)}
 .more-list{display:flex;flex-direction:column;gap:12px;padding:2px 16px 16px}
 .more-row{display:flex;align-items:center;gap:12px;background:var(--card);border:1.5px solid var(--line);border-radius:var(--r-md);padding:16px 16px;cursor:pointer;text-align:left;width:100%;box-shadow:0 12px 26px -24px rgba(107,68,35,.6)}
 .more-row:active{background:var(--cream-2)}
 .more-row .ic{width:44px;height:44px;border-radius:var(--r-sm);flex:none;display:grid;place-items:center;font-size:var(--fs-lg);background:linear-gradient(140deg,#F0E2C4,#E0C99A)}
-.more-row .tx .t{font-size:var(--fs-md);font-weight:600;color:var(--brown-h)}
+.more-row .tx .t{font-size:var(--fs-md);font-weight:700;color:var(--brown-h)}
 .more-row .tx .d{font-size:var(--fs-sm);color:var(--text-2);margin-top:2px;line-height:1.4}
 .more-row .ar{margin-left:auto;font-size:var(--fs-lg);color:var(--text-3)}
 .more-note{font-size:var(--fs-sm);color:var(--text-3);text-align:center;margin:8px 16px 4px;line-height:1.5}
@@ -688,7 +587,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 
 /* --- 家人回音卡（讲述开场，暖色小卡） --- */
 /* 收敛为顶部一行轻量 pill（不再夹在问题与主按钮之间） */
-.fam-pill{align-self:center;display:inline-flex;align-items:center;gap:8px;max-width:calc(100% - 28px);margin:12px auto 0;padding:8px 16px;border:none;border-radius:999px;background:rgba(251,243,228,.94);box-shadow:0 8px 20px -10px rgba(43,27,12,.6);font-size:var(--fs-md);font-weight:600;color:var(--brown-h);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fam-pill{align-self:center;display:inline-flex;align-items:center;gap:8px;max-width:calc(100% - 28px);margin:12px auto 0;padding:8px 16px;border:none;border-radius:999px;background:rgba(251,243,228,.94);box-shadow:0 8px 20px -10px rgba(43,27,12,.6);font-size:var(--fs-md);font-weight:700;color:var(--brown-h);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .fam-pill:active{background:#fff}
 
 /* --- 小结页「书变厚」沉淀反馈 --- */
@@ -700,7 +599,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .iv-processing{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;text-align:center;padding:8px 8px}
 .iv-proc-ring{width:64px;height:64px;border-radius:50%;border:5px solid rgba(201,169,97,.22);border-top-color:var(--gold-deep);animation:ivspin .9s linear infinite}
 @keyframes ivspin{to{transform:rotate(360deg)}}
-.iv-proc-t{font-family:var(--serif);font-size:var(--fs-lg);font-weight:600;color:var(--brown-h)}
+.iv-proc-t{font-family:var(--serif);font-size:var(--fs-lg);font-weight:700;color:var(--brown-h)}
 .iv-proc-s{font-size:var(--fs-md);color:var(--text-2)}
 
 /* --- 通用骨架屏 --- */
@@ -715,7 +614,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 /* --- 空态 --- */
 .empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:40px 32px;min-height:340px}
 .empty .ei{font-size:var(--fs-xl);opacity:.85}
-.empty .et{font-family:var(--serif);font-size:var(--fs-lg);font-weight:600;color:var(--brown-h)}
+.empty .et{font-family:var(--serif);font-size:var(--fs-lg);font-weight:700;color:var(--brown-h)}
 .empty .es{font-size:var(--fs-md);color:var(--text-2);line-height:1.6}
 .empty .eb{margin-top:8px}
 
@@ -723,18 +622,18 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .offline-bar{position:absolute;left:12px;right:12px;top:44px;z-index:80;background:linear-gradient(135deg,#F3E3C4,#E8D3A6);border:1px solid var(--gold);border-radius:var(--r-sm);padding:12px 16px;display:none;align-items:center;gap:12px;box-shadow:0 16px 34px -20px rgba(107,68,35,.7)}
 .offline-bar.show{display:flex;animation:rise .45s cubic-bezier(.2,.8,.2,1)}
 .offline-bar .oi{font-size:var(--fs-lg);flex:none}
-.offline-bar .ot{font-size:var(--fs-sm);color:var(--brown-h);font-weight:600;line-height:1.45}
+.offline-bar .ot{font-size:var(--fs-sm);color:var(--brown-h);font-weight:700;line-height:1.45}
 .offline-bar .ot span{display:block;font-weight:400;color:var(--text-2);font-size:var(--fs-sm);margin-top:1px}
 
 /* --- 峰值付费浮卡（成书里程碑 / 读完峰终） --- */
 .pay-float{position:absolute;left:16px;right:16px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:70;background:var(--cream);border:1.5px solid var(--gold);border-radius:var(--r-md);padding:16px 16px 16px;box-shadow:0 24px 50px -22px rgba(107,68,35,.75);display:none}
 .pay-float.show{display:block;animation:rise .5s cubic-bezier(.2,.8,.2,1)}
 .pay-float .pf-x{position:absolute;top:8px;right:8px;width:34px;height:34px;display:grid;place-items:center;color:var(--text-3);font-size:var(--fs-lg);cursor:pointer}
-.pay-float .pf-h{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown-h);padding-right:24px}
+.pay-float .pf-h{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown-h);padding-right:24px}
 .pay-float .pf-s{font-size:var(--fs-sm);color:var(--text-2);margin-top:8px;line-height:1.55}
 .pay-float .pf-s b{color:var(--gold-deep)}
 .pay-float .pf-act{margin-top:12px;display:flex;gap:12px}
-.pay-float .pf-act button{flex:1;border:none;border-radius:var(--r-sm);padding:12px;font-family:var(--serif);font-weight:600;font-size:var(--fs-md);cursor:pointer}
+.pay-float .pf-act button{flex:1;border:none;border-radius:var(--r-sm);padding:12px;font-family:var(--serif);font-weight:700;font-size:var(--fs-md);cursor:pointer}
 .pay-float .pf-act .p{background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff}
 .pay-float .pf-act .g{background:var(--cream-2);border:1px solid var(--paper-line);color:var(--brown)}
 
@@ -745,7 +644,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .hmodal.open{transform:translateY(0)}
 .hmodal .hm-grip{width:40px;height:5px;border-radius:3px;background:var(--paper-line);margin:8px auto 4px}
 .hmodal .hm-h{display:flex;align-items:center;justify-content:space-between;padding:8px 20px 8px}
-.hmodal .hm-h .a{font-family:var(--serif);font-weight:600;font-size:var(--fs-lg);color:var(--brown-h)}
+.hmodal .hm-h .a{font-family:var(--serif);font-weight:700;font-size:var(--fs-lg);color:var(--brown-h)}
 .hmodal .hm-h .x{font-size:var(--fs-lg);color:var(--text-3);cursor:pointer;width:40px;height:40px;display:grid;place-items:center}
 .hmodal .hm-sub{padding:0 20px 12px;font-size:var(--fs-sm);color:var(--text-2)}
 .hmodal .hm-list{overflow-y:auto;padding:2px 16px 20px}
@@ -753,7 +652,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .hm-seg:active{background:var(--cream-2)}
 .hm-seg .hi{width:40px;height:40px;border-radius:var(--r-sm);flex:none;background:rgba(74,107,71,.14);color:var(--green-2);display:grid;place-items:center;font-size:var(--fs-md)}
 .hm-seg .ht{flex:1;min-width:0}
-.hm-seg .ht .n{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--brown)}
+.hm-seg .ht .n{font-family:var(--serif);font-weight:700;font-size:var(--fs-md);color:var(--brown)}
 .hm-seg .ht .s{font-size:var(--fs-sm);color:var(--text-3);margin-top:2px}
 .hm-seg .hp{font-size:var(--fs-lg);color:var(--gold-deep);flex:none}
 
@@ -762,15 +661,15 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .perm-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:36px 32px;gap:8px}
 .perm-ic{width:96px;height:96px;border-radius:var(--r-xl);background:linear-gradient(140deg,#F0E2C4,#E0C99A);display:grid;place-items:center;font-size:var(--fs-xl);position:relative;margin-bottom:8px}
 .perm-ic .slash{position:absolute;font-size:var(--fs-xl);color:var(--error);opacity:.8;line-height:1}
-.perm-h{font-family:var(--serif);font-weight:600;font-size:var(--fs-lg);color:var(--brown-h);margin-top:12px}
+.perm-h{font-family:var(--serif);font-weight:700;font-size:var(--fs-lg);color:var(--brown-h);margin-top:12px}
 .perm-s{font-size:var(--fs-md);color:var(--text-2);line-height:1.65;margin-top:8px}
 .perm-steps{background:var(--cream-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:16px 16px;margin-top:16px;text-align:left;width:100%}
 .perm-steps .st{display:flex;gap:8px;align-items:flex-start;font-size:var(--fs-md);color:var(--text);line-height:1.5;margin:8px 0}
-.perm-steps .st .k{color:var(--gold-deep);font-weight:600;flex:none}
+.perm-steps .st .k{color:var(--gold-deep);font-weight:700;flex:none}
 .perm-act{width:100%;margin-top:20px}
 
 /* --- 上传中 / 失败（加照片，占位示意） --- */
-.up-state{position:absolute;left:8px;right:8px;bottom:8px;z-index:4;background:rgba(58,40,24,.86);color:#FBF3E4;border-radius:var(--r-sm);padding:8px 12px;font-size:var(--fs-sm);font-weight:600;display:none;align-items:center;gap:8px}
+.up-state{position:absolute;left:8px;right:8px;bottom:8px;z-index:4;background:rgba(58,40,24,.86);color:#FBF3E4;border-radius:var(--r-sm);padding:8px 12px;font-size:var(--fs-sm);font-weight:700;display:none;align-items:center;gap:8px}
 .up-state.show{display:flex}
 .up-state .sp{width:15px;height:15px;border-radius:50%;border:2.5px solid rgba(251,243,228,.4);border-top-color:#FBF3E4;animation:ivspin .8s linear infinite;flex:none}
 .up-state.fail{background:rgba(185,74,58,.92)}
@@ -779,16 +678,16 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 /* ============ v13 视觉系统精修（方向A：温暖纸感·精修不换风格）============ */
 .uic{width:var(--uic);height:var(--uic);display:inline-block;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:1.85;stroke-linecap:round;stroke-linejoin:round;flex:none}
 /* 统一图标占位符：小尺寸中性方框，等以后专门设计图标再替换 */
-.ico-ph{display:inline-block;width:18px;height:18px;vertical-align:middle;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ico-ph{display:inline-block;width:18px;height:18px;border:1.5px solid var(--text-3);border-radius:4px;box-sizing:border-box;vertical-align:middle;flex:none;background:none}
 .icsp{position:absolute;width:0;height:0;overflow:hidden}
 .mine-row .i .uic,.wb2 .x .i .uic,.share-opt .i .uic,.mode .i .uic{width:22px;height:22px}
 .mine-row .i,.share-opt .i{color:var(--gold-deep)}
 /* tabBar 选中态强化 */
-.tabbar .t{gap:4px;font-size:var(--fs-sm);font-weight:600;color:var(--text-3);transition:color .18s}
+.tabbar .t{gap:4px;font-size:var(--fs-sm);font-weight:700;color:var(--text-3);transition:color .18s}
 .tabbar .t .uic{width:25px;height:25px;stroke-width:1.8}
-.tabbar .t.on{color:var(--gold-deep);font-weight:600}
+.tabbar .t.on{color:var(--green);font-weight:700}
 .tabbar .t.on .uic{stroke-width:2.3}
-.tabbar .t .tabdot{width:5px;height:5px;border-radius:50%;background:var(--gold-deep);opacity:0;margin-top:-1px}
+.tabbar .t .tabdot{width:5px;height:5px;border-radius:50%;background:var(--green);opacity:0;margin-top:-1px}
 .tabbar .t.on .tabdot{opacity:1}
 /* 卡片/行/按钮：投影层级 + 按下态 */
 .mine-row,.scn,.msg-item,.share-opt,.wb2 .x,.mode,.hm-seg,.collab,.cs-item{transition:transform .12s ease,box-shadow .18s ease,background .15s ease}
@@ -919,21 +818,21 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
     <div class="sbar" style="color:var(--brown)"><span>9:41</span><span class="bat"></span></div>
     <div class="wxcap">··· ◉</div>
     <div class="body mine-body">
-      <div class="mine-nav" style="display:flex;align-items:center;justify-content:center;position:relative">我的<span class="bell" data-go="msgs" style="color:var(--brown-500)"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6Z"/><path d="M9.5 19a2.5 2.5 0 0 0 5 0"/></svg><span class="rd"></span></span></div>
+      <div class="mine-nav" style="display:flex;align-items:center;justify-content:center;position:relative">我的<span class="bell" data-go="msgs" style="color:var(--brown-500)"><span class="ico-ph"></span><span class="rd"></span></span></div>
       <div class="mine-user" data-go="profile" style="cursor:pointer"><div class="av">兰</div><div style="flex:1"><div class="k">当前用户</div><div class="n">兰秀英</div><div class="s">点这里看 / 改我的资料</div></div><div style="margin-left:auto;color:var(--text-3);font-size:var(--fs-lg)">›</div></div>
       <div class="hub-lbl">账户</div>
-      <div class="mine-row" data-go="profile"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></div><div><div class="a">账户 · 个人资料</div><div class="b">头像、昵称、联系方式</div></div><div class="ar">›</div></div>
-      <div class="mine-row" data-go="plans"><div class="i" style="background:rgba(201,169,97,.18);color:var(--gold-deep)"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M4 11h16v9H4z"/><path d="M2 7h20v4H2z"/><path d="M12 7v13"/><path d="M12 7C10.5 4.5 8 4 7 5.2 6 6.4 8.5 7 12 7c3.5 0 6-.6 5-1.8C21 4 13.5 4.5 12 7Z"/></svg></div><div><div class="a">我的套餐</div><div class="b">题量版本：基础 / 升级 / 高配</div></div><div class="ar">›</div></div>
-      <div class="mine-row" data-go="msgs"><div class="i" style="background:rgba(74,107,71,.14);color:var(--green-2)"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6Z"/><path d="M9.5 19a2.5 2.5 0 0 0 5 0"/></svg></div><div><div class="a">消息通知</div><div class="b">家人的采纳、回应与提问</div></div><div class="ar">›</div></div>
+      <div class="mine-row" data-go="profile"><div class="i"><span class="ico-ph"></span></div><div><div class="a">账户 · 个人资料</div><div class="b">头像、昵称、联系方式</div></div><div class="ar">›</div></div>
+      <div class="mine-row" data-go="plans"><div class="i" style="background:rgba(201,169,97,.18);color:var(--gold-deep)"><span class="ico-ph"></span></div><div><div class="a">我的套餐</div><div class="b">题量版本：基础 / 升级 / 高配</div></div><div class="ar">›</div></div>
+      <div class="mine-row" data-go="msgs"><div class="i" style="background:rgba(74,107,71,.14);color:var(--green-2)"><span class="ico-ph"></span></div><div><div class="a">消息通知</div><div class="b">家人的采纳、回应与提问</div></div><div class="ar">›</div></div>
       <div class="hub-lbl">设置 · 适老</div>
-      <div class="mine-row" data-toast="朗读语速：慢 / 中 / 快（示意）"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M4 15a8 8 0 0 1 16 0"/><path d="M12 15l4-3"/><circle cx="12" cy="15" r="1.2" fill="currentColor" stroke="none"/></svg></div><div><div class="a">朗读语速（TTS）</div><div class="b">当前：慢速，听得清</div></div><div class="ar">›</div></div>
-      <div class="mine-row" data-toast="字号：大 / 特大（示意）"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M3 18L7 7l4 11M4.2 14.5h5.6"/><path d="M13 18l3-8 3 8M13.8 15.5h4.4"/></svg></div><div><div class="a">字号大小</div><div class="b">当前：大字，看得清</div></div><div class="ar">›</div></div>
-      <div class="mine-row" data-go="onboarding"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.5a2.8 2.8 0 0 1 5.4 1c0 1.8-2.6 2-2.6 3.5"/><circle cx="12" cy="17.3" r="0.6" fill="currentColor" stroke="none"/></svg></div><div><div class="a">重看新手引导</div><div class="b">怎么用云忆，三句话就懂</div></div><div class="ar">›</div></div>
+      <div class="mine-row" data-toast="朗读语速：慢 / 中 / 快（示意）"><div class="i"><span class="ico-ph"></span></div><div><div class="a">朗读语速（TTS）</div><div class="b">当前：慢速，听得清</div></div><div class="ar">›</div></div>
+      <div class="mine-row" data-toast="字号：大 / 特大（示意）"><div class="i"><span class="ico-ph"></span></div><div><div class="a">字号大小</div><div class="b">当前：大字，看得清</div></div><div class="ar">›</div></div>
+      <div class="mine-row" data-go="onboarding"><div class="i"><span class="ico-ph"></span></div><div><div class="a">重看新手引导</div><div class="b">怎么用云忆，三句话就懂</div></div><div class="ar">›</div></div>
     </div>
     <div class="tabbar">
-      <div class="t" data-go="session"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3Z"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3"/></svg>讲述<i class="tabdot"></i></div>
-      <div class="t" data-go="shelf"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h5v16H6a2 2 0 0 0-2 2V5Z"/><path d="M20 5a2 2 0 0 0-2-2h-5v16h5a2 2 0 0 1 2 2V5Z"/></svg>书房<i class="tabdot"></i></div>
-      <div class="t on"><svg class="ico-ph" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>我的<i class="tabdot"></i></div>
+      <div class="t" data-go="session"><span class="ico-ph"></span>讲述<i class="tabdot"></i></div>
+      <div class="t" data-go="shelf"><span class="ico-ph"></span>书房<i class="tabdot"></i></div>
+      <div class="t on"><span class="ico-ph"></span>我的<i class="tabdot"></i></div>
     </div>
   </section>
 
@@ -944,8 +843,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
     <div class="sbar" style="color:#3D2916"><span>9:41</span><span class="bat"></span></div>
     <div class="wxcap">··· ◉</div>
     <div class="ss-hero">
-      <!-- 微信小程序：右上角胶囊占位，顶栏不放任何按钮，只留居中标题；导航动作全部收到底部次级行 -->
-      <div class="ss-top"><span class="tt">讲述</span></div>
+      <div class="ss-top"><span class="tb" data-go="shelf">‹ 书房</span><span class="tt">讲述</span><span class="tb menu" onclick="openTopics()"><span class="ico-ph"></span> 回看</span></div>
       <div class="ss-brand"></div>
       <div class="iv-who">
         <div class="iv-av">云</div>
@@ -954,55 +852,41 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
     </div>
     <div class="torn"></div>
     <!-- 全局断网态：您说的先存着，一会儿自动补上（绝不弹报错码） -->
-    <div class="offline-bar" id="offlineBar"><span class="oi"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M3 3l18 18"/><path d="M9 9.3A11 11 0 0 0 5 12M2 8.8A16 16 0 0 1 8.5 6M15.5 6A16 16 0 0 1 22 8.8M15 15.2A6 6 0 0 0 12 14.5"/><circle cx="12" cy="19" r="0.6" fill="currentColor" stroke="none"/></svg></span><div class="ot">网络有点慢，您说的我先存着了<span>一会儿网好了自动补上，您接着说就行</span></div></div>
+    <div class="offline-bar" id="offlineBar"><span class="oi"><span class="ico-ph"></span></span><div class="ot">网络有点慢，您说的我先存着了<span>一会儿网好了自动补上，您接着说就行</span></div></div>
     <div class="ss-body iv-body">
-      <div class="recover-bar" id="recoverBar" style="display:none"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.6L3 8"/><path d="M3 3.5V8h4.5"/><path d="M12 7.5V12l3 2"/></svg> 上次没讲完的，我给您留着呢，接着说就好 <span class="x" onclick="this.parentNode.style.display='none'">×</span></div>
+      <div class="recover-bar" id="recoverBar" style="display:none"><span class="ico-ph"></span> 上次没讲完的，我给您留着呢，接着说就好 <span class="x" onclick="this.parentNode.style.display='none'">×</span></div>
 
       <!-- 状态①：开场 / 每轮问题（一次只问一件事） -->
       <div class="iv-pane ask-hero" id="ivAskPane">
         <!-- P0-2 家人回音：收敛成顶部一行轻量 pill，仅开场第一问出现，可点展开 -->
-        <button class="fam-pill" id="ivFamEcho" data-toast="晓晓看了您讲的《门口的老槐树》，说她也记得那棵树"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg> 晓晓看过您的故事 ›</button>
-        <div class="free-badge" id="ivFreeBadge" style="display:none"><svg viewBox="0 0 24 24"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg> 随便讲讲 · 我帮您归类</div>
-        <div class="ask-ambient"><span class="hl">听见来路，<br>照见归途</span><span class="sb">旧事慢讲，我在身旁</span>
-          <div class="ss-prog3"><span class="p"><b>12</b><span>段已录</span></span><span class="p"><b>3</b><span>章成书</span></span><span class="p"><b>5</b><span>天连续</span></span></div>
-        </div>
+        <button class="fam-pill" id="ivFamEcho" data-toast="晓晓看了您讲的《门口的老槐树》，说她也记得那棵树"><span class="ico-ph"></span> 晓晓看过您的故事 ›</button>
+        <div class="ask-ambient">听见来路，照见归途</div>
         <div class="iv-qwrap">
-          <!-- 换个话题：接在题目末尾，点击切换本话题 -->
-          <div class="iv-qbox"><span class="iv-q" id="ivQ">秀英，您的名字，是谁给取的呀？</span><button class="iv-topicswap" onclick="ivSkipTopic()"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/></svg> 换个话题</button></div>
+          <div class="iv-q" id="ivQ">秀英，您的名字，是谁给取的呀？</div>
+          <button class="iv-replay" onclick="ivTTS()"><span class="ico-ph"></span> 念给我听</button>
         </div>
         <div class="iv-foot">
-          <!-- 书房 · 点这里跟我说 · 回看 一行 -->
-          <div class="iv-sayrow">
-            <button class="iv-sub side" data-go="shelf"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5V4.5Z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 21H19"/></svg>书房</button>
-            <button class="iv-say" onclick="ivListen()"><span class="em"><svg class="ico-ph" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/><path d="M8.5 21h7"/></svg></span>点这里，跟我说</button>
-            <button class="iv-sub side" onclick="openTopics()"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.6L3 8"/><path d="M3 3.5V8h4.5"/><path d="M12 7.5V12l3 2"/></svg>回看</button>
+          <button class="iv-say" onclick="ivListen()"><span class="em"><span class="ico-ph"></span></span>点这里，跟我说</button>
+          <div class="iv-subrow">
+            <button class="iv-sub" onclick="ivSkipTopic()"><span class="ico-ph"></span> 换个话题</button>
+            <button class="iv-sub" data-go="shelf"><span class="ico-ph"></span> 我的书房</button>
           </div>
         </div>
       </div>
 
       <!-- 状态②：说话中（强反馈 + 长停顿不打断 + 自动保存） -->
       <div class="iv-pane" id="ivListenPane" style="display:none">
-        <!-- 顶部固定：状态 + 提醒文案（不随转写滚动） -->
-        <div class="iv-listen-top">
+        <div class="iv-listening">
           <div class="iv-qmini" id="ivQmini">您的名字，是谁给取的呀？</div>
-          <!-- 状态 + 小波形 成一组紧凑录音指示 -->
-          <div class="iv-statusrow">
-            <div class="iv-recdot"><span class="d"></span><span id="ivRecLabel">正在听您说…</span></div>
-            <div class="iv-wave sm"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          </div>
-          <div class="iv-hintsoft">您慢慢说，说完点下面「我说完了」 <span class="autosave show" id="ivAutosave">✓ 一直在帮您存着</span></div>
-          <a class="iv-mictrouble" data-go="permfail"><svg class="ico-ph" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/><path d="M8.5 21h7"/></svg> 说了半天没反应？点这里开启麦克风</a>
+          <div class="iv-recdot"><span class="d"></span>正在听您说…</div>
+          <div class="iv-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="iv-hintsoft">您慢慢说，不着急，说完点下面那个大按钮<br><span class="autosave show" id="ivAutosave">✓ 一直在帮您存着</span><br><span data-go="permfail" style="display:inline-block;margin-top:8px;font-size:var(--fs-sm);color:var(--gold-deep);font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer"><span class="ico-ph"></span> 说了半天没反应？点这里开启麦克风</span></div>
         </div>
-        <!-- 中部：实时转写，文字一直往下（可滚动，自动跟到底部） -->
-        <div class="iv-live" id="ivLive"><div class="ll">正在转成文字…</div><span class="lt" id="ivLiveTxt"></span><span class="lcur"></span></div>
-        <!-- 底部固定：主按钮 + 一行（重说左 · 暂停右） -->
         <div class="iv-foot">
-          <!-- 一行：重说(左) · 我说完了(中) · 暂停(右) -->
-          <!-- 圆形按钮组：重说 · 暂停/继续(大圆) · 我说完了 -->
-          <div class="iv-recctrl">
-            <button class="iv-rbtn" onclick="ivListen()"><span class="ic"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/></svg></span><span class="lb">重说</span></button>
-            <button class="iv-rbtn primary" id="ivRecToggle" onclick="ivToggleRec()"><span class="ic"><svg viewBox="0 0 24 24"><rect x="7" y="5" width="3.5" height="14" rx="1"/><rect x="13.5" y="5" width="3.5" height="14" rx="1"/></svg></span><span class="lb">暂停</span></button>
-            <button class="iv-rbtn" onclick="ivDone()"><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><span class="lb">我说完了</span></button>
+          <button class="iv-say green" onclick="ivDone()"><span class="em">●</span>我说完了</button>
+          <div class="iv-mini2">
+            <button class="iv-minibtn" onclick="ivTTS('已暂停，随时可以接着说')"><span class="ico-ph"></span> 暂停</button>
+            <button class="iv-minibtn" onclick="ivListen()">↺ 重说</button>
           </div>
         </div>
       </div>
@@ -1021,11 +905,11 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
         <div class="iv-flash" onclick="ivPauseFlash()">
           <div class="iv-saved"><span class="ck">✓</span>记下啦</div>
           <div class="iv-flashsub"><span class="iv-cd" id="ivFlashCd">5</span> 秒后接着跟您聊…</div>
-          <div class="iv-hintsoft" id="ivFlashHint" style="font-size:var(--fs-md)"><svg class="ico-ph" viewBox="0 0 24 24"><rect x="7" y="5" width="3.5" height="14" rx="1"/><rect x="13.5" y="5" width="3.5" height="14" rx="1"/></svg> 点一下屏幕先停住 · 不着急</div>
+          <div class="iv-hintsoft" id="ivFlashHint" style="font-size:var(--fs-md)"><span class="ico-ph"></span> 点一下屏幕先停住 · 不着急</div>
         </div>
         <div class="iv-foot">
-          <button class="iv-say green" onclick="ivViewSummary()"><span class="em"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg></span>看看这段小结</button>
-          <button class="iv-say" id="ivFlashResume" style="display:none" onclick="ivConfirm()">接着跟您聊 →</button>
+          <button class="iv-say green" onclick="ivViewSummary()"><span class="em"><span class="ico-ph"></span></span>看看这段小结</button>
+          <button class="iv-sub" id="ivFlashResume" style="display:none;width:100%" onclick="ivConfirm()">接着跟您聊 →</button>
         </div>
       </div>
 
@@ -1035,7 +919,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
           <div class="iv-saved"><span class="ck">✓</span>记下啦</div>
           <div class="iv-recap">
             <div class="rt" id="ivRecap">我听您说：您这名字是<b>爷爷</b>给取的，盼着日子风调雨顺。</div>
-            <button class="iv-replay" onclick="ivReplayOrigin()"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8 8 0 0 1 0 12"/></svg> 点着回听我刚说的</button>
+            <button class="iv-replay" onclick="ivReplayOrigin()"><span class="ico-ph"></span> 点着回听我刚说的</button>
           </div>
           <div class="iv-askok">这样对吗？</div>
         </div>
@@ -1055,9 +939,9 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
           <div class="nq" id="ivTransQ">您还记得，第一天上学是什么样吗？</div>
         </div>
         <div class="iv-foot">
-          <button class="iv-say" onclick="ivListen()"><span class="em"><svg class="ico-ph" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/><path d="M8.5 21h7"/></svg></span>点这里，跟我说</button>
+          <button class="iv-say" onclick="ivListen()"><span class="em"><span class="ico-ph"></span></span>点这里，跟我说</button>
           <div class="iv-subrow">
-            <button class="iv-sub" data-go="summary"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg> 看看这段小结</button>
+            <button class="iv-sub" data-go="summary"><span class="ico-ph"></span> 看看这段小结</button>
             <button class="iv-sub" data-go="shelf">今天先到这儿</button>
           </div>
         </div>
@@ -1066,12 +950,12 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
       <!-- 状态⑤：情绪波动 → 安慰 + 软出口 -->
       <div class="iv-pane" id="ivComfortPane" style="display:none">
         <div class="iv-bridge">
-          <div class="comfort-ic"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10Z"/></svg></div>
+          <div class="comfort-ic"><span class="ico-ph"></span></div>
           <div class="nq">这段……不容易。</div>
           <div class="lead">不想说也没关系，咱不着急。<br>要不，聊点开心的？</div>
         </div>
         <div class="iv-foot">
-          <button class="iv-say green" onclick="ivComfortContinue()"><span class="em"><svg class="ico-ph" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 14a4 4 0 0 0 7 0"/><circle cx="9" cy="10" r="0.7" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="0.7" fill="currentColor" stroke="none"/></svg></span>好，聊点开心的</button>
+          <button class="iv-say green" onclick="ivComfortContinue()"><span class="em"><span class="ico-ph"></span></span>好，聊点开心的</button>
           <button class="iv-rest" data-go="shelf">今天先歇会儿吧</button>
         </div>
       </div>
@@ -1083,10 +967,10 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
       <div class="hm-h"><span class="a">回看您讲过的</span><span class="x" onclick="closeTopics()">×</span></div>
       <div class="hm-sub">这些都是您亲口讲过的，想再听哪段，点一下就行</div>
       <div class="hm-list">
-        <div class="hm-seg" onclick="closeTopics()"><div class="hi"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8 8 0 0 1 0 12"/></svg></div><div class="ht"><div class="n">您的名字是谁取的</div><div class="s">爷爷取的，盼着风调雨顺</div></div><div class="hp">›</div></div>
-        <div class="hm-seg" onclick="closeTopics()"><div class="hi"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8 8 0 0 1 0 12"/></svg></div><div class="ht"><div class="n">门口的老槐树</div><div class="s">夏天全村人在树下乘凉</div></div><div class="hp">›</div></div>
-        <div class="hm-seg" onclick="closeTopics()"><div class="hi"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8 8 0 0 1 0 12"/></svg></div><div class="ht"><div class="n">过年的新棉袄</div><div class="s">娘熬夜缝的枣红棉袄</div></div><div class="hp">›</div></div>
-        <div class="hm-seg" onclick="closeTopics()"><div class="hi"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8 8 0 0 1 0 12"/></svg></div><div class="ht"><div class="n">头一天上学</div><div class="s">爹送到村口，回头摆手</div></div><div class="hp">›</div></div>
+        <div class="hm-seg" onclick="closeTopics()"><div class="hi"><span class="ico-ph"></span></div><div class="ht"><div class="n">您的名字是谁取的</div><div class="s">爷爷取的，盼着风调雨顺</div></div><div class="hp">›</div></div>
+        <div class="hm-seg" onclick="closeTopics()"><div class="hi"><span class="ico-ph"></span></div><div class="ht"><div class="n">门口的老槐树</div><div class="s">夏天全村人在树下乘凉</div></div><div class="hp">›</div></div>
+        <div class="hm-seg" onclick="closeTopics()"><div class="hi"><span class="ico-ph"></span></div><div class="ht"><div class="n">过年的新棉袄</div><div class="s">娘熬夜缝的枣红棉袄</div></div><div class="hp">›</div></div>
+        <div class="hm-seg" onclick="closeTopics()"><div class="hi"><span class="ico-ph"></span></div><div class="ht"><div class="n">头一天上学</div><div class="s">爹送到村口，回头摆手</div></div><div class="hp">›</div></div>
       </div>
     </div>
   </section>
@@ -1108,9 +992,9 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
       <div class="skel skel-line" style="width:88%"></div>
     </div>
     <div class="body bk-body">
-      <div class="cover" onclick="bookOpenRead()" style="cursor:pointer;position:relative"><div class="spine"></div><div class="face"><div class="k">LIFE STORY</div><div class="t">我的时光印记</div><div class="s">生命故事书 · 一本书的一切都在这页</div><div class="a">兰秀英 · 云忆整理</div></div><div style="position:absolute;right:10px;bottom:9px;background:rgba(58,40,24,.82);color:#FBF3E4;font-size:var(--fs-sm);font-weight:600;padding:4px 12px;border-radius:var(--r-sm);z-index:3">轻点翻开 ›</div></div>
-      <div style="display:flex;gap:12px;margin-top:16px"><button class="btnp" style="flex:1" onclick="bookOpenRead()"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5V4.5Z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 21H19"/></svg> 翻开阅读 / 收听全本</button><button class="btng" style="flex:1" data-go="session"><svg class="ico-ph" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0"/><path d="M12 17v3"/></svg> 继续讲</button></div>
-      <div style="text-align:center;margin-top:8px;font-size:var(--fs-sm);color:var(--green-2);font-weight:600">✓ 小程序内看全本、听全本，一直免费</div>
+      <div class="cover" onclick="bookOpenRead()" style="cursor:pointer;position:relative"><div class="spine"></div><div class="face"><div class="k">LIFE STORY</div><div class="t">我的时光印记</div><div class="s">生命故事书 · 一本书的一切都在这页</div><div class="a">兰秀英 · 云忆整理</div></div><div style="position:absolute;right:10px;bottom:9px;background:rgba(58,40,24,.82);color:#FBF3E4;font-size:var(--fs-sm);font-weight:700;padding:4px 12px;border-radius:var(--r-sm);z-index:3">轻点翻开 ›</div></div>
+      <div style="display:flex;gap:12px;margin-top:16px"><button class="btnp" style="flex:1" onclick="bookOpenRead()"><span class="ico-ph"></span> 翻开阅读 / 收听全本</button><button class="btng" style="flex:1" data-go="session"><span class="ico-ph"></span> 继续讲</button></div>
+      <div style="text-align:center;margin-top:8px;font-size:var(--fs-sm);color:var(--green-2);font-weight:700">✓ 小程序内看全本、听全本，一直免费</div>
       <div class="card" style="margin-top:16px">
         <div class="wb-sect"><span class="a">成书进度</span><span class="b" data-go="story">故事卡 ›</span></div>
         <div class="wb-stat">
@@ -1118,7 +1002,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
           <div><div class="num ok">就快好</div><div class="lab">样章</div></div>
           <div><div class="num">2</div><div class="lab">章节稿</div></div>
         </div>
-        <div class="wb-good">讲得很不错 <svg class="ico-ph" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg> <b>再讲几段</b>，就能看到第一版样章了。<br><span style="color:var(--text-3);font-weight:400">样章 / 章节稿 / 章节编排（编辑态）二期展开，先占位。</span></div>
+        <div class="wb-good">讲得很不错 <span class="ico-ph"></span> <b>再讲几段</b>，就能看到第一版样章了。<br><span style="color:var(--text-3);font-weight:400">样章 / 章节稿 / 章节编排（编辑态）二期展开，先占位。</span></div>
       </div>
       <div class="toch"><span class="a">目录 · 点击直达</span><span class="b">由故事卡自动归章</span></div>
       <div class="toc">
@@ -1128,22 +1012,22 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
       </div>
       <div class="hub-lbl">一起记 · 家人协作</div>
       <div class="wb2">
-        <div class="x" data-go="invite"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><circle cx="9" cy="8" r="3.5"/><path d="M3 20a6.5 6.5 0 0 1 12 0"/><path d="M18 8v6M15 11h6"/></svg></div><div><div class="t">邀请家人一起记</div><div class="s">人多故事更全</div></div></div>
-        <div class="x" data-go="collaborators"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><circle cx="9" cy="8" r="3"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 15.2A6 6 0 0 1 21.5 20"/></svg></div><div><div class="t">一起记录的人</div><div class="s">4 人 · 回答提问</div></div></div>
-        <div class="x" data-go="story"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg></div><div><div class="t">故事卡</div><div class="s">原话 + 整理稿</div></div></div>
-        <div class="x" data-go="share"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><circle cx="6" cy="12" r="2.5"/><circle cx="17" cy="6" r="2.5"/><circle cx="17" cy="18" r="2.5"/><path d="M8.2 10.9l6.6-3.8M8.2 13.1l6.6 3.8"/></svg></div><div><div class="t">分享这本书</div><div class="s">翻页书 / 金句卡</div></div></div>
+        <div class="x" data-go="invite"><div class="i"><span class="ico-ph"></span></div><div><div class="t">邀请家人一起记</div><div class="s">人多故事更全</div></div></div>
+        <div class="x" data-go="collaborators"><div class="i"><span class="ico-ph"></span></div><div><div class="t">一起记录的人</div><div class="s">4 人 · 回答提问</div></div></div>
+        <div class="x" data-go="story"><div class="i"><span class="ico-ph"></span></div><div><div class="t">故事卡</div><div class="s">原话 + 整理稿</div></div></div>
+        <div class="x" data-go="share"><div class="i"><span class="ico-ph"></span></div><div><div class="t">分享这本书</div><div class="s">翻页书 / 金句卡</div></div></div>
       </div>
       <div class="hub-lbl">留下来 · 送给家人</div>
       <!-- P0-4 常驻付费降级为次要入口（不再是金色主按钮、不前置价格）；价格与转化改在情感峰值浮卡里出现 -->
-      <div class="share-opt" onclick="showUpgrade('download')"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M4 11h16v9H4z"/><path d="M2 7h20v4H2z"/><path d="M12 7v13"/><path d="M12 7C10.5 4.5 8 4 7 5.2 6 6.4 8.5 7 12 7c3.5 0 6-.6 5-1.8C21 4 13.5 4.5 12 7Z"/></svg></div><div><div class="t">把这本书留在手上</div><div class="d">做成实物精装 / 下载电子书（想留个纪念时再办）</div></div><span class="tp pub">了解</span></div>
-      <div class="share-opt" style="margin-top:12px" data-toast="做成什么·更多：岁月成影 / 专属心曲 / 云端分身…（增值服务，二三期开放）"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M12 4l1.7 5.3L19 11l-5.3 1.7L12 18l-1.7-5.3L5 11l5.3-1.7L12 4Z"/></svg></div><div><div class="t">做成什么 · 更多</div><div class="d">岁月成影 / 专属心曲 / 云端分身…（增值，后续开放）</div></div><span class="tp pub">了解</span></div>
-      <div class="more-note" style="margin-top:12px"><svg class="ico-ph" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r="0.6" fill="currentColor" stroke="none"/></svg> 小程序里看全本、听全本一直免费。</div>
+      <div class="share-opt" onclick="showUpgrade('download')"><div class="i"><span class="ico-ph"></span></div><div><div class="t">把这本书留在手上</div><div class="d">做成实物精装 / 下载电子书（想留个纪念时再办）</div></div><span class="tp pub">了解</span></div>
+      <div class="share-opt" style="margin-top:12px" data-toast="做成什么·更多：岁月成影 / 专属心曲 / 云端分身…（增值服务，二三期开放）"><div class="i"><span class="ico-ph"></span></div><div><div class="t">做成什么 · 更多</div><div class="d">岁月成影 / 专属心曲 / 云端分身…（增值，后续开放）</div></div><span class="tp pub">了解</span></div>
+      <div class="more-note" style="margin-top:12px"><span class="ico-ph"></span> 小程序里看全本、听全本一直免费。</div>
     </div>
 
     <!-- P0-4 情感峰值浮卡①：成书里程碑达成时浮出 -->
     <div class="pay-float" id="payMilestone">
       <span class="pf-x" onclick="hidePayFloat('payMilestone')">×</span>
-      <div class="pf-h"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg> 又攒够一章啦！</div>
+      <div class="pf-h"><span class="ico-ph"></span> 又攒够一章啦！</div>
       <div class="pf-s">妈妈的故事已经能装订成<b>第一章样章</b>了。要不要把这本书留在手上——做成实物精装，或先下载电子书？</div>
       <div class="pf-act"><button class="g" onclick="hidePayFloat('payMilestone')">再讲讲</button><button class="p" onclick="hidePayFloat('payMilestone');go('plans')">留在手上 ›</button></div>
     </div>
@@ -1152,7 +1036,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
     <div id="bookRead" style="display:none">
       <div class="sbar" style="color:#FBF3E4"><span>9:41</span><span class="bat"></span></div>
       <div class="wxcap">··· ◉</div>
-      <div class="fb-top"><span class="b" onclick="bookShowPreview()">‹</span><span class="h">我的时光印记</span><span class="sh" data-go="share"><svg class="ico-ph" viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.5"/><circle cx="17" cy="6" r="2.5"/><circle cx="17" cy="18" r="2.5"/><path d="M8.2 10.9l6.6-3.8M8.2 13.1l6.6 3.8"/></svg></span></div>
+      <div class="fb-top"><span class="b" onclick="bookShowPreview()">‹</span><span class="h">我的时光印记</span><span class="sh" data-go="share"><span class="ico-ph"></span></span></div>
       <div class="fb-stage">
         <!-- P0-6 翻页骨架屏：书打开前短暂显示 -->
         <div class="fb-skel" id="fbSkel" style="display:none">
@@ -1191,7 +1075,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
         </div>
         <div class="tapzone l" onclick="fbPrev()"></div>
         <div class="tapzone r" onclick="fbNext()"></div>
-        <div class="fb-hint" id="fbHint"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M10.5 12V6.2a1.6 1.6 0 0 1 3.2 0v3.3"/><path d="M13.7 9.8a1.6 1.6 0 0 1 3.2 0V15a5 5 0 0 1-5 5 5 5 0 0 1-4-2l-2.4-3.2a1.5 1.5 0 0 1 2.3-1.9l1.2 1.3V9.5"/></svg> 点右侧翻页 · 左侧返回预览</div>
+        <div class="fb-hint" id="fbHint"><span class="ico-ph"></span> 点右侧翻页 · 左侧返回预览</div>
         <div class="fb-ctrl">
           <button id="fbPrev" onclick="event.stopPropagation();fbPrev()">‹ 上一页</button>
           <span class="pgnum" id="fbNum">封面</span>
@@ -1218,9 +1102,9 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
         <span class="se-tag">童 · 童年时光</span>
         <div class="se-h">门口的老槐树</div>
         <div class="se-q">“夏天全村人都爱在树下乘凉，那是我一辈子最凉快的地方。”</div>
-        <div class="se-photo"><div class="ph-empty"><span class="ic"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 16l-5-4-4 3-2-1.5L3 18"/></svg></span>给这段配张老照片吧</div><div class="add" onclick="storyUpload()">＋ 换 / 加照片</div>
+        <div class="se-photo"><div class="ph-empty"><span class="ic"><span class="ico-ph"></span></span>给这段配张老照片吧</div><div class="add" onclick="storyUpload()">＋ 换 / 加照片</div>
           <div class="up-state" id="storyUp"><span class="sp"></span>照片上传中…</div>
-          <div class="up-state fail" id="storyUpFail"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M9 9.3A11 11 0 0 0 5 12M2 8.8A16 16 0 0 1 8.5 6M15.5 6A16 16 0 0 1 22 8.8M15 15.2A6 6 0 0 0 12 14.5"/><circle cx="12" cy="19" r="0.6" fill="currentColor" stroke="none"/></svg> 没传上，网络不太稳<span class="retry" onclick="event.stopPropagation();storyUpload()">重试</span></div>
+          <div class="up-state fail" id="storyUpFail"><span class="ico-ph"></span> 没传上，网络不太稳<span class="retry" onclick="event.stopPropagation();storyUpload()">重试</span></div>
         </div>
         <div class="se-txt">我家在村头一间土坯房，门口有一棵<span class="hl">很老很老的</span>槐树。夏天傍晚，全村人都搬着小板凳到树下乘凉、说家常……</div>
         <div class="se-foot"><button class="btng" data-go="session">重新讲</button><button class="btnp" data-go="book">确认这张</button></div>
@@ -1240,14 +1124,14 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
         <div class="chip-row"><span class="chip on">女儿</span><span class="chip">儿子</span><span class="chip">孙辈</span><span class="chip">亲友</span></div>
         <div class="sect-lbl">你想怎么帮</div>
         <div class="mode-list">
-          <div class="mode on" data-go="session"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M4 20h4L18.5 9.5l-4-4L4 16v4Z"/><path d="M13 7l4 4"/></svg></div><div><div class="t">当面帮她录</div><div class="d">陪着老人，边问边录（最简单）</div></div></div>
-          <div class="mode" data-go="contribute"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M4 5h16v11H9l-4 3v-3H4V5Z"/><path d="M8 9h8M8 12h5"/></svg></div><div><div class="t">讲讲我眼中的她（亲友视角）</div><div class="d">答"关于妈妈"的问题，只你可见</div></div></div>
-          <div class="mode" data-go="collaborators"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.5a2.8 2.8 0 0 1 5.4 1c0 1.8-2.6 2-2.6 3.5"/><circle cx="12" cy="17.3" r="0.6" fill="currentColor" stroke="none"/></svg></div><div><div class="t">给她出个问题</div><div class="d">你想知道的，让她讲给你听</div></div></div>
+          <div class="mode on" data-go="session"><div class="i"><span class="ico-ph"></span></div><div><div class="t">当面帮她录</div><div class="d">陪着老人，边问边录（最简单）</div></div></div>
+          <div class="mode" data-go="contribute"><div class="i"><span class="ico-ph"></span></div><div><div class="t">讲讲我眼中的她（亲友视角）</div><div class="d">答"关于妈妈"的问题，只你可见</div></div></div>
+          <div class="mode" data-go="collaborators"><div class="i"><span class="ico-ph"></span></div><div><div class="t">给她出个问题</div><div class="d">你想知道的，让她讲给你听</div></div></div>
         </div>
         <div class="sect-lbl">已加入的人</div>
         <div class="miniavs" data-go="collaborators"><span class="a" style="background:linear-gradient(140deg,#DAB97E,#B8894F)">兰</span><span class="a" style="background:linear-gradient(140deg,#6E8F6A,#3D5A4C)">晓</span><span class="a" style="background:linear-gradient(140deg,#C88,#A55)">军</span><span class="more">共 4 人 ›</span></div>
         <button class="btnp" style="margin-top:20px" data-toast="已生成邀请卡，可转发微信">生成邀请卡 · 分享到微信</button>
-        <div style="text-align:center;margin-top:12px;font-size:var(--fs-sm);color:var(--gold-deep);font-weight:600;cursor:pointer" data-go="landing"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.5"/></svg> 预览家人点开邀请后看到的 ›</div>
+        <div style="text-align:center;margin-top:12px;font-size:var(--fs-sm);color:var(--gold-deep);font-weight:700;cursor:pointer" data-go="landing"><span class="ico-ph"></span> 预览家人点开邀请后看到的 ›</div>
       </div>
     </div>
   </section>
@@ -1265,7 +1149,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
       <div class="sect-lbl">家人的提问（等你回答）</div>
       <div class="qask"><div class="who">外孙女 小雨 问</div><div class="q">外婆，你年轻时最爱穿什么样的衣服呀？</div><span class="go" data-go="session">去回答 ›</span></div>
       <div class="qask"><div class="who">女儿 兰晓 问</div><div class="q">妈，你和爸是怎么认识的？那天的事还记得吗？</div><span class="go" data-go="session">去回答 ›</span></div>
-      <div class="voice-note"><svg class="ico-ph" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 15.2A6 6 0 0 1 21.5 20"/></svg> 成书里会标注每段<b>由谁讲述 / 谁补充</b>——让这本书成为一家人的<b>多声部</b>合著。</div>
+      <div class="voice-note"><span class="ico-ph"></span> 成书里会标注每段<b>由谁讲述 / 谁补充</b>——让这本书成为一家人的<b>多声部</b>合著。</div>
     </div></div>
   </section>
 
@@ -1274,12 +1158,12 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
     <div class="sbar" style="color:var(--brown)"><span>9:41</span><span class="bat"></span></div><div class="wxcap">··· ◉</div>
     <div class="navbar"><span class="b" data-go="book">‹</span><span class="h">分享这本书</span></div>
     <div class="body"><div class="pad">
-      <div class="share-opt" onclick="openBook(true)"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5V4.5Z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 21H19"/></svg></div><div><div class="t">整本翻页书</div><div class="d">生成翻页 H5，家人微信里直接翻看</div></div><span class="tp priv">家人可见</span></div>
-      <div class="share-opt" data-go="quotecard"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M6 7h4v5c0 2.2-1.4 3.6-4 4.2"/><path d="M14 7h4v5c0 2.2-1.4 3.6-4 4.2"/></svg></div><div><div class="t">金句卡</div><div class="d">一句金句 + 老照片，适合发朋友圈</div></div><span class="tp pub">可公开</span></div>
-      <div class="share-opt" data-go="landing"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg></div><div><div class="t">精选片段</div><div class="d">分享一段故事，别人点进来了解</div></div><span class="tp pub">可公开</span></div>
+      <div class="share-opt" onclick="openBook(true)"><div class="i"><span class="ico-ph"></span></div><div><div class="t">整本翻页书</div><div class="d">生成翻页 H5，家人微信里直接翻看</div></div><span class="tp priv">家人可见</span></div>
+      <div class="share-opt" data-go="quotecard"><div class="i"><span class="ico-ph"></span></div><div><div class="t">金句卡</div><div class="d">一句金句 + 老照片，适合发朋友圈</div></div><span class="tp pub">可公开</span></div>
+      <div class="share-opt" data-go="landing"><div class="i"><span class="ico-ph"></span></div><div><div class="t">精选片段</div><div class="d">分享一段故事，别人点进来了解</div></div><span class="tp pub">可公开</span></div>
       <div class="sect-lbl">谁能看到</div>
       <div class="priv-row"><div class="pl">可见范围</div><div class="chip-row"><span class="chip">仅我</span><span class="chip on">家族成员</span><span class="chip">公开精选</span></div></div>
-      <div class="voice-note" style="margin-top:16px"><svg class="ico-ph" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> <b>完整的书</b>需家族成员身份才能读；对外只露<b>精选片段 / 金句</b>，隐私与传播两全。</div>
+      <div class="voice-note" style="margin-top:16px"><span class="ico-ph"></span> <b>完整的书</b>需家族成员身份才能读；对外只露<b>精选片段 / 金句</b>，隐私与传播两全。</div>
     </div></div>
   </section>
 
@@ -1304,9 +1188,9 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
     <div class="body">
       <div class="land-hero"><span class="bn"></span><div class="t">兰秀英的<br>生命故事</div></div>
       <div class="pad">
-        <div class="ct-banner"><div class="r"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6Z"/><path d="M9.5 19a2.5 2.5 0 0 0 5 0"/></svg> 家人邀请你，一起帮长辈记住一生</div><div class="p" style="margin-top:8px"><span><svg class="ico-ph" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg></span><span>你补充的内容只有你和家人看得到；不影响长辈自己讲的。</span></div></div>
+        <div class="ct-banner"><div class="r"><span class="ico-ph"></span> 家人邀请你，一起帮长辈记住一生</div><div class="p" style="margin-top:8px"><span><span class="ico-ph"></span></span><span>你补充的内容只有你和家人看得到；不影响长辈自己讲的。</span></div></div>
         <button class="btnp" data-go="contribute" style="margin:12px 0">我来帮她写 ›</button>
-        <div class="land-quote">“夏天全村人都爱在树下乘凉，那是我一辈子最凉快的地方。”<div class="lock"><svg class="ico-ph" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg> 完整故事仅家人可见</div></div>
+        <div class="land-quote">“夏天全村人都爱在树下乘凉，那是我一辈子最凉快的地方。”<div class="lock"><span class="ico-ph"></span> 完整故事仅家人可见</div></div>
         <div class="sect-lbl">云忆，把长辈的一生，讲成一本书</div>
         <div class="land-sell">
           <div class="li"><span class="k">01</span><div><b>只需讲述</b>，不用打字，AI 自动成书</div></div>
@@ -1327,16 +1211,16 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
     <div class="body"><div class="pad">
       <div class="ct-banner">
         <div class="r">你正在为「兰秀英」补充回忆</div>
-        <div class="p"><span><svg class="ico-ph" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span><span>女儿 · 兰晓 视角（答的是「关于妈妈」的问题）</span></div>
-        <div class="p"><span><svg class="ico-ph" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><span>你只能看到和录入<b>自己补充的内容</b>，妈妈的自述你看不到。</span></div>
+        <div class="p"><span><span class="ico-ph"></span></span><span>女儿 · 兰晓 视角（答的是「关于妈妈」的问题）</span></div>
+        <div class="p"><span><span class="ico-ph"></span></span><span>你只能看到和录入<b>自己补充的内容</b>，妈妈的自述你看不到。</span></div>
       </div>
       <div class="ct-q">
         <div class="w">给子女的问题 · 3 / 12</div>
         <div class="q">在你心里，妈妈是个什么样的人？用三个词形容，并各讲一件事。</div>
       </div>
       <div class="ct-mic">
-        <div class="ic" data-toast="选择照片" style="color:var(--green-2)"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 16l-5-4-4 3-2-1.5L3 18"/></svg></div>
-        <button class="talk" data-toast="录音中…（演示）"><svg class="ico-ph" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0"/><path d="M12 17v3"/></svg> 点击说话</button>
+        <div class="ic" data-toast="选择照片" style="color:var(--green-2)"><span class="ico-ph"></span></div>
+        <button class="talk" data-toast="录音中…（演示）"><span class="ico-ph"></span> 点击说话</button>
         <div class="ic" data-toast="切换文字输入">A</div>
       </div>
       <div class="ct-mine">
@@ -1357,7 +1241,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
       <div class="plan"><div class="lv">基础版</div><span class="qn">约 80 问</span><div class="price">人生最关键的问题</div><ul><li>人生最关键的约 80 个问题</li><li>一次采访就能生成一本精华小传</li><li>翻页阅读 + 电子版下载</li></ul><button class="pick g" data-toast="已选择 · 基础版">选基础版</button></div>
       <div class="plan hot"><div class="pbadge">最受欢迎</div><div class="lv">升级版</div><span class="qn">约 100 ~ 200 问</span><div class="price">较完整的一生传记</div><ul><li>含基础版全部</li><li>覆盖求学 / 事业 / 家庭 / 内心</li><li>较完整的一生传记</li><li>可邀家人一起补充（多声部）</li></ul><button class="pick p" data-toast="已选择 · 升级版">选升级版</button></div>
       <div class="plan"><div class="lv">高配版 · 传家</div><span class="qn">全 308 问 · 10 章</span><div class="price">最完整的厚传记</div><ul><li>含升级版全部</li><li>最完整的厚传记（10 章全）</li><li>精装实物书 + 岁月成影 / 云端分身</li></ul><button class="pick g" data-toast="顾问将与你联系">了解高配版</button></div>
-      <div class="plan-note"><svg class="ico-ph" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="8" r="0.6" fill="currentColor" stroke="none"/></svg> 采访中<b>不显示题数进度</b>，题量只代表"你的书能有多完整"。随时可<b>升级</b>——讲得越多，书越厚。</div>
+      <div class="plan-note"><span class="ico-ph"></span> 采访中<b>不显示题数进度</b>，题量只代表"你的书能有多完整"。随时可<b>升级</b>——讲得越多，书越厚。</div>
     </div></div>
   </section>
 
@@ -1371,15 +1255,15 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
     <div class="navbar"><span class="b" data-go="mine">‹</span><span class="h">消息</span></div>
     <!-- P0-6 消息空态 -->
     <div class="empty" id="msgsEmpty" style="display:none">
-      <div class="ei"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6Z"/><path d="M9.5 19a2.5 2.5 0 0 0 5 0"/></svg></div>
+      <div class="ei"><span class="ico-ph"></span></div>
       <div class="et">还没有新消息</div>
       <div class="es">家人采纳、回应您的故事，<br>或给您出新问题时，会在这儿提醒您。</div>
     </div>
     <div class="body" id="msgsFull"><div class="pad">
-      <div class="msg-item unread" data-go="contribute"><div class="mi"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg></div><div style="flex:1"><div class="mt"><b>老周</b> 采纳了你补充的《我们是怎么认识的》，已进第 4 章</div><div class="tm">刚刚</div></div><span class="unreaddot"></span></div>
-      <div class="msg-item unread" data-go="contribute"><div class="mi"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M4 5h16v11H9l-4 3v-3H4V5Z"/><path d="M8 9h8M8 12h5"/></svg></div><div style="flex:1"><div class="mt"><b>老周</b> 回应了你：「记得，那年下大雨」</div><div class="tm">1 小时前</div></div><span class="unreaddot"></span></div>
-      <div class="msg-item" data-go="session"><div class="mi"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.5a2.8 2.8 0 0 1 5.4 1c0 1.8-2.6 2-2.6 3.5"/><circle cx="12" cy="17.3" r="0.6" fill="currentColor" stroke="none"/></svg></div><div><div class="mt">外孙女 <b>小雨</b> 给你出了个新问题（关于你自己的书）</div><div class="tm">昨天</div></div></div>
-      <div class="msg-item" data-go="collaborators"><div class="mi"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M4 20h4L18.5 9.5l-4-4L4 16v4Z"/><path d="M13 7l4 4"/></svg></div><div><div class="mt">女儿 <b>兰晓</b> 帮你补充了 2 段童年记忆，待你查看</div><div class="tm">昨天</div></div></div>
+      <div class="msg-item unread" data-go="contribute"><div class="mi"><span class="ico-ph"></span></div><div style="flex:1"><div class="mt"><b>老周</b> 采纳了你补充的《我们是怎么认识的》，已进第 4 章</div><div class="tm">刚刚</div></div><span class="unreaddot"></span></div>
+      <div class="msg-item unread" data-go="contribute"><div class="mi"><span class="ico-ph"></span></div><div style="flex:1"><div class="mt"><b>老周</b> 回应了你：「记得，那年下大雨」</div><div class="tm">1 小时前</div></div><span class="unreaddot"></span></div>
+      <div class="msg-item" data-go="session"><div class="mi"><span class="ico-ph"></span></div><div><div class="mt">外孙女 <b>小雨</b> 给你出了个新问题（关于你自己的书）</div><div class="tm">昨天</div></div></div>
+      <div class="msg-item" data-go="collaborators"><div class="mi"><span class="ico-ph"></span></div><div><div class="mt">女儿 <b>兰晓</b> 帮你补充了 2 段童年记忆，待你查看</div><div class="tm">昨天</div></div></div>
     </div></div>
   </section>
 
@@ -1399,7 +1283,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
           <div class="li"><span class="k">03</span><div><b>字大、声儿清，慢慢说不着急</b>，随时都在</div></div>
         </div>
         <button class="btnp" style="margin-top:24px" data-go="session">开始讲述 →</button>
-        <div style="text-align:center;margin-top:12px"><span data-go="session" style="font-size:var(--fs-md);color:var(--text-3);font-weight:600;cursor:pointer">跳过，直接开聊</span></div>
+        <div style="text-align:center;margin-top:12px"><span data-go="session" style="font-size:var(--fs-md);color:var(--text-3);font-weight:700;cursor:pointer">跳过，直接开聊</span></div>
         <div class="more-note">首次进入才出现一次，学会后自动跳过。</div>
       </div>
     </div>
@@ -1411,24 +1295,16 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
     <div class="navbar"><span class="b" data-go="session">‹</span><span class="h">这段 · 回忆小结</span></div>
     <div class="body"><div class="pad">
       <div class="iv-saved" style="margin:4px 0 16px"><span class="ck">✓</span>这段记下啦</div>
-      <!-- 随便讲讲 → AI 归类结果（仅从自由讲述进入时显示） -->
-      <div class="cate-card" id="sumCate" style="display:none">
-        <div class="ct-h"><svg viewBox="0 0 24 24"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg> 都帮您理好、归好类了</div>
-        <div class="ct-sub">刚才您随口聊的，我拆成 3 段，各自归到该去的章节：</div>
-        <div class="ct-item"><span class="tag">童年 · 生命的起点</span>门口的老槐树</div>
-        <div class="ct-item"><span class="tag">家人 · 母亲</span>娘做的槐花饭</div>
-        <div class="ct-item"><span class="tag">家人 · 长辈</span>爷爷是教书先生</div>
-      </div>
       <span class="se-tag">生 · 生命的起点</span>
       <div class="se-h" style="margin-top:12px">门口的老槐树</div>
       <div class="se-q">"夏天全村人都爱在树下乘凉，那是我一辈子最凉快的地方。"</div>
-      <div class="se-photo" style="margin-top:16px"><div class="ph-empty"><span class="ic"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M4 18l5-5 3 3 3-3 5 5"/></svg></span>给这段配张老照片吧（家人可帮）</div><div class="add" data-toast="从相册选照片">＋ 加照片</div></div>
+      <div class="se-photo" style="margin-top:16px"><div class="ph-empty"><span class="ic"><span class="ico-ph"></span></span>给这段配张老照片吧（家人可帮）</div><div class="add" data-toast="从相册选照片">＋ 加照片</div></div>
       <div class="se-txt" style="margin-top:16px">刚才您讲的，小云给您理成了一段：我家在村头一间土坯房，门口有一棵很老很老的槐树。夏天傍晚，全村人都搬着小板凳到树下乘凉、说家常……</div>
       <!-- P0-3 「书变厚」沉淀反馈：情感化，不做题号/进度条/分数 -->
-      <div class="thick-fb"><span class="bk"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5V4.5Z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 21H19"/></svg></span><div>这是第 <b>12</b> 段啦，您的书快有一章了 —— 越讲越厚，都是您的一辈子。</div></div>
-      <div class="iv-recap" style="margin-top:16px"><div class="rt">要不要现在<b>回听一遍</b>刚才说的原话？</div><button class="iv-replay" id="sumReplay" onclick="sumReplay()" style="margin-top:12px"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8 8 0 0 1 0 12"/></svg> 回听原话</button></div>
+      <div class="thick-fb"><span class="bk"><span class="ico-ph"></span></span><div>这是第 <b>12</b> 段啦，您的书快有一章了 —— 越讲越厚，都是您的一辈子。</div></div>
+      <div class="iv-recap" style="margin-top:16px"><div class="rt">要不要现在<b>回听一遍</b>刚才说的原话？</div><button class="iv-replay" id="sumReplay" onclick="sumReplay()" style="margin-top:12px"><span class="ico-ph"></span> 回听原话</button></div>
       <div style="display:flex;gap:12px;margin-top:20px">
-        <button class="btng" style="flex:1" data-go="shelf"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5V4.5Z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 21H19"/></svg> 收进书房</button>
+        <button class="btng" style="flex:1" data-go="shelf"><span class="ico-ph"></span> 收进书房</button>
         <button class="btnp" style="flex:1" data-go="session">接着聊 →</button>
       </div>
       <div class="more-note">这张"故事卡"会自动归到您书里的对应章节。</div>
@@ -1444,10 +1320,10 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
       <div class="hub-lbl">资料</div>
       <div class="mine-row" data-toast="修改昵称（示意）"><div class="i">名</div><div><div class="a">昵称</div><div class="b">兰秀英</div></div><div class="ar">›</div></div>
       <div class="mine-row" data-toast="出生年份用于成书年代（示意）"><div class="i">岁</div><div><div class="a">出生年份</div><div class="b">1948 年</div></div><div class="ar">›</div></div>
-      <div class="mine-row" data-toast="绑定手机号（示意）"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M5 4h3.5l1.8 4.5-2.2 1.4a11 11 0 0 0 5 5l1.4-2.2L19 18.5V19a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></div><div><div class="a">手机号</div><div class="b">已绑定 138****6021</div></div><div class="ar">›</div></div>
+      <div class="mine-row" data-toast="绑定手机号（示意）"><div class="i"><span class="ico-ph"></span></div><div><div class="a">手机号</div><div class="b">已绑定 138****6021</div></div><div class="ar">›</div></div>
       <div class="hub-lbl">其他</div>
-      <div class="mine-row" data-go="plans"><div class="i" style="background:rgba(201,169,97,.18);color:var(--gold-deep)"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M4 11h16v9H4z"/><path d="M2 7h20v4H2z"/><path d="M12 7v13"/><path d="M12 7C10.5 4.5 8 4 7 5.2 6 6.4 8.5 7 12 7c3.5 0 6-.6 5-1.8C21 4 13.5 4.5 12 7Z"/></svg></div><div><div class="a">我的套餐</div><div class="b">题量版本</div></div><div class="ar">›</div></div>
-      <div class="mine-row" data-toast="退出登录（示意）"><div class="i"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M14 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4"/><path d="M10 12h9M16 8l3 4-3 4"/></svg></div><div><div class="a">退出登录</div><div class="b">切换账号</div></div><div class="ar">›</div></div>
+      <div class="mine-row" data-go="plans"><div class="i" style="background:rgba(201,169,97,.18);color:var(--gold-deep)"><span class="ico-ph"></span></div><div><div class="a">我的套餐</div><div class="b">题量版本</div></div><div class="ar">›</div></div>
+      <div class="mine-row" data-toast="退出登录（示意）"><div class="i"><span class="ico-ph"></span></div><div><div class="a">退出登录</div><div class="b">切换账号</div></div><div class="ar">›</div></div>
     </div></div>
   </section>
 
@@ -1457,7 +1333,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
     <div class="navbar"><span class="b" data-go="session">‹</span><span class="h">开启说话</span></div>
     <div class="body">
       <div class="perm-wrap">
-        <div class="perm-ic"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/><path d="M8.5 21h7"/></svg><span class="slash"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M4 4l16 16"/></svg></span></div>
+        <div class="perm-ic"><span class="ico-ph"></span><span class="slash"><span class="ico-ph"></span></span></div>
         <div class="perm-h">还没拿到"说话"的权限</div>
         <div class="perm-s">要把您讲的话录下来，得先让微信允许云忆用麦克风。开一下就好，很简单：</div>
         <div class="perm-steps">
@@ -1479,10 +1355,10 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
       <div class="mine-nav">书房</div>
       <!-- P0-6 书房空态（还没有书） -->
       <div class="empty" id="shelfEmpty" style="display:none">
-        <div class="ei"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5V4.5Z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 21H19"/></svg></div>
+        <div class="ei"><span class="ico-ph"></span></div>
         <div class="et">书房还空着呢</div>
         <div class="es">您还没有书。点下面开始讲述，<br>说上几段，就能有一本属于您的书。</div>
-        <button class="btnp eb" style="width:auto;padding:16px 28px" data-go="session"><svg class="ico-ph" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0"/><path d="M12 17v3"/></svg> 开始讲述</button>
+        <button class="btnp eb" style="width:auto;padding:16px 28px" data-go="session"><span class="ico-ph"></span> 开始讲述</button>
       </div>
       <div id="shelfFull">
         <div class="hub-lbl">我的书 · 我是传主</div>
@@ -1493,16 +1369,16 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
       </div>
     </div>
     <div class="tabbar">
-      <div class="t" data-go="session"><svg class="ico-ph" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0"/><path d="M12 17v3"/></svg>讲述<i class="tabdot"></i></div>
-      <div class="t on"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5V4.5Z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 21H19"/></svg>书房<i class="tabdot"></i></div>
-      <div class="t" data-go="mine"><svg class="ico-ph" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>我的<i class="tabdot"></i></div>
+      <div class="t" data-go="session"><span class="ico-ph"></span>讲述<i class="tabdot"></i></div>
+      <div class="t on"><span class="ico-ph"></span>书房<i class="tabdot"></i></div>
+      <div class="t" data-go="mine"><span class="ico-ph"></span>我的<i class="tabdot"></i></div>
     </div>
   </section>
 
   <!-- 升级引导弹窗（覆盖当前屏） -->
   <div class="modal-scrim" id="upModal" onclick="if(event.target===this)closeUpgrade()">
     <div class="upmodal">
-      <div class="uh" id="upH"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg> 升级更完整的传记</div>
+      <div class="uh" id="upH"><span class="ico-ph"></span> 升级更完整的传记</div>
       <div class="ub" id="upB">题量 = 书的厚度，随时可升级。</div>
       <div class="upmini">
         <div class="m"><div class="n">基础</div><div class="q">80 问</div></div>
@@ -1546,23 +1422,7 @@ function sumReplay(){ var b=document.getElementById('sumReplay'); if(!b)return; 
 function openTopics(){var m=document.getElementById('hmodal'),s=document.getElementById('hmScrim');if(m)m.classList.add('open');if(s)s.classList.add('open');}
 function closeTopics(){var m=document.getElementById('hmodal'),s=document.getElementById('hmScrim');if(m)m.classList.remove('open');if(s)s.classList.remove('open');}
 /* 换个话题：不是选题器——软性交给小云换一问（长辈不选题） */
-var ivSkipCount=0, ivFree=false;
-var ivFreeText='我也说不好从哪讲起……就想起我娘，夏天爱做槐花饭；门口那棵老槐树，全村人都爱在底下乘凉。对了，我爷爷是教书先生，方圆几里的娃都跟他念过书。';
-function ivSkipTopic(){
-  ivSkipCount++;
-  if(ivSkipCount>=3){ ivSkipCount=0; ivFreeTalk(); return; }   /* 连换 3 个话题没开口 → 兜底进「随便讲讲」 */
-  toast('好嘞，咱换个轻省的聊'); ivConfirm();
-}
-/* 随便讲讲：不挑题，随口说，AI 后台归类 */
-function ivFreeTalk(){
-  ivFree=true;
-  ivShowPane('Ask'); ivMood('不挑了，您随便说'); ivAskHero();
-  var fe=document.getElementById('ivFamEcho'); if(fe) fe.style.display='none';
-  var badge=document.getElementById('ivFreeBadge'); if(badge) badge.style.display='inline-flex';
-  ivSet('ivQ','换了好几个了？<b>那咱不挑了</b> —— 您想到啥就说啥，一件小事、一个人都行，我在后头帮您理清楚、归到该放的地方。');
-  toast('挑不出来没关系，随便聊就好');
-}
-function ivShowSummary(isFree){ var c=document.getElementById('sumCate'); if(c) c.style.display=isFree?'block':'none'; go('summary'); }
+function ivSkipTopic(){ toast('好嘞，咱换个轻省的聊'); ivConfirm(); }
 /* 「我的书」= 成书预览 + 同屏翻页阅读（原 flipbook 并入，0 跳屏） */
 function openBook(read){ go('book'); if(read) bookOpenRead(); }
 function bookOpenRead(){ var r=document.getElementById('bookRead'); if(r) r.style.display='flex'; hidePayFloat('payPeak'); fbSkeleton(); fbReset(); }
@@ -1661,62 +1521,22 @@ function ivShowPane(name){
   ['Ask','Listen','Processing','Flash','Recorded','Trans','Comfort'].forEach(function(p){
     var el=document.getElementById('iv'+p+'Pane'); if(el) el.style.display=(p===name?'flex':'none');
   });
-  /* v16：只有【讲述】开场（第一问 ask）走女子图全屏沉浸；其余功能态保持干净 */
-  var sess=document.getElementById('session'); if(sess) sess.classList.toggle('sess-imm', name==='Ask');   /* 全部提问态都走满铺沉浸（不再只第一问） */
-  if(name!=='Listen') ivLiveStop();   /* 离开“说话中”停掉实时转写 */
-}
-/* ===== 语音录入·实时转写（原型脚本模拟；真机替换为 ASR 流式回调即可） ===== */
-function ivSaidText(){if(ivFree) return ivFreeText; var t=ivTurns[ivTurn]||{};var s=t.said||t.origin||'';
-  return s.replace(/^正在回放[:：]/,'').replace(/[“”"]/g,'').replace(/（沉默）/g,' ').trim();}
-var ivLiveFull='', ivLiveIdx=0, ivRecPaused=false;
-function ivLiveStop(){clearInterval(window._ivLive);}
-function ivLiveRun(){   /* 从当前进度继续逐字流式（支持暂停后续跑） */
-  var box=document.getElementById('ivLive'), txt=document.getElementById('ivLiveTxt');
-  ivLiveStop();
-  window._ivLive=setInterval(function(){
-    if(ivLiveIdx>=ivLiveFull.length){ivLiveStop();return;}
-    ivLiveIdx+=1; if(txt) txt.textContent=ivLiveFull.slice(0,ivLiveIdx);
-    if(box) box.scrollTop=box.scrollHeight;
-  },95);
-}
-function ivLiveStart(){   /* 进入说话中：重置并开录 */
-  var txt=document.getElementById('ivLiveTxt'); if(!txt)return;
-  ivLiveFull=ivSaidText(); ivLiveIdx=0; txt.textContent=''; ivRecPaused=false;
-  ivLiveRun(); ivRecUI();
-}
-/* 中间主按钮：录音 开始/暂停 toggle（暂停 ⇄ 继续说） */
-function ivToggleRec(){
-  ivRecPaused=!ivRecPaused;
-  if(ivRecPaused){ ivLiveStop(); ivMood('已暂停 · 点“继续说”接着录'); }
-  else { ivLiveRun(); ivMood('正在听您说'); }
-  ivRecUI();
-}
-function ivRecUI(){
-  var pane=document.getElementById('ivListenPane'); if(pane) pane.classList.toggle('rec-paused', ivRecPaused);
-  var lab=document.getElementById('ivRecLabel'); if(lab) lab.textContent=ivRecPaused?'已暂停':'正在听您说…';
-  var btn=document.getElementById('ivRecToggle'); if(!btn) return;
-  var ic=btn.querySelector('.ic'), lb=btn.querySelector('.lb');
-  if(ic) ic.innerHTML = ivRecPaused
-    ? '<svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7V5Z"/></svg>'
-    : '<svg viewBox="0 0 24 24"><rect x="7" y="5" width="3.5" height="14" rx="1"/><rect x="13.5" y="5" width="3.5" height="14" rx="1"/></svg>';
-  if(lb) lb.textContent = ivRecPaused ? '继续说' : '暂停';
 }
 function ivRender(){var t=ivTurns[ivTurn];ivSet('ivQ',t.q);ivSet('ivQmini',t.q);ivSet('ivRecap',t.recap);}
 /* 进入采访页：展示“开场/当前一问” */
-function ivEnter(){ivFree=false;var b=document.getElementById('ivFreeBadge');if(b)b.style.display='none';ivRender();ivShowPane('Ask');ivMood('在陪您聊天');ivAskHero();}
+function ivEnter(){ivRender();ivShowPane('Ask');ivMood('在陪您聊天');ivAskHero();}
 /* v9: 实拍人物氛围图只在【讲述】开场初始态(第一问)出现，后续问答保持干净 */
-function ivAskHero(){var ap=document.getElementById('ivAskPane');if(ap)ap.classList.toggle('ask-hero',true);   /* 所有提问都用满铺 hero 布局 */
+function ivAskHero(){var ap=document.getElementById('ivAskPane');if(ap)ap.classList.toggle('ask-hero',ivTurn===0);
   var fe=document.getElementById('ivFamEcho'); if(fe) fe.style.display=(ivTurn===0?'inline-flex':'none');} /* P0-2 家人回音仅开场第一问出现（顶部 pill） */
 /* 说话中：长停顿不打断，靠“我说完了”判停 + 自动保存反馈 */
-function ivListen(){ivSkipCount=0;ivRender();ivShowPane('Listen');ivMood(ivFree?'随便说，我记着':'正在听您说');if(ivFree)ivSet('ivQmini','随便讲讲 · 想到啥说啥');ivLiveStart();}
+function ivListen(){ivRender();ivShowPane('Listen');ivMood('正在听您说');}
 /* 点“我说完了”：先过处理态“小云正在记下…”(≈1s)，再按条件式确认路由 */
 var ivFirstDone=false;   /* P0-1 首次讲完是否已走过强制小结 */
 function ivDone(){
   var t=ivTurns[ivTurn];
   ivProcessing(function(){
-    if(ivFree){ ivFree=false; ivShowSummary(true); return; }   /* 随便讲讲 → AI 归类结果 */
     /* P0-1 第一次讲完（第一轮首段）直接进「回忆小结」屏——不倒计时、不是次级按钮 */
-    if(!ivFirstDone && ivTurn===0){ ivFirstDone=true; ivTurn=1; ivShowSummary(false); return; }
+    if(!ivFirstDone && ivTurn===0){ ivFirstDone=true; ivTurn=1; go('summary'); return; }
     if(t && t.needConfirm){ ivRecorded(); }   /* 例外：拿不准 → 复述 + 二选一 */
     else { ivFlash(); }                        /* 之后轮次：记下啦一闪 + 看看这段小结 */
   });
@@ -1732,10 +1552,12 @@ function ivClearFlash(){ clearTimeout(window._ivf); clearInterval(window._ivfCd)
 function ivFlash(){
   ivShowPane('Flash'); ivMood('记下您刚说的话');
   ivClearFlash();
-  /* 适老改造：不再 5 秒自动跳，停住等老人主动点「接着聊」，把节奏还给老人 */
-  var resume=document.getElementById('ivFlashResume'); if(resume) resume.style.display='block';
-  var sub=document.querySelector('#ivFlashPane .iv-flashsub'); if(sub) sub.textContent='都记下啦，您歇会儿，想好了再接着聊';
-  var hint=document.getElementById('ivFlashHint'); if(hint) hint.textContent='';
+  var resume=document.getElementById('ivFlashResume'); if(resume) resume.style.display='none';
+  var sub=document.querySelector('#ivFlashPane .iv-flashsub'); if(sub) sub.innerHTML='<span class="iv-cd" id="ivFlashCd">5</span> 秒后接着跟您聊…';
+  var hint=document.getElementById('ivFlashHint'); if(hint) hint.textContent='点一下屏幕先停住 · 不着急';
+  var n=5; ivSet('ivFlashCd', String(n));            /* P0-7 倒计时 5 秒 */
+  window._ivfCd=setInterval(function(){ n--; if(n>=1) ivSet('ivFlashCd', String(n)); }, 1000);
+  window._ivf=setTimeout(function(){ ivClearFlash(); ivConfirm(); }, 5000);  /* 5 秒后自动进下一问 */
 }
 /* P0-7 点任意处暂停倒计时：停住计时，给“接着聊”按钮，把控制权还给长辈 */
 function ivPauseFlash(){
@@ -1745,7 +1567,7 @@ function ivPauseFlash(){
   var resume=document.getElementById('ivFlashResume'); if(resume) resume.style.display='block';
 }
 /* 一闪页“看看这段小结”：立刻停倒计时（防被跳走）→ 进「回忆小结」屏 */
-function ivViewSummary(){ ivClearFlash(); ivShowSummary(false); }
+function ivViewSummary(){ ivClearFlash(); go('summary'); }
 /* 例外路径：说完立刻“记下啦 ✓” + 复述钩子 + 二选一（仅可能听错时） */
 function ivRecorded(){ivRender();ivShowPane('Recorded');ivMood('记下您刚说的话');}
 function ivTransition(){var t=ivTurns[ivTurn];ivSet('ivTransLead',t.transLead||'这段我都记下啦。');ivSet('ivTransQ',t.transQ||t.q);ivShowPane('Trans');ivMood('在陪您聊天');}
@@ -1785,11 +1607,7 @@ function applyHash(){var h=(location.hash||'').slice(1);if(!h)return;var p=h.spl
   if(p[0]==='flipbook'){ openBook(true); if(p[1]){fbPage=Math.min(+p[1]||0,fbLeaves.length);fbRender();} return; }
   go(p[0]);
   if(p[0]==='book'&&p[1]==='read'){ bookOpenRead(); if(p[2]){fbPage=Math.min(+p[2]||0,fbLeaves.length);fbRender();} }}
-window.addEventListener('load',function(){
-  applyHash();
-  /* 刷新/首次加载时若讲述页是默认激活屏，主动初始化 → 补上 sess-imm 满铺沉浸效果 */
-  var s=document.getElementById('session'); if(s&&s.classList.contains('on')) ivEnter();
-});
+window.addEventListener('load',applyHash);
 window.addEventListener('hashchange',applyHash);
 </script>
 </body>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>时光印记 · 产品优化原型 v1.2（现状对齐版）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== 对齐真实设计系统：云亘华年 棕+金（微绿副色）===== */
+:root{
+  --paper:#F7F1E6;
+  --cream:#FFFDF8;
+  --cloud:#FAFAF7;
+  --card:#FFFFFF;
+  --linen:#EDE3D0;
+  --brown:#6B4423;
+  --brown-500:#8B5A3C;
+  --brown-ink:#3D3328;
+  --gold:#C9A961;
+  --gold-deep:#C28A4F;
+  --gold-soft:#DAB97E;
+  --green:#4A6B47;
+  --green-700:#3D5A4C;
+  --orange:#D4A574;
+  --text:#2B2620;
+  --text-2:#7A6F5F;
+  --text-3:#8A938E;
+  --error:#B94A3A;
+  --line:#ECEEEB;
+  --line-warm:#E6D9BF;
+  --shadow:22px 40px 78px -42px rgba(107,68,35,.42);
+  --serif:"Noto Serif SC",serif;
+  --sans:"Noto Sans SC",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--sans);color:var(--text);
+  background:radial-gradient(120% 80% at 50% -8%, #F3E9D4 0%, transparent 58%), #E8DCC4;
+  background-attachment:fixed;min-height:100vh;padding:60px 32px 120px;line-height:1.6;
+}
+/* header */
+.masthead{max-width:1200px;margin:0 auto 46px}
+.masthead .kicker{font-size:13px;letter-spacing:.4em;color:var(--gold-deep);font-weight:700;
+  text-transform:uppercase;display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.masthead .kicker::before{content:"";width:44px;height:2px;background:var(--gold-deep)}
+.masthead h1{font-family:var(--serif);font-weight:900;color:var(--brown);
+  font-size:clamp(32px,5vw,56px);line-height:1.1}
+.masthead h1 .l{color:var(--gold-deep);font-weight:500}
+.masthead .sub{margin-top:18px;max-width:720px;font-size:15.5px;color:var(--text-2);line-height:1.9}
+.legend-tags{margin-top:24px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.lt{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-2);font-weight:500}
+.dot{width:13px;height:13px;border-radius:4px;flex:none}
+.dot.now{background:var(--green)}
+.dot.mod{background:var(--gold)}
+.dot.new{background:var(--brown)}
+
+.flowbar{max-width:1200px;margin:0 auto 54px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  font-family:var(--serif);color:var(--text-2);font-size:15px}
+.flowbar b{color:var(--brown);font-weight:700}
+.flowbar .arr{color:var(--gold-deep);font-size:18px}
+
+.gallery{max-width:1280px;margin:0 auto;display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:66px 48px;align-items:start}
+.frame{position:relative}
+.frame .tag{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-left:4px}
+.frame .tag .no{font-family:var(--serif);font-weight:900;font-size:28px;color:var(--gold-deep);line-height:1;flex:none}
+.frame .tag .tt{font-family:var(--serif);font-weight:700;font-size:19px;color:var(--brown)}
+.frame .tag .st{font-size:11px;font-weight:700;padding:4px 10px;border-radius:7px;margin-left:auto;flex:none;color:#fff}
+.st.now{background:var(--green)}
+.st.mod{background:var(--gold-deep)}
+.st.new{background:var(--brown)}
+
+.phone{width:360px;margin:0 auto;background:#2A2016;border-radius:46px;padding:12px;box-shadow:var(--shadow);position:relative}
+.phone::after{content:"";position:absolute;top:22px;left:50%;transform:translateX(-50%);width:96px;height:26px;background:#2A2016;border-radius:0 0 16px 16px;z-index:6}
+.screen{position:relative;width:100%;height:722px;border-radius:36px;overflow:hidden;background:var(--cream);display:flex;flex-direction:column}
+.statusbar{height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px 0 28px;font-size:14px;font-weight:700;color:var(--brown);z-index:5}
+.statusbar .bat{width:22px;height:11px;border:1.5px solid currentColor;border-radius:3px;position:relative;opacity:.9}
+.statusbar .bat::after{content:"";position:absolute;left:1.5px;top:1.5px;bottom:1.5px;width:12px;background:currentColor;border-radius:1px}
+.navbar{flex:none;padding:4px 22px 12px;display:flex;align-items:center;gap:12px;z-index:5}
+.navbar .back{font-size:26px;color:var(--brown-500);line-height:1;width:28px}
+.navbar .h{font-family:var(--serif);font-weight:700;font-size:18px;color:var(--brown)}
+.body{flex:1;overflow:hidden;position:relative;z-index:2;padding:0 22px 20px}
+.body.scroll{overflow-y:auto}
+
+.btn-primary{width:100%;border:none;border-radius:16px;padding:18px;
+  background:linear-gradient(180deg,var(--brown-500),var(--brown));color:#FBF3E4;
+  font-family:var(--serif);font-weight:700;font-size:19px;box-shadow:0 12px 22px -12px rgba(107,68,35,.75);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px}
+.btn-ghost{width:100%;border:1.5px solid var(--line-warm);border-radius:16px;padding:15px;
+  background:var(--cream);color:var(--brown);font-weight:700;font-size:15px;cursor:pointer}
+.note{position:absolute;left:-12px;right:-12px;bottom:-40px;text-align:center;font-size:12.5px;color:var(--text-2);line-height:1.55}
+.note .now{color:var(--green);font-weight:700}
+.note .mod{color:var(--gold-deep);font-weight:700}
+.note .new{color:var(--brown);font-weight:700}
+
+.ring{--p:0;width:44px;height:44px;border-radius:50%;flex:none;
+  background:conic-gradient(var(--gold-deep) calc(var(--p)*1%), #EDE3D0 0);display:grid;place-items:center}
+.ring i{width:34px;height:34px;border-radius:50%;background:var(--cream);display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:700;color:var(--brown)}
+.ring.g{background:conic-gradient(var(--green) calc(var(--p)*1%), #E4E9E2 0)}
+
+.tabbar{flex:none;height:62px;display:flex;border-top:1px solid var(--line);background:var(--cloud);z-index:5}
+.tabbar .t{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;color:var(--text-3);font-weight:500}
+.tabbar .t.on{color:var(--brown)}
+.tabbar .t svg{width:22px;height:22px}
+.fab{position:absolute;right:16px;bottom:84px;width:50px;height:50px;border-radius:50%;background:var(--cream);border:1px solid var(--line-warm);box-shadow:0 8px 18px -8px rgba(107,68,35,.55);display:grid;place-items:center;z-index:6;color:var(--brown-500);font-size:21px}
+
+.seal{font-family:var(--serif);font-weight:700;color:#FBF3E4;display:grid;place-items:center;border-radius:9px;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.28), 0 4px 9px -3px rgba(107,68,35,.5)}
+.seal.gold{background:linear-gradient(140deg,var(--gold-soft),var(--gold-deep))}
+.seal.green{background:linear-gradient(140deg,#6E8F6A,var(--green-700))}
+
+/* ===== 1 HOME ===== */
+.home-hero{margin:0 -22px;padding:26px 26px 30px;color:#FBF3E4;
+  background:linear-gradient(180deg,#F0D9B0 0%,#C48A54 56%,#6D4226 100%);position:relative}
+.home-hero .brand{font-family:var(--serif);font-weight:900;font-size:30px;letter-spacing:.08em;color:#3D2916}
+.home-hero .brand small{display:block;font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.4em;color:rgba(61,41,22,.6);margin-top:6px}
+.home-hero .slogan{margin-top:18px;font-family:var(--serif);font-size:17px;color:#4A2E18;line-height:1.7;opacity:.9}
+.teller{margin:-16px 0 0;position:relative;z-index:3;background:var(--card);border:1px solid var(--line-warm);border-radius:20px;padding:18px;display:flex;align-items:center;gap:15px;box-shadow:0 14px 30px -22px rgba(107,68,35,.7)}
+.teller .av{width:52px;height:52px;border-radius:50%;flex:none;background:linear-gradient(140deg,var(--gold-soft),var(--gold-deep));display:grid;place-items:center;color:#fff;font-family:var(--serif);font-size:23px;font-weight:700}
+.teller .n{font-family:var(--serif);font-weight:700;font-size:18px;color:var(--brown)}
+.teller .s{font-size:12.5px;color:var(--text-2);margin-top:3px}
+.teller .p{margin-left:auto;text-align:right}
+.teller .p b{font-family:var(--serif);font-size:24px;color:var(--gold-deep);font-weight:900}
+.teller .p span{font-size:10.5px;color:var(--text-3);display:block}
+.bookcard{margin-top:16px;position:relative;border-radius:20px;overflow:hidden;padding:20px;
+  background:linear-gradient(140deg,#F5E7C8,#DDB877);border:1px solid var(--gold);min-height:112px;
+  display:flex;flex-direction:column;justify-content:space-between}
+.bookcard::before{content:"";position:absolute;right:-16px;top:-16px;width:104px;height:104px;border:2px solid rgba(107,68,35,.14);border-radius:14px;transform:rotate(10deg)}
+.bookcard .lbl{font-size:11px;letter-spacing:.28em;color:var(--brown-500);font-weight:700}
+.bookcard .tt{font-family:var(--serif);font-weight:700;font-size:22px;color:var(--brown);margin-top:6px}
+.bookcard .go{align-self:flex-start;margin-top:auto;background:rgba(107,68,35,.9);color:#FBF3E4;font-size:13px;font-weight:700;padding:8px 15px;border-radius:11px}
+.qgrid{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.qtile{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;display:flex;flex-direction:column;gap:7px}
+.qtile .i{width:32px;height:32px;border-radius:9px;background:rgba(201,169,97,.16);display:grid;place-items:center;color:var(--gold-deep);font-weight:700}
+.qtile .l{font-weight:700;font-size:14.5px;color:var(--brown)}
+.qtile .d{font-size:11px;color:var(--text-3)}
+
+/* ===== 2 SCENES (改造 chapters) ===== */
+.sc-intro{padding:4px 2px 14px}
+.sc-intro p{font-size:14px;color:var(--text-2);line-height:1.8}
+.sc-intro p b{color:var(--brown)}
+.scene{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 15px;margin-bottom:12px;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
+.scene:hover{transform:translateY(-3px);box-shadow:0 16px 28px -20px rgba(107,68,35,.6);border-color:var(--gold)}
+.scene .seal{width:48px;height:48px;font-size:25px;flex:none}
+.scene .t .n{font-family:var(--serif);font-weight:700;font-size:17px;color:var(--brown)}
+.scene .t .g{font-size:12px;color:var(--text-3);margin-top:3px}
+.scene .t{flex:1;min-width:0}
+
+/* ===== 3 SESSION ===== */
+.ses-old{margin:2px 2px 0;background:rgba(185,74,58,.08);border:1px dashed var(--error);border-radius:12px;padding:9px 12px;font-size:11.5px;color:var(--error);line-height:1.5}
+.ses-old b{text-decoration:line-through}
+.ses-new-prog{margin:12px 2px 0}
+.ses-new-prog .lb{display:flex;align-items:center;gap:8px;font-family:var(--serif);font-weight:700;font-size:16px;color:var(--brown)}
+.ses-new-prog .lb .seal{width:28px;height:28px;font-size:15px;border-radius:7px}
+.bar{margin-top:10px;height:9px;border-radius:6px;background:#EDE3D0;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--gold-deep),var(--gold-soft))}
+.bar-lbl{display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);margin-top:5px}
+.ask{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold-deep);border-radius:0 16px 16px 16px;padding:15px 16px;margin-top:14px}
+.ask .w{font-size:11.5px;color:var(--gold-deep);font-weight:700;letter-spacing:.1em;margin-bottom:6px}
+.ask .q{font-family:var(--serif);font-size:18px;line-height:1.7;color:var(--brown)}
+.ask .spk{margin-top:9px;font-size:12px;color:var(--text-3)}
+.paper-input{flex:1;margin:14px 0;background:repeating-linear-gradient(0deg,transparent 0 35px,var(--line-warm) 35px 36px),var(--cream);border:1px solid var(--line-warm);border-radius:14px;padding:12px 15px;font-size:16px;line-height:36px;color:var(--text);overflow:hidden}
+.cursor{display:inline-block;width:2px;height:19px;background:var(--gold-deep);vertical-align:-3px;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.ses-actions{flex:none;display:flex;align-items:center;gap:13px}
+.circle-btn{width:54px;height:54px;border-radius:50%;flex:none;background:var(--cream);border:1px solid var(--line-warm);display:grid;place-items:center;color:var(--brown-500);font-size:20px}
+.mic{flex:1;border:none;border-radius:18px;padding:15px;cursor:pointer;background:linear-gradient(180deg,#5C7E58,var(--green-700));color:#F3F7F1;font-family:var(--serif);font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 12px 20px -12px rgba(61,90,76,.8)}
+.mic .wave{display:flex;gap:3px;align-items:center}
+.mic .wave i{width:3px;height:13px;background:rgba(255,255,255,.85);border-radius:2px;animation:wv 1s ease-in-out infinite}
+.mic .wave i:nth-child(2){height:19px;animation-delay:.15s}
+.mic .wave i:nth-child(3){height:9px;animation-delay:.3s}
+.mic .wave i:nth-child(4){height:17px;animation-delay:.45s}
+@keyframes wv{0%,100%{transform:scaleY(.5)}50%{transform:scaleY(1)}}
+.story-toast{position:absolute;left:20px;right:20px;bottom:26px;z-index:8;background:var(--cream);border:1px solid var(--gold);border-radius:16px;padding:13px 15px;display:flex;align-items:center;gap:12px;box-shadow:0 18px 38px -18px rgba(107,68,35,.7);animation:rise .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+.story-toast .bn{width:42px;height:42px;border-radius:11px;flex:none;background:linear-gradient(140deg,var(--gold-soft),var(--gold-deep));color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:12px;line-height:1.1;text-align:center}
+.story-toast .t{font-weight:700;font-size:13.5px;color:var(--brown)}
+.story-toast .s{font-size:11.5px;color:var(--text-3)}
+.story-toast .look{margin-left:auto;color:var(--gold-deep);font-weight:700;font-size:12.5px}
+
+/* ===== 4 WORKBENCH (现状) ===== */
+.wb-sec{margin-top:6px;display:flex;align-items:center;justify-content:space-between}
+.wb-sec .st{font-family:var(--serif);font-weight:700;font-size:17px;color:var(--brown)}
+.wb-sec .lk{font-size:12.5px;color:var(--gold-deep);font-weight:700}
+.wb-stats{margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.wb-stat{background:linear-gradient(145deg,#FBF1DE,#EFD8B4);border:1px solid var(--line-warm);border-radius:16px;padding:16px 10px;text-align:center}
+.wb-stat .num{font-family:var(--serif);font-weight:900;font-size:26px;color:var(--brown)}
+.wb-stat .lab{font-size:12px;color:var(--brown-500);margin-top:3px;font-weight:500}
+.wb-stat .sub{font-size:10.5px;color:var(--gold-deep);margin-top:6px;font-weight:700}
+.wb-tip{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 15px;font-size:13px;color:var(--text-2);line-height:1.7}
+.wb-tip b{color:var(--brown)}
+.wb-actions{margin-top:16px;display:grid;gap:11px}
+.wb-row{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px}
+.wb-row .ic{width:40px;height:40px;border-radius:11px;background:rgba(201,169,97,.16);display:grid;place-items:center;color:var(--gold-deep);flex:none;font-size:19px}
+.wb-row .tx{flex:1}
+.wb-row .tx .a{font-weight:700;font-size:15px;color:var(--brown)}
+.wb-row .tx .b{font-size:11.5px;color:var(--text-3)}
+.wb-row .ar{color:var(--text-3);font-size:20px}
+
+/* ===== 5 BOOK ===== */
+.book-cover{margin:6px 2px 0;border-radius:14px;position:relative;overflow:hidden;padding:26px 22px;color:#FBF3E4;background:linear-gradient(150deg,#7A5330,#3D2916);box-shadow:0 18px 34px -20px rgba(61,41,22,.9)}
+.book-cover::after{content:"";position:absolute;inset:9px;border:1px solid rgba(251,243,228,.3);border-radius:9px;pointer-events:none}
+.book-cover .k{font-size:11px;letter-spacing:.4em;color:var(--gold-soft)}
+.book-cover .t{font-family:var(--serif);font-weight:900;font-size:29px;margin-top:9px;line-height:1.25}
+.book-cover .a{font-size:12.5px;color:rgba(251,243,228,.68);margin-top:12px}
+.unlock{margin:14px 2px 0;background:rgba(201,169,97,.14);border:1px dashed var(--gold-deep);border-radius:14px;padding:13px 15px;display:flex;align-items:center;gap:12px}
+.unlock .ic{width:36px;height:36px;border-radius:10px;background:linear-gradient(140deg,var(--gold-soft),var(--gold-deep));color:#fff;display:grid;place-items:center;flex:none}
+.unlock .t{font-weight:700;font-size:13.5px;color:var(--brown)}
+.unlock .s{font-size:12px;color:var(--text-2);margin-top:2px}
+.unlock .s b{color:var(--gold-deep)}
+.toc-t{margin:20px 2px 10px;font-family:var(--serif);font-weight:700;font-size:15px;color:var(--brown-500);display:flex;align-items:center;gap:10px}
+.toc-t::after{content:"";flex:1;height:1px;background:var(--line-warm)}
+.toc a{display:flex;align-items:baseline;gap:11px;padding:11px 6px;border-radius:9px;cursor:pointer;color:var(--text)}
+.toc a:hover{background:rgba(201,169,97,.1)}
+.toc .cn{font-family:var(--serif);font-weight:700;color:var(--gold-deep);font-size:15px;width:26px;flex:none}
+.toc .ct{font-family:var(--serif);font-size:16px;color:var(--brown);flex:none}
+.toc .fill{flex:1;border-bottom:1.5px dotted var(--line-warm);transform:translateY(-4px);min-width:10px}
+.toc .pg{font-size:12.5px;color:var(--text-3)}
+.toc a.lock{opacity:.4}
+.toc a.lock .ct::after{content:"　🔒";font-size:11px}
+
+/* ===== 6 STORY EDIT ===== */
+.se-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(201,169,97,.16);border-radius:8px;padding:5px 11px;font-size:12px;color:var(--gold-deep);font-weight:700;margin-top:4px}
+.se-h{font-family:var(--serif);font-weight:900;font-size:23px;color:var(--brown);margin-top:11px;line-height:1.4}
+.se-quote{font-family:var(--serif);font-style:italic;color:var(--gold-deep);font-size:15.5px;border-left:3px solid var(--gold);padding:3px 0 3px 13px;margin-top:13px;line-height:1.7}
+.se-photo{margin-top:15px;height:146px;border-radius:14px;position:relative;overflow:hidden;background:linear-gradient(135deg,#EDDFC2,#D9C39A);border:1px solid var(--line-warm);display:grid;place-items:center}
+.se-photo .add{position:absolute;right:10px;bottom:10px;background:rgba(61,41,22,.85);color:#FBF3E4;font-size:12px;font-weight:700;padding:7px 12px;border-radius:10px}
+.se-photo .ph{color:var(--brown-500);text-align:center}
+.se-body{margin-top:15px;font-size:16px;line-height:2.0;color:var(--text)}
+.se-body .hl{background:rgba(201,169,97,.22);border-bottom:2px solid var(--gold);padding:0 2px}
+.se-foot{margin-top:auto;display:flex;gap:11px;padding-top:14px}
+
+.legend{max-width:1200px;margin:76px auto 0;padding:30px 34px;background:var(--card);border:1px solid var(--line-warm);border-radius:22px;box-shadow:0 20px 48px -40px rgba(107,68,35,.55)}
+.legend h3{font-family:var(--serif);font-weight:900;font-size:21px;color:var(--brown)}
+.legend .lead{color:var(--text-2);font-size:14px;margin:6px 0 22px}
+.lg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.lg{display:flex;gap:12px;align-items:flex-start}
+.lg .b{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;flex:none;margin-top:2px;color:#fff}
+.lg .t{font-weight:700;color:var(--brown);font-size:14px}
+.lg .d{font-size:12.5px;color:var(--text-2);line-height:1.6}
+.footnote{max-width:1200px;margin:26px auto 0;text-align:center;color:var(--text-3);font-size:12.5px;line-height:1.8}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="kicker">时光印记 · Prototype v1.2 · 现状对齐</div>
+  <h1>生命故事书<span class="l"> · 产品优化原型（现状版）</span></h1>
+  <p class="sub">本版对齐真实代码：① 配色改回产品实际的<strong>棕 + 暖金</strong>（微绿副色），非上一版的朱砂红；② 每屏标注是「现状已有 / 本次改造 / 新增」——因为核对代码后发现，客户想要的进度条、章节分组、故事卡、成书预览<strong>大多已存在</strong>，本轮以<strong>改造呈现与门槛</strong>为主，而非重做。</p>
+  <div class="legend-tags">
+    <span class="lt"><span class="dot now"></span>现状已有（代码里已实现）</span>
+    <span class="lt"><span class="dot mod"></span>本次改造（改现有页/逻辑）</span>
+    <span class="lt"><span class="dot new"></span>新增（净新增能力）</span>
+  </div>
+</header>
+
+<div class="flowbar">
+  <b>首页</b><span class="arr">→</span><b>人生场景总览</b><span class="arr">→</span><b>场景化采访</b><span class="arr">→</span><b>工作台</b><span class="arr">→</span><b>故事卡·图文</b><span class="arr">→</span><b>成书预览</b>
+</div>
+
+<main class="gallery">
+
+  <!-- 1 HOME -->
+  <section class="frame">
+    <div class="tag"><span class="no">01</span><span class="tt">首页</span><span class="st new">新增入口</span></div>
+    <div class="phone"><div class="screen">
+      <div class="statusbar" style="color:#3D2916"><span>9:41</span><span class="bat"></span></div>
+      <div class="body scroll" style="padding-top:0">
+        <div class="home-hero">
+          <div class="brand">时光印记<small>MEMORY · IMPRINT</small></div>
+          <div class="slogan">您说的每一段话，<br>都在慢慢长成一本书。</div>
+        </div>
+        <div class="teller">
+          <div class="av">兰</div>
+          <div><div class="n">兰秀英的故事</div><div class="s">已讲 3 个场景 · 26 张故事卡</div></div>
+          <div class="p"><b>34%</b><span>完成度</span></div>
+        </div>
+        <div class="bookcard">
+          <div><div class="lbl">MY BOOK</div><div class="tt">看我的书</div></div>
+          <div class="go">翻开成书预览 →</div>
+        </div>
+        <div class="qgrid">
+          <div class="qtile"><div class="i">▶</div><div class="l">继续讲述</div><div class="d">回到上次场景</div></div>
+          <div class="qtile"><div class="i">＋</div><div class="l">讲新的一段</div><div class="d">挑个场景开始</div></div>
+        </div>
+        <button class="btn-primary" style="margin-top:16px">开始今天的讲述</button>
+      </div>
+      <div class="tabbar">
+        <div class="t on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1z"/></svg>首页</div>
+        <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>服务</div>
+        <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>我的</div>
+      </div>
+    </div></div>
+    <div class="note"><span class="new">新增</span>「看我的书」直达入口 + 全局回首页悬浮键；沿用真实暖棕渐变首页视觉</div>
+  </section>
+
+  <!-- 2 SCENES -->
+  <section class="frame">
+    <div class="tag"><span class="no">02</span><span class="tt">人生场景总览</span><span class="st mod">改造 chapters</span></div>
+    <div class="phone"><div class="screen">
+      <div class="statusbar"><span>9:41</span><span class="bat"></span></div>
+      <div class="navbar"><span class="back">‹</span><span class="h">讲讲您的人生</span></div>
+      <div class="body scroll">
+        <div class="sc-intro"><p>挑一个最想说的场景，<b>不用按顺序</b>。讲过的会盖上印章。</p></div>
+        <div class="scene"><div class="seal gold">童</div><div class="t"><div class="n">童年时光</div><div class="g">已讲 6 段 · 家乡与儿时</div></div><div class="ring" style="--p:80"><i>6</i></div></div>
+        <div class="scene"><div class="seal green">学</div><div class="t"><div class="n">求学岁月</div><div class="g">已讲 5 段 · 老师与同窗</div></div><div class="ring g" style="--p:62"><i>5</i></div></div>
+        <div class="scene"><div class="seal gold">业</div><div class="t"><div class="n">闯荡与事业</div><div class="g">第一份工作、奋斗、成就</div></div><div class="ring" style="--p:30"><i>3</i></div></div>
+        <div class="scene"><div class="seal green">缘</div><div class="t"><div class="n">爱情与成家</div><div class="g">相识、相守、那个人</div></div><div class="ring g" style="--p:0"><i>＋</i></div></div>
+        <div class="scene"><div class="seal gold">亲</div><div class="t"><div class="n">为人父母</div><div class="g">孩子与家的日子</div></div><div class="ring" style="--p:0"><i>＋</i></div></div>
+        <div class="scene"><div class="seal green">浪</div><div class="t"><div class="n">风浪与转折</div><div class="g">挫折、抉择、遗憾</div></div><div class="ring g" style="--p:0"><i>＋</i></div></div>
+        <div class="scene"><div class="seal gold">趣</div><div class="t"><div class="n">兴趣与信念</div><div class="g">爱好、信仰、价值观</div></div><div class="ring" style="--p:0"><i>＋</i></div></div>
+        <div class="scene"><div class="seal green">望</div><div class="t"><div class="n">回望与寄语</div><div class="g">感悟与对后辈的话</div></div><div class="ring g" style="--p:0"><i>＋</i></div></div>
+        <button class="btn-ghost" style="margin-top:6px">🎙 我想随便讲讲，AI 帮我归类</button>
+      </div>
+    </div></div>
+    <div class="note"><span class="mod">改造</span>现有 <code>chapters.vue</code> 已按章节分组显示进度，本次<b>前置到采访入口</b> + 10 章收敛为 8 场景 + 印章化（沿用现有金/绿交替）</div>
+  </section>
+
+  <!-- 3 SESSION -->
+  <section class="frame">
+    <div class="tag"><span class="no">03</span><span class="tt">场景化采访</span><span class="st mod">改造 · 隐藏308</span></div>
+    <div class="phone"><div class="screen">
+      <div class="statusbar"><span>9:41</span><span class="bat"></span></div>
+      <div class="navbar" style="padding-bottom:4px"><span class="back">‹</span><span class="h">采访 · 童年时光</span></div>
+      <div class="body" style="display:flex;flex-direction:column">
+        <div class="ses-old">现状问题：采访页顶部现在写「全部 <b>308</b> 题，进度 5/308」——正是"太累"焦虑的来源</div>
+        <div class="ses-new-prog">
+          <div class="lb"><span class="seal gold">童</span>童年时光 · 已讲 6 段</div>
+          <div class="bar"><i style="width:80%"></i></div>
+          <div class="bar-lbl"><span>这个场景讲得很不错</span><span>再讲 2 段收个尾</span></div>
+        </div>
+        <div class="ask">
+          <div class="w">小云 问</div>
+          <div class="q">您小时候住的地方，是什么样子的？门口有什么，还记得吗？</div>
+          <div class="spk">🔊 点这里再听一遍</div>
+        </div>
+        <div class="paper-input">我家在村头一间土坯房，门口有棵老槐树，夏天全村人都爱在树下乘凉<span class="cursor"></span></div>
+        <div class="ses-actions">
+          <div class="circle-btn">📷</div>
+          <button class="mic"><span class="wave"><i></i><i></i><i></i><i></i></span> 点击停止</button>
+          <div class="circle-btn">⌨</div>
+        </div>
+      </div>
+      <div class="story-toast">
+        <div class="bn">故事<br>+1</div>
+        <div><div class="t">《门口的老槐树》已生成</div><div class="s">小云已整理成故事卡</div></div>
+        <div class="look">查看 ›</div>
+      </div>
+    </div></div>
+    <div class="note"><span class="mod">改造</span>进度「308 题 5/308」→「场景 · 已讲 X 段」　·　按钮「按住说话」→「<b>点击停止</b>」　·　新增即时「故事卡 +1」</div>
+  </section>
+
+  <!-- 4 WORKBENCH -->
+  <section class="frame">
+    <div class="tag"><span class="no">04</span><span class="tt">工作台</span><span class="st now">现状已有</span></div>
+    <div class="phone"><div class="screen">
+      <div class="statusbar"><span>9:41</span><span class="bat"></span></div>
+      <div class="navbar"><span class="back">‹</span><span class="h">兰秀英的生命故事</span></div>
+      <div class="body scroll">
+        <div class="wb-sec"><span class="st">故事进度</span><span class="lk">边讲边整理 ›</span></div>
+        <div class="wb-stats">
+          <div class="wb-stat"><div class="num">26</div><div class="lab">故事卡</div></div>
+          <div class="wb-stat"><div class="num">✓</div><div class="lab">样章</div><div class="sub">看样章</div></div>
+          <div class="wb-stat"><div class="num">3</div><div class="lab">章节稿</div><div class="sub">看章节稿</div></div>
+        </div>
+        <div class="wb-tip">样章和章节稿<b>已就绪</b>，继续讲述会更完整。再讲 <b>4 段</b>可解锁整书预览。</div>
+        <div class="wb-actions">
+          <div class="wb-row"><div class="ic">📖</div><div class="tx"><div class="a">成书预览</div><div class="b">看整本书的样子</div></div><div class="ar">›</div></div>
+          <div class="wb-row"><div class="ic">🗂</div><div class="tx"><div class="a">故事卡列表</div><div class="b">26 张 · 编辑/重新生成</div></div><div class="ar">›</div></div>
+          <div class="wb-row"><div class="ic">📥</div><div class="tx"><div class="a">导入已有文稿</div><div class="b">上传 Word/PDF，AI 归类</div></div><div class="ar">›</div></div>
+        </div>
+      </div>
+    </div></div>
+    <div class="note"><span class="now">现状</span>故事卡 / 样章 / 章节稿 / 导入 <b>均已存在</b>（<code>workbench.vue</code>），本次只优化入口显眼度与措辞</div>
+  </section>
+
+  <!-- 5 STORY EDIT -->
+  <section class="frame">
+    <div class="tag"><span class="no">05</span><span class="tt">故事卡 · 图文</span><span class="st mod">改造 · 可改可配图</span></div>
+    <div class="phone"><div class="screen">
+      <div class="statusbar"><span>9:41</span><span class="bat"></span></div>
+      <div class="navbar"><span class="back">‹</span><span class="h">故事卡</span></div>
+      <div class="body scroll" style="display:flex;flex-direction:column">
+        <span class="se-tag">童 · 童年时光</span>
+        <div class="se-h">门口的老槐树</div>
+        <div class="se-quote">"夏天全村人都爱在树下乘凉，那是我一辈子最凉快的地方。"</div>
+        <div class="se-photo"><div class="ph"><div style="font-size:29px">🖼</div><div style="font-size:12px;margin-top:4px;color:var(--brown-500)">配一张老照片</div></div><div class="add">＋ 添加照片</div></div>
+        <div class="se-body">我家在村头一间土坯房，门口有一棵<span class="hl">很老很老的</span>槐树。夏天的傍晚，全村人都搬着小板凳，到树下乘凉、说家常……</div>
+        <div class="se-foot"><button class="btn-ghost" style="flex:1">重新讲</button><button class="btn-primary" style="flex:1;font-size:16px;padding:14px">确认这张</button></div>
+      </div>
+    </div></div>
+    <div class="note"><span class="mod">改造</span>故事卡已有（后端 assetUrls 字段就绪），本次加<b>局部改字</b>（高亮处可定位光标）与<b>插图</b></div>
+  </section>
+
+  <!-- 6 BOOK -->
+  <section class="frame">
+    <div class="tag"><span class="no">06</span><span class="tt">成书预览 · 目录</span><span class="st mod">改造 · 目录/门槛</span></div>
+    <div class="phone"><div class="screen">
+      <div class="statusbar"><span>9:41</span><span class="bat"></span></div>
+      <div class="navbar"><span class="back">‹</span><span class="h">我的书</span></div>
+      <div class="body scroll">
+        <div class="book-cover"><div class="k">生命故事书</div><div class="t">兰秀英的<br>八十年光阴</div><div class="a">口述 · 兰秀英　整理 · 时光印记</div></div>
+        <div class="unlock"><div class="ic">🔓</div><div><div class="t">整书还差一点点</div><div class="s">再讲 <b>4 段</b>故事，即可解锁完整成书</div></div></div>
+        <div class="toc-t">目录 · 点击直达</div>
+        <div class="toc">
+          <a><span class="cn">一</span><span class="ct">门口的老槐树</span><span class="fill"></span><span class="pg">P.1</span></a>
+          <a><span class="cn">二</span><span class="ct">上学要走的那条河</span><span class="fill"></span><span class="pg">P.9</span></a>
+          <a><span class="cn">三</span><span class="ct">第一次进城做工</span><span class="fill"></span><span class="pg">P.18</span></a>
+          <a class="lock"><span class="cn">四</span><span class="ct">遇见他那年</span><span class="fill"></span><span class="pg">—</span></a>
+          <a class="lock"><span class="cn">五</span><span class="ct">孩子们小时候</span><span class="fill"></span><span class="pg">—</span></a>
+        </div>
+      </div>
+      <div class="fab">⌂</div>
+    </div></div>
+    <div class="note"><span class="now">现状</span>成书预览页已有（<code>book.vue</code>）　<span class="mod">改造</span>加目录直达跳转 + 门槛下调（40→20 故事卡）</div>
+  </section>
+
+</main>
+
+<section class="legend">
+  <h3>本轮工作定性 · 现状对照</h3>
+  <div class="lead">核对代码后，客户诉求大多已有实现，真实工作以「改造」为主，净新增很少。</div>
+  <div class="lg-grid">
+    <div class="lg"><span class="b" style="background:var(--green)">现状</span><div><div class="t">章节分组 · 进度条 · 故事卡 · 样章章节稿 · 成书预览 · 导入</div><div class="d">均已在 chapters/session/workbench/book 页实现</div></div></div>
+    <div class="lg"><span class="b" style="background:var(--gold-deep)">改造</span><div><div class="t">隐藏 308 → 场景化进度</div><div class="d">session 顶部去掉"X/308"，改场景 + 段数（第一优先级）</div></div></div>
+    <div class="lg"><span class="b" style="background:var(--gold-deep)">改造</span><div><div class="t">chapters 前置为场景入口</div><div class="d">从二级页提到采访前，10 章收敛 8 场景</div></div></div>
+    <div class="lg"><span class="b" style="background:var(--gold-deep)">改造</span><div><div class="t">语音文案 · 局部编辑 · 自动缓存 · 目录 · 门槛</div><div class="d">全是改现有前端/后端常量，低风险</div></div></div>
+    <div class="lg"><span class="b" style="background:var(--brown)">新增</span><div><div class="t">首页看我的书入口 · 回首页悬浮键 · 即时故事卡浮层</div><div class="d">少量净新增交互</div></div></div>
+    <div class="lg"><span class="b" style="background:var(--brown)">新增</span><div><div class="t">P2 商业化：版本 / 收费 / 分享</div><div class="d">代码零基础，唯一真·新工程，另立项</div></div></div>
+  </div>
+</section>
+
+<p class="footnote">时光印记 · 生命故事书 ｜ 产品优化原型 v1.2（现状对齐版）｜ 2026-06-30<br>配色对齐真实设计系统（棕 #6B4423 + 暖金 #C9A961 + 微绿 #4A6B47）。最终视觉与文案以设计定稿及题库 chapterName 实际映射为准。</p>
+
+</body>
+</html>

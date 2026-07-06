@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云忆 · 老人端极简访谈原型 v1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+:root{
+  /* 复用现有原型暖色系 / 墨绿 token */
+  --cream:#FBF6EC; --cream-2:#FDFAF3; --card:#FFFFFF;
+  --brown:#6B4423; --brown-h:#5A3A1E; --brown-500:#8B5A3C;
+  --gold:#C9A961; --gold-btn1:#C88E3E; --gold-btn2:#94611E; --gold-deep:#8A6220;
+  --green:#3D5A4C; --green-2:#4A6B47; --green-deep:#2E4438;
+  --text:#241F18; --text-2:#6B6152; --text-3:#8A7E6C;
+  --paper-line:#E6D9BF; --line:#EBE3D3; --error:#B94A3A;
+  --serif:"Noto Serif SC","Songti SC",serif;
+  --sans:"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  font-family:var(--sans);color:var(--text);line-height:1.6;
+  background:radial-gradient(1200px 700px at 50% -10%, #F3E7CE, #E9DcC0 60%, #E2D4B4);
+  min-height:100%;display:flex;gap:26px;justify-content:center;align-items:flex-start;
+  padding:34px 20px 60px;
+}
+
+/* ---------- 演示导航（客户演示用，老人实际看不到） ---------- */
+.map{position:fixed;left:18px;top:18px;z-index:100;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:12px;box-shadow:0 16px 40px -24px rgba(107,68,35,.6);width:172px}
+.map .mt{font-family:var(--serif);font-weight:700;font-size:12.5px;color:var(--brown);margin-bottom:3px}
+.map .ms{font-size:10.5px;color:var(--text-3);margin-bottom:9px;line-height:1.4}
+.map .grp{font-size:10px;letter-spacing:.12em;color:var(--gold-deep);font-weight:700;margin:8px 0 5px;text-transform:uppercase}
+.map button{display:block;width:100%;text-align:left;border:1px solid var(--line);background:var(--cream-2);
+  border-radius:8px;padding:7px 9px;margin-bottom:5px;font-size:12px;color:var(--brown);font-weight:600;
+  cursor:pointer;font-family:var(--sans)}
+.map button:hover{background:rgba(201,169,97,.15);border-color:var(--gold)}
+.map button.act{background:var(--brown);color:#FBF3E4;border-color:var(--brown)}
+@media(max-width:980px){.map{position:static;width:100%;max-width:380px;margin-bottom:14px}}
+
+/* ---------- 手机外壳 ---------- */
+.phone{width:392px;background:#241A10;border-radius:46px;padding:11px;
+  box-shadow:0 44px 90px -44px rgba(70,44,20,.75);position:relative;flex:none}
+.phone::after{content:"";position:absolute;top:22px;left:50%;transform:translateX(-50%);
+  width:120px;height:28px;background:#241A10;border-radius:0 0 16px 16px;z-index:60}
+.screens{position:relative;width:100%;height:812px;border-radius:38px;overflow:hidden;background:var(--cream)}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;background:var(--cream)}
+.screen.on{display:flex;animation:fade .32s ease}
+@keyframes fade{from{opacity:0;transform:scale(.995)}to{opacity:1;transform:none}}
+.status{flex:none;height:46px;display:flex;align-items:flex-end;justify-content:space-between;
+  padding:0 22px 8px;font-size:13px;font-weight:700;color:var(--brown-h);opacity:.85}
+/* 低调的次级入口：所有次要功能都收纳在这一个“更多”后面，平时不干扰主访谈 */
+.more-btn{background:transparent;border:none;font-size:13px;font-weight:700;color:var(--brown-500);
+  opacity:.75;cursor:pointer;font-family:var(--sans);padding:4px 2px}
+.more-btn:active{opacity:1}
+
+/* ---------- 更多（收纳次级功能的抽屉页） ---------- */
+.more-hd{flex:none;display:flex;align-items:center;gap:10px;padding:8px 18px 12px}
+.more-hd .bk{background:var(--cream-2);border:2px solid var(--paper-line);border-radius:14px;
+  width:52px;height:52px;font-size:24px;color:var(--brown-h);cursor:pointer;flex:none}
+.more-hd .ti{font-family:var(--serif);font-size:24px;font-weight:900;color:var(--brown-h)}
+.more-list{display:flex;flex-direction:column;gap:12px}
+.more-row{display:flex;align-items:center;gap:14px;background:var(--card);border:2px solid var(--line);
+  border-radius:18px;padding:16px 16px;cursor:pointer;text-align:left;font-family:var(--sans);width:100%;
+  box-shadow:0 12px 26px -24px rgba(107,68,35,.6)}
+.more-row:active{background:var(--cream-2)}
+.more-row .ic{width:48px;height:48px;border-radius:14px;flex:none;display:grid;place-items:center;font-size:26px;
+  background:linear-gradient(140deg,#F0E2C4,#E0C99A)}
+.more-row .tx .t{font-size:19px;font-weight:800;color:var(--brown-h)}
+.more-row .tx .d{font-size:14px;color:var(--text-2);margin-top:3px;line-height:1.4}
+.more-row .ar{margin-left:auto;font-size:22px;color:var(--text-3)}
+.more-note{font-size:13px;color:var(--text-3);text-align:center;margin:14px 4px 2px;line-height:1.5}
+
+/* ---------- 顶栏：采访者 + 叫家人帮忙（常驻安全网） ---------- */
+.topbar{flex:none;display:flex;align-items:center;gap:12px;padding:6px 18px 14px}
+.topbar .av{width:52px;height:52px;border-radius:16px;flex:none;
+  background:linear-gradient(140deg,#5C8069,var(--green-deep));color:#fff;
+  display:grid;place-items:center;font-family:var(--serif);font-weight:800;font-size:24px;
+  box-shadow:0 10px 22px -12px rgba(46,68,56,.8)}
+.topbar .who .n{font-size:18px;font-weight:800;color:var(--brown-h)}
+.topbar .who .s{font-size:14px;color:var(--text-2);margin-top:1px}
+.help{margin-left:auto;border:2px solid var(--gold);background:var(--cream-2);color:var(--brown-h);
+  border-radius:16px;padding:10px 14px;font-size:15px;font-weight:800;cursor:pointer;
+  display:flex;align-items:center;gap:6px;min-height:52px}
+.help .i{font-size:20px}
+.help:active{background:rgba(201,169,97,.2)}
+
+/* ---------- 通用大按钮 ---------- */
+.say-btn{border:none;border-radius:26px;width:100%;min-height:132px;cursor:pointer;
+  background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff;
+  font-family:var(--sans);font-weight:800;font-size:29px;letter-spacing:.02em;
+  text-shadow:0 1px 2px rgba(60,35,10,.45);
+  box-shadow:0 20px 40px -18px rgba(180,120,50,.95);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.say-btn .em{font-size:44px;line-height:1}
+.say-btn:active{transform:translateY(2px)}
+.say-btn.green{background:linear-gradient(180deg,#5C8069,var(--green-deep))}
+.big2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.big-eq{border:none;border-radius:22px;min-height:104px;cursor:pointer;font-family:var(--sans);
+  font-weight:800;font-size:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  padding:8px}
+.big-eq .em{font-size:34px;line-height:1}
+.big-eq.pri{background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff;
+  text-shadow:0 1px 2px rgba(60,35,10,.45);box-shadow:0 16px 30px -16px rgba(180,120,50,.9)}
+.big-eq.sec{background:var(--card);border:2.5px solid var(--paper-line);color:var(--brown-h)}
+.big-eq:active{transform:translateY(2px)}
+.sub-link{margin:0 auto;background:var(--cream-2);border:2px solid var(--line);border-radius:18px;
+  padding:14px 20px;font-size:18px;font-weight:700;color:var(--brown-500);cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;min-height:60px}
+.sub-link:active{background:rgba(201,169,97,.15)}
+.replay{display:inline-flex;align-items:center;gap:7px;background:transparent;border:2px solid var(--gold);
+  color:var(--brown-h);border-radius:16px;padding:9px 15px;font-size:16px;font-weight:700;cursor:pointer;min-height:52px}
+.replay:active{background:rgba(201,169,97,.16)}
+
+/* ---------- 开场 / 每轮问题 (home) ---------- */
+.body{flex:1;overflow-y:auto;display:flex;flex-direction:column;padding:6px 22px 24px}
+.qwrap{flex:1;display:flex;flex-direction:column;justify-content:center;gap:20px;padding:8px 0}
+.q-lead{font-size:17px;font-weight:700;color:var(--gold-deep)}
+.e-q{font-family:var(--sans);font-size:31px;line-height:1.4;font-weight:800;color:var(--brown-h)}
+.e-q b{color:var(--green-deep)}
+.foot{flex:none;display:flex;flex-direction:column;gap:16px;padding-top:8px}
+
+/* ---------- 说话中 (speaking) ---------- */
+.listening{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;text-align:center;padding:10px 6px}
+.q-mini{font-size:20px;font-weight:700;color:var(--text-2);line-height:1.4}
+.rec-dot{font-size:34px;font-weight:800;color:var(--error);display:flex;align-items:center;gap:12px}
+.rec-dot .d{width:20px;height:20px;border-radius:50%;background:var(--error);animation:pulse 1.1s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
+.wave{display:flex;align-items:center;gap:7px;height:96px}
+.wave i{width:9px;border-radius:6px;background:linear-gradient(180deg,var(--gold),var(--brown-500));display:block;
+  animation:eq 1s ease-in-out infinite}
+.wave i:nth-child(1){height:34px;animation-delay:0s}
+.wave i:nth-child(2){height:66px;animation-delay:.12s}
+.wave i:nth-child(3){height:92px;animation-delay:.24s}
+.wave i:nth-child(4){height:54px;animation-delay:.36s}
+.wave i:nth-child(5){height:82px;animation-delay:.1s}
+.wave i:nth-child(6){height:40px;animation-delay:.3s}
+.wave i:nth-child(7){height:72px;animation-delay:.18s}
+.wave i:nth-child(8){height:50px;animation-delay:.05s}
+.wave i:nth-child(9){height:88px;animation-delay:.26s}
+@keyframes eq{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
+.hint-soft{font-size:16px;color:var(--text-3)}
+.mini2{display:flex;gap:14px;justify-content:center}
+.mini-btn{background:var(--cream-2);border:2px solid var(--paper-line);border-radius:18px;
+  padding:14px 26px;font-size:18px;font-weight:700;color:var(--brown-h);cursor:pointer;min-height:60px;min-width:110px}
+.mini-btn:active{background:rgba(201,169,97,.15)}
+
+/* ---------- 记下啦 (recorded) ---------- */
+.recorded-top{flex:1;display:flex;flex-direction:column;justify-content:center;gap:20px}
+.saved{display:flex;align-items:center;gap:14px;font-size:34px;font-weight:800;color:var(--green-deep)}
+.saved .ck{width:52px;height:52px;border-radius:50%;background:var(--green-deep);color:#fff;
+  display:grid;place-items:center;font-size:30px;flex:none}
+.recap{background:var(--card);border:2px solid var(--line);border-left:6px solid var(--gold);border-radius:18px;
+  padding:20px 20px 18px;box-shadow:0 14px 30px -22px rgba(107,68,35,.6)}
+.recap .rt{font-size:24px;line-height:1.55;color:var(--text);font-weight:600}
+.recap .rt b{color:var(--green-deep);font-weight:800}
+.recap .ra{margin-top:16px}
+.ask-ok{font-size:24px;font-weight:800;color:var(--brown-h);text-align:center;margin-top:2px}
+
+/* ---------- 过渡 / 安慰 (bridge) ---------- */
+.bridge{flex:1;display:flex;flex-direction:column;justify-content:center;gap:20px;text-align:center;padding:6px 4px}
+.bridge .lead{font-size:22px;font-weight:700;color:var(--text-2);line-height:1.5}
+.bridge .rule{display:flex;align-items:center;gap:12px;color:var(--gold-deep);font-size:15px;font-weight:700;justify-content:center;margin:2px 0}
+.bridge .rule::before,.bridge .rule::after{content:"";height:2px;width:44px;background:var(--gold);opacity:.6;border-radius:2px}
+.bridge .nq{font-size:30px;font-weight:800;color:var(--brown-h);line-height:1.4}
+.comfort-ic{font-size:52px}
+.rest-link{margin:0 auto;background:transparent;border:none;color:var(--text-2);font-size:17px;font-weight:700;
+  text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:12px;min-height:52px}
+
+/* ---------- 听/看我的书 (book) ---------- */
+#book .body{display:block}
+.book-hd{flex:none;text-align:center;padding:12px 20px 6px}
+.book-hd .bk{font-family:var(--serif);font-size:15px;letter-spacing:.14em;color:var(--gold-deep);font-weight:700}
+.book-hd .bt{font-family:var(--serif);font-size:30px;font-weight:900;color:var(--brown-h);margin-top:6px}
+.chapter{background:var(--card);border:2px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:16px;
+  box-shadow:0 14px 30px -24px rgba(107,68,35,.6)}
+.chapter .img{height:150px;background:linear-gradient(135deg,#D8C39A,#B98E5C);display:flex;align-items:flex-end;
+  padding:14px 18px;color:#fff;font-family:var(--serif);font-weight:800;font-size:22px;text-shadow:0 2px 8px rgba(80,50,20,.5)}
+.chapter .img.c2{background:linear-gradient(135deg,#9CB3A0,#4A6B5C)}
+.chapter .img.c3{background:linear-gradient(135deg,#D9A98C,#B06A47)}
+.chapter .tx{padding:16px 18px 18px;font-size:20px;line-height:1.7;color:var(--text)}
+.pageflip{display:flex;justify-content:space-between;align-items:center;padding-top:4px}
+.flip-btn{background:var(--cream-2);border:2px solid var(--paper-line);border-radius:18px;padding:14px 22px;
+  font-size:18px;font-weight:800;color:var(--brown-h);cursor:pointer;min-height:60px}
+.flip-btn:active{background:rgba(201,169,97,.15)}
+.flip-num{font-size:17px;font-weight:700;color:var(--text-2)}
+
+/* ---------- 求助家人 (help) ---------- */
+.help-scr{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:22px;padding:14px}
+.help-scr .ring{width:120px;height:120px;border-radius:50%;background:linear-gradient(140deg,#5C8069,var(--green-deep));
+  display:grid;place-items:center;font-size:58px;color:#fff;box-shadow:0 20px 40px -20px rgba(46,68,56,.9)}
+.help-scr .ht{font-size:28px;font-weight:800;color:var(--brown-h);line-height:1.45}
+.help-scr .hs{font-size:19px;color:var(--text-2);line-height:1.6}
+.help-scr .hs b{color:var(--green-deep)}
+
+.tts-badge{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--gold-deep);font-weight:700}
+.end .body{justify-content:center;text-align:center;gap:22px}
+
+@media (prefers-reduced-motion: reduce){
+  .screen.on{animation:none}
+  .wave i{animation:none}
+  .rec-dot .d{animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 演示导航（客户演示跳画面用，老人看不到） ============ -->
+<div class="map">
+  <div class="mt">演示导航</div>
+  <div class="ms">仅供客户演示跳画面。老人端实际全屏对话，看不到此栏。</div>
+  <div class="grp">三步循环</div>
+  <button data-go="home" class="act" onclick="jump('home')">① 开场·被问第一句 A</button>
+  <button data-go="speaking" onclick="jump('speak')">② 说话中 B</button>
+  <button data-go="recorded" onclick="jump('recorded')">③ 记下啦·确认 C</button>
+  <div class="grp">动态追问分支</div>
+  <button onclick="jump('deep')">讲得起劲 → 顺着深挖</button>
+  <button onclick="jump('short')">答得短 → 换小切口</button>
+  <button onclick="jump('transition')">话题聊透 → 自然过渡</button>
+  <button onclick="jump('emotion')">情绪波动 → 安慰+软出口</button>
+  <div class="grp">旁支</div>
+  <button data-go="book" onclick="jump('book')">📖 听/看我的书</button>
+  <button data-go="help" onclick="jump('help')">🆘 叫家人帮忙</button>
+  <div class="grp">收纳入口</div>
+  <button data-go="more" onclick="go('more')">☰ 更多（次级功能）</button>
+  <button data-go="plans" onclick="go('plans')">💳 套餐（价格只在此）</button>
+</div>
+
+<!-- ============ 手机 ============ -->
+<div class="phone">
+  <div class="screens">
+
+    <!-- ===== A 开场 / 每轮问题 ===== -->
+    <section class="screen on" id="home">
+      <div class="status"><span>9:24</span><button class="more-btn" onclick="go('more')">☰ 更多</button></div>
+      <div class="topbar">
+        <div class="av">云</div>
+        <div class="who"><div class="n">小云</div><div class="s">在陪您聊天</div></div>
+        <button class="help" onclick="go('help')"><span class="i">🆘</span>叫家人帮忙</button>
+      </div>
+      <div class="body">
+        <div class="qwrap">
+          <div class="q-lead">秀英，我又来啦 —— 今天想先跟您聊聊……</div>
+          <div class="e-q" id="homeQ">秀英，您的名字，是谁给取的呀？</div>
+          <div><button class="replay" onclick="tts()">🔊 再念一遍</button></div>
+        </div>
+        <div class="foot">
+          <button class="say-btn" onclick="goSpeak()"><span class="em">👆</span>点这里，跟我说</button>
+          <button class="sub-link" onclick="go('book')">📖 听听我的书</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== B 说话中 ===== -->
+    <section class="screen" id="speaking">
+      <div class="status"><span>9:24</span><button class="more-btn" onclick="go('more')">☰ 更多</button></div>
+      <div class="topbar">
+        <div class="av">云</div>
+        <div class="who"><div class="n">小云</div><div class="s">正在听您说</div></div>
+        <button class="help" onclick="go('help')"><span class="i">🆘</span>叫家人帮忙</button>
+      </div>
+      <div class="body">
+        <div class="listening">
+          <div class="q-mini" id="speakQ">您的名字，是谁给取的呀？</div>
+          <div class="rec-dot"><span class="d"></span>正在听您说…</div>
+          <div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="hint-soft">您慢慢说，不着急，说完点下面那个大按钮</div>
+        </div>
+        <div class="foot">
+          <button class="say-btn green" onclick="goRecorded()"><span class="em">●</span>我说完了</button>
+          <div class="mini2">
+            <button class="mini-btn" onclick="tts('已暂停，随时可以接着说')">⏸ 暂停</button>
+            <button class="mini-btn" onclick="tts('好，咱重新说一遍')">↺ 重说</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== C 记下啦 / 确认 ===== -->
+    <section class="screen" id="recorded">
+      <div class="status"><span>9:25</span><button class="more-btn" onclick="go('more')">☰ 更多</button></div>
+      <div class="topbar">
+        <div class="av">云</div>
+        <div class="who"><div class="n">小云</div><div class="s">记下您刚说的话</div></div>
+        <button class="help" onclick="go('help')"><span class="i">🆘</span>叫家人帮忙</button>
+      </div>
+      <div class="body">
+        <div class="recorded-top">
+          <div class="saved"><span class="ck">✓</span>记下啦</div>
+          <div class="recap">
+            <div class="rt" id="recapText">我听您说：您这名字是<b>爷爷</b>给取的，盼着日子风调雨顺。</div>
+            <div class="ra"><button class="replay" onclick="tts('正在回放您刚才的原声…')">🔊 点着回听我刚说的</button></div>
+          </div>
+          <div class="ask-ok">这样对吗？</div>
+        </div>
+        <div class="foot">
+          <div class="big2">
+            <button class="big-eq pri" onclick="confirmContinue()"><span class="em">✓</span>对，继续</button>
+            <button class="big-eq sec" onclick="goSpeak()"><span class="em">↺</span>我再说一遍</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 过渡：自然滑向下一话题 ===== -->
+    <section class="screen" id="transition">
+      <div class="status"><span>9:31</span><button class="more-btn" onclick="go('more')">☰ 更多</button></div>
+      <div class="topbar">
+        <div class="av">云</div>
+        <div class="who"><div class="n">小云</div><div class="s">在陪您聊天</div></div>
+        <button class="help" onclick="go('help')"><span class="i">🆘</span>叫家人帮忙</button>
+      </div>
+      <div class="body">
+        <div class="bridge">
+          <div class="lead" id="transLead">您小时候的事，我都记下啦。</div>
+          <div class="rule">那咱接着往前走一点点</div>
+          <div class="nq" id="transQ">您还记得，第一天上学是什么样吗？</div>
+        </div>
+        <div class="foot">
+          <button class="say-btn" onclick="goSpeak()"><span class="em">👆</span>点这里，跟我说</button>
+          <button class="rest-link" onclick="go('end')">今天先到这儿，歇会儿</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 情绪安抚分支 ===== -->
+    <section class="screen" id="comfort">
+      <div class="status"><span>9:35</span><button class="more-btn" onclick="go('more')">☰ 更多</button></div>
+      <div class="topbar">
+        <div class="av">云</div>
+        <div class="who"><div class="n">小云</div><div class="s">陪着您</div></div>
+        <button class="help" onclick="go('help')"><span class="i">🆘</span>叫家人帮忙</button>
+      </div>
+      <div class="body">
+        <div class="bridge">
+          <div class="comfort-ic">🤍</div>
+          <div class="nq">这段……不容易。</div>
+          <div class="lead">不想说也没关系，咱不着急。<br>要不，聊点开心的？</div>
+        </div>
+        <div class="foot">
+          <button class="say-btn green" onclick="comfortContinue()"><span class="em">🌤</span>好，聊点开心的</button>
+          <button class="rest-link" onclick="go('end')">今天先歇会儿吧</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 听 / 看我的书 ===== -->
+    <section class="screen" id="book">
+      <div class="status"><span>9:40</span><button class="more-btn" onclick="go('more')">☰ 更多</button></div>
+      <div class="topbar">
+        <div class="av">云</div>
+        <div class="who"><div class="n">我的书</div><div class="s">随时听、随时看</div></div>
+        <button class="help" onclick="go('home')" style="border-color:var(--paper-line)"><span class="i">↩</span>回去聊天</button>
+      </div>
+      <div class="body">
+        <div class="book-hd">
+          <div class="bk">我 的 书</div>
+          <div class="bt">《秀英的一生》</div>
+        </div>
+        <button class="say-btn" style="margin:4px 0 20px" onclick="tts('从头念给您听…')"><span class="em">▶</span>从头念给我听</button>
+        <div class="chapter">
+          <div class="img">童年那些事</div>
+          <div class="tx">那年过年，我穿一件枣红的新棉袄，是娘熬了好几夜缝的，兜里还揣着俩铜板……</div>
+        </div>
+        <div class="chapter">
+          <div class="img c2">我名字的来历</div>
+          <div class="tx">我这名字是爷爷取的。爷爷是教书先生，方圆几里的娃都跟他念过书，说是盼着日子风调雨顺……</div>
+        </div>
+        <div class="chapter">
+          <div class="img c3">头一天上学</div>
+          <div class="tx">背个布书包，爹送我到村口，回头冲我摆手。教我的是周先生，戴副圆眼镜，说话慢悠悠的……</div>
+        </div>
+        <div class="pageflip">
+          <button class="flip-btn" onclick="tts('翻到上一页')">‹ 上一页</button>
+          <span class="flip-num">第 1 页</span>
+          <button class="flip-btn" onclick="tts('翻到下一页')">下一页 ›</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 求助家人 ===== -->
+    <section class="screen" id="help">
+      <div class="status"><span>9:42</span><button class="more-btn" onclick="go('more')">☰ 更多</button></div>
+      <div class="topbar">
+        <div class="av">云</div>
+        <div class="who"><div class="n">小云</div><div class="s">帮您叫家人</div></div>
+      </div>
+      <div class="body">
+        <div class="help-scr">
+          <div class="ring">📞</div>
+          <div class="ht">已经告诉您女儿<br>小芳啦</div>
+          <div class="hs">她马上会<b>打电话</b>过来。<br>您先歇着，不用管手机上的事。</div>
+        </div>
+        <div class="foot">
+          <button class="say-btn green" onclick="go('home')"><span class="em">👌</span>好，我等着</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 歇会儿 / 收尾 ===== -->
+    <section class="screen end" id="end">
+      <div class="status"><span>9:45</span><button class="more-btn" onclick="go('more')">☰ 更多</button></div>
+      <div class="topbar">
+        <div class="av">云</div>
+        <div class="who"><div class="n">小云</div><div class="s">今天辛苦啦</div></div>
+        <button class="help" onclick="go('help')"><span class="i">🆘</span>叫家人帮忙</button>
+      </div>
+      <div class="body">
+        <div class="qwrap" style="text-align:center;align-items:center">
+          <div class="comfort-ic">🌙</div>
+          <div class="e-q">今天讲了好多啦，<br>都好好记着呢。</div>
+          <div class="q-lead">咱改天接着聊，您歇着。</div>
+        </div>
+        <div class="foot">
+          <button class="say-btn" onclick="go('book')"><span class="em">📖</span>听听我的书</button>
+          <button class="sub-link" onclick="restart()">↩ 再聊两句</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 更多：统一收纳次要功能（同一个小程序，非分端） ===== -->
+    <section class="screen" id="more">
+      <div class="status"><span>9:46</span><button class="more-btn" onclick="go('home')">✕ 关闭</button></div>
+      <div class="more-hd">
+        <button class="bk" onclick="go('home')">‹</button>
+        <div class="ti">更多</div>
+      </div>
+      <div class="body">
+        <div class="more-list">
+          <button class="more-row" onclick="go('book')">
+            <span class="ic">📖</span>
+            <span class="tx"><span class="t">我的书</span><span class="d">听全本 / 翻着看 · 免费</span></span>
+            <span class="ar">›</span>
+          </button>
+          <button class="more-row" onclick="toast('演示：换个话题聊。仍是 AI 一次推一个，不铺题库')">
+            <span class="ic">🗂</span>
+            <span class="tx"><span class="t">换个话题聊</span><span class="d">想聊别的？让小云换一个（不用自己挑）</span></span>
+            <span class="ar">›</span>
+          </button>
+          <button class="more-row" onclick="toast('演示：做成什么 — 成书 / 影像 / 心曲 / 展馆…')">
+            <span class="ic">🎁</span>
+            <span class="tx"><span class="t">做成什么</span><span class="d">光阴成卷 · 岁月成影 · 专属心曲…</span></span>
+            <span class="ar">›</span>
+          </button>
+          <button class="more-row" onclick="go('plans')">
+            <span class="ic">💳</span>
+            <span class="tx"><span class="t">套餐与下载</span><span class="d">看全本免费 · 想留一本电子/实物书在这儿办</span></span>
+            <span class="ar">›</span>
+          </button>
+          <button class="more-row" onclick="go('help')">
+            <span class="ic">👨‍👩‍👧</span>
+            <span class="tx"><span class="t">叫家人一起写</span><span class="d">请子女帮着补照片、补故事</span></span>
+            <span class="ar">›</span>
+          </button>
+          <button class="more-row" onclick="toast('演示：把这本书分享给亲友看')">
+            <span class="ic">🔗</span>
+            <span class="tx"><span class="t">分享这本书</span><span class="d">发给亲友，仅小程序内可看</span></span>
+            <span class="ar">›</span>
+          </button>
+          <button class="more-row" onclick="toast('演示：我的 — 传主 / 参与的 / 账户')">
+            <span class="ic">👤</span>
+            <span class="tx"><span class="t">我的</span><span class="d">我的书、我参与的、账户设置</span></span>
+            <span class="ar">›</span>
+          </button>
+        </div>
+        <div class="more-note">这些都收在这一个入口里，<br>平时不打扰您聊天。</div>
+      </div>
+    </section>
+
+    <!-- ===== 套餐（价格只在这里出现，绝不进主访谈流） ===== -->
+    <section class="screen" id="plans">
+      <div class="status"><span>9:47</span><button class="more-btn" onclick="go('more')">‹ 更多</button></div>
+      <div class="more-hd">
+        <button class="bk" onclick="go('more')">‹</button>
+        <div class="ti">套餐与下载</div>
+      </div>
+      <div class="body">
+        <div class="chapter" style="margin-bottom:14px">
+          <div class="tx" style="font-size:19px">
+            📱 在小程序里 <b>听全本、看全本，一直都免费</b>。<br>
+            想把书<b>留下来</b>（电子书 / 实物书），才需要下面的套餐。
+          </div>
+        </div>
+        <div class="more-list">
+          <div class="more-row" style="cursor:default">
+            <span class="ic">📗</span>
+            <span class="tx"><span class="t">基础版 · 80 个问题</span><span class="d">够记下一生的主要故事</span></span>
+          </div>
+          <div class="more-row" style="cursor:default">
+            <span class="ic">📘</span>
+            <span class="tx"><span class="t">升级版 · 100–200 个问题</span><span class="d">更细的家史与细节</span></span>
+          </div>
+          <div class="more-row" style="cursor:default">
+            <span class="ic">📙</span>
+            <span class="tx"><span class="t">传家版 · 308 个问题</span><span class="d">一整套完整传记</span></span>
+          </div>
+          <div class="more-row" style="cursor:default;border-color:var(--gold)">
+            <span class="ic">⬇️</span>
+            <span class="tx"><span class="t">下载电子书 ¥99.9</span><span class="d">实物精装书更贵，可包邮到家</span></span>
+          </div>
+        </div>
+        <div class="more-note">这一步一般由子女在这儿办；<br>老人聊天时看不到这些。</div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+/* ============ 预置采访脚本（无后端，全部脚本模拟） ============
+   同一话题多轮追问，AI 从上一句抓钩子继续问；覆盖 深挖 / 小切口 / 过渡 / 情绪 四分支。 */
+var turns = [
+  { // 0 开场第一问
+    q:'秀英，您的名字，是谁给取的呀？',
+    recap:'我听您说：您这名字是<b>爷爷</b>给取的，盼着日子风调雨顺。',
+    origin:'正在回放：“我这名字是我爷爷取的，说是盼着风调雨顺……”'
+  },
+  { // 1 讲得起劲 → 抓“爷爷”深挖
+    q:'哦，是爷爷取的。那时候您爷爷，是做什么的呀？',
+    recap:'我听您说：爷爷是<b>教书先生</b>，方圆几里的孩子都跟他念过书。',
+    origin:'正在回放：“我爷爷是个教书先生，方圆几里的娃都跟他念过书……”'
+  },
+  { // 2 答得短
+    q:'教书先生呀。那他平时对您，是不是特别严？',
+    recap:'嗯，我记下啦。',
+    origin:'正在回放：“还行吧……记不太清了。”'
+  },
+  { // 3 换小切口 → 又讲起劲
+    q:'那我换个问法 —— 您还记得，过年那天，穿的是什么衣裳吗？',
+    recap:'我听您说：过年穿一件<b>枣红新棉袄</b>，是娘熬夜缝的，兜里还揣着俩铜板。',
+    origin:'正在回放：“记得记得！一件枣红的新棉袄，我娘熬了好几夜缝的……”',
+    enterVia:'transition',
+    transLead:'您小时候的事，我都记下啦。',
+    transQ:'那我换个问法 —— 您还记得，过年那天，穿的是什么衣裳吗？'
+  },
+  { // 4 自然过渡到新话题：上学
+    q:'那您还记得，头一天上学，是什么样吗？',
+    recap:'我听您说：第一天上学，<b>爹送您到村口</b>，回头冲您摆手。',
+    origin:'正在回放：“背个布书包，我爹送我到村口，回头冲我摆手……”',
+    enterVia:'transition',
+    transLead:'过年那些事，我都替您记下啦。',
+    transQ:'那咱接着往前走 —— 您还记得，头一天上学是什么样吗？'
+  },
+  { // 5 继续深挖
+    q:'那学堂里，头一个教您的先生，您还叫得上名字吗？',
+    recap:'我听您说：是<b>周先生</b>，戴圆眼镜，说话慢悠悠的。',
+    origin:'正在回放：“姓周，周先生，戴副圆眼镜，说话慢悠悠的……”'
+  },
+  { // 6 情绪波动
+    q:'那会儿家里热闹吗，还有谁跟您一块儿过年？',
+    recap:'这段……我轻轻替您记下了。',
+    origin:'正在回放：“还有我哥……他走得早，那年才十九……”（沉默）'
+  },
+  { // 7 安慰后换开心话题
+    q:'那说件高兴的 —— 这辈子，您最得意的一件事是啥？',
+    recap:'我听您说：最得意的是<b>闺女考上了大学</b>，是村里头一个。',
+    origin:'正在回放：“最得意啊，是我闺女考上了大学，村里头一个！”',
+    enterVia:'comfort'
+  }
+];
+
+var turn = 0;
+
+function setText(id,html){ var e=document.getElementById(id); if(e) e.innerHTML=html; }
+
+function renderTurn(){
+  var t=turns[turn];
+  setText('homeQ', t.q);
+  setText('speakQ', t.q);
+  setText('recapText', t.recap);
+}
+
+function go(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on');});
+  var el=document.getElementById(id); if(el){el.classList.add('on'); var b=el.querySelector('.body'); if(b)b.scrollTop=0;}
+  document.querySelectorAll('.map button[data-go]').forEach(function(x){x.classList.toggle('act',x.dataset.go===id);});
+}
+
+function goSpeak(){ renderTurn(); go('speaking'); }
+function goRecorded(){ renderTurn(); go('recorded'); }
+
+/* 确认“对，继续” → 推进到下一轮；如下一轮需先走过渡/安慰桥接，先展示桥接屏 */
+function confirmContinue(){
+  var next=turn+1;
+  if(next>=turns.length){ go('end'); return; }
+  var nt=turns[next];
+  if(nt.enterVia==='transition'){
+    turn=next;
+    setText('transLead', nt.transLead||'这段我都记下啦。');
+    setText('transQ', nt.transQ||nt.q);
+    go('transition');
+    return;
+  }
+  if(nt.enterVia==='comfort'){
+    turn=next;               // comfort 屏承接情绪，点“聊点开心的”再进入该轮问题
+    go('comfort');
+    return;
+  }
+  turn=next; renderTurn(); go('home');
+}
+
+function comfortContinue(){ renderTurn(); go('home'); }
+
+function tts(msg){
+  var t=turns[turn];
+  // 演示用：不弹真语音，仅示意“正在念/回放”，回听用当前轮原声
+  var text = msg || ('🔊 正在念：' + document.getElementById('homeQ').textContent);
+  toast(text);
+}
+/* 回听原声按钮走这里，取当前轮 origin */
+document.addEventListener('click', function(e){
+  var b=e.target.closest('.recap .replay');
+  if(b){ toast(turns[turn].origin || '正在回放您刚才的原声…'); }
+});
+
+function restart(){ turn=0; renderTurn(); go('home'); }
+
+/* 演示导航跳转 */
+function jump(where){
+  switch(where){
+    case 'home': turn=0; renderTurn(); go('home'); break;
+    case 'speak': renderTurn(); go('speaking'); break;
+    case 'recorded': renderTurn(); go('recorded'); break;
+    case 'deep': turn=1; renderTurn(); go('home'); break;          // 讲得起劲→深挖
+    case 'short': turn=2; renderTurn(); go('home'); break;         // 答得短（下一问是小切口）
+    case 'transition': turn=4;                                     // 话题聊透→自然过渡
+      setText('transLead', turns[4].transLead); setText('transQ', turns[4].transQ); go('transition'); break;
+    case 'emotion': turn=6; renderTurn(); go('home'); break;       // 情绪波动那一轮
+    case 'book': go('book'); break;
+    case 'help': go('help'); break;
+  }
+}
+
+/* 轻量 toast（示意语音/回听，不打断流程） */
+var _toastEl;
+function toast(msg){
+  if(!_toastEl){
+    _toastEl=document.createElement('div');
+    _toastEl.style.cssText='position:absolute;left:50%;bottom:120px;transform:translateX(-50%);'+
+      'background:rgba(46,58,50,.94);color:#fff;padding:14px 20px;border-radius:16px;font-size:16px;'+
+      'font-weight:600;max-width:300px;text-align:center;z-index:80;box-shadow:0 12px 30px -12px rgba(0,0,0,.5);'+
+      'line-height:1.5;opacity:0;transition:opacity .25s';
+    document.querySelector('.screens').appendChild(_toastEl);
+  }
+  _toastEl.textContent=msg;
+  _toastEl.style.opacity='1';
+  clearTimeout(window._tt);
+  window._tt=setTimeout(function(){ _toastEl.style.opacity='0'; }, 2200);
+}
+
+renderTurn();
+</script>
+</body>
+</html>
