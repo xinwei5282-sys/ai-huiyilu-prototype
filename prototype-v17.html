@@ -1002,13 +1002,38 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .setup-chip{cursor:pointer}
 .setup-chip.on{border-color:rgba(74,107,71,.25);background:rgba(74,107,71,.12);color:var(--green-2)}
 .setup-input{width:100%;min-height:36px;margin-top:5px;padding:7px 11px;border:1px solid rgba(91,70,48,.12);border-radius:14px;background:rgba(255,255,255,.82);color:var(--brown-h);font-size:var(--fs-sm);font-weight:800;display:flex;align-items:center}
+.setup-select,.setup-address{position:relative;cursor:pointer;padding-right:34px}
+.setup-select::after,.setup-address::after{content:"";position:absolute;right:12px;top:50%;width:8px;height:8px;border-right:2px solid rgba(91,70,48,.46);border-bottom:2px solid rgba(91,70,48,.46);transform:translateY(-65%) rotate(45deg);transition:transform .18s}
+.setup-select.open::after{transform:translateY(-35%) rotate(225deg)}
+.setup-menu{display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:30;border:1px solid rgba(91,70,48,.12);border-radius:14px;background:rgba(255,253,248,.98);box-shadow:0 18px 34px -22px rgba(83,61,38,.62);overflow:hidden}
+.setup-select.open .setup-menu{display:block}
+.setup-menu button{width:100%;min-height:38px;border:0;border-bottom:1px solid rgba(91,70,48,.08);background:transparent;text-align:left;padding:9px 12px;color:var(--brown-h);font-size:13px;font-weight:900;font-family:var(--sans)}
+.setup-menu button:last-child{border-bottom:0}
+.setup-menu button:active{background:rgba(74,107,71,.1)}
+.addr-picker{position:absolute;inset:0;z-index:60;display:none;background:rgba(42,32,25,.28);align-items:flex-end}
+.addr-picker.show{display:flex}
+.addr-picker-sheet{width:100%;border-radius:24px 24px 0 0;background:rgba(255,251,245,.98);box-shadow:0 -22px 44px -28px rgba(42,32,25,.8);padding:10px 16px 18px}
+.addr-picker-head{display:grid;grid-template-columns:64px 1fr 64px;align-items:center;gap:8px;margin:0 -16px 10px;padding:0 16px 10px;border-bottom:1px solid rgba(91,70,48,.12)}
+.addr-picker-head b{font-size:17px;color:var(--brown-h);font-weight:900;text-align:center}
+.addr-picker-head button{min-height:36px;border:0;background:transparent;font-size:14px;font-weight:900;font-family:var(--sans)}
+.addr-picker-head .cancel{color:rgba(91,70,48,.58);text-align:left}
+.addr-picker-head .save{color:var(--gold-deep);text-align:right}
+.addr-picker-wheel{position:relative;padding:7px 8px}
+.addr-picker-wheel::before{content:"";position:absolute;left:8px;right:8px;top:50%;height:38px;transform:translateY(-50%);border-radius:13px;background:rgba(74,107,71,.1);pointer-events:none}
+.addr-picker-cols{position:relative;display:grid;grid-template-columns:.9fr 1fr 1fr;gap:6px;z-index:1}
+.addr-picker-col{height:154px;overflow:hidden;display:grid;align-content:center;gap:3px;text-align:center}
+.addr-picker-col span{padding:6px 3px;border-radius:10px;color:rgba(91,70,48,.42);font-size:13px;font-weight:900;line-height:1.2;white-space:nowrap}
+.addr-picker-col span.on{color:var(--green-2);font-size:15px;background:transparent}
+.addr-picker-col span.muted{opacity:.55}
 .setup-row{display:grid;grid-template-columns:1fr;gap:7px}
 .setup-hint{margin-top:8px;color:var(--text-3);font-size:12px;line-height:1.45;font-weight:700}
 .setup-actions{position:absolute;left:16px;right:16px;bottom:14px;z-index:12;display:grid;gap:8px;margin-top:0;padding-top:10px;background:linear-gradient(180deg,rgba(250,246,240,0),rgba(250,246,240,.96) 26%,rgba(250,246,240,.98))}
 .setup-actions.two{grid-template-columns:1fr 1fr}
 .setup-actions.forward{grid-template-columns:.82fr 1.18fr}
+.setup-actions.two.forward{grid-template-columns:1fr}
 .setup-cta{width:100%;min-height:46px;border:0;border-radius:16px;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff;font-size:var(--fs-md);font-weight:900;box-shadow:0 16px 30px -14px rgba(184,91,55,.65)}
 .setup-cta.secondary{background:rgba(255,250,242,.9);color:var(--green-2);border:1px solid rgba(74,107,71,.18);box-shadow:none}
+.setup-actions .setup-cta.secondary{min-height:34px;background:transparent;border:0;color:rgba(91,70,48,.56);font-size:14px;box-shadow:none}
 .setup-note{display:none}
 .setup-note .i{width:22px;height:22px;border-radius:50%;background:rgba(74,107,71,.12);display:grid;place-items:center;flex:none;font-weight:900}
 .setup-progress{display:none;align-items:center;gap:8px;margin-top:18px}
@@ -1233,10 +1258,10 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .iv-rwrap{flex:1;display:flex;flex-direction:column;justify-content:flex-start;padding:10px 0 0;overflow:hidden}
 .iv-rchat{flex:1;overflow-y:auto;padding:0 16px 132px}
 .iv-rfoot{position:absolute;left:0;right:0;bottom:0;z-index:18;flex:none;padding:10px 16px calc(14px + env(safe-area-inset-bottom,0px));background:linear-gradient(0deg,var(--cream) 78%,rgba(250,246,240,0));border-top:1px solid rgba(180,74,42,.10);box-shadow:0 -18px 34px -26px rgba(107,68,35,.58)}
-.iv-rfoot .row{display:grid;grid-template-columns:108px 1fr;gap:10px;align-items:center}
+.iv-rfoot .row{display:grid;grid-template-columns:1fr;gap:8px;align-items:center}
 .iv-rfoot button{min-height:52px;border-radius:18px;font-size:16px;font-weight:900}
-.iv-rfoot .more{order:0;border:1.5px solid var(--paper-line);background:rgba(255,255,255,.82);color:var(--brown-500);box-shadow:none;font-size:15px}
-.iv-rfoot .summary{order:0;border:1.5px solid rgba(217,102,63,.18);background:rgba(217,102,63,.10);color:var(--gold-deep);box-shadow:none}
+.iv-rfoot .more{order:1;min-height:34px;border:0;background:transparent;color:rgba(91,70,48,.56);box-shadow:none;font-size:14px}
+.iv-rfoot .summary{order:0;border:0;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff;box-shadow:0 16px 30px -16px rgba(196,147,79,.95)}
 .iv-rfoot .summary.ready{border:0;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff;box-shadow:0 16px 30px -16px rgba(196,147,79,.95)}
 .iv-rchip{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:var(--success-bg);color:var(--green);border-radius:999px;padding:8px 16px 8px 10px;font-size:var(--fs-md);font-weight:700;margin-bottom:12px}
 .iv-rchip .ck{width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;flex:none}
@@ -2157,6 +2182,17 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
   border:1.5px solid var(--paper-line);
   color:var(--brown);
   box-shadow:none;
+}
+.setup-actions .setup-cta:not(.secondary){
+  background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2)) !important;
+  color:#fff !important;
+  border:0 !important;
+  box-shadow:0 16px 30px -14px rgba(184,91,55,.65) !important;
+}
+.setup-actions .setup-cta.secondary{
+  background:transparent !important;
+  border:0 !important;
+  color:rgba(91,70,48,.56) !important;
 }
 .chip.on,.mode.on,.setup-chip.on{
   background:var(--progress-bg);
@@ -3240,17 +3276,26 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
             </div>
             <div class="setup-field">
               <div class="setup-label">出生年代</div>
-              <div class="setup-input">50 后</div>
+              <div class="setup-input setup-select" onclick="setupToggleSelect(this)">50 后
+                <div class="setup-menu">
+                  <button onclick="setupChoose(event,this)">40 后</button>
+                  <button onclick="setupChoose(event,this)">50 后</button>
+                  <button onclick="setupChoose(event,this)">60 后</button>
+                  <button onclick="setupChoose(event,this)">70 后</button>
+                  <button onclick="setupChoose(event,this)">80 后</button>
+                  <button onclick="setupChoose(event,this)">不确定</button>
+                </div>
+              </div>
             </div>
           </div>
           <div class="setup-row">
             <div class="setup-field">
               <div class="setup-label">老家在哪？</div>
-              <div class="setup-input">杭州老家</div>
+              <div class="setup-input setup-address" id="setupHomeAddr" onclick="openAddressPicker({title:'选择老家',targetId:'setupHomeAddr'})">浙江省 杭州市 上城区</div>
             </div>
             <div class="setup-field">
               <div class="setup-label">现在住哪？</div>
-              <div class="setup-input">杭州上城</div>
+              <div class="setup-input setup-address" id="setupLiveAddr" onclick="openAddressPicker({title:'选择现住地',targetId:'setupLiveAddr'})">浙江省 杭州市 上城区</div>
             </div>
           </div>
           <div class="setup-field">
@@ -3272,8 +3317,8 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
             </div>
           </div>
           <div class="setup-actions two forward">
+            <button class="setup-cta" data-go="session">开启人生回忆</button>
             <button class="setup-cta secondary" data-go="session">跳过</button>
-            <button class="setup-cta" data-go="session">开始人生回忆</button>
           </div>
         </div>
       </div>
@@ -3551,6 +3596,26 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
     </div>
   </section>
 
+  <!-- 通用地址选择器（省 / 市 / 区） -->
+  <div class="addr-picker" id="addrPicker" onclick="if(event.target===this)closeAddressPicker()">
+    <div class="addr-picker-sheet">
+      <div class="addr-picker-head"><button class="cancel" onclick="closeAddressPicker()">取消</button><b id="addrPickerTitle">选择地址</b><button class="save" onclick="confirmAddressPicker()">保存</button></div>
+      <div class="addr-picker-wheel">
+        <div class="addr-picker-cols">
+          <div class="addr-picker-col">
+            <span class="muted">江苏省</span><span class="on">浙江省</span><span>安徽省</span><span>上海市</span><span>北京市</span>
+          </div>
+          <div class="addr-picker-col">
+            <span class="muted">宁波市</span><span class="on">杭州市</span><span>绍兴市</span><span>苏州市</span><span>上海市</span>
+          </div>
+          <div class="addr-picker-col">
+            <span class="muted">拱墅区</span><span class="on">上城区</span><span>西湖区</span><span>越城区</span><span>姑苏区</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 升级引导弹窗（覆盖当前屏） -->
   <div class="modal-scrim" id="upModal" onclick="if(event.target===this)closeUpgrade()">
     <div class="upmodal">
@@ -3635,6 +3700,46 @@ function setupPick(el,multi){
   var box=el.parentNode; if(box) box.querySelectorAll('.setup-chip').forEach(function(c){c.classList.remove('on')});
   el.classList.add('on');
 }
+function setupCloseSelects(except){
+  document.querySelectorAll('.setup-select.open').forEach(function(s){ if(s!==except)s.classList.remove('open'); });
+}
+function setupToggleSelect(el){
+  if(!el)return;
+  var willOpen=!el.classList.contains('open');
+  setupCloseSelects(el);
+  el.classList.toggle('open',willOpen);
+}
+function setupChoose(ev,btn){
+  if(ev){ev.stopPropagation();ev.preventDefault();}
+  var box=btn&&btn.closest?btn.closest('.setup-select'):null;
+  if(!box)return;
+  var menu=box.querySelector('.setup-menu');
+  box.childNodes[0].nodeValue=(btn.textContent||'').trim();
+  box.classList.remove('open');
+  if(menu)box.appendChild(menu);
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest||!e.target.closest('.setup-select'))setupCloseSelects();
+});
+var addressPickerTargetId='';
+function openAddressPicker(opts){
+  setupCloseSelects();
+  opts=opts||{};
+  addressPickerTargetId=opts.targetId||'';
+  var p=document.getElementById('addrPicker'), t=document.getElementById('addrPickerTitle');
+  if(t)t.textContent=opts.title||'选择地址';
+  if(p)p.classList.add('show');
+}
+function closeAddressPicker(){
+  var p=document.getElementById('addrPicker');
+  if(p)p.classList.remove('show');
+}
+function confirmAddressPicker(){
+  var text='浙江省 杭州市 上城区';
+  var target=document.getElementById(addressPickerTargetId);
+  if(target)target.textContent=text;
+  closeAddressPicker();
+}
 var PRD_CONTENT={
   userpath:{title:'项目路径图 PRD',stage:'客户介绍 · 主流程总览',problem:'用一张路径图说明云忆从认识对象、开始讲述、AI 追问、故事成稿到进入书房的完整价值链。',requirements:['项目路径图在屏幕地图中排第一位。','隐藏首页引导页面在主路径中的权重，避免客户先看到说明页。','路径顺序固定为：认识对象、开口讲述、AI 追问、故事成稿、进入书房。','每个阶段要能对应到真实页面，不用抽象流程替代产品界面。'],metrics:['路径页访问率','客户讲解完成率','关键步骤理解度']},
   setup:{title:'新用户信息收集 PRD',stage:'首次使用 · 建立采访上下文',problem:'用户需要先告诉系统被记录人的基本信息，系统才能生成更贴近个人经历的采访题目。',requirements:['页面不能内容平铺，要做成交互式步骤。','采集被记录人的身份、关系、年代、故事方向等基础信息。','允许跳过，直接进入讲述，避免首次使用门槛过高。','完成后进入推荐题目或采访页。'],metrics:['信息收集开始率','信息收集完成率','跳过率']},
@@ -3703,6 +3808,7 @@ Object.assign(PRD_CONTENT,{
   devhandoff:{title:'开发交付设计稿 PRD',stage:'交付 · 高保真原型转开发设计稿',problem:'当前原型已经能演示产品体验，但开发落地还需要明确页面真源、视觉规则、状态覆盖、字段交互和验收边界。',goal:'把 prototype-v17.html 升级为开发可用设计稿入口，让开发按页面、组件、状态和验收标准实现，而不是只照截图还原。',status:['已具备高保真页面、PRD 面板、UI 设计规范和主要异常状态。','本页作为开发交付总入口，串联原型、PRD、UI 规范和文档。'],inScope:['主链路页面清单和 screen id。','页面状态覆盖清单。','组件复用规则。','开发验收尺寸和交互边界。','与 docs/开发交付设计稿.md 对齐。'],deferred:['不在本仓库实现正式小程序组件。','不在原型里定义后端接口完整字段，只给出页面交互字段和埋点。','不替代后续 Figma 组件库，但可作为 Figma 重建依据。'],users:['前端开发：按页面和组件实现。','测试/验收：按状态和验收清单覆盖。','产品/设计：用同一入口确认开发边界。'],flow:['从左侧屏幕地图进入开发交付模式。','查看页面真源、视觉真源、交互真源、状态真源。','按 docs/开发交付设计稿.md 拆实现任务。','开发完成后用原型截图和验收清单逐页对照。'],requirements:['开发不得只按静态截图实现，必须覆盖 PRD 面板里的字段、异常、埋点和验收。','所有新增页面先补 screen id、地图入口和 PRD_CONTENT。','所有新增颜色、字号、按钮样式先落到 docs/UI设计规范.md 或复用现有 token。','讲述、书房、故事卡、协作、我的页必须组件化拆分。'],edgeCases:['如果原型视觉和 UI 规范冲突，先以 UI 规范为准，再回修原型。','如果演示态和真实开发态冲突，优先真实业务状态，不保留纯演示假交互。','如果某状态无法在原型中点击触达，必须在开发交付文档中列为待补。'],events:[['design_handoff_viewed','进入开发交付模式；属性：source_page。'],['handoff_section_checked','查看交付模块；属性：section_name。'],['handoff_acceptance_completed','开发验收完成；属性：screen_id, result。']],acceptance:['左侧屏幕地图有开发交付入口。','本页能说明页面、视觉、交互、状态四类真源。','右侧 PRD 面板能展示开发交付说明。','docs/开发交付设计稿.md 与本页内容一致。'],metrics:['交付入口访问率','开发返工率','状态漏实现数','逐页验收通过率']}
 });
 Object.assign(PRD_CONTENT,{
+  setup:{title:'新用户信息收集 PRD',stage:'首次使用 · 建立采访上下文',problem:'AI 采访需要知道被记录人的基础背景，但首次采集不能让长辈感觉像在填复杂档案。',goal:'用一屏内的轻量信息采集完成最小必要上下文，并让用户可以直接开启人生回忆。',users:['长辈/被记录者：自己开始记录。','子女/发起人：帮父母或家人建档。'],flow:['进入新用户信息收集页。','选择这本书写谁，并填写称呼、年龄。','点击出生年代字段，通过下拉选项选择年代。','点击老家或现住地，打开通用省市区地址选择器。','地址选择器顶部显示取消、居中标题、右侧保存；保存后回填对应字段。','点击开启人生回忆进入采访页；也可点击弱化的跳过进入通用采访。'],requirements:['页面保持一屏一任务，不做长表单平铺。','出生年代使用下拉选择，不要求手动输入。','老家和现住地必须调用通用地址选择器组件，不写页面专用选择器。','通用地址选择器为底部弹层，支持省 / 市 / 区三列选择。','地址选择器标题栏采用左取消、中标题、右保存，并用底部分隔线区分标题区和内容区。','地址选择器内容区不使用额外背景框，只保留滚轮文字和选中高亮。','底部主按钮为“开启人生回忆”，位于“跳过”上方；跳过弱化处理。'],edgeCases:['用户未填写称呼时，用“您”或“家人”兜底。','用户跳过时不强阻断，进入采访页并标记上下文不完整。','重复进入时保留已选基础信息。','地址选择器取消时不改变原字段值。'],events:[['profile_collection_started','进入资料采集页；属性：source_page。'],['profile_field_selected','选择字段时触发；属性：field_name, option_type。'],['profile_birth_decade_selected','选择出生年代；属性：birth_decade。'],['address_picker_opened','打开通用地址选择器；属性：field_name, title。'],['address_picker_saved','保存地址；属性：field_name, province, city, district。'],['profile_collection_completed','点击开启人生回忆；属性：fields_completed_count。'],['profile_collection_skipped','点击跳过；属性：fields_completed_count。']],acceptance:['出生年代点击后展示下拉选项。','老家和现住地点击后打开同一个通用地址选择器。','地址选择器不在 setup 页面内部定义专用组件。','地址选择器标题栏左取消、中标题、右保存。','开启人生回忆按钮在跳过上方，跳过视觉弱化。','跳过也能进入采访页。'],metrics:['信息收集完成率','跳过率','出生年代选择率','地址选择器打开率','地址保存率']},
   share:{title:'分享底部弹窗 PRD',stage:'传播 · 当前片段轻分享',problem:'用户只需要分享当前片段，不应被带到整本书、纸质书或复制链接等额外选择里。',goal:'用底部弹窗承接当前片段分享，让用户快速选择金句卡、片段或保存长图。',users:['发起人：把当前片段发给家人或朋友圈。','亲友：通过片段了解故事并继续补充。'],flow:['从故事卡或回忆小结点击分享。','底部弹窗打开，并展示当前片段摘要。','选择金句卡、片段或保存长图。','完成分享、进入片段落地页或看到保存反馈。'],requirements:['分享以底部弹窗呈现，不作为独立主页面。','只分享当前片段，不公开整本书。','分享方式为金句卡、片段、保存长图。','不显示复制链接。','整本书分享和纸质书仍回到书详情处理。'],edgeCases:['点击遮罩或关闭按钮收起弹窗。','保存长图失败时给出可重试反馈。','片段含敏感内容时后续正式版应提示先编辑。'],events:[['share_sheet_opened','打开分享弹窗；属性：story_id, source_page。'],['share_option_clicked','点击分享方式；属性：option_name。'],['share_sheet_closed','关闭分享弹窗；属性：close_type。']],acceptance:['点击分享只出现底部弹窗。','弹窗内只有金句卡、片段、保存长图三个入口。','不出现复制链接和整本书公开说明。','关闭弹窗后停留在原页面。'],metrics:['分享弹窗打开率','分享方式点击率','保存长图成功率','片段分享完成率']},
   contribute:{title:'亲友视角录入 PRD',stage:'协作 · 我来补充',problem:'亲友被邀请后往往不知道写什么，系统要根据身份给出具体问题，并让补充过程和采访录音页一样轻。',goal:'让亲友用语音、文字和图片视频完成一段可审核的补充回忆。',users:['亲友/同事/孙辈：补充自己的视角。','发起人：审核并收录。'],flow:['从邀请落地页进入时先选择身份。','从某个人补录明细或贡献详情补充时，直接进入第二步并沿用已知身份。','在补充页查看身份条和问题卡。','上传照片/视频，或用语音/文字补充。','提交后写入贡献列表，状态为待确认或待查看。'],requirements:['补充回忆的录入逻辑与采访录音页一致。','第一步只在身份未知时出现。','已知身份补录时不再要求选择身份。','补充页支持多张照片和视频上传、横向展示和拖拽排序。','图片/视频上传后再展示素材条。','提交失败时保留草稿。'],edgeCases:['身份未选且不是已知身份进入时，停留第一步。','重新补充已收录内容时，新增内容进入审核。','上传失败的素材可保留失败态并重试。'],events:[['contribute_started','进入补充流程；属性：source, invite_id, has_known_role。'],['contribute_role_selected','选择身份；属性：role。'],['contribute_media_uploaded','上传素材；属性：media_type, media_count。'],['contribution_submitted','提交补充；属性：input_mode, content_length, media_count。'],['contribution_save_failed','保存失败；属性：error_code。']],acceptance:['已知身份进入时直接显示第二步。','补充页可上传多张图片/视频并排序。','问题卡、身份条、录入区层级清楚。','提交后能在贡献列表看到记录。'],metrics:['身份选择率','补充提交率','素材上传率','保存成功率']},
   contribperson:{title:'某个人的补录明细 PRD',stage:'协作 · 单人补录明细',problem:'贡献者点开某个人后，需要查看自己给 TA 补过的每段内容，并能继续给这个人补录。',goal:'承接“我补录的人”列表，展示单个被补录人的内容明细和继续补录入口。',users:['家人/亲友贡献者。'],flow:['从我补录的人点击老周。','查看给老周补过的内容、数量和状态。','点击某条内容进入贡献详情。','点击继续给老周补录，直接进入亲友录入第二步。'],requirements:['顶部说明当前被补录人和贡献者身份。','展示总补录数、已进书数、待查看数。','每条内容展示标题、状态和章节/下一步说明。','点击条目进入 contribdetail。','底部按钮继续给当前人补录，不再选择身份。'],edgeCases:['状态为待查看时显示对方尚未查看。','状态为待确认时提示确认后更新到书里。','被补录人切换后，继续补录按钮必须同步姓名和身份。'],events:[['contribution_person_viewed','进入某个人补录明细；属性：target_user_id, relation, contribution_count。'],['contribution_item_clicked','点击贡献；属性：status, contribution_id。'],['contribution_person_continue_clicked','继续给当前人补录；属性：target_user_id, relation。']],acceptance:['点击给老周内容后看到老周的内容列表。','点击单条内容进入贡献详情。','继续补录直接进入亲友录入第二步。'],metrics:['单人补录明细访问率','贡献详情点击率','继续补录率']},
@@ -3742,6 +3848,7 @@ var PRD_FIELDS={
   default:[['页面 ID','路由切换时读取','screen_id'],['来源页面','跳转时记录','source_page'],['用户类型','全局上下文','被记录者 / 子女 / 协作者 / 运营'],['书籍 ID','业务对象标识','book_id']]
 };
 Object.assign(PRD_FIELDS,{
+  setup:[['被记录人关系','单选 chip，选择后高亮并写入采访上下文','我自己 / 父亲 / 母亲 / 祖父母 / 其他亲人'],['称呼/昵称','文本输入，失焦保存；为空时用兜底称呼','1-12 个中文字符；默认“秀英”或“家人”'],['年龄','文本或数字输入，用于基础画像和推荐问题','数字年龄 / 可为空'],['出生年代','点击字段打开下拉菜单，选中后回填字段','40 后 / 50 后 / 60 后 / 70 后 / 80 后 / 不确定'],['老家','点击字段调用通用地址选择器','省 / 市 / 区；可为空'],['现住地','点击字段调用通用地址选择器','省 / 市 / 区；可为空'],['通用地址选择器','全局底部弹层组件，非 setup 页面专用组件','左取消 / 中标题 / 右保存；三列省市区'],['主按钮','点击进入采访页并完成资料采集','开启人生回忆'],['跳过入口','弱化按钮，进入通用采访并标记资料不完整','跳过']],
   share:[['分享容器','点击分享时打开底部弹窗，不切换主页面','closed / open'],['片段摘要','弹窗顶部只读展示当前片段','标题 + 一句摘要 + 缩略图'],['分享方式','点击进入或触发对应动作','金句卡 / 片段 / 保存长图'],['关闭动作','点击遮罩或关闭按钮','tap_mask / tap_close'],['分享状态','分享动作后反馈','未分享 / 分享成功 / 取消 / 失败']],
   contribute:[['关系身份','第一步单选；已知身份补录时跳过第一步','老同事 / 女儿 / 儿子 / 孙辈 / 亲友'],['身份条','第二步顶部只读展示当前身份','以老同事身份 / 以女儿身份等'],['补充问题','系统根据身份展示','你们怎么认识的 / 印象最深的一次 / 他年轻时的样子'],['素材列表','上传后才展示，支持横向滑动和拖拽排序','0-N 张图片 / 0-N 段视频'],['输入方式','语音/文字切换','voice / keyboard'],['补充内容','长文本或语音转写','0-3000 字'],['提交状态','提交后进入状态','待确认 / 待查看 / 保存失败']],
   contribperson:[['被补录人','当前明细页对象，只读展示','老周 / 兰秀英 / 小姨等'],['贡献者身份','当前贡献者与被补录人的关系','老同事 / 女儿 / 亲友'],['汇总数字','只读展示当前人下的贡献统计','已补录 N 段 / 已进书 N 段 / 待查看 N 段'],['补录条目','点击进入贡献详情','标题 / 状态 / 时间 / 章节提示'],['继续补录','点击直接进入亲友录入第二步','沿用当前被补录人和身份']],
