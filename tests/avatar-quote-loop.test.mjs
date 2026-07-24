@@ -42,6 +42,9 @@ test('AI persona is optional, half-body, shareable, and can become avatar', () =
   assert.doesNotMatch(html, /id="setupAvatarInput"/);
   assert.match(html, /id="persona"/);
   assert.match(html, /制作我的形象/);
+  assert.match(html, /先上传一张清晰半身照/);
+  assert.match(html, /无需裁剪/);
+  assert.match(html, /personaRender\('source'\)/);
   assert.match(html, /分享人物形象/);
   assert.match(html, /personaSetAvatar/);
   assert.doesNotMatch(html, /personaRestoreAvatar|恢复原头像/);
