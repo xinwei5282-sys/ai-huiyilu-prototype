@@ -41,10 +41,10 @@ test('chapter share opens mini program sharing without landing navigation', () =
 test('AI persona is optional, half-body, shareable, and can become avatar', () => {
   assert.doesNotMatch(html, /id="setupAvatarInput"/);
   assert.match(html, /id="persona"/);
-  assert.match(html, /生成半身形象/);
+  assert.match(html, /制作我的形象/);
   assert.match(html, /分享人物形象/);
   assert.match(html, /personaSetAvatar/);
-  assert.match(html, /personaRestoreAvatar/);
+  assert.doesNotMatch(html, /personaRestoreAvatar|恢复原头像/);
   assert.match(html, /id="personaposter"/);
   assert.match(html, /把一生，<br>讲成一本书/);
   assert.match(html, /扫码，也为父母留下一本/);
