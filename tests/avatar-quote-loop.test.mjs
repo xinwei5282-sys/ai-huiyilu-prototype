@@ -38,9 +38,12 @@ test('background prompt uses article context and reserves card layout', () => {
   assert.match(html, /背景必须结合金句内容与所在文章语境/);
   assert.match(html, /文章相关人物可以出现在背景中/);
   assert.match(prompts, /金句内容不设字数上限/);
+  assert.match(prompts, /core_meaning[^\n]+信息完整优先，不限制字数/);
+  assert.doesNotMatch(prompts, /core_meaning[^\n]+20字以内/);
   assert.match(html, /金句','可编辑文本，用于金句卡和分享','不限制字数；可为空/);
   assert.match(html, /不限制字数，卡片自动换行适配/);
   assert.doesNotMatch(html, /金句[^\n]{0,80}(?:0-40|1-40) 字/);
+  assert.match(html, /promptDocs:\[\['查看金句卡背景完整提示词','docs\/ai\/quote-card-background-prompts\.md'\]\]/);
 });
 
 test('persona prompt locks identity while allowing controlled styling', () => {
@@ -51,6 +54,9 @@ test('persona prompt locks identity while allowing controlled styling', () => {
   assert.match(personaPrompts, /不得进入“可设为头像”状态/);
   assert.match(html, /原始照片是唯一身份依据/);
   assert.match(html, /生成结果与参考照片为同一人/);
+  assert.match(html, /promptDocs:\[\['查看半身人物形象完整提示词','docs\/ai\/persona-image-prompts\.md'\]\]/);
+  assert.match(html, /<h3>AI 提示词<\/h3>/);
+  assert.match(html, /target="_blank" rel="noopener"/);
 });
 
 test('chapter share opens mini program sharing without landing navigation', () => {
