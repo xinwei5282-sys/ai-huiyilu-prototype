@@ -5,6 +5,7 @@ import { readFile } from 'node:fs/promises';
 const html = await readFile(new URL('../prototype-v17.html', import.meta.url), 'utf8');
 const prompts = await readFile(new URL('../docs/ai/quote-card-background-prompts.md', import.meta.url), 'utf8');
 const personaPrompts = await readFile(new URL('../docs/ai/persona-image-prompts.md', import.meta.url), 'utf8');
+const followupPrompts = await readFile(new URL('../docs/ai/followup-prompts.md', import.meta.url), 'utf8');
 
 test('first-time setup skips avatar while profile avatar remains editable', () => {
   assert.doesNotMatch(html, /id="setupAvatarInput"/);
@@ -57,6 +58,18 @@ test('persona prompt locks identity while allowing controlled styling', () => {
   assert.match(html, /promptDocs:\[\['查看半身人物形象完整提示词','docs\/ai\/persona-image-prompts\.md'\]\]/);
   assert.match(html, /<h3>AI 提示词<\/h3>/);
   assert.match(html, /target="_blank" rel="noopener"/);
+});
+
+test('follow-up prompt stays gentle, grounded, and skippable', () => {
+  assert.match(followupPrompts, /transcript/);
+  assert.match(followupPrompts, /already_confirmed/);
+  assert.match(followupPrompts, /一次最多生成 \{\{max_questions\}\} 个追问/);
+  assert.match(followupPrompts, /不暗示答案/);
+  assert.match(followupPrompts, /不强迫用户回答/);
+  assert.match(followupPrompts, /questions` 返回空数组/);
+  assert.match(html, /查看 AI 追问完整提示词/);
+  assert.match(html, /PRD_CONTENT\.session\.promptDocs/);
+  assert.match(html, /自由录入也要在追问阶段补齐时间、地点、人物关系/);
 });
 
 test('chapter share opens mini program sharing without landing navigation', () => {
