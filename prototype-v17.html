@@ -813,6 +813,16 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .profile-avatar-row{display:flex;align-items:center;gap:14px;padding:6px 0 14px;border-bottom:1px solid rgba(180,138,62,.14)}
 .profile-avatar-row .me3-av{width:64px;height:64px;border-radius:22px}
 .profile-avatar-row b{display:block;color:var(--brown-h);font-size:16px}.profile-avatar-row span{display:block;margin-top:3px;color:var(--brown-500);font-size:13px;font-weight:700}
+.persona-body{padding:10px 16px 24px;background:radial-gradient(260px 180px at 90% 0,rgba(238,139,93,.13),transparent 64%),var(--cream)}
+.persona-intro{font-size:14px;line-height:1.55;color:var(--brown-500);font-weight:700;margin-bottom:12px}.persona-intro b{color:var(--brown-h)}
+.persona-preview{position:relative;width:258px;height:344px;margin:0 auto;border-radius:26px;overflow:hidden;background:linear-gradient(155deg,#e7d5c1,#ad8167);box-shadow:0 24px 48px -28px rgba(74,45,25,.68)}
+.persona-preview::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(31,20,14,.48)),url("proto-assets/home-bg.png") 55% 32%/cover no-repeat;transition:.25s}.persona-preview[data-state="idle"]::before{filter:blur(7px) saturate(.65);transform:scale(1.04)}.persona-preview[data-state="generating"]::before{filter:blur(9px) saturate(.55);transform:scale(1.06)}
+.persona-preview-label{position:absolute;left:16px;right:16px;bottom:15px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.45)}.persona-preview-label b{display:block;font-family:var(--serif);font-size:20px}.persona-preview-label span{display:block;margin-top:3px;font-size:12px;font-weight:700;opacity:.86}
+.persona-overlay{position:absolute;inset:0;display:grid;place-items:center;background:rgba(44,31,23,.18);color:#fff;text-align:center;font-size:14px;font-weight:900}.persona-preview[data-state="ready"] .persona-overlay{display:none}.persona-spinner{width:28px;height:28px;margin:0 auto 10px;border:3px solid rgba(255,255,255,.28);border-top-color:#fff;border-radius:50%;animation:qspin .8s linear infinite}
+.persona-style-title{margin-top:16px;font-size:14px;color:var(--brown-h);font-weight:900}.persona-styles{display:flex;gap:7px;margin-top:8px}.persona-style{flex:1;min-height:40px;border:1px solid rgba(91,70,48,.13);border-radius:13px;background:#fff;color:var(--brown-500);font:800 12px var(--sans)}.persona-style.on{border-color:rgba(180,74,42,.34);background:var(--progress-bg);color:var(--gold-deep)}
+.persona-note{margin-top:10px;border-radius:13px;background:rgba(76,122,92,.08);padding:9px 11px;color:var(--green-2);font-size:12px;line-height:1.45;font-weight:800}.persona-actions{display:grid;grid-template-columns:1fr 1.2fr;gap:9px;margin-top:12px}.persona-actions button{min-height:48px;border-radius:15px;font:900 14px var(--sans)}.persona-actions .ghost{border:1px solid rgba(91,70,48,.13);background:#fff;color:var(--brown)}.persona-actions .primary{border:0;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff}.persona-actions .wide{grid-column:1/-1}.persona-hidden-input{display:none}
+.persona-poster-wrap{padding:8px 16px 24px;background:var(--cream)}.persona-poster{position:relative;width:300px;height:430px;margin:0 auto;border-radius:24px;overflow:hidden;background:#d8bfa7;box-shadow:0 28px 54px -30px rgba(62,39,24,.72)}.persona-poster::before{content:"";position:absolute;inset:0;background:url("proto-assets/home-bg.png") 55% 31%/cover no-repeat}.persona-poster::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,20,14,.05) 30%,rgba(30,19,13,.14) 54%,rgba(27,17,12,.94) 100%)}
+.pp-brand{position:absolute;z-index:2;left:18px;top:18px;display:flex;align-items:center;gap:8px;color:#fff;font-size:13px;font-weight:900;text-shadow:0 2px 10px rgba(0,0,0,.34)}.pp-brand i{display:block;width:25px;height:25px;background:var(--brand) center/contain no-repeat}.pp-copy{position:absolute;z-index:2;left:20px;right:20px;bottom:75px;color:#fff}.pp-copy h2{font-family:var(--serif);font-size:26px;line-height:1.32;letter-spacing:.03em}.pp-copy p{margin-top:7px;font-size:13px;line-height:1.5;font-weight:700;color:rgba(255,255,255,.82)}.pp-foot{position:absolute;z-index:2;left:20px;right:18px;bottom:16px;display:flex;align-items:center;gap:10px;color:#fff}.pp-qr{width:48px;height:48px;border-radius:8px;background:repeating-conic-gradient(#2f241c 0 25%,#fff 0 50%) 0/10px 10px;border:3px solid #fff}.pp-cta b{display:block;font-size:12px}.pp-cta span{display:block;margin-top:2px;font-size:10px;color:rgba(255,255,255,.7);font-weight:700}.persona-poster-note{width:300px;margin:10px auto 0;color:var(--brown-500);font-size:12px;line-height:1.5;text-align:center;font-weight:700}.persona-poster-actions{display:flex;gap:10px;margin-top:14px}.persona-poster-actions button{flex:1;min-height:50px;border-radius:16px;font:900 15px var(--sans)}.persona-poster-actions .save{border:1px solid rgba(91,70,48,.13);background:#fff;color:var(--brown)}.persona-poster-actions .share{border:0;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff}
 .me3-note{margin-top:12px;border-radius:18px;background:rgba(76,122,92,.08);border:1px solid rgba(76,122,92,.14);padding:12px 13px;font-size:13px;line-height:1.55;font-weight:800;color:var(--green-2)}
 .me3-plan-hero{position:relative;overflow:hidden;border-radius:24px;padding:18px;background:linear-gradient(150deg,#FFF7EC,#F5DFC0);border:1px solid rgba(180,138,62,.16);box-shadow:var(--sh-card)}
 .me3-plan-hero .h{font-family:var(--serif);font-size:24px;line-height:1.2;font-weight:900;color:var(--brown-h)}.me3-plan-hero .s{margin-top:7px;font-size:14px;line-height:1.48;color:var(--brown-500);font-weight:800}
@@ -2312,6 +2322,8 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
   <button data-go="reviewdetail">· 家人补充详情</button>
   <button data-go="mine">【我的】账户/套餐/消息/设置</button>
   <button data-go="profile">· 账户资料（新）</button>
+  <button data-go="persona">· AI 人物形象（半身）</button>
+  <button data-go="personaposter">· 人物形象品牌海报</button>
   <button data-go="plans">· 我的套餐（题量版本）</button>
   <button data-go="msgs">· 消息通知</button>
   <button data-go="landing">被邀请落地页</button>
@@ -2391,6 +2403,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
           <div><b>80%</b><span>成书进度</span></div>
         </div>
       </div>
+      <div class="me3-task" data-go="persona"><span class="ic"><svg class="ico-ph" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/><path d="M18 4l.7 1.6L20.5 6l-1.8.7L18 8.5l-.7-1.8L15.5 6l1.8-.4L18 4Z"/></svg></span><div class="tx"><b>生成 AI 人物形象</b><span>制作专属半身形象，可用于海报或设为头像</span></div><span class="tag">去生成</span></div>
       <div class="me3-task" data-go="review"><span class="ic"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-4 3v-3H4V5Z"/><path d="M8 9h8M8 12h5"/></svg></span><div class="tx"><b>家人补充了 2 段</b><span>先查看并采纳，合适的内容会收进书里</span></div><span class="tag">去处理</span></div>
       <div class="hub-lbl">账户功能</div>
       <div class="me3-grid">
@@ -3291,15 +3304,6 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
             </div>
           </div>
           <div class="setup-field">
-            <div class="setup-label">放一张熟悉的头像 <span style="color:var(--text-3);font-weight:700">（选填）</span></div>
-            <label class="setup-avatar" for="setupAvatarInput">
-              <span class="setup-avatar-preview" data-avatar-view>兰</span>
-              <span class="setup-avatar-copy"><b>上传照片</b></span>
-              <span class="setup-avatar-add">选择 ›</span>
-              <input id="setupAvatarInput" type="file" accept="image/*" onchange="handleAvatarUpload(event)">
-            </label>
-          </div>
-          <div class="setup-field">
             <div class="setup-label">怎么称呼您？</div>
             <div class="setup-input">秀英</div>
           </div>
@@ -3330,6 +3334,24 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
             <div class="setup-field">
               <div class="setup-label">现在住哪？</div>
               <div class="setup-input setup-address" id="setupLiveAddr" onclick="openAddressPicker({title:'选择现住地',targetId:'setupLiveAddr'})">浙江省 杭州市 上城区</div>
+            </div>
+          </div>
+          <div class="setup-field">
+            <div class="setup-label">平时喜欢什么？</div>
+            <div class="setup-options">
+              <span class="setup-chip" onclick="setupPick(this,true)">种花</span>
+              <span class="setup-chip" onclick="setupPick(this,true)">做饭</span>
+              <span class="setup-chip" onclick="setupPick(this,true)">唱戏</span>
+              <span class="setup-chip" onclick="setupPick(this,true)">旅行</span>
+            </div>
+          </div>
+          <div class="setup-field">
+            <div class="setup-label">还想重点留下什么？</div>
+            <div class="setup-options">
+              <span class="setup-chip" onclick="setupPick(this,true)">老照片</span>
+              <span class="setup-chip" onclick="setupPick(this,true)">家族往事</span>
+              <span class="setup-chip" onclick="setupPick(this,true)">工作经历</span>
+              <span class="setup-chip" onclick="setupPick(this,true)">给孩子的话</span>
             </div>
           </div>
           <div class="setup-actions two forward">
@@ -3501,6 +3523,46 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
         <div class="profile-line editable" data-toast="修改出生年份（示意）"><b>出生年份</b><span>1948 年</span></div>
         <div class="profile-line"><b>手机号</b><span>138****6021</span></div>
       </div>
+    </div>
+  </section>
+
+  <!-- PERSONA = AI 半身人物形象（可选增强能力） -->
+  <section class="screen" id="persona">
+    <div class="sbar" style="color:var(--brown)"><span>9:41</span><span class="bat"></span></div><div class="wxcap">··· ◉</div>
+    <div class="navbar"><span class="b" data-go="mine">‹</span><span class="h">AI 人物形象</span></div>
+    <div class="body persona-body">
+      <div class="persona-intro"><b>生成专属半身形象</b><br>可用于人物海报，也可以由您决定是否设为头像。</div>
+      <div class="persona-preview" id="personaPreview" data-state="idle">
+        <div class="persona-overlay" id="personaOverlay"><div>选择风格后<br>生成您的半身形象</div></div>
+        <div class="persona-preview-label"><b>兰秀英 · 云忆人物形象</b><span>3:4 半身主图 · 自动适配分享海报</span></div>
+      </div>
+      <div class="persona-style-title">选择一种风格</div>
+      <div class="persona-styles">
+        <button class="persona-style on" onclick="personaPickStyle(this)">温暖生活</button>
+        <button class="persona-style" onclick="personaPickStyle(this)">典雅东方</button>
+        <button class="persona-style" onclick="personaPickStyle(this)">旧时光</button>
+      </div>
+      <div class="persona-note">AI 形象是可选增强项，不影响记录和分享；确认前不会替换当前头像。</div>
+      <div class="persona-actions" id="personaActions">
+        <button class="ghost" onclick="document.getElementById('personaPhotoInput').click()">更换照片</button>
+        <button class="primary" onclick="personaGenerate()">生成半身形象</button>
+        <input class="persona-hidden-input" id="personaPhotoInput" data-avatar-purpose="persona" type="file" accept="image/*" onchange="handleAvatarUpload(event)">
+      </div>
+    </div>
+  </section>
+
+  <!-- PERSONA POSTER = 人物形象品牌拉新海报 -->
+  <section class="screen" id="personaposter">
+    <div class="sbar" style="color:var(--brown)"><span>9:41</span><span class="bat"></span></div><div class="wxcap">··· ◉</div>
+    <div class="navbar"><span class="b" data-go="persona">‹</span><span class="h">分享人物形象</span></div>
+    <div class="body persona-poster-wrap">
+      <div class="persona-poster">
+        <div class="pp-brand"><i></i><span>云忆 · 生命故事</span></div>
+        <div class="pp-copy"><h2>把一生，<br>讲成一本书</h2><p>每一个普通人的故事，<br>都值得被好好记住。</p></div>
+        <div class="pp-foot"><div class="pp-qr"></div><div class="pp-cta"><b>扫码，也为父母留下一本</b><span>开口讲述，AI 帮您整理成书</span></div></div>
+      </div>
+      <div class="persona-poster-note">分享的是品牌人物海报，不会公开您的完整故事内容。</div>
+      <div class="persona-poster-actions"><button class="save" data-toast="人物海报已保存到相册">保存图片</button><button class="share" data-toast="已打开微信分享，可发送人物海报">分享到微信</button></div>
     </div>
   </section>
 
@@ -3722,6 +3784,11 @@ var AvatarStore={
   get:function(){try{return localStorage.getItem(this.key)||''}catch(e){return''}},
   set:function(value){try{localStorage.setItem(this.key,value)}catch(e){} syncAvatarViews(value)}
 };
+var PersonaStore={
+  sourceKey:'huiyilu.persona.source.v1',generatedKey:'huiyilu.persona.generated.v1',originalAvatarKey:'huiyilu.avatar.original.v1',
+  get:function(key){try{return localStorage.getItem(key)||''}catch(e){return''}},
+  set:function(key,value){try{localStorage.setItem(key,value)}catch(e){}}
+};
 function syncAvatarViews(value){
   var src=typeof value==='string'?value:AvatarStore.get();
   document.querySelectorAll('[data-avatar-view]').forEach(function(el){
@@ -3729,11 +3796,12 @@ function syncAvatarViews(value){
     el.innerHTML=src?'<img src="'+src+'" alt="用户头像">':'兰';
   });
 }
-var avatarCropSource=null, avatarCropScale=1;
+var avatarCropSource=null, avatarCropScale=1, avatarCropPurpose='avatar';
 function handleAvatarUpload(event){
   var file=event&&event.target&&event.target.files&&event.target.files[0];
   if(!file)return;
   if(!/^image\//.test(file.type)){toast('请选择图片文件');return;}
+  avatarCropPurpose=event.target&&event.target.dataset.avatarPurpose==='persona'?'persona':'avatar';
   var reader=new FileReader();
   reader.onload=function(){
     var img=new Image();
@@ -3755,7 +3823,7 @@ function adjustAvatarZoom(delta){
 }
 function cancelAvatarCrop(){
   var cropper=document.getElementById('avatarCropper');if(cropper)cropper.classList.remove('show');
-  avatarCropSource=null;document.querySelectorAll('#setupAvatarInput,#profileAvatarInput').forEach(function(i){i.value=''});
+  avatarCropSource=null;document.querySelectorAll('#profileAvatarInput,#personaPhotoInput').forEach(function(i){i.value=''});
 }
 function confirmAvatarCrop(){
   if(!avatarCropSource)return;
@@ -3763,10 +3831,43 @@ function confirmAvatarCrop(){
   var sx=(avatarCropSource.naturalWidth-size)/2, sy=(avatarCropSource.naturalHeight-size)/2;
   var canvas=document.createElement('canvas');canvas.width=512;canvas.height=512;
   canvas.getContext('2d').drawImage(avatarCropSource,sx,sy,size,size,0,0,512,512);
-  AvatarStore.set(canvas.toDataURL('image/jpeg',.82));
+  var cropped=canvas.toDataURL('image/jpeg',.82);
+  if(avatarCropPurpose==='persona'){PersonaStore.set(PersonaStore.sourceKey,cropped);toast('照片已准备好，可以生成半身形象');}
+  else{AvatarStore.set(cropped);toast('照片已保存，会同步到金句卡');}
   var cropper=document.getElementById('avatarCropper');if(cropper)cropper.classList.remove('show');
-  avatarCropSource=null;toast('照片已保存，会同步到金句卡');
+  avatarCropSource=null;
 }
+var personaTimer=0;
+function personaPickStyle(button){document.querySelectorAll('.persona-style').forEach(function(x){x.classList.toggle('on',x===button)})}
+function personaRender(state){
+  var preview=document.getElementById('personaPreview'),overlay=document.getElementById('personaOverlay'),actions=document.getElementById('personaActions');if(!preview||!overlay||!actions)return;
+  preview.dataset.state=state;
+  if(state==='generating'){
+    overlay.innerHTML='<div><div class="persona-spinner"></div>AI 正在生成半身形象…</div>';
+    actions.innerHTML='<button class="ghost wide" disabled>生成中，请稍候</button>';
+  }else if(state==='ready'){
+    overlay.innerHTML='';
+    actions.innerHTML='<button class="ghost" onclick="personaGenerate()">重新生成</button><button class="primary" onclick="personaSetAvatar()">设为头像</button><button class="primary wide" onclick="personaShare()">分享人物形象</button><button class="ghost wide" onclick="personaRestoreAvatar()">恢复原头像</button>';
+  }else{
+    overlay.innerHTML='<div>选择风格后<br>生成您的半身形象</div>';
+    actions.innerHTML='<button class="ghost" onclick="document.getElementById(\'personaPhotoInput\').click()">更换照片</button><button class="primary" onclick="personaGenerate()">生成半身形象</button><input class="persona-hidden-input" id="personaPhotoInput" data-avatar-purpose="persona" type="file" accept="image/*" onchange="handleAvatarUpload(event)">';
+  }
+}
+function personaGenerate(){
+  clearTimeout(personaTimer);personaRender('generating');
+  personaTimer=setTimeout(function(){PersonaStore.set(PersonaStore.generatedKey,'proto-assets/home-bg.png');personaRender('ready');toast('半身人物形象已生成')},1000);
+}
+function personaSetAvatar(){
+  var generated=PersonaStore.get(PersonaStore.generatedKey)||'proto-assets/home-bg.png',current=AvatarStore.get();
+  if(current&&!PersonaStore.get(PersonaStore.originalAvatarKey))PersonaStore.set(PersonaStore.originalAvatarKey,current);
+  AvatarStore.set(generated);toast('已设为头像，可随时恢复');
+}
+function personaRestoreAvatar(){
+  var original=PersonaStore.get(PersonaStore.originalAvatarKey);
+  if(original){AvatarStore.set(original);toast('已恢复原头像')}else toast('还没有保存过原头像');
+}
+function personaShare(){go('personaposter')}
+function personaDemo(state){go('persona');clearTimeout(personaTimer);personaRender(state||'idle')}
 var quoteBgTimer=0, quoteBgStyle='warm-study';
 function quoteBackgroundRender(state,style){
   var card=document.getElementById('quoteCard'), status=document.getElementById('quoteBgStatus');
@@ -3884,7 +3985,9 @@ Object.assign(PRD_CONTENT,{
   upload:{title:'上传素材 PRD',stage:'素材 · 照片与资料补充',problem:'照片、证件、老物件能增强生命故事可信度，但素材上传需要清楚告诉用户上传什么、会进入哪里。',goal:'完成素材上传并关联到书、章节或故事。',users:['子女/发起人：上传老照片和资料。','被记录者：补充实物记忆。'],flow:['从书详情进入上传素材。','选择照片/文字/其他资料类型。','上传并填写说明。','关联到章节或待整理素材库。'],requirements:['入口区分照片、文字、老物件/证件等类型。','上传进度、成功、失败重试状态完整。','允许先上传后归类。','素材进入待整理列表，后续可被 AI 用于故事补充。'],edgeCases:['大图压缩或上传慢时显示进度。','失败后保留待上传队列。','敏感证件提示仅家人可见。'],events:[['material_upload_page_viewed','进入素材页；属性：book_id。'],['material_type_selected','选择素材类型；属性：material_type。'],['material_upload_completed','上传成功；属性：material_type, file_count。'],['material_upload_failed','上传失败；属性：error_code, file_count。']],acceptance:['至少三类素材入口。','上传失败可重试。','能看到素材用途说明。'],metrics:['素材上传率','上传成功率','素材关联率']},
   review:{title:'家人帮写审核 PRD',stage:'协作 · 审核入书',problem:'家人补充内容需要主账号审核，否则会破坏被记录者对故事真实性和隐私的控制。',goal:'让主账号高效查看、采纳、修改或暂不收录家人贡献。',users:['主账号/传主：审核内容。','家人贡献者：等待反馈。'],flow:['从消息、书详情或协作者进入审核页。','查看家人贡献内容。','选择采纳、修改、暂不收录。','采纳后进入对应章节。'],requirements:['每条贡献展示贡献者、身份、时间、内容摘要。','支持采纳、修改、暂不收录。','采纳时可选择章节或自动归类。','审核结果同步通知贡献者。'],edgeCases:['内容重复时提示可能重复。','贡献内容敏感时支持仅保存不入书。'],events:[['family_review_viewed','进入审核页；属性：pending_count。'],['family_contribution_action','审核操作；属性：action, contributor_role。'],['family_contribution_accepted','采纳成功；属性：chapter_id。']],acceptance:['待审核内容有明确状态。','采纳后章节故事数更新。'],metrics:['审核查看率','采纳率','修改率','暂不收录率']},
   reviewdetail:{title:'家人补充详情 PRD',stage:'协作 · 单条审核',problem:'审核列表如果直接放正文和按钮会显得拥挤，用户也难以聚焦判断一条内容。',goal:'列表只负责定位内容，详情页负责完整阅读和采纳决策。',users:['主账号/传主：逐条查看家人补充。'],flow:['从家人帮你写的列表点击某条。','进入补充详情查看完整内容。','待确认内容可采纳进书或先放着。','已采纳内容只读返回。'],requirements:['列表页不放全文和采纳按钮。','详情页展示贡献者、时间、状态和完整内容。','待确认详情页显示采纳进书按钮。','已采纳详情页隐藏采纳按钮。'],edgeCases:['从已采纳列表进入时，详情页为只读。','返回后保留审核列表默认或当前状态。'],events:[['family_review_detail_viewed','进入补充详情；属性：status, contributor_role。'],['family_review_detail_accepted','详情页采纳；属性：contribution_id。']],acceptance:['列表点击可进入详情。','详情页能完成采纳。','已采纳详情不出现重复采纳按钮。'],metrics:['补充详情访问率','详情采纳率']},
-  mine:{title:'我的页 PRD',stage:'账户 · 个人中心',problem:'用户需要一个稳定入口查看账户状态、套餐、消息和自己的记录进度。',goal:'承接账户管理、套餐升级和协作消息。',users:['所有登录用户。'],flow:['底部 Tab 进入我的。','查看头像、昵称、故事进度、套餐状态。','进入账户资料、我的套餐、消息。'],requirements:['顶部展示用户身份和当前书籍进度。','套餐入口清晰，说明当前版本。','消息入口提示未读。','底部 Tab 可回到讲述/书房。'],edgeCases:['未登录时引导登录。','无套餐时展示基础版权益。'],events:[['mine_viewed','进入我的；属性：plan_type, unread_count。'],['mine_tile_clicked','点击功能入口；属性：tile_name。']],acceptance:['账户资料、套餐、消息入口都可点击。','套餐状态可见。'],metrics:['我的页访问率','套餐点击率','消息点击率']},
+  mine:{title:'我的页 PRD',stage:'账户 · 个人中心',problem:'用户需要一个稳定入口查看账户状态、记录进度和可选的 AI 人物形象能力。',goal:'承接账户管理、套餐、协作消息和人物形象生成。',users:['所有登录用户。'],flow:['底部 Tab 进入我的。','查看头像、昵称和故事进度。','按需进入 AI 人物形象、账户资料或套餐。'],requirements:['新增 AI 人物形象入口，明确为可选增强能力。','未生成人物形象不影响记录和分享。','顶部继续展示当前头像，不把普通头像与 AI 半身主图混为一体。'],edgeCases:['未生成时展示去生成。','已生成时入口展示查看/重新生成。'],events:[['mine_viewed','进入我的；属性：has_persona。'],['persona_entry_clicked','点击人物形象入口；属性：has_persona。']],acceptance:['AI 人物形象入口可点击。','未生成也不出现阻断弹窗。'],metrics:['人物形象入口点击率','人物形象生成率','我的页访问率']},
+  persona:{title:'AI 人物形象 PRD',stage:'我的 · 可选形象增强',problem:'普通头像只能完成账号识别，用户还需要更有品牌感的人物素材用于展示和分享。',goal:'生成一张可复用的 3:4 半身人物形象，并由用户自主决定是否设为头像或制作品牌海报。',users:['希望制作人物海报或品牌形象的用户。'],flow:['从我的页进入 AI 人物形象。','使用当前照片或重新上传并裁剪。','选择风格后生成 3:4 半身形象。','预览后可设为头像，或进入人物品牌海报预览。'],requirements:['主图为头部至腰部的 3:4 半身形象。','人物形象属于可选能力，不拦截记录和分享。','点击分享人物形象进入品牌海报，不直接分享裸图。','设为头像必须由用户主动确认。','设置前保存原头像，并支持恢复。'],edgeCases:['生成失败时保留来源照片并允许重试。','没有原头像时恢复操作给出说明。'],events:[['persona_page_viewed','进入人物形象页。'],['persona_generated','生成完成；属性：style, result。'],['persona_set_as_avatar','设为头像。'],['persona_poster_opened','进入人物品牌海报。']],acceptance:['我的页可进入。','成功后可设为头像或进入品牌海报。'],metrics:['人物形象生成率','设为头像率','人物海报打开率']},
+  personaposter:{title:'人物形象品牌海报 PRD',stage:'传播 · 品牌拉新',problem:'直接分享人物裸图缺少品牌识别和转化入口，无法承接产品拉新。',goal:'把半身人物形象合成为带品牌、Slogan 和二维码的传播海报。',users:['已生成人物形象并希望分享的用户。'],flow:['从人物形象成功页点击分享。','预览品牌人物海报。','保存图片或分享到微信。','接收方扫码进入云忆新用户流程。'],requirements:['海报包含半身人物形象、云忆品牌、主 Slogan、价值说明和二维码。','主 Slogan 为“把一生，讲成一本书”。','二维码文案引导“也为父母留下一本”。','不得在海报公开完整故事正文。'],edgeCases:['保存失败时保留预览并允许重试。','微信分享取消后停留海报页。'],events:[['persona_poster_viewed','进入海报预览；属性：persona_id。'],['persona_poster_saved','保存海报。'],['persona_poster_shared','微信分享海报。'],['persona_poster_qr_opened','扫码进入新用户流程。']],acceptance:['海报包含品牌、Slogan、二维码和拉新文案。','支持保存和微信分享。'],metrics:['人物海报保存率','人物海报分享率','二维码扫码转化率']},
   profile:{title:'账户资料 PRD',stage:'账户 · 基础资料',problem:'用户需要确认当前账号是谁，以及手机号等敏感资料是否正确。',goal:'展示和管理账号基础资料，同时保护隐私。',users:['登录用户。'],flow:['从我的页进入账户资料。','查看头像、昵称、手机号。','进入套餐页或返回。'],requirements:['手机号脱敏展示。','昵称和头像展示当前账号。','不在原型中暴露真实个人信息。','提供套餐入口。'],edgeCases:['手机号未绑定时展示绑定提示。','资料加载失败时显示重试。'],events:[['profile_viewed','进入资料页；属性：has_phone, plan_type。'],['profile_plan_clicked','点击套餐入口；属性：source_page。']],acceptance:['手机号脱敏。','套餐入口可用。'],metrics:['资料页访问率','套餐入口点击率']},
   plans:{title:'我的套餐 PRD',stage:'商业化 · 题量版本',problem:'用户需要理解不同套餐的差异，尤其是题量如何影响书的完整度。',goal:'用“题量=书的厚度”解释套餐价值，并推动升级。',users:['发起人/付费决策者。'],flow:['从我的或资料页进入套餐。','查看当前套餐、剩余题量、升级权益。','点击升级。'],requirements:['明确当前套餐名称和题量。','展示升级后可获得更多问题、章节和纸质书能力。','权益文案与生命故事场景相关。'],edgeCases:['已是最高套餐时展示续费/增购。','支付不可用时可留下咨询。'],events:[['plans_viewed','进入套餐页；属性：plan_type, remaining_questions。'],['plan_upgrade_clicked','点击升级；属性：from_plan, target_plan。']],acceptance:['能看懂当前套餐。','升级按钮明显但不干扰主流程。'],metrics:['套餐页访问率','升级点击率','付费转化率']},
   msgs:{title:'消息通知 PRD',stage:'召回 · 协作动态',problem:'家人回应、采纳、提问等动态如果没有通知，用户很难持续回到产品。',goal:'把协作事件转化为可点击的任务和召回入口。',users:['发起人、被记录者、贡献者。'],flow:['从我的页进入消息。','查看未读和已读消息。','点击消息进入对应页面。'],requirements:['消息类型包括采纳、回应、提问、待审核。','未读消息有明显标识。','点击后跳到具体任务页面。'],edgeCases:['无消息时展示空态和开始讲述入口。','已处理消息不重复强提醒。'],events:[['messages_viewed','进入消息页；属性：unread_count。'],['message_clicked','点击消息；属性：message_type, target_page。'],['message_marked_read','消息已读；属性：message_type。']],acceptance:['未读状态可见。','点击消息能跳转。'],metrics:['消息打开率','消息点击率','未读处理率']},
@@ -3905,7 +4008,7 @@ Object.assign(PRD_CONTENT,{
   devhandoff:{title:'开发交付设计稿 PRD',stage:'交付 · 高保真原型转开发设计稿',problem:'当前原型已经能演示产品体验，但开发落地还需要明确页面真源、视觉规则、状态覆盖、字段交互和验收边界。',goal:'把 prototype-v17.html 升级为开发可用设计稿入口，让开发按页面、组件、状态和验收标准实现，而不是只照截图还原。',status:['已具备高保真页面、PRD 面板、UI 设计规范和主要异常状态。','本页作为开发交付总入口，串联原型、PRD、UI 规范和文档。'],inScope:['主链路页面清单和 screen id。','页面状态覆盖清单。','组件复用规则。','开发验收尺寸和交互边界。','与 docs/开发交付设计稿.md 对齐。'],deferred:['不在本仓库实现正式小程序组件。','不在原型里定义后端接口完整字段，只给出页面交互字段和埋点。','不替代后续 Figma 组件库，但可作为 Figma 重建依据。'],users:['前端开发：按页面和组件实现。','测试/验收：按状态和验收清单覆盖。','产品/设计：用同一入口确认开发边界。'],flow:['从左侧屏幕地图进入开发交付模式。','查看页面真源、视觉真源、交互真源、状态真源。','按 docs/开发交付设计稿.md 拆实现任务。','开发完成后用原型截图和验收清单逐页对照。'],requirements:['开发不得只按静态截图实现，必须覆盖 PRD 面板里的字段、异常、埋点和验收。','所有新增页面先补 screen id、地图入口和 PRD_CONTENT。','所有新增颜色、字号、按钮样式先落到 docs/UI设计规范.md 或复用现有 token。','讲述、书房、故事卡、协作、我的页必须组件化拆分。'],edgeCases:['如果原型视觉和 UI 规范冲突，先以 UI 规范为准，再回修原型。','如果演示态和真实开发态冲突，优先真实业务状态，不保留纯演示假交互。','如果某状态无法在原型中点击触达，必须在开发交付文档中列为待补。'],events:[['design_handoff_viewed','进入开发交付模式；属性：source_page。'],['handoff_section_checked','查看交付模块；属性：section_name。'],['handoff_acceptance_completed','开发验收完成；属性：screen_id, result。']],acceptance:['左侧屏幕地图有开发交付入口。','本页能说明页面、视觉、交互、状态四类真源。','右侧 PRD 面板能展示开发交付说明。','docs/开发交付设计稿.md 与本页内容一致。'],metrics:['交付入口访问率','开发返工率','状态漏实现数','逐页验收通过率']}
 });
 Object.assign(PRD_CONTENT,{
-  setup:{title:'新用户信息收集 PRD',stage:'首次使用 · 建立采访上下文',problem:'AI 采访需要知道被记录人的基础背景，但首次采集不能让长辈感觉像在填复杂档案。',goal:'用一屏内的轻量信息采集完成最小必要上下文，并让用户可以直接开启人生回忆。',users:['长辈/被记录者：自己开始记录。','子女/发起人：帮父母或家人建档。'],flow:['进入新用户信息收集页。','选择这本书写谁，可选上传一张头像。','填写称呼和基础信息。','点击开启人生回忆进入采访页；也可跳过。'],requirements:['头像为选填，不得阻断首次使用。','原始头像只做 1:1 轻度居中裁切，不做 AI 改脸。','头像保存后同步到我的页、个人资料和分享金句卡。','底部主按钮为“开启人生回忆”，跳过弱化处理。'],edgeCases:['未上传头像时使用姓名首字兜底。','头像读取失败时保留兜底头像并允许重试。','重复进入时保留已选基础信息和头像。'],events:[['profile_collection_started','进入资料采集页；属性：source_page。'],['profile_avatar_selected','头像读取完成；属性：source, crop_mode。'],['profile_collection_completed','点击开启人生回忆；属性：fields_completed_count, has_avatar。'],['profile_collection_skipped','点击跳过；属性：fields_completed_count, has_avatar。']],acceptance:['不上传头像也能开始。','上传后我的页和金句卡同步显示。','头像不经过 AI 人脸处理。','跳过也能进入采访页。'],metrics:['信息收集完成率','头像选择率','跳过率']},
+  setup:{title:'新用户信息收集 PRD',stage:'首次使用 · 建立采访上下文',problem:'AI 采访需要知道被记录人的基础背景，但首次采集不能让长辈感觉像在填复杂档案。',goal:'保留原有采访资料，只移除头像收集，让用户尽快开始讲述。',users:['长辈/被记录者。','子女/发起人。'],flow:['进入资料收集页。','选择这本书写谁。','填写称呼、年龄/年代和地点。','选择平时喜好和想重点留下的内容。','开启人生回忆或跳过。'],requirements:['首次资料页只删除头像上传，不删除其他原有信息。','保留关系、称呼、年龄、年代、地点、兴趣和重点内容。','首次页不生成人物形象。','整页允许跳过。'],edgeCases:['未填写称呼时使用“您”或“家人”。','跳过后使用通用采访问题。'],events:[['profile_collection_started','进入资料采集页。'],['profile_field_selected','选择资料字段；属性：field_name。'],['profile_collection_completed','完成资料；属性：fields_completed_count。'],['profile_collection_skipped','跳过资料。']],acceptance:['页面不出现头像上传。','原有其他资料字段全部保留。','跳过也能进入采访。'],metrics:['信息收集完成率','兴趣选择率','重点内容选择率','跳过率']},
   share:{title:'分享底部弹窗 PRD',stage:'传播 · 当前章节轻分享',problem:'用户需要把当前章节直接分享给微信好友，不应再经过中间落地页。',goal:'用底部弹窗承接分享，让用户快速选择金句卡、章节小程序卡片或保存长图。',users:['发起人：把当前章节发给家人或朋友圈。','亲友：从小程序章节卡片打开并阅读。'],flow:['从故事卡或回忆小结点击分享。','底部弹窗展示当前章节摘要。','选择分享章节。','直接调起微信小程序分享能力并发送当前章节卡片。'],requirements:['分享以底部弹窗呈现。','分享章节不跳转落地页。','章节卡片携带当前章节标识并直接打开小程序对应章节。','分享方式为金句卡、分享章节、保存长图。','不显示复制链接。'],edgeCases:['用户取消微信分享后停留原页面。','分享能力调起失败时提示重试。','章节含敏感内容时后续正式版应提示先编辑。'],events:[['share_sheet_opened','打开分享弹窗；属性：chapter_id, source_page。'],['chapter_miniprogram_share_clicked','点击分享章节；属性：chapter_id。'],['chapter_miniprogram_share_completed','章节小程序卡片发送完成；属性：chapter_id, channel。']],acceptance:['弹窗内显示金句卡、分享章节、保存长图。','点击分享章节不进入 landing。','点击后直接出现小程序分享反馈。'],metrics:['分享弹窗打开率','章节分享点击率','章节分享完成率','保存长图成功率']},
   contribute:{title:'亲友视角录入 PRD',stage:'协作 · 我来补充',problem:'亲友被邀请后往往不知道写什么，系统要根据身份给出具体问题，并让补充过程和采访录音页一样轻。',goal:'让亲友用语音、文字和图片视频完成一段可审核的补充回忆。',users:['亲友/同事/孙辈：补充自己的视角。','发起人：审核并收录。'],flow:['从邀请落地页进入时先选择身份。','从某个人补录明细或贡献详情补充时，直接进入第二步并沿用已知身份。','在补充页查看身份条和问题卡。','上传照片/视频，或用语音/文字补充。','提交后写入贡献列表，状态为待确认或待查看。'],requirements:['补充回忆的录入逻辑与采访录音页一致。','第一步只在身份未知时出现。','已知身份补录时不再要求选择身份。','补充页支持多张照片和视频上传、横向展示和拖拽排序。','图片/视频上传后再展示素材条。','提交失败时保留草稿。'],edgeCases:['身份未选且不是已知身份进入时，停留第一步。','重新补充已收录内容时，新增内容进入审核。','上传失败的素材可保留失败态并重试。'],events:[['contribute_started','进入补充流程；属性：source, invite_id, has_known_role。'],['contribute_role_selected','选择身份；属性：role。'],['contribute_media_uploaded','上传素材；属性：media_type, media_count。'],['contribution_submitted','提交补充；属性：input_mode, content_length, media_count。'],['contribution_save_failed','保存失败；属性：error_code。']],acceptance:['已知身份进入时直接显示第二步。','补充页可上传多张图片/视频并排序。','问题卡、身份条、录入区层级清楚。','提交后能在贡献列表看到记录。'],metrics:['身份选择率','补充提交率','素材上传率','保存成功率']},
   contribperson:{title:'某个人的补录明细 PRD',stage:'协作 · 单人补录明细',problem:'贡献者点开某个人后，需要查看自己给 TA 补过的每段内容，并能继续给这个人补录。',goal:'承接“我补录的人”列表，展示单个被补录人的内容明细和继续补录入口。',users:['家人/亲友贡献者。'],flow:['从我补录的人点击老周。','查看给老周补过的内容、数量和状态。','点击某条内容进入贡献详情。','点击继续给老周补录，直接进入亲友录入第二步。'],requirements:['顶部说明当前被补录人和贡献者身份。','展示总补录数、已进书数、待查看数。','每条内容展示标题、状态和章节/下一步说明。','点击条目进入 contribdetail。','底部按钮继续给当前人补录，不再选择身份。'],edgeCases:['状态为待查看时显示对方尚未查看。','状态为待确认时提示确认后更新到书里。','被补录人切换后，继续补录按钮必须同步姓名和身份。'],events:[['contribution_person_viewed','进入某个人补录明细；属性：target_user_id, relation, contribution_count。'],['contribution_item_clicked','点击贡献；属性：status, contribution_id。'],['contribution_person_continue_clicked','继续给当前人补录；属性：target_user_id, relation。']],acceptance:['点击给老周内容后看到老周的内容列表。','点击单条内容进入贡献详情。','继续补录直接进入亲友录入第二步。'],metrics:['单人补录明细访问率','贡献详情点击率','继续补录率']},
@@ -3915,7 +4018,7 @@ Object.assign(PRD_CONTENT,{
 });
 var PRD_FIELDS={
   userpath:[['路径阶段','点击路径节点查看对应页面或说明','认识对象 / 开口讲述 / AI 追问 / 故事成稿 / 进入书房'],['阶段状态','只读展示，标识该阶段是否已在原型覆盖','已完成 / 待补充 / 后续能力'],['目标页面','点击后跳转到对应 screen','setup / session / summary / shelf / book / printbook']],
-  setup:[['被记录人关系','单选 chip，选择后高亮并写入上下文','我自己 / 父亲 / 母亲 / 祖父母 / 其他亲人'],['称呼/昵称','文本输入，失焦保存；为空时用兜底称呼','1-12 个中文字符；默认“秀英”或“家人”'],['年龄/年代','文本或单选，用于推荐问题','年龄数字 / 50 后 / 60 后 / 70 后 / 不确定'],['老家/现居地','基础地点字段，用于生成生活场景问题','城市/区县；可为空'],['推荐开场题','基于基础信息生成，用户单选后进入采访','名字来源 / 老房子 / 家里最疼您的人'],['跳过状态','按钮动作，进入采访但标记资料不完整','true / false']],
+  setup:[['被记录人关系','单选 chip，选择后高亮并写入上下文','我自己 / 父亲 / 母亲 / 祖父母 / 其他亲人'],['称呼/昵称','文本输入，失焦保存；为空时用兜底称呼','1-12 个中文字符；默认“秀英”或“家人”'],['年龄/年代','文本或单选，用于推荐问题','年龄数字 / 50 后 / 60 后 / 70 后 / 不确定'],['老家/现居地','基础地点字段，用于生成生活场景问题','城市/区县；可为空'],['平时喜好','多选 chip，用于生成生活类问题','种花 / 做饭 / 唱戏 / 旅行'],['重点内容','多选 chip，用于调整采访优先级','老照片 / 家族往事 / 工作经历 / 给孩子的话'],['跳过状态','按钮动作，进入采访但标记资料不完整','true / false']],
   session:[['首页记录入口','三个主入口按钮，点击进入不同记录路径','选个问题，慢慢讲 / 想到什么，就讲什么 / 看着照片，讲讲当时'],['当前话题','点击话题/章节触发切换；有内容时先弹保存确认','出生与家族 / 童年 / 求学 / 工作 / 成家 / 全部话题'],['输入模式','底部按钮切换；文案和录音态同步变化','keyboard / voice；默认 keyboard 且录音暂停'],['录音状态','按钮切换，影响波形和转写进度','paused / listening / failed'],['已录入文本','内容区可编辑或流式写入，支持滚动','0-5000 字；为空时不可直接完成'],['未保存状态','输入、转写、上传素材后置 true；保存/放弃后置 false','true / false'],['保存弹窗动作','切换话题或章节时出现','保存后切换 / 不保存继续切换 / 继续讲当前题']],
   summary:[['故事标题','可编辑文本，失焦自动保存','1-24 字；默认由 AI 根据内容生成'],['故事分类','点击分类或自动归类','出生与家族 / 童年 / 求学 / 工作 / 成家 / 亲人'],['金句','可编辑短句，用于金句卡和分享','0-40 字；可为空'],['故事正文','富文本/长文本编辑，失焦自动保存','建议 200-1200 字'],['后续动作','按钮点击进入对应页面','邀请帮写 / 分享 / 收进书房 / 接着聊']],
   shelf:[['整本书入口','点击进入书详情','book_id；默认“我的时光印记”'],['章节书本','点击进入章节详情','第一章-第六章；状态：已成稿 / 待补充'],['书架滚动','玻璃层内纵向滚动','scrollTop 0-N'],['空态按钮','无内容时显示并进入采访页','开始讲述']],
@@ -3935,6 +4038,8 @@ var PRD_FIELDS={
   reviewdetail:[['贡献者','只读展示家人身份和时间','女儿 / 儿子 / 孙辈 / 亲友'],['补充正文','完整展示家人补充内容','20-1200 字'],['详情状态','只读状态标签','待确认 / 已采纳'],['详情动作','待确认时显示','先放着 / 采纳进书']],
   mine:[['用户身份','只读展示','本人 / 子女发起人 / 家人协作者'],['故事进度','只读统计','已讲段数 / 章节数 / 已成稿数'],['套餐状态','点击进入套餐页','基础版 / 升级版 / 专业版'],['未读消息','点击进入消息页','0-N 条']],
   profile:[['头像','点击更换或只读展示','图片 / 姓名首字'],['昵称','文本输入，失焦保存','1-12 字'],['手机号','脱敏只读或绑定','138****0000 / 未绑定'],['套餐入口','点击进入 plans','当前套餐名称']],
+  persona:[['来源照片','使用当前照片或重新上传并裁剪','原图 / 1:1 裁剪来源'],['半身主图','AI 生成 3:4 竖版形象','头部至腰部'],['形象风格','生成前单选','温暖生活 / 典雅东方 / 旧时光'],['生成状态','页面状态流转','未生成 / 生成中 / 已生成 / 失败'],['成功动作','生成成功后点击','重新生成 / 设为头像 / 分享人物形象 / 恢复原头像']],
+  personaposter:[['人物主图','使用已确认 AI 半身形象','3:4 半身图'],['品牌信息','海报固定叠加','云忆 · 生命故事'],['主 Slogan','固定品牌文案','把一生，讲成一本书'],['拉新引导','二维码旁文案','扫码，也为父母留下一本'],['海报动作','点击执行','保存图片 / 分享到微信']],
   plans:[['当前套餐','只读展示','基础版 / 升级版 / 专业版'],['剩余题量','只读数值','0-N 问'],['升级目标','点击选择套餐','升级版 200 问 / 专业版 500 问'],['支付状态','后续支付流转','未支付 / 支付中 / 成功 / 失败']],
   msgs:[['消息类型','列表标签或图标','采纳 / 回应 / 提问 / 待审核 / 系统'],['未读状态','点击消息后置已读','unread / read'],['跳转目标','点击消息进入对应页面','session / review / contribute / book'],['消息时间','只读展示','刚刚 / N 小时前 / 昨天 / 日期']],
   onboarding:[['引导页序号','滑动或点击切换','1 / 2 / 3'],['开始按钮','点击进入资料采集','开始，先认识一下'],['跳过入口','点击进入采访页','先随便看看'],['展示状态','首次展示后记录','未看 / 已看 / 已跳过']],
@@ -3984,7 +4089,8 @@ function go(id){
   renderPrd(id);
   closeTopics(); closeDrawer(); closeToc();
   if(id==='setup') setupShow(1);
-  if(id==='mine'||id==='profile'||id==='quotecard') syncAvatarViews();
+  if(id==='mine'||id==='profile'||id==='quotecard'||id==='persona') syncAvatarViews();
+  if(id==='persona')personaRender(PersonaStore.get(PersonaStore.generatedKey)?'ready':'idle');
   if(id==='session'){ var rb=document.getElementById('recoverBar'); if(rb) rb.style.display = hasDraft ? 'flex' : 'none'; ivEnter(); }
   if(id==='book'){ bookShowPreview(); bookSkeleton(); } /* 进「我的书」默认显示成书视图（预览）+ 骨架屏 */
   if(id==='review') rvSwitch('pending');

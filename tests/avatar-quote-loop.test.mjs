@@ -5,9 +5,9 @@ import { readFile } from 'node:fs/promises';
 const html = await readFile(new URL('../prototype-v17.html', import.meta.url), 'utf8');
 const prompts = await readFile(new URL('../docs/ai/quote-card-background-prompts.md', import.meta.url), 'utf8');
 
-test('avatar is optional, persisted, and reused across the loop', () => {
-  assert.match(html, /id="setupAvatarInput"/);
-  assert.match(html, />上传照片</);
+test('first-time setup skips avatar while profile avatar remains editable', () => {
+  assert.doesNotMatch(html, /id="setupAvatarInput"/);
+  assert.match(html, /id="profileAvatarInput"/);
   assert.match(html, /id="avatarCropper"/);
   assert.match(html, /确认使用/);
   assert.match(html, /huiyilu\.avatar\.v1/);
@@ -36,4 +36,16 @@ test('chapter share opens mini program sharing without landing navigation', () =
   assert.match(html, />分享章节<\/button>/);
   assert.match(html, /已打开小程序分享，可发送当前章节/);
   assert.doesNotMatch(html, /data-go="landing"[^>]*>[\s\S]{0,300}分享章节/);
+});
+
+test('AI persona is optional, half-body, shareable, and can become avatar', () => {
+  assert.doesNotMatch(html, /id="setupAvatarInput"/);
+  assert.match(html, /id="persona"/);
+  assert.match(html, /生成半身形象/);
+  assert.match(html, /分享人物形象/);
+  assert.match(html, /personaSetAvatar/);
+  assert.match(html, /personaRestoreAvatar/);
+  assert.match(html, /id="personaposter"/);
+  assert.match(html, /把一生，<br>讲成一本书/);
+  assert.match(html, /扫码，也为父母留下一本/);
 });
