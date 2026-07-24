@@ -814,15 +814,16 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .profile-avatar-row .me3-av{width:64px;height:64px;border-radius:22px}
 .profile-avatar-row b{display:block;color:var(--brown-h);font-size:16px}.profile-avatar-row span{display:block;margin-top:3px;color:var(--brown-500);font-size:13px;font-weight:700}
 .persona-body{padding:10px 16px 24px;background:radial-gradient(260px 180px at 90% 0,rgba(238,139,93,.13),transparent 64%),var(--cream)}
+.persona-steps{display:flex;align-items:center;margin:2px 2px 15px;color:var(--brown-500)}.persona-step{position:relative;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:800;white-space:nowrap}.persona-step:not(:last-child){flex:1}.persona-step:not(:last-child)::after{content:"";height:1px;flex:1;margin:0 7px;background:rgba(91,70,48,.16)}.persona-step i{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:rgba(91,70,48,.09);color:var(--brown-500);font-style:normal}.persona-step.on{color:var(--gold-deep)}.persona-step.on i{background:var(--gold-deep);color:#fff}.persona-step.done i{background:var(--green-2);color:#fff}.persona-step.done:not(:last-child)::after{background:rgba(76,122,92,.38)}
 .persona-intro{font-size:14px;line-height:1.55;color:var(--brown-500);font-weight:700;margin-bottom:12px}.persona-intro b{color:var(--brown-h)}
 .persona-upload-card{min-height:300px;border:1.5px dashed rgba(180,74,42,.28);border-radius:26px;background:linear-gradient(160deg,rgba(255,255,255,.86),rgba(255,245,234,.9));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;cursor:pointer}.persona-upload-icon{width:76px;height:76px;border-radius:25px;background:var(--progress-bg);display:grid;place-items:center;color:var(--gold-deep)}.persona-upload-icon svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.persona-upload-card b{margin-top:17px;font-size:19px;color:var(--brown-h)}.persona-upload-card p{margin-top:7px;font-size:13px;line-height:1.55;color:var(--brown-500);font-weight:700}.persona-upload-button{margin-top:18px;border:0;border-radius:15px;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff;padding:12px 24px;font:900 14px var(--sans)}
 .persona-create-step{display:none}
 .persona-preview{position:relative;width:258px;height:344px;margin:0 auto;border-radius:26px;overflow:hidden;background:linear-gradient(155deg,#e7d5c1,#ad8167);box-shadow:0 24px 48px -28px rgba(74,45,25,.68)}
 .persona-preview::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(31,20,14,.48)),url("proto-assets/home-bg.png") 55% 32%/cover no-repeat;transition:.25s}.persona-preview[data-state="idle"]::before{filter:blur(7px) saturate(.65);transform:scale(1.04)}.persona-preview[data-state="generating"]::before{filter:blur(9px) saturate(.55);transform:scale(1.06)}
 .persona-source-image{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#dfcdb9;display:none;z-index:1}.persona-preview[data-state="source"]::before,.persona-preview[data-state="generating"]::before{display:none}.persona-preview[data-state="source"] .persona-source-image,.persona-preview[data-state="generating"] .persona-source-image{display:block}.persona-preview[data-state="generating"] .persona-source-image{filter:blur(5px) saturate(.7);transform:scale(1.03)}
-.persona-preview-label{position:absolute;left:16px;right:16px;bottom:15px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.45)}.persona-preview-label b{display:block;font-family:var(--serif);font-size:20px}.persona-preview-label span{display:block;margin-top:3px;font-size:12px;font-weight:700;opacity:.86}
+.persona-preview-label{position:absolute;left:16px;right:16px;bottom:15px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.45)}.persona-preview:not([data-state="ready"]) .persona-preview-label{display:none}.persona-preview-label b{display:block;font-family:var(--serif);font-size:20px}.persona-preview-label span{display:block;margin-top:3px;font-size:12px;font-weight:700;opacity:.86}
 .persona-overlay{position:absolute;inset:0;display:grid;place-items:center;background:rgba(44,31,23,.18);color:#fff;text-align:center;font-size:14px;font-weight:900}.persona-preview[data-state="ready"] .persona-overlay{display:none}.persona-spinner{width:28px;height:28px;margin:0 auto 10px;border:3px solid rgba(255,255,255,.28);border-top-color:#fff;border-radius:50%;animation:qspin .8s linear infinite}
-.persona-style-title{margin-top:16px;font-size:14px;color:var(--brown-h);font-weight:900}.persona-styles{display:flex;gap:7px;margin-top:8px}.persona-style{flex:1;min-height:40px;border:1px solid rgba(91,70,48,.13);border-radius:13px;background:#fff;color:var(--brown-500);font:800 12px var(--sans)}.persona-style.on{border-color:rgba(180,74,42,.34);background:var(--progress-bg);color:var(--gold-deep)}
+.persona-style-zone{transition:opacity .2s}.persona-style-title{display:flex;align-items:center;justify-content:space-between;margin-top:16px;font-size:15px;color:var(--brown-h);font-weight:900}.persona-style-title span{font-size:11px;color:var(--brown-500);font-weight:700}.persona-styles{display:flex;gap:8px;margin-top:8px}.persona-style{position:relative;flex:1;min-height:62px;padding:8px 5px 7px;border:1px solid rgba(91,70,48,.13);border-radius:16px;background:#fff;color:var(--brown-500);font:800 13px var(--sans);transition:transform .16s,border-color .16s,background .16s}.persona-style small{display:block;margin-top:3px;font-size:10px;font-weight:700;opacity:.72}.persona-style.on{border-color:rgba(217,102,63,.52);background:var(--progress-bg);color:var(--gold-deep);box-shadow:0 8px 18px -14px rgba(180,74,42,.8)}.persona-style.on::after{content:"✓";position:absolute;right:6px;top:5px;width:17px;height:17px;border-radius:50%;display:grid;place-items:center;background:var(--gold-deep);color:#fff;font-size:10px}.persona-style:active{transform:scale(.97)}.persona-style-zone.disabled{opacity:.48;pointer-events:none}
 .persona-note{margin-top:10px;border-radius:13px;background:rgba(76,122,92,.08);padding:9px 11px;color:var(--green-2);font-size:12px;line-height:1.45;font-weight:800}.persona-actions{display:grid;grid-template-columns:1fr 1.2fr;gap:9px;margin-top:12px}.persona-actions button{min-height:48px;border-radius:15px;font:900 14px var(--sans)}.persona-actions .ghost{border:1px solid rgba(91,70,48,.13);background:#fff;color:var(--brown)}.persona-actions .primary{border:0;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff}.persona-actions .wide{grid-column:1/-1}.persona-hidden-input{display:none}
 .persona-actions .reset-link{grid-column:1/-1;min-height:44px;border:0;background:transparent;color:var(--brown-500);text-decoration:underline;text-underline-offset:4px}
 .persona-poster-wrap{padding:8px 16px 24px;background:var(--cream)}.persona-poster{position:relative;width:300px;height:430px;margin:0 auto;border-radius:24px;overflow:hidden;background:#d8bfa7;box-shadow:0 28px 54px -30px rgba(62,39,24,.72)}.persona-poster::before{content:"";position:absolute;inset:0;background:url("proto-assets/home-bg.png") 55% 31%/cover no-repeat}.persona-poster::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,20,14,.05) 30%,rgba(30,19,13,.14) 54%,rgba(27,17,12,.94) 100%)}
@@ -3535,10 +3536,15 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
     <div class="sbar" style="color:var(--brown)"><span>9:41</span><span class="bat"></span></div><div class="wxcap">··· ◉</div>
     <div class="navbar"><span class="b" data-go="mine">‹</span><span class="h">我的人物形象</span></div>
     <div class="body persona-body">
+      <div class="persona-steps" id="personaSteps" aria-label="人物形象制作进度">
+        <span class="persona-step on" data-persona-step="upload"><i>1</i>上传照片</span>
+        <span class="persona-step" data-persona-step="style"><i>2</i>选择风格</span>
+        <span class="persona-step" data-persona-step="done"><i>3</i>完成</span>
+      </div>
       <div class="persona-intro" id="personaIntro"><b>先上传一张清晰半身照</b><br>建议选择正面、光线自然、上半身完整的照片。</div>
       <label class="persona-upload-card" id="personaUploadStep" for="personaPhotoInput">
         <span class="persona-upload-icon"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><circle cx="8.5" cy="10" r="1.7"/><path d="M4.5 17l4.3-4 3.1 2.6 3.2-3 4.3 4.4"/></svg></span>
-        <b>上传半身照</b><p>无需裁剪，上传成功后<br>再选择喜欢的人物风格。</p><span class="persona-upload-button">选择半身照</span>
+        <b>上传半身照</b><span class="persona-upload-button">选择半身照</span>
         <input class="persona-hidden-input" id="personaPhotoInput" data-avatar-purpose="persona" type="file" accept="image/*" onchange="handleAvatarUpload(event)">
       </label>
       <div class="persona-create-step" id="personaCreateStep">
@@ -3547,13 +3553,15 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
           <div class="persona-overlay" id="personaOverlay"></div>
           <div class="persona-preview-label"><b>兰秀英 · 云忆人物形象</b><span>3:4 半身主图 · 自动适配分享海报</span></div>
         </div>
-        <div class="persona-style-title">选择一种风格</div>
-        <div class="persona-styles">
-          <button class="persona-style on" onclick="personaPickStyle(this)">温暖生活</button>
-          <button class="persona-style" onclick="personaPickStyle(this)">典雅东方</button>
-          <button class="persona-style" onclick="personaPickStyle(this)">旧时光</button>
+        <div class="persona-style-zone" id="personaStyleZone">
+          <div class="persona-style-title">选择人物风格<span>点击即可预选</span></div>
+          <div class="persona-styles">
+            <button class="persona-style on" aria-pressed="true" onclick="personaPickStyle(this)">温暖生活<small>自然 · 亲切</small></button>
+            <button class="persona-style" aria-pressed="false" onclick="personaPickStyle(this)">典雅东方<small>端庄 · 雅致</small></button>
+            <button class="persona-style" aria-pressed="false" onclick="personaPickStyle(this)">旧时光<small>怀旧 · 温润</small></button>
+          </div>
         </div>
-        <div class="persona-note">人物形象是可选功能，不影响记录和分享；确认前不会替换当前头像。</div>
+        <div class="persona-note" id="personaNote">人物形象是可选功能，不影响记录和分享；确认前不会替换当前头像。</div>
         <div class="persona-actions" id="personaActions"></div>
       </div>
     </div>
@@ -3855,17 +3863,24 @@ function confirmAvatarCrop(){
   avatarCropSource=null;
 }
 var personaTimer=0;
-function personaPickStyle(button){document.querySelectorAll('.persona-style').forEach(function(x){x.classList.toggle('on',x===button)})}
+function personaPickStyle(button){document.querySelectorAll('.persona-style').forEach(function(x){var selected=x===button;x.classList.toggle('on',selected);x.setAttribute('aria-pressed',selected?'true':'false')})}
+function personaSetSteps(state){
+  var order={idle:0,source:1,generating:1,ready:2},active=order[state]===undefined?0:order[state];
+  document.querySelectorAll('[data-persona-step]').forEach(function(step,index){step.classList.toggle('done',index<active);step.classList.toggle('on',index===active);var icon=step.querySelector('i');if(icon)icon.textContent=index<active?'✓':String(index+1)});
+}
 function personaRender(state){
-  var upload=document.getElementById('personaUploadStep'),create=document.getElementById('personaCreateStep'),intro=document.getElementById('personaIntro'),preview=document.getElementById('personaPreview'),sourceImage=document.getElementById('personaSourceImage'),overlay=document.getElementById('personaOverlay'),actions=document.getElementById('personaActions');if(!upload||!create||!preview||!overlay||!actions)return;
+  var upload=document.getElementById('personaUploadStep'),create=document.getElementById('personaCreateStep'),intro=document.getElementById('personaIntro'),preview=document.getElementById('personaPreview'),sourceImage=document.getElementById('personaSourceImage'),overlay=document.getElementById('personaOverlay'),actions=document.getElementById('personaActions'),styleZone=document.getElementById('personaStyleZone'),note=document.getElementById('personaNote');if(!upload||!create||!preview||!overlay||!actions)return;
+  personaSetSteps(state);
   if(state==='idle'){
     upload.style.display='flex';create.style.display='none';
     if(intro)intro.innerHTML='<b>先上传一张清晰半身照</b><br>建议选择正面、光线自然、上半身完整的照片。';
     return;
   }
   upload.style.display='none';create.style.display='block';
-  if(intro)intro.innerHTML=state==='ready'?'<b>您的专属人物形象已做好</b><br>可以设为头像，也可以制作品牌人物海报。':'<b>半身照已上传</b><br>选择一种喜欢的风格，再制作人物形象。';
+  if(intro)intro.innerHTML=state==='ready'?'<b>您的专属人物形象已做好</b><br>可以设为头像，也可以制作品牌人物海报。':(state==='generating'?'<b>正在制作人物形象</b><br>大约需要一点时间，请稍候。':'<b>半身照已上传</b><br>选择一种喜欢的风格，再制作人物形象。');
   if(sourceImage)sourceImage.src=PersonaStore.get(PersonaStore.sourceKey)||'proto-assets/ob-hero.png';
+  if(styleZone){styleZone.style.display=state==='ready'?'none':'block';styleZone.classList.toggle('disabled',state==='generating')}
+  if(note){note.style.display=state==='ready'?'none':'block'}
   preview.dataset.state=state;
   if(state==='generating'){
     overlay.innerHTML='<div><div class="persona-spinner"></div>正在制作您的专属形象…</div>';
