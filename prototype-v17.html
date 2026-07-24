@@ -3872,7 +3872,7 @@ function personaRender(state){
     actions.innerHTML='<button class="ghost wide" disabled>生成中，请稍候</button>';
   }else if(state==='ready'){
     overlay.innerHTML='';
-    actions.innerHTML='<button class="ghost" onclick="personaGenerate()">再做一张</button><button class="primary" onclick="personaSetAvatar()">设为头像</button><button class="primary wide" onclick="personaShare()">分享人物形象</button><button class="reset-link" onclick="personaReset()">更换半身照</button>';
+    actions.innerHTML='<button class="primary wide" onclick="personaShare()">分享人物形象</button><button class="ghost wide" onclick="personaSetAvatar()">设为头像</button><button class="reset-link" onclick="personaReset()">更换半身照</button>';
   }else{
     overlay.innerHTML='';
     actions.innerHTML='<button class="ghost" onclick="document.getElementById(\'personaPhotoInput\').click()">重新上传</button><button class="primary" onclick="personaGenerate()">制作我的形象</button>';
@@ -4063,7 +4063,7 @@ var PRD_FIELDS={
   reviewdetail:[['贡献者','只读展示家人身份和时间','女儿 / 儿子 / 孙辈 / 亲友'],['补充正文','完整展示家人补充内容','20-1200 字'],['详情状态','只读状态标签','待确认 / 已采纳'],['详情动作','待确认时显示','先放着 / 采纳进书']],
   mine:[['用户身份','只读展示','本人 / 子女发起人 / 家人协作者'],['故事进度','只读统计','已讲段数 / 章节数 / 已成稿数'],['套餐状态','点击进入套餐页','基础版 / 升级版 / 专业版'],['未读消息','点击进入消息页','0-N 条']],
   profile:[['头像','点击更换或只读展示','图片 / 姓名首字'],['昵称','文本输入，失焦保存','1-12 字'],['手机号','脱敏只读或绑定','138****0000 / 未绑定'],['套餐入口','点击进入 plans','当前套餐名称']],
-  persona:[['来源照片','第一步直接上传，不裁剪','清晰正面半身照'],['半身主图','AI 生成 3:4 竖版形象','头部至腰部'],['形象风格','照片上传后单选','温暖生活 / 典雅东方 / 旧时光'],['生成状态','页面状态流转','待上传 / 已上传 / 生成中 / 已生成 / 失败'],['成功动作','生成成功后点击','再做一张 / 设为头像 / 分享人物形象']],
+  persona:[['来源照片','第一步直接上传，不裁剪','清晰正面半身照'],['半身主图','AI 生成 3:4 竖版形象','头部至腰部'],['形象风格','照片上传后单选','温暖生活 / 典雅东方 / 旧时光'],['生成状态','页面状态流转','待上传 / 已上传 / 生成中 / 已生成 / 失败'],['成功动作','生成成功后点击','分享人物形象 / 设为头像 / 更换半身照']],
   personaposter:[['人物主图','使用已确认 AI 半身形象','3:4 半身图'],['品牌信息','海报固定叠加','云忆 · 生命故事'],['主 Slogan','固定品牌文案','把一生，讲成一本书'],['拉新引导','二维码旁文案','扫码，也为父母留下一本'],['海报动作','点击执行','保存图片 / 分享到微信']],
   plans:[['当前套餐','只读展示','基础版 / 升级版 / 专业版'],['剩余题量','只读数值','0-N 问'],['升级目标','点击选择套餐','升级版 200 问 / 专业版 500 问'],['支付状态','后续支付流转','未支付 / 支付中 / 成功 / 失败']],
   msgs:[['消息类型','列表标签或图标','采纳 / 回应 / 提问 / 待审核 / 系统'],['未读状态','点击消息后置已读','unread / read'],['跳转目标','点击消息进入对应页面','session / review / contribute / book'],['消息时间','只读展示','刚刚 / N 小时前 / 昨天 / 日期']],
