@@ -2406,7 +2406,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
       <button class="me3-task" data-go="persona"><span class="ic"><svg class="ico-ph" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/><path d="M18 4l.7 1.6L20.5 6l-1.8.7L18 8.5l-.7-1.8L15.5 6l1.8-.4L18 4Z"/></svg></span><span class="tx"><b>制作我的人物形象</b><span>用一张照片，生成有故事感的半身形象</span></span><span class="tag">去制作</span></button>
       <div class="hub-lbl">账户功能</div>
       <div class="me3-grid">
-        <button class="me3-tile" data-go="plans"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 11h16v9H4z"/><path d="M2 7h20v4H2z"/><path d="M12 7v13"/></svg></span><b>我的套餐</b><span>当前：升级版 · 200 问</span></button>
+        <button class="me3-tile" data-go="plans"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 11h16v9H4z"/><path d="M2 7h20v4H2z"/><path d="M12 7v13"/></svg></span><b>我的套餐</b><span>当前：人生长卷 · 100 题</span></button>
         <button class="me3-tile" data-go="collaborators"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 15.2A6 6 0 0 1 21.5 20"/></svg></span><b>一起记录的人</b><span>4 位家人一起记录</span></button>
       </div>
       <div class="hub-lbl">偏好设置</div>
@@ -3227,13 +3227,14 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
     <div class="body me3-body">
       <div class="me3-plan-hero">
         <div class="h">当前套餐</div>
-        <div class="s">套餐决定采访深度和成书厚度。</div>
-        <div class="me3-current"><span class="me3-plan-ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5Z"/><path d="M3 12l9 5 9-5"/><path d="M3 16l9 5 9-5"/></svg></span><div class="me3-name"><b>升级版 · 200 问</b><span>求学 / 事业 / 家庭 / 内心 · 较完整一生</span></div></div>
+        <div class="s">题量只代表成书厚度，讲述时由 AI 自然引导。</div>
+        <div class="me3-current"><span class="me3-plan-ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5Z"/><path d="M3 12l9 5 9-5"/><path d="M3 16l9 5 9-5"/></svg></span><div class="me3-name"><b>人生长卷 · 100 题</b><span>覆盖家族 / 童年 / 求学 / 事业 / 家庭 / 传承</span></div></div>
       </div>
       <div class="hub-lbl">可选版本</div>
-      <div class="me3-plan-card"><div class="me3-plan-head"><b>基础版</b><span>精华小传</span></div><div class="me3-plan-q"><b>80</b>问 · 一次采访就成一本</div><div class="me3-plan-feat"><span>关键问题</span><span>翻页阅读</span><span>电子版下载</span></div></div>
-      <div class="me3-plan-card hot"><div class="me3-plan-head"><b>升级版</b><span>当前方案</span></div><div class="me3-plan-q"><b>200</b>问 · 较完整的一生传记</div><div class="me3-plan-feat"><span>含基础版全部</span><span>家人补充</span><span>多声部成书</span></div></div>
-      <div class="me3-plan-card"><div class="me3-plan-head"><b>高配版 · 传家</b><span>10 章全</span></div><div class="me3-plan-q"><b>303</b>问 · 最完整的厚传记</div><div class="me3-plan-feat"><span>精装实物书</span><span>岁月成影</span><span>云端分身</span></div><button class="me3-plan-btn" data-toast="顾问将与你联系">了解高配版</button></div>
+      <div class="me3-plan-card"><div class="me3-plan-head"><b>人生初卷</b><span>快速成书</span></div><div class="me3-plan-q"><b>15</b>题 · 精选一生关键节点</div><div class="me3-plan-feat"><span>5 章小书</span><span>故事卡预览</span><span>电子版下载</span></div></div>
+      <div class="me3-plan-card hot"><div class="me3-plan-head"><b>人生长卷</b><span>当前方案</span></div><div class="me3-plan-q"><b>100</b>题 · 多章节完整生命故事</div><div class="me3-plan-feat"><span>含初卷全部</span><span>家人补充</span><span>纸质成书</span></div></div>
+      <div class="me3-plan-card"><div class="me3-plan-head"><b>家族典藏</b><span>完整题库</span></div><div class="me3-plan-q"><b>303</b>题 · 开放当前完整访谈库</div><div class="me3-plan-feat"><span>AI 自动跳题</span><span>家族档案</span><span>典藏礼盒</span></div><button class="me3-plan-btn" data-toast="顾问将与你联系">了解家族典藏</button></div>
+      <div class="plan-note"><b>讲述时不显示题号。</b>题库由 AI 在后台调度，不适用的问题会跳过，敏感内容也可以先放着。</div>
     </div>
   </section>
 
@@ -3714,9 +3715,9 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
       <div class="uh" id="upH"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg> 升级更完整的传记</div>
       <div class="ub" id="upB">题量 = 书的厚度，随时可升级。</div>
       <div class="upmini">
-        <div class="m"><div class="n">基础</div><div class="q">80 问</div></div>
-        <div class="m hot"><div class="n">升级</div><div class="q">100-200 问</div></div>
-        <div class="m"><div class="n">高配</div><div class="q">303 问</div></div>
+        <div class="m"><div class="n">初卷</div><div class="q">15 题</div></div>
+        <div class="m hot"><div class="n">长卷</div><div class="q">100 题</div></div>
+        <div class="m"><div class="n">典藏</div><div class="q">303 题</div></div>
       </div>
       <div class="uact"><button class="g" onclick="closeUpgrade()">暂不</button><button class="p" onclick="closeUpgrade();go('plans')">查看套餐 ›</button></div>
     </div>
@@ -3992,7 +3993,7 @@ var PRD_CONTENT={
   reviewdetail:{title:'家人补充详情 PRD',stage:'协作 · 单条审核',problem:'列表页不适合承载完整内容和采纳动作，需要单独详情页完成阅读和决策。',requirements:['展示单条家人补充的完整内容。','待确认内容在详情页采纳。','已采纳内容只读查看。'],metrics:['补充详情访问率','详情采纳率']},
   mine:{title:'我的页 PRD',stage:'账户 · 个人中心',problem:'用户需要统一查看账户、套餐、消息和个人资料，承接付费与管理动作。',requirements:['展示用户身份、故事进度、套餐状态。','入口包括账户资料、我的套餐、消息通知。','保留底部 Tab，可回到讲述和书房。'],metrics:['我的页访问率','套餐入口点击率','资料页点击率']},
   profile:{title:'账户资料 PRD',stage:'账户 · 基础资料',problem:'用户需要管理自己的账户资料，并查看当前套餐和身份信息。',requirements:['展示头像、昵称、手机号等基础资料。','手机号等敏感信息需脱敏。','提供我的套餐入口。'],metrics:['资料页访问率','套餐入口点击率']},
-  plans:{title:'我的套餐 PRD',stage:'商业化 · 题量版本',problem:'云忆需要用题量、书的厚度和成书能力解释套餐价值。',requirements:['展示当前套餐、剩余题量和升级权益。','用“题量=书的厚度”表达价值。','支持升级到更完整的传记版本。'],metrics:['套餐页访问率','升级点击率','付费转化率']},
+  plans:{title:'我的套餐 PRD',stage:'商业化 · 生命故事版本',problem:'云忆需要把访谈题量转译成“书的厚度”和成品价值，同时避免把题库变成老人端任务压力。',requirements:['展示人生初卷 15 题、人生长卷 100 题、家族典藏 303 题三档。','说明三档为同一题库的递进版本，升级后继续补充，不重复作答。','题量只在套餐页作为成书厚度说明，不进入讲述流程。','说明 AI 会后台调度题库，不适用或敏感问题可以跳过。'],packageTiers:[['人生初卷','15 题','内置题目 ID：1、3、5、13、16、32、36、47、63、78、111、145、173、236、288。覆盖来处、家庭、童年、求学、事业、婚姻、子女、苦难、成就和传承。'],['人生长卷','100 题','从完整题库按 10 章配额抽取：家族 10、童年 12、求学 10、事业/创业 14、婚姻 10、子女 10、苦难 8、时代/关系 10、价值/晚年 8、传承/感官 8。优先抽取已有人生经历的章节。'],['家族典藏','303 题','开放当前完整 303 题访谈库。不是强制答完，AI 按年龄、婚育、职业、创业、退休等上下文自动跳过不适用问题，并允许敏感问题仅保存不入书。']],metrics:['套餐页访问率','升级点击率','付费转化率']},
   msgs:{title:'消息通知 PRD',stage:'召回 · 协作动态',problem:'用户需要知道家人的回应、采纳、提问和待处理内容。',requirements:['展示未读消息和历史消息。','点击消息进入对应页面。','区分采纳、回应、提问、待审核等类型。'],metrics:['消息打开率','消息点击率','未读处理率']},
   landing:{title:'被邀请落地页 PRD',stage:'外部 · 家人进入',problem:'亲友通过分享链接进入时，需要快速理解自己要做什么，并开始帮她写。',requirements:['说明被邀请对象和协作目的。','选择身份后进入补充回忆。','提供“也给我父母做一本”的转化入口。'],metrics:['落地页打开率','身份选择率','帮写开始率','二次转化率']},
   onboarding:{title:'首页引导 PRD',stage:'新手 · 可隐藏',problem:'新用户可能需要快速理解云忆，但主路径不应依赖长引导。',requirements:['引导页可跳过。','当前主流程中弱化或隐藏，不放在屏幕地图第一位。','文案控制在三句话以内。'],metrics:['引导页完成率','跳过率']},
@@ -4021,7 +4022,7 @@ Object.assign(PRD_CONTENT,{
   persona:{title:'AI 人物形象 PRD',stage:'我的 · 可选形象增强',problem:'普通头像只能完成账号识别，用户还需要更有品牌感的人物素材用于展示和分享。',goal:'以用户照片锁定本人身份，再按所选风格生成 3:4 半身人物形象。',promptDocs:[['查看半身人物形象完整提示词','docs/ai/persona-image-prompts.md']],users:['希望制作人物海报或品牌形象的用户。'],flow:['从我的页进入人物形象。','第一步上传一张清晰半身照，无需裁剪。','上传成功后展示原图和风格选项。','选择风格并制作人物形象。','预览后可设为头像、进入品牌海报或更换半身照。'],requirements:['未上传半身照时不展示风格和生成按钮。','半身照上传后直接进入风格选择，不进入裁剪页。','原始照片是唯一身份依据，必须保持同一人的脸型、五官比例、年龄感、肤色和主要发型。','AI 主图为头部至腰部的 3:4 半身形象。','风格只改变服装、姿态、背景和光影，不得换脸、明显年轻化或生成通用网红脸。','点击分享人物形象进入品牌海报，不分享裸图。','生成完成后支持更换半身照并返回初始上传页。','设为头像必须由用户主动确认。'],edgeCases:['上传失败时停留第一步并允许重试。','人脸过小、遮挡、多人或模糊时提示重新上传。','身份一致性不合格时不得进入可设为头像状态。','生成失败时保留来源照片和所选风格。'],events:[['persona_photo_uploaded','上传半身照；属性：file_type。'],['persona_style_selected','选择风格。'],['persona_generated','生成完成。'],['persona_photo_reset','清除当前形象并返回上传页。'],['persona_set_as_avatar','设为头像。'],['persona_poster_opened','进入人物品牌海报。']],acceptance:['初始页只显示半身照上传。','上传后才显示风格与制作按钮。','上传半身照不出现裁剪页。','生成结果与参考照片为同一人，年龄、脸型和主要五官无明显漂移。','只有用户主动确认后才能设为头像。','成功后可进入品牌海报或更换半身照。'],metrics:['半身照上传率','人物形象生成率','身份一致性通过率','设为头像率','人物海报打开率']},
   personaposter:{title:'人物形象品牌海报 PRD',stage:'传播 · 品牌拉新',problem:'直接分享人物裸图缺少品牌识别和转化入口，无法承接产品拉新。',goal:'把半身人物形象合成为带品牌、Slogan 和二维码的传播海报。',users:['已生成人物形象并希望分享的用户。'],flow:['从人物形象成功页点击分享。','预览品牌人物海报。','保存图片或分享到微信。','接收方扫码进入云忆新用户流程。'],requirements:['海报包含半身人物形象、云忆品牌、主 Slogan、价值说明和二维码。','主 Slogan 为“把一生，讲成一本书”。','二维码文案引导“也为父母留下一本”。','不得在海报公开完整故事正文。'],edgeCases:['保存失败时保留预览并允许重试。','微信分享取消后停留海报页。'],events:[['persona_poster_viewed','进入海报预览；属性：persona_id。'],['persona_poster_saved','保存海报。'],['persona_poster_shared','微信分享海报。'],['persona_poster_qr_opened','扫码进入新用户流程。']],acceptance:['海报包含品牌、Slogan、二维码和拉新文案。','支持保存和微信分享。'],metrics:['人物海报保存率','人物海报分享率','二维码扫码转化率']},
   profile:{title:'账户资料 PRD',stage:'账户 · 基础资料',problem:'用户需要确认当前账号是谁，以及手机号等敏感资料是否正确。',goal:'展示和管理账号基础资料，同时保护隐私。',users:['登录用户。'],flow:['从我的页进入账户资料。','查看头像、昵称、手机号。','进入套餐页或返回。'],requirements:['手机号脱敏展示。','昵称和头像展示当前账号。','不在原型中暴露真实个人信息。','提供套餐入口。'],edgeCases:['手机号未绑定时展示绑定提示。','资料加载失败时显示重试。'],events:[['profile_viewed','进入资料页；属性：has_phone, plan_type。'],['profile_plan_clicked','点击套餐入口；属性：source_page。']],acceptance:['手机号脱敏。','套餐入口可用。'],metrics:['资料页访问率','套餐入口点击率']},
-  plans:{title:'我的套餐 PRD',stage:'商业化 · 题量版本',problem:'用户需要理解不同套餐的差异，尤其是题量如何影响书的完整度。',goal:'用“题量=书的厚度”解释套餐价值，并推动升级。',users:['发起人/付费决策者。'],flow:['从我的或资料页进入套餐。','查看当前套餐、剩余题量、升级权益。','点击升级。'],requirements:['明确当前套餐名称和题量。','展示升级后可获得更多问题、章节和纸质书能力。','权益文案与生命故事场景相关。'],edgeCases:['已是最高套餐时展示续费/增购。','支付不可用时可留下咨询。'],events:[['plans_viewed','进入套餐页；属性：plan_type, remaining_questions。'],['plan_upgrade_clicked','点击升级；属性：from_plan, target_plan。']],acceptance:['能看懂当前套餐。','升级按钮明显但不干扰主流程。'],metrics:['套餐页访问率','升级点击率','付费转化率']},
+  plans:{title:'我的套餐 PRD',stage:'商业化 · 生命故事版本',problem:'用户需要理解三档生命故事套餐的差异，但讲述者不能感到自己被 15/100/303 个问题追着完成。',goal:'用“题量=书的厚度”解释套餐价值，并把三档包装成初卷、长卷、典藏的成品升级。',users:['发起人/付费决策者。'],flow:['从我的或资料页进入套餐。','查看当前人生长卷和可升级的家族典藏。','理解 15 题、100 题和 303 题是同一题库递进权益。','点击了解或升级。'],requirements:['明确人生初卷 15 题、人生长卷 100 题、家族典藏 303 题。','展示升级后可获得更多人生章节、家人补充和纸质/典藏能力。','说明 AI 后台调度题库，不适用问题自动跳过。','不得在讲述流程展示题目总数、进度分母或剩余题量。','权益文案与生命故事成品相关，而不是问卷任务清单。'],packageTiers:[['人生初卷','15 题','内置题目 ID：1、3、5、13、16、32、36、47、63、78、111、145、173、236、288。覆盖来处、家庭、童年、求学、事业、婚姻、子女、苦难、成就和传承。'],['人生长卷','100 题','按章节配额取题：家族与出生 10、童年 12、求学青春 10、事业/创业 14、婚姻爱情 10、子女家庭 10、苦难转折 8、时代/关系 10、价值/晚年 8、传承/感官 8。每章优先取基础事实、关键场景、转折事件、感悟传承四类问题。'],['家族典藏','303 题','开放当前完整 303 题访谈库。不是强制答完，AI 按年龄、婚育、职业、创业、退休等上下文自动跳过不适用问题；敏感问题支持跳过、仅私密保存或交给家人后续补充。']],edgeCases:['已是最高套餐时展示续费/增购。','支付不可用时可留下咨询。','用户跳过敏感问题时不扣除体验路径，不产生失败态。'],events:[['plans_viewed','进入套餐页；属性：plan_type, question_bank_scope。'],['plan_upgrade_clicked','点击升级；属性：from_plan, target_plan。']],acceptance:['能看懂三档套餐分别对应简版人生、完整人生和典藏人生。','PRD 面板能看到每档题目内置规则或取题逻辑。','套餐页可展示题量，但讲述流不展示总题数。','升级按钮明显但不干扰主流程。'],metrics:['套餐页访问率','升级点击率','付费转化率']},
   msgs:{title:'消息通知 PRD',stage:'召回 · 协作动态',problem:'家人回应、采纳、提问等动态如果没有通知，用户很难持续回到产品。',goal:'把协作事件转化为可点击的任务和召回入口。',users:['发起人、被记录者、贡献者。'],flow:['从我的页进入消息。','查看未读和已读消息。','点击消息进入对应页面。'],requirements:['消息类型包括采纳、回应、提问、待审核。','未读消息有明显标识。','点击后跳到具体任务页面。'],edgeCases:['无消息时展示空态和开始讲述入口。','已处理消息不重复强提醒。'],events:[['messages_viewed','进入消息页；属性：unread_count。'],['message_clicked','点击消息；属性：message_type, target_page。'],['message_marked_read','消息已读；属性：message_type。']],acceptance:['未读状态可见。','点击消息能跳转。'],metrics:['消息打开率','消息点击率','未读处理率']},
   landing:{title:'被邀请落地页 PRD',stage:'外部 · 家人进入',problem:'家人从分享链接进入时，不一定了解云忆，需要在一屏内知道“我是谁、帮谁写、写完去哪”。',goal:'让外部访客完成身份选择并开始补充。',users:['被邀请的家人、亲友、同事。'],flow:['打开邀请链接。','查看被记录人和邀请说明。','选择身份。','点击我来帮她写进入补充流程。'],requirements:['明确被邀请对象和协作目的。','身份选项覆盖女儿、儿子、孙辈、亲友/同事。','说明补充内容会收进她的书里并需确认。','提供“也给我父母做一本”二次转化入口。'],edgeCases:['链接失效时提示联系邀请人。','未选择身份时给默认亲友身份但允许修改。'],events:[['invite_landing_viewed','打开落地页；属性：invite_id, source_channel。'],['landing_role_selected','选择身份；属性：role。'],['landing_contribute_clicked','点击帮她写；属性：role。'],['landing_create_own_clicked','点击给我父母做一本；属性：source_invite_id。']],acceptance:['身份选择后说明文案变化。','能进入补充页。'],metrics:['落地页打开率','身份选择率','帮写开始率','二次转化率']},
   permfail:{title:'麦克风权限 PRD',stage:'异常 · 权限被拦截',problem:'用户说了半天没反应会快速失去信任，权限异常页要解释原因并提供替代路径。',goal:'恢复录音能力，或引导用户继续使用键盘输入。',users:['采访录入用户。'],flow:['采访页点击麦克风异常入口。','查看开启麦克风说明。','返回采访页继续输入。'],requirements:['说明当前无法录音的原因。','提供开启麦克风步骤。','保留“先回去看看/键盘输入”退路。','不让用户以为内容已丢失。'],edgeCases:['权限恢复后回到采访页自动更新按钮状态。','无法恢复时继续键盘输入。'],events:[['mic_permission_page_viewed','进入权限页；属性：permission_status。'],['mic_permission_recover_clicked','点击开启指引；属性：platform。'],['mic_permission_back_clicked','返回采访；属性：fallback_mode。']],acceptance:['异常页不阻断键盘输入。','用户知道下一步怎么做。'],metrics:['权限恢复率','返回输入率','录音失败流失率']},
@@ -4071,11 +4072,11 @@ var PRD_FIELDS={
   upload:[['素材类型','入口卡片选择','老照片 / 文字资料 / 老物件 / 证件资料 / 视频'],['文件数量','上传后统计','1-20 个'],['素材说明','可选文本输入','0-100 字'],['关联位置','选择归类目标','整本书 / 某章节 / 某故事 / 待整理'],['上传状态','进度和结果展示','未上传 / 上传中 / 成功 / 失败']],
   review:[['贡献者','只读展示家人身份','女儿 / 儿子 / 孙辈 / 亲友'],['列表条目','点击进入详情，不在列表采纳','待确认 / 已采纳'],['审核分类','顶部切换','待确认 / 已采纳'],['审核状态','列表标签','待确认 / 已采纳']],
   reviewdetail:[['贡献者','只读展示家人身份和时间','女儿 / 儿子 / 孙辈 / 亲友'],['补充正文','完整展示家人补充内容','20-1200 字'],['详情状态','只读状态标签','待确认 / 已采纳'],['详情动作','待确认时显示','先放着 / 采纳进书']],
-  mine:[['用户身份','只读展示','本人 / 子女发起人 / 家人协作者'],['故事进度','只读统计','已讲段数 / 章节数 / 已成稿数'],['套餐状态','点击进入套餐页','基础版 / 升级版 / 专业版'],['未读消息','点击进入消息页','0-N 条']],
+  mine:[['用户身份','只读展示','本人 / 子女发起人 / 家人协作者'],['故事进度','只读统计','已讲段数 / 章节数 / 已成稿数'],['套餐状态','点击进入套餐页','人生初卷 / 人生长卷 / 家族典藏'],['未读消息','点击进入消息页','0-N 条']],
   profile:[['头像','点击更换或只读展示','图片 / 姓名首字'],['昵称','文本输入，失焦保存','1-12 字'],['手机号','脱敏只读或绑定','138****0000 / 未绑定'],['套餐入口','点击进入 plans','当前套餐名称']],
   persona:[['来源照片','第一步直接上传，不裁剪','清晰正面半身照'],['半身主图','AI 生成 3:4 竖版形象','头部至腰部'],['形象风格','照片上传后单选','温暖生活 / 典雅东方 / 旧时光'],['生成状态','页面状态流转','待上传 / 已上传 / 生成中 / 已生成 / 失败'],['成功动作','生成成功后点击','分享人物形象 / 设为头像 / 更换半身照']],
   personaposter:[['人物主图','使用已确认 AI 半身形象','3:4 半身图'],['品牌信息','海报固定叠加','云忆 · 生命故事'],['主 Slogan','固定品牌文案','把一生，讲成一本书'],['拉新引导','二维码旁文案','扫码，也为父母留下一本'],['海报动作','点击执行','保存图片 / 分享到微信']],
-  plans:[['当前套餐','只读展示','基础版 / 升级版 / 专业版'],['剩余题量','只读数值','0-N 问'],['升级目标','点击选择套餐','升级版 200 问 / 专业版 500 问'],['支付状态','后续支付流转','未支付 / 支付中 / 成功 / 失败']],
+  plans:[['当前套餐','只读展示','人生初卷 / 人生长卷 / 家族典藏'],['成书深度','只读展示','15 题 / 100 题 / 当前完整 303 题库'],['题库调度','后台权益说明','AI 自动跳过不适用问题'],['升级目标','点击选择套餐','人生长卷 / 家族典藏'],['支付状态','后续支付流转','未支付 / 支付中 / 成功 / 失败']],
   msgs:[['消息类型','列表标签或图标','采纳 / 回应 / 提问 / 待审核 / 系统'],['未读状态','点击消息后置已读','unread / read'],['跳转目标','点击消息进入对应页面','session / review / contribute / book'],['消息时间','只读展示','刚刚 / N 小时前 / 昨天 / 日期']],
   onboarding:[['引导页序号','滑动或点击切换','1 / 2 / 3'],['开始按钮','点击进入资料采集','开始，先认识一下'],['跳过入口','点击进入采访页','先随便看看'],['展示状态','首次展示后记录','未看 / 已看 / 已跳过']],
   permfail:[['权限状态','系统检测展示','未授权 / 已拒绝 / 已授权 / 不支持'],['恢复动作','点击查看设置指引','开启麦克风 / 返回键盘输入'],['兜底输入','按钮返回采访键盘输入','keyboard'],['错误原因','只读说明','浏览器权限 / 小程序权限 / 系统权限']],
@@ -4106,7 +4107,8 @@ function renderPrd(id){
   function fieldList(items){return items&&items.length?'<div class="prd-block"><h3>字段交互 / 取值</h3><div class="prd-field">'+items.map(function(x){return '<div><b>'+x[0]+'</b><span>'+x[1]+'</span><i>取值：'+x[2]+'</i></div>';}).join('')+'</div></div>':'';}
   function metrics(items){return items&&items.length?'<div class="prd-block"><h3>核心指标</h3><div class="prd-metrics">'+items.map(function(x){return '<span>'+x+'</span>';}).join('')+'</div></div>':'';}
   function promptDocs(items){return items&&items.length?'<div class="prd-block"><h3>AI 提示词</h3><div class="prd-docs">'+items.map(function(x){return '<a href="'+x[1]+'" target="_blank" rel="noopener">'+x[0]+'</a>';}).join('')+'</div></div>':'';}
-  body.innerHTML=para('问题',data.problem)+para('目标',data.goal)+promptDocs(data.promptDocs)+list('当前状态',data.status)+list('本版范围',data.inScope)+list('暂缓/后续',data.deferred)+list('目标用户',data.users)+list('用户流程',data.flow)+list('功能规则',data.requirements)+list('异常与边界',data.edgeCases)+fieldList(fields)+events(data.events)+list('验收标准',data.acceptance)+metrics(data.metrics);
+  function packageTiers(items){return items&&items.length?'<div class="prd-block"><h3>套餐题目内置规则</h3><div class="prd-field">'+items.map(function(x){return '<div><b>'+x[0]+' · '+x[1]+'</b><span>'+x[2]+'</span></div>';}).join('')+'</div></div>':'';}
+  body.innerHTML=para('问题',data.problem)+para('目标',data.goal)+promptDocs(data.promptDocs)+list('当前状态',data.status)+list('本版范围',data.inScope)+list('暂缓/后续',data.deferred)+list('目标用户',data.users)+list('用户流程',data.flow)+list('功能规则',data.requirements)+packageTiers(data.packageTiers)+list('异常与边界',data.edgeCases)+fieldList(fields)+events(data.events)+list('验收标准',data.acceptance)+metrics(data.metrics);
 }
 function togglePrdPanel(){
   var p=document.getElementById('prdPanel'), t=document.getElementById('prdToggle');
