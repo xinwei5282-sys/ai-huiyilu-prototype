@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 
 const html = await readFile(new URL('../prototype-v17.html', import.meta.url), 'utf8');
 const prompts = await readFile(new URL('../docs/ai/quote-card-background-prompts.md', import.meta.url), 'utf8');
+const personaPrompts = await readFile(new URL('../docs/ai/persona-image-prompts.md', import.meta.url), 'utf8');
 
 test('first-time setup skips avatar while profile avatar remains editable', () => {
   assert.doesNotMatch(html, /id="setupAvatarInput"/);
@@ -25,11 +26,27 @@ test('quote card exposes non-blocking AI background states and styles', () => {
   assert.match(html, /生成失败，已保留当前背景/);
 });
 
-test('background prompt protects identity and reserves card layout', () => {
-  assert.match(prompts, /不生成人物、面孔、手、身体/);
+test('background prompt uses article context and reserves card layout', () => {
+  assert.match(prompts, /article_content/);
+  assert.match(prompts, /core_meaning/);
+  assert.match(prompts, /visual_elements/);
+  assert.match(prompts, /根据文章语境决定是否出现人物/);
+  assert.match(prompts, /不得声称或暗示为用户本人的真实影像/);
   assert.match(prompts, /左下头像区域/);
   assert.match(prompts, /右下二维码区域/);
-  assert.match(prompts, /不发送头像、姓名、手机号或完整访谈原文/);
+  assert.match(prompts, /不把完整文章直接发送给图片模型/);
+  assert.match(html, /背景必须结合金句内容与所在文章语境/);
+  assert.match(html, /文章相关人物可以出现在背景中/);
+});
+
+test('persona prompt locks identity while allowing controlled styling', () => {
+  assert.match(personaPrompts, /唯一人物身份依据/);
+  assert.match(personaPrompts, /脸型、五官结构与比例/);
+  assert.match(personaPrompts, /不要把人物年轻化/);
+  assert.match(personaPrompts, /0\.80–0\.90/);
+  assert.match(personaPrompts, /不得进入“可设为头像”状态/);
+  assert.match(html, /原始照片是唯一身份依据/);
+  assert.match(html, /生成结果与参考照片为同一人/);
 });
 
 test('chapter share opens mini program sharing without landing navigation', () => {
