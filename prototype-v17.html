@@ -11,10 +11,10 @@
 :root{
   --cream:#FAF6F0; --cream-2:#FFFBF5; --card:#FFFFFF;   /* A·暖阳奶油 换皮 */
   --brown:#2A2019; --brown-h:#1E1712; --brown-500:#8A6F5C;
-  --gold:#D9663F; --gold-btn1:#EE8B5D; --gold-btn2:#D9663F; --gold-deep:#B44A2A;   /* 陶土橙主色（替换原金色） */
+  --gold:#D9663F; --gold-btn1:#C65332; --gold-btn2:#A83F27; --gold-deep:#B44A2A;   /* 陶土橙主色（按钮使用高对比深色） */
   --green:#4C7A5C; --green-2:#4C7A5C; --green-700:#3C6249;
   /* 副文本对比达标（适老） */
-  --text:#2A2019; --text-2:#7C6B5E; --text-3:#A0917F;
+  --text:#2A2019; --text-2:#7C6B5E; --text-3:#746456;
   --gold-ink:#B44A2A;
   --paper-line:#EFE1D2; --error:#B94A3A; --line:#EDE4D8;
   /* v15 统一设计系统 token */
@@ -51,6 +51,7 @@
   --session-scene:url("proto-assets/home-bg.png");   /* 讲述页场景图：复用 home-bg 女子书桌图 */
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+button:focus-visible,[data-go]:focus-visible,[onclick]:focus-visible{outline:3px solid rgba(180,74,42,.42);outline-offset:3px}
 body{font-family:var(--sans);color:var(--text);line-height:1.6;
   background:radial-gradient(120% 60% at 100% 0%, rgba(249,197,150,.22) 0%, transparent 60%), #EAE5DC;
   min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:36px 16px 60px}
@@ -570,16 +571,16 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .up3-k{position:relative;z-index:1;font-size:13px;font-weight:900;color:var(--gold-deep)}
 .up3-h{position:relative;z-index:1;margin-top:4px;font-family:var(--serif);font-size:24px;line-height:1.25;font-weight:800;color:var(--brown-h)}
 .up3-s{position:relative;z-index:1;margin-top:8px;font-size:14px;line-height:1.55;color:var(--brown-500);font-weight:700}
-.up3-drop{position:relative;z-index:1;margin-top:14px;border:1.5px dashed rgba(217,102,63,.36);border-radius:20px;background:rgba(255,255,255,.62);padding:15px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.up3-drop{position:relative;z-index:1;width:100%;margin-top:14px;border:1.5px dashed rgba(217,102,63,.36);border-radius:20px;background:rgba(255,255,255,.62);padding:15px;display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left;font-family:var(--sans);color:inherit}
 .up3-drop .ic{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,#FFE7D5,#FFD9BE);display:grid;place-items:center;color:var(--gold-deep);flex:none}
 .up3-drop .ic svg,.up3-type .ic svg,.up3-file .ic svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .up3-drop b{display:block;font-size:16px;color:var(--brown-h);line-height:1.25}
 .up3-drop span{display:block;margin-top:3px;font-size:12px;color:var(--text-2);font-weight:700}
 .up3-types{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}
-.up3-type{border:0;background:#fff;border-radius:18px;padding:13px 8px;box-shadow:var(--sh-soft);display:flex;flex-direction:column;align-items:center;gap:7px;color:var(--brown);font-family:var(--sans);font-weight:900;cursor:pointer;min-height:94px}
-.up3-type .ic{width:38px;height:38px;border-radius:14px;background:var(--A-cream2);display:grid;place-items:center;color:var(--gold-deep)}
-.up3-type span{font-size:13px;line-height:1.2}
-.up3-type em{font-style:normal;font-size:10px;color:var(--text-3);font-weight:800}
+.up3-type{border:1px solid rgba(180,138,62,.12);background:rgba(255,255,255,.68);border-radius:16px;padding:10px 5px;box-shadow:none;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--brown);font-family:var(--sans);font-weight:900;cursor:pointer;min-height:78px}
+.up3-type .ic{width:32px;height:32px;border-radius:11px;background:var(--A-cream2);display:grid;place-items:center;color:var(--gold-deep)}
+.up3-type span{font-size:14px;line-height:1.2}
+.up3-type em{font-style:normal;font-size:12px;color:var(--text-2);font-weight:800}
 .up3-panel{margin-top:14px;background:#fff;border-radius:22px;padding:15px;box-shadow:var(--sh-soft);border:1px solid rgba(180,138,62,.08)}
 .up3-ph{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .up3-ph b{font-size:16px;color:var(--brown-h)}
@@ -588,15 +589,15 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .up3-bar{height:7px;border-radius:999px;background:rgba(217,102,63,.14);overflow:hidden}
 .up3-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#EE8B5D,#D9663F)}
 .up3-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}
-.up3-steps span{border-radius:12px;background:var(--cream-2);padding:7px 5px;text-align:center;font-size:11px;color:var(--text-2);font-weight:800}
+.up3-steps span{border-radius:12px;background:var(--cream-2);padding:8px 5px;text-align:center;font-size:13px;color:var(--text-2);font-weight:800}
 .up3-steps span.on{background:rgba(217,102,63,.12);color:var(--gold-deep)}
 .up3-list{display:grid;gap:10px;margin-top:10px}
 .up3-file{background:#fff;border-radius:20px;padding:13px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh-soft);border:1px solid rgba(180,138,62,.08)}
 .up3-file .ic{width:44px;height:44px;border-radius:15px;background:var(--A-cream2);display:grid;place-items:center;color:var(--gold-deep);flex:none}
 .up3-file .tx{flex:1;min-width:0}
 .up3-file .name{font-size:15px;font-weight:900;color:var(--brown-h);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.up3-file .meta{margin-top:4px;font-size:12px;font-weight:800;color:var(--text-2);line-height:1.35}
-.up3-file .tag{flex:none;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:900;background:rgba(76,122,92,.12);color:var(--green-2);white-space:nowrap}
+.up3-file .meta{margin-top:4px;font-size:14px;font-weight:800;color:var(--text-2);line-height:1.35}
+.up3-file .tag{flex:none;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:900;background:rgba(76,122,92,.12);color:var(--green-2);white-space:nowrap}
 .co-body{background:radial-gradient(260px 170px at 90% 2%,rgba(238,139,93,.12),transparent 62%),var(--cream);padding:14px 16px 18px}
 .co-hero{position:relative;overflow:hidden;border-radius:24px;padding:18px;background:linear-gradient(150deg,#FFF7EC,#F5DFC0);border:1px solid rgba(180,138,62,.16);box-shadow:var(--sh-card)}
 .co-hero::after{content:"";position:absolute;right:-42px;top:-52px;width:140px;height:140px;border-radius:50%;background:rgba(217,102,63,.1);pointer-events:none}
@@ -726,18 +727,15 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .co-collab-hero .ey{position:relative;z-index:1;font-size:12px;font-weight:900;color:var(--gold-deep)}
 .co-collab-hero .h{position:relative;z-index:1;margin-top:6px;font-family:var(--serif);font-size:24px;line-height:1.2;font-weight:900;color:var(--brown-h)}
 .co-collab-hero .s{position:relative;z-index:1;margin-top:7px;font-size:13px;line-height:1.48;color:var(--brown-500);font-weight:800}
-.co-collab-stats{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
-.co-collab-stats div{border:1px solid rgba(180,138,62,.12);border-radius:15px;background:rgba(255,255,255,.62);padding:9px 4px;text-align:center}
-.co-collab-stats b{display:block;font-size:19px;line-height:1;color:var(--gold-deep);font-weight:900}
-.co-collab-stats span{display:block;margin-top:5px;font-size:11px;color:var(--text-2);font-weight:900}
+.co-collab-summary{position:relative;z-index:1;display:flex;align-items:center;gap:8px;margin-top:13px;padding-top:12px;border-top:1px solid rgba(180,138,62,.18);font-size:14px;line-height:1.4;color:var(--green-700);font-weight:800}.co-collab-summary span{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--success-bg);color:var(--green-700);flex:none}
 .co-collab-list{display:grid;gap:9px;margin-top:12px}
-.co-person-row{display:flex;align-items:center;gap:12px;border:1px solid rgba(180,138,62,.09);border-radius:19px;background:rgba(255,255,255,.82);padding:12px;box-shadow:var(--sh-soft);cursor:pointer}
+.co-person-row{width:100%;display:flex;align-items:center;gap:12px;border:1px solid rgba(180,138,62,.10);border-radius:18px;background:rgba(255,255,255,.72);padding:13px 12px;box-shadow:none;cursor:pointer;text-align:left;font-family:var(--sans);color:inherit}
 .co-person-row .co-av{width:44px;height:44px;border-radius:16px}
 .co-person-main{flex:1;min-width:0}
 .co-person-main b{display:block;font-size:16px;line-height:1.25;color:var(--brown-h);font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.co-person-main span{display:block;margin-top:4px;font-size:12px;line-height:1.38;color:var(--text-2);font-weight:800}
+.co-person-main span{display:block;margin-top:4px;font-size:14px;line-height:1.4;color:var(--text-2);font-weight:750}
 .co-person-state{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:5px}
-.co-person-state em{font-style:normal;border-radius:999px;background:rgba(217,102,63,.10);color:var(--gold-deep);padding:5px 8px;font-size:11px;font-weight:900;white-space:nowrap}
+.co-person-state em{font-style:normal;border-radius:999px;background:rgba(217,102,63,.10);color:var(--gold-deep);padding:6px 9px;font-size:12px;font-weight:900;white-space:nowrap}
 .co-person-state em.done{background:rgba(76,122,92,.12);color:var(--green-2)}
 .co-person-state i{font-style:normal;color:var(--text-3);font-size:20px;line-height:1}
 .co-collab-foot{position:absolute;left:0;right:0;bottom:0;z-index:16;padding:10px 16px calc(14px + env(safe-area-inset-bottom,0px));background:linear-gradient(0deg,var(--cream) 78%,rgba(250,246,240,0));border-top:1px solid rgba(180,138,62,.10)}
@@ -770,26 +768,24 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .me3-body{background:radial-gradient(260px 170px at 88% 0%,rgba(238,139,93,.12),transparent 64%),var(--cream);padding:14px 16px 18px}
 .me3-hero{position:relative;overflow:hidden;border-radius:24px;padding:18px;background:linear-gradient(150deg,#FFF7EC,#F5DFC0);border:1px solid rgba(180,138,62,.16);box-shadow:var(--sh-card)}
 .me3-hero::after{content:"";position:absolute;right:-44px;top:-54px;width:140px;height:140px;border-radius:50%;background:rgba(217,102,63,.1);pointer-events:none}
-.me3-top{position:relative;z-index:1;display:flex;align-items:center;gap:13px;cursor:pointer}
+.me3-top{position:relative;z-index:1;width:100%;display:flex;align-items:center;gap:13px;cursor:pointer;border:0;background:transparent;text-align:left;font-family:var(--sans);color:inherit}
 .me3-av{width:58px;height:58px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(140deg,#F4A877,#D9663F);color:#fff;font-family:var(--serif);font-size:24px;font-weight:900;box-shadow:0 12px 22px -13px rgba(180,74,42,.8);flex:none;background-size:cover;background-position:center;overflow:hidden}
 .me3-av.has-avatar{font-size:0}
 .me3-name{flex:1;min-width:0}.me3-name b{display:block;font-size:22px;line-height:1.25;color:var(--brown-h);font-weight:900}.me3-name span{display:block;margin-top:4px;font-size:13px;font-weight:800;color:var(--brown-500)}
 .me3-chip{border-radius:999px;background:rgba(255,255,255,.68);border:1px solid rgba(180,138,62,.16);padding:6px 9px;color:var(--gold-deep);font-size:12px;font-weight:900;flex:none}
-.me3-stats{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
-.me3-stats div{background:rgba(255,255,255,.58);border:1px solid rgba(180,138,62,.14);border-radius:15px;padding:9px 5px;text-align:center}
-.me3-stats b{display:block;font-family:var(--serif);font-size:19px;line-height:1;color:var(--gold-deep)}.me3-stats span{display:block;margin-top:5px;font-size:11px;font-weight:800;color:var(--text-2)}
+.me3-story-progress{position:relative;z-index:1;width:100%;margin-top:14px;padding:12px 0 0;border:0;border-top:1px solid rgba(180,138,62,.20);background:transparent;display:flex;align-items:center;gap:12px;text-align:left;font-family:var(--sans);color:inherit;cursor:pointer}.me3-story-progress>span{flex:1;min-width:0}.me3-story-progress b{display:block;font-size:16px;line-height:1.3;color:var(--brown-h)}.me3-story-progress small{display:block;margin-top:4px;font-size:14px;line-height:1.35;color:var(--text-2);font-weight:700}.me3-story-progress i{font-style:normal;color:var(--gold-deep);font-size:14px;font-weight:900;white-space:nowrap}
 .me3-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
-.me3-tile{background:rgba(255,250,242,.46);border:1px solid rgba(180,138,62,.16);border-radius:18px;padding:13px;box-shadow:none;cursor:pointer;min-height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px}
+.me3-tile{background:rgba(255,250,242,.46);border:1px solid rgba(180,138,62,.16);border-radius:18px;padding:13px;box-shadow:none;cursor:pointer;min-height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;font-family:var(--sans);color:inherit}
 .me3-tile .ic{width:38px;height:38px;border-radius:13px;background:var(--progress-bg);display:grid;place-items:center;color:var(--gold-deep)}
 .me3-tile .ic svg,.me3-row .ic svg,.me3-plan-ic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .me3-tile b{display:block;font-size:var(--fs-sm);color:var(--brown-h);line-height:1.25;font-weight:800}.me3-tile span{display:none}
-.me3-row{background:#fff;border:1px solid rgba(180,138,62,.08);border-radius:19px;padding:14px;box-shadow:var(--sh-soft);display:flex;align-items:center;gap:12px;margin-top:10px;cursor:pointer}
+.me3-row{width:100%;background:#fff;border:1px solid rgba(180,138,62,.08);border-radius:19px;padding:14px;box-shadow:var(--sh-soft);display:flex;align-items:center;gap:12px;margin-top:10px;cursor:pointer;text-align:left;font-family:var(--sans);color:inherit}
 .me3-row .ic{width:44px;height:44px;border-radius:15px;background:var(--A-cream2);display:grid;place-items:center;color:var(--gold-deep);flex:none}
-.me3-row .tx{flex:1;min-width:0}.me3-row b{display:block;font-size:16px;color:var(--brown-h)}.me3-row span{display:block;margin-top:4px;font-size:12px;font-weight:800;color:var(--text-2)}.me3-row .arr{color:var(--text-3);font-size:20px;flex:none}
-.me3-task{margin-top:12px;border-radius:19px;background:rgba(255,255,255,.78);border:1px solid rgba(120,90,60,.08);box-shadow:var(--sh-soft);padding:13px;display:flex;align-items:center;gap:11px;cursor:pointer}
+.me3-row .tx{flex:1;min-width:0}.me3-row b{display:block;font-size:16px;color:var(--brown-h)}.me3-row span{display:block;margin-top:4px;font-size:14px;font-weight:800;color:var(--text-2)}.me3-row .arr{color:var(--text-3);font-size:20px;flex:none}
+.me3-task{width:100%;margin-top:10px;border-radius:18px;background:rgba(255,255,255,.72);border:1px solid rgba(120,90,60,.10);box-shadow:none;padding:13px;display:flex;align-items:center;gap:11px;cursor:pointer;text-align:left;font-family:var(--sans);color:inherit}
 .me3-task .ic{width:42px;height:42px;border-radius:14px;background:var(--progress-bg);color:var(--gold-deep);display:grid;place-items:center;flex:none}
 .me3-task .ic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.me3-task .tx{flex:1;min-width:0}.me3-task b{display:block;font-size:15px;line-height:1.25;color:var(--brown-h);font-weight:900}.me3-task span{display:block;margin-top:4px;font-size:12px;line-height:1.35;color:var(--text-2);font-weight:800}.me3-task .tag{flex:none;border-radius:999px;background:rgba(217,102,63,.14);color:var(--gold-deep);padding:5px 8px;font-size:11px;font-weight:900}
+.me3-task .tx{flex:1;min-width:0}.me3-task b{display:block;font-size:16px;line-height:1.28;color:var(--brown-h);font-weight:900}.me3-task .tx>span{display:block;margin-top:4px;font-size:14px;line-height:1.4;color:var(--text-2);font-weight:750}.me3-task .tag{flex:none;border-radius:999px;background:rgba(217,102,63,.12);color:var(--gold-deep);padding:6px 9px;font-size:12px;font-weight:900}
 .me3-pref{display:grid;gap:0;border:1px solid rgba(120,90,60,.08);border-radius:18px;background:rgba(255,255,255,.66);overflow:hidden;box-shadow:var(--sh-soft)}
 .me3-pref .me3-row{margin:0;border:0;border-radius:0;box-shadow:none;background:transparent}
 .me3-pref .me3-row+.me3-row{border-top:1px solid rgba(180,138,62,.12)}
@@ -824,7 +820,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .persona-preview-label{position:absolute;left:16px;right:16px;bottom:15px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.45)}.persona-preview:not([data-state="ready"]) .persona-preview-label{display:none}.persona-preview-label b{display:block;font-family:var(--serif);font-size:20px}.persona-preview-label span{display:block;margin-top:3px;font-size:12px;font-weight:700;opacity:.86}
 .persona-overlay{position:absolute;inset:0;display:grid;place-items:center;background:rgba(44,31,23,.18);color:#fff;text-align:center;font-size:14px;font-weight:900}.persona-preview[data-state="ready"] .persona-overlay{display:none}.persona-spinner{width:28px;height:28px;margin:0 auto 10px;border:3px solid rgba(255,255,255,.28);border-top-color:#fff;border-radius:50%;animation:qspin .8s linear infinite}
 .persona-style-zone{transition:opacity .2s}.persona-style-title{display:flex;align-items:center;justify-content:space-between;margin-top:16px;font-size:15px;color:var(--brown-h);font-weight:900}.persona-style-title span{font-size:11px;color:var(--brown-500);font-weight:700}.persona-styles{display:flex;gap:8px;margin-top:8px}.persona-style{position:relative;flex:1;min-height:62px;padding:8px 5px 7px;border:1px solid rgba(91,70,48,.13);border-radius:16px;background:#fff;color:var(--brown-500);font:800 13px var(--sans);transition:transform .16s,border-color .16s,background .16s}.persona-style small{display:block;margin-top:3px;font-size:10px;font-weight:700;opacity:.72}.persona-style.on{border-color:rgba(217,102,63,.52);background:var(--progress-bg);color:var(--gold-deep);box-shadow:0 8px 18px -14px rgba(180,74,42,.8)}.persona-style.on::after{content:"✓";position:absolute;right:6px;top:5px;width:17px;height:17px;border-radius:50%;display:grid;place-items:center;background:var(--gold-deep);color:#fff;font-size:10px}.persona-style:active{transform:scale(.97)}.persona-style-zone.disabled{opacity:.48;pointer-events:none}
-.persona-note{margin-top:10px;border-radius:13px;background:rgba(76,122,92,.08);padding:9px 11px;color:var(--green-2);font-size:12px;line-height:1.45;font-weight:800}.persona-actions{display:grid;grid-template-columns:1fr 1.2fr;gap:9px;margin-top:12px}.persona-actions button{min-height:48px;border-radius:15px;font:900 14px var(--sans)}.persona-actions .ghost{border:1px solid rgba(91,70,48,.13);background:#fff;color:var(--brown)}.persona-actions .primary{border:0;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff}.persona-actions .wide{grid-column:1/-1}.persona-hidden-input{display:none}
+.persona-actions{display:grid;grid-template-columns:1fr 1.2fr;gap:9px;margin-top:12px}.persona-actions button{min-height:48px;border-radius:15px;font:900 14px var(--sans)}.persona-actions .ghost{border:1px solid rgba(91,70,48,.13);background:#fff;color:var(--brown)}.persona-actions .primary{border:0;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff}.persona-actions .wide{grid-column:1/-1}.persona-hidden-input{display:none}
 .persona-actions .reset-link{grid-column:1/-1;min-height:44px;border:0;background:transparent;color:var(--brown-500);text-decoration:underline;text-underline-offset:4px}
 .persona-poster-wrap{padding:8px 16px 24px;background:var(--cream)}.persona-poster{position:relative;width:300px;height:430px;margin:0 auto;border-radius:24px;overflow:hidden;background:#d8bfa7;box-shadow:0 28px 54px -30px rgba(62,39,24,.72)}.persona-poster::before{content:"";position:absolute;inset:0;background:url("proto-assets/home-bg.png") 55% 31%/cover no-repeat}.persona-poster::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,20,14,.05) 30%,rgba(30,19,13,.14) 54%,rgba(27,17,12,.94) 100%)}
 .pp-brand{position:absolute;z-index:2;left:18px;top:18px;display:flex;align-items:center;gap:8px;color:#fff;font-size:13px;font-weight:900;text-shadow:0 2px 10px rgba(0,0,0,.34)}.pp-brand i{display:block;width:25px;height:25px;background:var(--brand) center/contain no-repeat}.pp-copy{position:absolute;z-index:2;left:20px;right:20px;bottom:75px;color:#fff}.pp-copy h2{font-family:var(--serif);font-size:26px;line-height:1.32;letter-spacing:.03em}.pp-copy p{margin-top:7px;font-size:13px;line-height:1.5;font-weight:700;color:rgba(255,255,255,.82)}.pp-foot{position:absolute;z-index:2;left:20px;right:18px;bottom:16px;display:flex;align-items:center;gap:10px;color:#fff}.pp-qr{width:48px;height:48px;border-radius:8px;background:repeating-conic-gradient(#2f241c 0 25%,#fff 0 50%) 0/10px 10px;border:3px solid #fff}.pp-cta b{display:block;font-size:12px}.pp-cta span{display:block;margin-top:2px;font-size:10px;color:rgba(255,255,255,.7);font-weight:700}.persona-poster-note{width:300px;margin:10px auto 0;color:var(--brown-500);font-size:12px;line-height:1.5;text-align:center;font-weight:700}.persona-poster-actions{display:flex;gap:10px;margin-top:14px}.persona-poster-actions button{flex:1;min-height:50px;border-radius:16px;font:900 15px var(--sans)}.persona-poster-actions .save{border:1px solid rgba(91,70,48,.13);background:#fff;color:var(--brown)}.persona-poster-actions .share{border:0;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff}
@@ -2397,28 +2393,25 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
     <div class="body me3-body">
       <div class="mine-nav" style="display:flex;align-items:center;justify-content:center;position:relative">我的</div>
       <div class="me3-hero">
-        <div class="me3-top" data-go="profile">
+        <button class="me3-top" data-go="profile">
           <div class="me3-av" data-avatar-view>兰</div>
           <div class="me3-name"><b>兰秀英</b><span>云忆 · 生命故事</span></div>
           <span class="me3-chip">资料 ›</span>
-        </div>
-        <div class="me3-stats" data-go="book">
-          <div><b>12</b><span>已录故事</span></div>
-          <div><b>3</b><span>已成书稿</span></div>
-          <div><b>80%</b><span>成书进度</span></div>
-        </div>
+        </button>
+        <button class="me3-story-progress" data-go="book"><span><b>您的时光印记正在慢慢成书</b><small>已经整理出 3 篇书稿</small></span><i>去书房 ›</i></button>
       </div>
-      <div class="me3-task" data-go="persona"><span class="ic"><svg class="ico-ph" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/><path d="M18 4l.7 1.6L20.5 6l-1.8.7L18 8.5l-.7-1.8L15.5 6l1.8-.4L18 4Z"/></svg></span><div class="tx"><b>制作我的人物形象</b><span>用一张照片，生成有故事感的半身形象</span></div><span class="tag">去制作</span></div>
-      <div class="me3-task" data-go="review"><span class="ic"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-4 3v-3H4V5Z"/><path d="M8 9h8M8 12h5"/></svg></span><div class="tx"><b>家人补充了 2 段</b><span>先查看并采纳，合适的内容会收进书里</span></div><span class="tag">去处理</span></div>
+      <div class="hub-lbl">现在可以做</div>
+      <button class="me3-task" data-go="review"><span class="ic"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-4 3v-3H4V5Z"/><path d="M8 9h8M8 12h5"/></svg></span><span class="tx"><b>看看家人补充的故事</b><span>有 2 段新内容等您确认</span></span><span class="tag">去看看</span></button>
+      <button class="me3-task" data-go="persona"><span class="ic"><svg class="ico-ph" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/><path d="M18 4l.7 1.6L20.5 6l-1.8.7L18 8.5l-.7-1.8L15.5 6l1.8-.4L18 4Z"/></svg></span><span class="tx"><b>制作我的人物形象</b><span>用一张照片，生成有故事感的半身形象</span></span><span class="tag">去制作</span></button>
       <div class="hub-lbl">账户功能</div>
       <div class="me3-grid">
-        <div class="me3-tile" data-go="plans"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 11h16v9H4z"/><path d="M2 7h20v4H2z"/><path d="M12 7v13"/></svg></span><b>我的套餐</b><span>当前：升级版 · 200 问</span></div>
-        <div class="me3-tile" data-go="collaborators"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 15.2A6 6 0 0 1 21.5 20"/></svg></span><b>一起记录的人</b><span>4 位家人一起记录</span></div>
+        <button class="me3-tile" data-go="plans"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 11h16v9H4z"/><path d="M2 7h20v4H2z"/><path d="M12 7v13"/></svg></span><b>我的套餐</b><span>当前：升级版 · 200 问</span></button>
+        <button class="me3-tile" data-go="collaborators"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 15.2A6 6 0 0 1 21.5 20"/></svg></span><b>一起记录的人</b><span>4 位家人一起记录</span></button>
       </div>
       <div class="hub-lbl">偏好设置</div>
       <div class="me3-pref">
-        <div class="me3-row" data-toast="朗读语速：慢 / 中 / 快（示意）"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 15a8 8 0 0 1 16 0"/><path d="M12 15l4-3"/><circle cx="12" cy="15" r="1.2" fill="currentColor" stroke="none"/></svg></span><div class="tx"><b>朗读语速</b><span>慢速</span></div><span class="arr">›</span></div>
-        <div class="me3-row" data-toast="字号：标准 / 大（示意）"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 18L7 7l4 11M4.2 14.5h5.6"/><path d="M13 18l3-8 3 8M13.8 15.5h4.4"/></svg></span><div class="tx"><b>字号大小</b><span>标准</span></div><span class="arr">›</span></div>
+        <button class="me3-row" data-toast="朗读语速：慢 / 中 / 快（示意）"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 15a8 8 0 0 1 16 0"/><path d="M12 15l4-3"/><circle cx="12" cy="15" r="1.2" fill="currentColor" stroke="none"/></svg></span><span class="tx"><b>朗读语速</b><span>慢速</span></span><span class="arr">›</span></button>
+        <button class="me3-row" data-toast="字号：标准 / 大（示意）"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 18L7 7l4 11M4.2 14.5h5.6"/><path d="M13 18l3-8 3 8M13.8 15.5h4.4"/></svg></span><span class="tx"><b>字号大小</b><span>标准</span></span><span class="arr">›</span></button>
       </div>
     </div>
     <div class="tabbar">
@@ -2875,14 +2868,14 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
       <div class="co-collab-hero">
         <div class="ey">家人协作</div>
         <div class="h">4 个人正在一起完成这本书</div>
-        <div class="s">每个人写过什么、还有什么待处理，都从这里进入。</div>
-        <div class="co-collab-stats"><div><b>12</b><span>本人讲述</span></div><div><b>11</b><span>家人补充</span></div><div><b>2</b><span>待回答</span></div></div>
+        <div class="s">家人已经补充了 11 段故事，还有 2 项等您看看。</div>
+        <div class="co-collab-summary"><span>✓</span>大家写下的内容都会先由您确认</div>
       </div>
       <div class="co-collab-list">
-        <div class="co-person-row" data-go="review"><div class="co-av" style="background:linear-gradient(140deg,#DAB97E,#B8894F)">兰</div><div class="co-person-main"><b>兰秀英</b><span>传主 · 已讲 12 段原声回忆</span></div><div class="co-person-state"><em class="done">主账号</em><i>›</i></div></div>
-        <div class="co-person-row" data-go="review"><div class="co-av" style="background:linear-gradient(140deg,#6E8F6A,#3D5A4C)">晓</div><div class="co-person-main"><b>兰晓</b><span>女儿 · 帮录 8 段 · 有 1 个问题待回答</span></div><div class="co-person-state"><em>待处理</em><i>›</i></div></div>
-        <div class="co-person-row" data-go="review"><div class="co-av" style="background:linear-gradient(140deg,#C88,#A55)">军</div><div class="co-person-main"><b>兰军</b><span>儿子 · 补充 3 段往事</span></div><div class="co-person-state"><em class="done">已同步</em><i>›</i></div></div>
-        <div class="co-person-row" data-go="review"><div class="co-av" style="background:linear-gradient(140deg,#88A,#558)">小</div><div class="co-person-main"><b>小雨</b><span>外孙女 · 出了 5 个追问 · 有 1 个待回答</span></div><div class="co-person-state"><em>待处理</em><i>›</i></div></div>
+        <button class="co-person-row" data-go="review"><span class="co-av" style="background:linear-gradient(140deg,#DAB97E,#B8894F)">兰</span><span class="co-person-main"><b>兰秀英</b><span>传主 · 已讲 12 段原声回忆</span></span><span class="co-person-state"><em class="done">主账号</em><i>›</i></span></button>
+        <button class="co-person-row" data-go="review"><span class="co-av" style="background:linear-gradient(140deg,#6E8F6A,#3D5A4C)">晓</span><span class="co-person-main"><b>兰晓</b><span>女儿 · 有 1 个问题待回答</span></span><span class="co-person-state"><em>待处理</em><i>›</i></span></button>
+        <button class="co-person-row" data-go="review"><span class="co-av" style="background:linear-gradient(140deg,#C88,#A55)">军</span><span class="co-person-main"><b>兰军</b><span>儿子 · 补充了 3 段往事</span></span><span class="co-person-state"><em class="done">已同步</em><i>›</i></span></button>
+        <button class="co-person-row" data-go="review"><span class="co-av" style="background:linear-gradient(140deg,#88A,#558)">小</span><span class="co-person-main"><b>小雨</b><span>外孙女 · 有 1 个问题待回答</span></span><span class="co-person-state"><em>待处理</em><i>›</i></span></button>
       </div>
     </div>
     <div class="co-collab-foot">
@@ -3150,10 +3143,10 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
         <div class="up3-k">充实这本书</div>
         <div class="up3-h">把老照片、信件、录像收进故事里</div>
         <div class="up3-s">上传后自动识别文字、人物和时间线，合适的内容会归入对应章节。</div>
-        <div class="up3-drop" onclick="uploadMaterialPicked()">
+        <button class="up3-drop" onclick="uploadMaterialPicked()">
           <span class="ic"><svg viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1-.5-7.97 5.5 5.5 0 0 1 10.7-1.2A3.75 3.75 0 0 1 18 18"/><path d="M12 19v-6M9.5 15.5L12 13l2.5 2.5"/></svg></span>
           <span><b>点这里上传素材</b><span>文档、照片、视频都可以</span></span>
-        </div>
+        </button>
       </div>
       <div class="up3-types">
         <button class="up3-type" onclick="uploadMaterialPicked('文档')"><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h5"/></svg></span><span>文档</span><em>信件 / 日记</em></button>
@@ -3561,7 +3554,6 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
             <button class="persona-style" aria-pressed="false" onclick="personaPickStyle(this)">旧时光<small>怀旧 · 温润</small></button>
           </div>
         </div>
-        <div class="persona-note" id="personaNote">人物形象是可选功能，不影响记录和分享；确认前不会替换当前头像。</div>
         <div class="persona-actions" id="personaActions"></div>
       </div>
     </div>
@@ -3869,7 +3861,7 @@ function personaSetSteps(state){
   document.querySelectorAll('[data-persona-step]').forEach(function(step,index){step.classList.toggle('done',index<active);step.classList.toggle('on',index===active);var icon=step.querySelector('i');if(icon)icon.textContent=index<active?'✓':String(index+1)});
 }
 function personaRender(state){
-  var upload=document.getElementById('personaUploadStep'),create=document.getElementById('personaCreateStep'),intro=document.getElementById('personaIntro'),preview=document.getElementById('personaPreview'),sourceImage=document.getElementById('personaSourceImage'),overlay=document.getElementById('personaOverlay'),actions=document.getElementById('personaActions'),styleZone=document.getElementById('personaStyleZone'),note=document.getElementById('personaNote');if(!upload||!create||!preview||!overlay||!actions)return;
+  var upload=document.getElementById('personaUploadStep'),create=document.getElementById('personaCreateStep'),intro=document.getElementById('personaIntro'),preview=document.getElementById('personaPreview'),sourceImage=document.getElementById('personaSourceImage'),overlay=document.getElementById('personaOverlay'),actions=document.getElementById('personaActions'),styleZone=document.getElementById('personaStyleZone');if(!upload||!create||!preview||!overlay||!actions)return;
   personaSetSteps(state);
   if(state==='idle'){
     upload.style.display='flex';create.style.display='none';
@@ -3880,7 +3872,6 @@ function personaRender(state){
   if(intro)intro.innerHTML=state==='ready'?'<b>您的专属人物形象已做好</b><br>可以设为头像，也可以制作品牌人物海报。':(state==='generating'?'<b>正在制作人物形象</b><br>大约需要一点时间，请稍候。':'<b>半身照已上传</b><br>选择一种喜欢的风格，再制作人物形象。');
   if(sourceImage)sourceImage.src=PersonaStore.get(PersonaStore.sourceKey)||'proto-assets/ob-hero.png';
   if(styleZone){styleZone.style.display=state==='ready'?'none':'block';styleZone.classList.toggle('disabled',state==='generating')}
-  if(note){note.style.display=state==='ready'?'none':'block'}
   preview.dataset.state=state;
   if(state==='generating'){
     overlay.innerHTML='<div><div class="persona-spinner"></div>正在制作您的专属形象…</div>';
