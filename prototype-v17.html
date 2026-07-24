@@ -771,7 +771,8 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .me3-hero{position:relative;overflow:hidden;border-radius:24px;padding:18px;background:linear-gradient(150deg,#FFF7EC,#F5DFC0);border:1px solid rgba(180,138,62,.16);box-shadow:var(--sh-card)}
 .me3-hero::after{content:"";position:absolute;right:-44px;top:-54px;width:140px;height:140px;border-radius:50%;background:rgba(217,102,63,.1);pointer-events:none}
 .me3-top{position:relative;z-index:1;display:flex;align-items:center;gap:13px;cursor:pointer}
-.me3-av{width:58px;height:58px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(140deg,#F4A877,#D9663F);color:#fff;font-family:var(--serif);font-size:24px;font-weight:900;box-shadow:0 12px 22px -13px rgba(180,74,42,.8);flex:none}
+.me3-av{width:58px;height:58px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(140deg,#F4A877,#D9663F);color:#fff;font-family:var(--serif);font-size:24px;font-weight:900;box-shadow:0 12px 22px -13px rgba(180,74,42,.8);flex:none;background-size:cover;background-position:center;overflow:hidden}
+.me3-av.has-avatar{font-size:0}
 .me3-name{flex:1;min-width:0}.me3-name b{display:block;font-size:22px;line-height:1.25;color:var(--brown-h);font-weight:900}.me3-name span{display:block;margin-top:4px;font-size:13px;font-weight:800;color:var(--brown-500)}
 .me3-chip{border-radius:999px;background:rgba(255,255,255,.68);border:1px solid rgba(180,138,62,.16);padding:6px 9px;color:var(--gold-deep);font-size:12px;font-weight:900;flex:none}
 .me3-stats{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
@@ -809,6 +810,9 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .profile-line b{font-size:var(--fs-md);color:var(--brown-h);font-weight:800}
 .profile-line span{margin-left:auto;text-align:right;font-size:var(--fs-md);color:var(--brown-500);font-weight:800}
 .profile-line.editable span{color:var(--brown-500)}
+.profile-avatar-row{display:flex;align-items:center;gap:14px;padding:6px 0 14px;border-bottom:1px solid rgba(180,138,62,.14)}
+.profile-avatar-row .me3-av{width:64px;height:64px;border-radius:22px}
+.profile-avatar-row b{display:block;color:var(--brown-h);font-size:16px}.profile-avatar-row span{display:block;margin-top:3px;color:var(--brown-500);font-size:13px;font-weight:700}
 .me3-note{margin-top:12px;border-radius:18px;background:rgba(76,122,92,.08);border:1px solid rgba(76,122,92,.14);padding:12px 13px;font-size:13px;line-height:1.55;font-weight:800;color:var(--green-2)}
 .me3-plan-hero{position:relative;overflow:hidden;border-radius:24px;padding:18px;background:linear-gradient(150deg,#FFF7EC,#F5DFC0);border:1px solid rgba(180,138,62,.16);box-shadow:var(--sh-card)}
 .me3-plan-hero .h{font-family:var(--serif);font-size:24px;line-height:1.2;font-weight:900;color:var(--brown-h)}.me3-plan-hero .s{margin-top:7px;font-size:14px;line-height:1.48;color:var(--brown-500);font-weight:800}
@@ -825,7 +829,12 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .priv-row .pl{font-size:var(--fs-sm);color:var(--text-2);margin-bottom:8px;font-weight:600}
 /* 金句卡 */
 /* 金句卡 · 书页收藏卡（分享样式优化 2026-07-06） */
-.qcard{--book-serif:"Songti SC","STSong","Noto Serif SC",serif;width:300px;margin:6px auto 0;border-radius:18px;background:linear-gradient(170deg,#FFFDF9,#F4ECDD);border:1px solid rgba(120,90,60,.14);box-shadow:0 30px 60px -28px rgba(80,50,25,.55);position:relative;overflow:hidden;padding:22px 24px 20px}
+.qcard{--book-serif:"Songti SC","STSong","Noto Serif SC",serif;width:300px;margin:6px auto 0;border-radius:18px;background:linear-gradient(170deg,rgba(255,253,249,.94),rgba(244,236,221,.92));border:1px solid rgba(120,90,60,.14);box-shadow:0 30px 60px -28px rgba(80,50,25,.55);position:relative;overflow:hidden;padding:22px 24px 20px;isolation:isolate;transition:background .25s ease}
+.qcard::after{content:"";position:absolute;inset:0;z-index:-2;opacity:.72;transition:opacity .25s;background:radial-gradient(circle at 82% 15%,rgba(244,182,119,.5),transparent 25%),linear-gradient(155deg,#fff9ed,#e8d5b8)}
+.qcard[data-quote-bg="vintage-film"]::after{background:radial-gradient(ellipse at 15% 8%,rgba(255,244,214,.8),transparent 28%),repeating-linear-gradient(96deg,rgba(79,54,36,.025) 0 1px,transparent 1px 7px),linear-gradient(160deg,#e8d7bd,#bca88c);filter:sepia(.18)}
+.qcard[data-quote-bg="ink-memory"]::after{background:radial-gradient(ellipse at 75% 78%,rgba(66,90,70,.22),transparent 26%),radial-gradient(ellipse at 28% 88%,rgba(84,73,56,.18),transparent 32%),linear-gradient(150deg,#faf7ed,#dfe3d8)}
+.qcard[data-quote-state="generating"]::after{opacity:.38;filter:blur(3px)}
+.qcard[data-quote-state="generating"] .qc-generating{display:flex}
 .qcard::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--gold-btn1),var(--gold-deep))}
 .qc-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2px}
 .qc-brand{display:flex;align-items:center;gap:7px;font-size:var(--fs-sm);font-weight:600;color:var(--gold-deep);letter-spacing:.02em}
@@ -834,13 +843,16 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .qc-mark{font-family:var(--book-serif);font-size:64px;line-height:.6;color:var(--gold);opacity:.3;height:30px;margin:8px 0 0}
 .qcard .quote{font-family:var(--book-serif);font-size:22px;line-height:1.85;color:var(--brown-h);font-weight:600;text-align:justify;margin-top:4px}
 .qc-by{display:flex;align-items:center;gap:11px;margin-top:18px}
-.qc-av{width:40px;height:40px;border-radius:12px;flex:none;display:grid;place-items:center;font-family:var(--book-serif);font-weight:600;font-size:19px;color:#fff;background:linear-gradient(140deg,#F4A877,var(--gold-deep));box-shadow:0 6px 14px -6px rgba(180,74,42,.5)}
+.qc-av{width:46px;height:46px;border-radius:15px;flex:none;display:grid;place-items:center;font-family:var(--book-serif);font-weight:600;font-size:19px;color:#fff;background:linear-gradient(140deg,#F4A877,var(--gold-deep));background-size:cover;background-position:center;box-shadow:0 6px 14px -6px rgba(180,74,42,.5);overflow:hidden}.qc-av.has-avatar{font-size:0}
 .qc-by .n{font-weight:700;font-size:var(--fs-md);color:var(--brown-h)}
 .qc-by .s{font-size:var(--fs-sm);color:var(--text-3);margin-top:1px}
 .qc-foot{margin-top:20px;padding-top:16px;border-top:1px dashed rgba(120,90,60,.3);display:flex;align-items:center;gap:12px}
 .qcard .qr{width:54px;height:54px;border-radius:8px;flex:none;background:repeating-conic-gradient(#3A2E22 0 25%,#fff 0 50%) 0/12px 12px;border:3px solid #fff;box-shadow:0 0 0 1px var(--line)}
 .qc-cta .a{font-family:var(--book-serif);font-weight:600;font-size:var(--fs-sm);color:var(--brown)}
 .qc-cta .b{font-size:var(--fs-sm);color:var(--text-3);margin-top:2px}
+.qc-generating{display:none;position:absolute;inset:0;z-index:6;align-items:center;justify-content:center;background:rgba(255,251,244,.54);backdrop-filter:blur(2px);color:var(--brown);font-size:13px;font-weight:900}.qc-generating::before{content:"";width:18px;height:18px;margin-right:8px;border:2px solid rgba(180,74,42,.2);border-top-color:var(--gold-deep);border-radius:50%;animation:qspin .8s linear infinite}@keyframes qspin{to{transform:rotate(360deg)}}
+.quote-bg-panel{width:300px;margin:12px auto 0}.quote-bg-head{display:flex;align-items:center;justify-content:space-between}.quote-bg-head b{font-size:14px;color:var(--brown-h)}.quote-bg-head span{font-size:12px;color:var(--green-2);font-weight:800}.quote-bg-styles{display:flex;gap:7px;margin-top:8px}.quote-bg-style{flex:1;min-height:38px;border:1px solid rgba(91,70,48,.13);border-radius:12px;background:rgba(255,255,255,.72);color:var(--brown-500);font:800 12px var(--sans)}.quote-bg-style.on{border-color:rgba(180,74,42,.32);background:var(--progress-bg);color:var(--gold-deep)}
+.quote-bg-status{display:flex;align-items:center;gap:7px;margin-top:8px;min-height:30px;padding:6px 9px;border-radius:10px;background:rgba(76,122,92,.08);color:var(--green-2);font-size:12px;font-weight:800}.quote-bg-status.failed{background:rgba(185,74,58,.08);color:var(--error)}.quote-bg-status button{margin-left:auto;border:0;background:transparent;color:inherit;font:900 12px var(--sans);cursor:pointer}
 /* 亲友视角录入 */
 .ct-banner{background:linear-gradient(135deg,#FFF3E9,#FFE7D5);border:1px solid #FFD9BE;border-radius:var(--r-md);padding:16px 16px;margin-bottom:16px}
 .ct-banner .r{font-family:var(--serif);font-weight:600;font-size:var(--fs-md);color:var(--gold-deep)}
@@ -1041,6 +1053,9 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 .setup-progress i::before{content:"";display:block;width:50%;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--gold-btn1),var(--gold-btn2));transition:width .25s}
 .setup-progress.step2 i::before{width:100%}
 .setup-progress span{color:var(--green-2);font-size:var(--fs-sm);font-weight:900}
+.setup-avatar{display:flex;align-items:center;gap:12px;margin-top:8px;padding:10px;border:1px dashed rgba(180,74,42,.24);border-radius:16px;background:rgba(255,255,255,.56);cursor:pointer}.setup-avatar-preview{width:54px;height:54px;border-radius:18px;background:linear-gradient(140deg,#F4A877,#D9663F);display:grid;place-items:center;color:#fff;font:900 22px var(--serif);background-size:cover;background-position:center;flex:none;overflow:hidden}.setup-avatar-preview.has-avatar{font-size:0}.setup-avatar-copy{flex:1;min-width:0}.setup-avatar-copy b{display:block;color:var(--brown-h);font-size:14px}.setup-avatar-copy span{display:block;margin-top:2px;color:var(--brown-500);font-size:12px;font-weight:700;line-height:1.4}.setup-avatar-add{color:var(--gold-deep);font-size:13px;font-weight:900}.setup-avatar input{display:none}
+.avatar-cropper{position:absolute;inset:0;z-index:180;display:none;flex-direction:column;background:#16120f;color:#fff}.avatar-cropper.show{display:flex}.avatar-crop-head{height:72px;padding:26px 18px 10px;display:flex;align-items:center;justify-content:space-between}.avatar-crop-head button{border:0;background:transparent;color:#fff;font:800 15px var(--sans)}.avatar-crop-head b{font-size:17px}.avatar-crop-stage{flex:1;display:grid;place-items:center;padding:26px}.avatar-crop-frame{position:relative;width:286px;height:286px;border-radius:50%;overflow:hidden;background:#2b2521;box-shadow:0 0 0 999px rgba(0,0,0,.34),0 0 0 2px rgba(255,255,255,.9)}.avatar-crop-frame img{width:100%;height:100%;object-fit:cover;transform:scale(1);transition:transform .15s}.avatar-crop-frame::after{content:"";position:absolute;inset:33.33%;border:1px solid rgba(255,255,255,.28);border-radius:50%;pointer-events:none}.avatar-crop-tip{text-align:center;color:rgba(255,255,255,.7);font-size:13px;font-weight:700}.avatar-crop-zoom{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:15px}.avatar-crop-zoom button{width:44px;height:44px;border:1px solid rgba(255,255,255,.25);border-radius:50%;background:rgba(255,255,255,.08);color:#fff;font-size:24px}.avatar-crop-actions{padding:16px 22px 30px}.avatar-crop-confirm{width:100%;height:54px;border:0;border-radius:17px;background:linear-gradient(180deg,var(--gold-btn1),var(--gold-btn2));color:#fff;font:900 17px var(--sans)}
+[data-avatar-view] img{width:100%;height:100%;display:block;object-fit:cover}
 /* 套餐 */
 .plan{background:#fff;border:none;border-radius:20px;padding:20px;margin-bottom:16px;position:relative;box-shadow:var(--sh-card)}
 .plan.hot{box-shadow:0 0 0 2px var(--gold) inset,var(--sh-2)}
@@ -2299,7 +2314,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
   <button data-go="profile">· 账户资料（新）</button>
   <button data-go="plans">· 我的套餐（题量版本）</button>
   <button data-go="msgs">· 消息通知</button>
-  <button data-go="landing">被邀请落地页（外部·不在 tab）</button>
+  <button data-go="landing">被邀请落地页</button>
   <button data-go="devhandoff">开发交付模式</button>
 </div>
 
@@ -2366,7 +2381,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
       <div class="mine-nav" style="display:flex;align-items:center;justify-content:center;position:relative">我的</div>
       <div class="me3-hero">
         <div class="me3-top" data-go="profile">
-          <div class="me3-av">兰</div>
+          <div class="me3-av" data-avatar-view>兰</div>
           <div class="me3-name"><b>兰秀英</b><span>云忆 · 生命故事</span></div>
           <span class="me3-chip">资料 ›</span>
         </div>
@@ -2933,7 +2948,8 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
     <div class="sbar" style="color:var(--brown)"><span>9:41</span><span class="bat"></span></div><div class="wxcap">··· ◉</div>
     <div class="navbar"><span class="b" data-go="share">‹</span><span class="h">金句卡</span></div>
     <div class="body"><div class="pad">
-      <div class="qcard">
+      <div class="qcard" id="quoteCard" data-quote-bg="warm-study" data-quote-state="ready">
+        <div class="qc-generating">AI 正在生成回忆背景…</div>
         <div class="qc-head">
           <span class="qc-brand"><span class="dot"></span>云忆 · 生命故事</span>
           <svg class="qc-leaf" viewBox="0 0 118 150" aria-hidden="true"><path d="M68 140 C68 90 76 55 106 30" stroke="#8a9a63" stroke-width="2.4" stroke-linecap="round" fill="none"/><g fill="#a7b982" opacity=".92"><path d="M72 118 C58 112 50 96 58 82 C74 88 80 104 72 118Z"/><path d="M76 100 C64 92 60 74 70 62 C84 72 86 90 76 100Z"/><path d="M82 80 C72 70 72 52 84 44 C96 56 94 72 82 80Z"/><path d="M90 60 C82 50 84 34 97 28 C106 40 102 54 90 60Z"/></g><g fill="#c2d0a3" opacity=".85"><path d="M68 116 C80 108 98 108 106 120 C92 128 76 126 68 116Z"/><path d="M74 96 C86 88 102 88 110 100 C97 108 82 106 74 96Z"/></g></svg>
@@ -2941,10 +2957,19 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
         <div class="qc-mark">“</div>
         <div class="quote">夏天全村人都爱在树下乘凉，那是我一辈子最凉快的地方。</div>
         <div class="qc-by">
-          <span class="qc-av">忆</span>
+          <span class="qc-av" data-avatar-view>兰</span>
           <div><div class="n">兰秀英</div><div class="s">《我的时光印记 · 门口的老槐树》</div></div>
         </div>
         <div class="qc-foot"><div class="qr"></div><div class="qc-cta"><div class="a">扫码，也给父母做一本</div><div class="b">云忆 · 记录长辈的一生</div></div></div>
+      </div>
+      <div class="quote-bg-panel">
+        <div class="quote-bg-head"><b>AI 回忆背景</b></div>
+        <div class="quote-bg-styles">
+          <button class="quote-bg-style on" data-quote-bg="warm-study" onclick="quoteBackgroundGenerate('warm-study',this)">暖光书房</button>
+          <button class="quote-bg-style" data-quote-bg="vintage-film" onclick="quoteBackgroundGenerate('vintage-film',this)">旧时光</button>
+          <button class="quote-bg-style" data-quote-bg="ink-memory" onclick="quoteBackgroundGenerate('ink-memory',this)">水墨记忆</button>
+        </div>
+        <div class="quote-bg-status" id="quoteBgStatus">背景已生成，可直接保存或分享<button onclick="quoteBackgroundGenerate()">换一张</button></div>
       </div>
       <div style="display:flex;gap:12px;margin-top:20px"><button class="btng" data-toast="已保存到相册">保存图片</button><button class="btnp" data-toast="已分享到微信">分享到微信</button></div>
     </div></div>
@@ -3266,6 +3291,15 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
             </div>
           </div>
           <div class="setup-field">
+            <div class="setup-label">放一张熟悉的头像 <span style="color:var(--text-3);font-weight:700">（选填）</span></div>
+            <label class="setup-avatar" for="setupAvatarInput">
+              <span class="setup-avatar-preview" data-avatar-view>兰</span>
+              <span class="setup-avatar-copy"><b>上传照片</b><span>上传后可裁剪；不会被 AI 改脸，也可以跳过</span></span>
+              <span class="setup-avatar-add">选择 ›</span>
+              <input id="setupAvatarInput" type="file" accept="image/*" onchange="handleAvatarUpload(event)">
+            </label>
+          </div>
+          <div class="setup-field">
             <div class="setup-label">怎么称呼您？</div>
             <div class="setup-input">秀英</div>
           </div>
@@ -3296,24 +3330,6 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
             <div class="setup-field">
               <div class="setup-label">现在住哪？</div>
               <div class="setup-input setup-address" id="setupLiveAddr" onclick="openAddressPicker({title:'选择现住地',targetId:'setupLiveAddr'})">浙江省 杭州市 上城区</div>
-            </div>
-          </div>
-          <div class="setup-field">
-            <div class="setup-label">平时喜欢什么？</div>
-            <div class="setup-options">
-              <span class="setup-chip" onclick="setupPick(this,true)">种花</span>
-              <span class="setup-chip" onclick="setupPick(this,true)">做饭</span>
-              <span class="setup-chip" onclick="setupPick(this,true)">唱戏</span>
-              <span class="setup-chip" onclick="setupPick(this,true)">旅行</span>
-            </div>
-          </div>
-          <div class="setup-field">
-            <div class="setup-label">还想重点留下什么？</div>
-            <div class="setup-options">
-              <span class="setup-chip" onclick="setupPick(this,true)">老照片</span>
-              <span class="setup-chip" onclick="setupPick(this,true)">家族往事</span>
-              <span class="setup-chip" onclick="setupPick(this,true)">工作经历</span>
-              <span class="setup-chip" onclick="setupPick(this,true)">给孩子的话</span>
             </div>
           </div>
           <div class="setup-actions two forward">
@@ -3474,6 +3490,11 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
     <div class="sbar" style="color:var(--brown)"><span>9:41</span><span class="bat"></span></div><div class="wxcap">··· ◉</div>
     <div class="navbar"><span class="b" data-go="mine">‹</span><span class="h">个人资料</span></div>
     <div class="body me3-body">
+      <div class="profile-avatar-row" onclick="document.getElementById('profileAvatarInput').click()">
+        <div class="me3-av" data-avatar-view>兰</div>
+        <div><b>头像</b><span>用于“我的”和分享金句卡 · 点击更换</span></div>
+        <input id="profileAvatarInput" type="file" accept="image/*" onchange="handleAvatarUpload(event)" style="display:none">
+      </div>
       <div class="profile-plain">
         <div class="profile-line editable" data-toast="修改姓名（示意）"><b>姓名</b><span>兰秀英</span></div>
         <div class="profile-line editable" data-toast="修改昵称（示意）"><b>昵称</b><span>兰秀英</span></div>
@@ -3677,10 +3698,18 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
       </div>
       <div class="share-sheet-grid">
         <button class="share-sheet-opt" data-go="quotecard"><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 5.5h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2Z"/><path d="M8 10h3v4H8z"/><path d="M14 10h2.5"/><path d="M14 14h2"/></svg></span>金句卡</button>
-        <button class="share-sheet-opt" data-go="landing"><span class="ic"><svg viewBox="0 0 24 24"><path d="M7 4.5h10a2 2 0 0 1 2 2v12.5l-3-1.8-3 1.8-3-1.8-3 1.8V6.5a2 2 0 0 1 2-2Z"/><path d="M10 9h4"/><path d="M10 12.5h5"/></svg></span>片段</button>
+        <button class="share-sheet-opt" data-go="landing"><span class="ic"><svg viewBox="0 0 24 24"><path d="M7 4.5h10a2 2 0 0 1 2 2v12.5l-3-1.8-3 1.8-3-1.8-3 1.8V6.5a2 2 0 0 1 2-2Z"/><path d="M10 9h4"/><path d="M10 12.5h5"/></svg></span>分享片段</button>
         <button class="share-sheet-opt" data-toast="已保存分享长图"><span class="ic"><svg viewBox="0 0 24 24"><rect x="7" y="3.5" width="10" height="17" rx="2"/><path d="M10 8h4"/><path d="M10 11.5h4"/><path d="M12 15v3"/><path d="M10.5 16.5 12 18l1.5-1.5"/></svg></span>保存长图</button>
       </div>
     </div>
+  </div>
+
+  <div class="avatar-cropper" id="avatarCropper">
+    <div class="avatar-crop-head"><button onclick="cancelAvatarCrop()">取消</button><b>裁剪照片</b><span style="width:32px"></span></div>
+    <div class="avatar-crop-stage">
+      <div><div class="avatar-crop-frame"><img id="avatarCropImage" alt="待裁剪照片"></div><div class="avatar-crop-tip">移动照片，保留清晰正脸</div><div class="avatar-crop-zoom"><button onclick="adjustAvatarZoom(-.1)">−</button><span id="avatarZoomText">100%</span><button onclick="adjustAvatarZoom(.1)">＋</button></div></div>
+    </div>
+    <div class="avatar-crop-actions"><button class="avatar-crop-confirm" onclick="confirmAvatarCrop()">确认使用</button></div>
   </div>
 
 </div></div>
@@ -3688,6 +3717,74 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 <div class="toastc" id="toastc"></div>
 
 <script>
+var AvatarStore={
+  key:'huiyilu.avatar.v1',
+  get:function(){try{return localStorage.getItem(this.key)||''}catch(e){return''}},
+  set:function(value){try{localStorage.setItem(this.key,value)}catch(e){} syncAvatarViews(value)}
+};
+function syncAvatarViews(value){
+  var src=typeof value==='string'?value:AvatarStore.get();
+  document.querySelectorAll('[data-avatar-view]').forEach(function(el){
+    el.classList.toggle('has-avatar',!!src);
+    el.innerHTML=src?'<img src="'+src+'" alt="用户头像">':'兰';
+  });
+}
+var avatarCropSource=null, avatarCropScale=1;
+function handleAvatarUpload(event){
+  var file=event&&event.target&&event.target.files&&event.target.files[0];
+  if(!file)return;
+  if(!/^image\//.test(file.type)){toast('请选择图片文件');return;}
+  var reader=new FileReader();
+  reader.onload=function(){
+    var img=new Image();
+    img.onload=function(){
+      avatarCropSource=img; avatarCropScale=1;
+      var preview=document.getElementById('avatarCropImage'), cropper=document.getElementById('avatarCropper');
+      if(preview){preview.src=reader.result;preview.style.transform='scale(1)'}
+      var label=document.getElementById('avatarZoomText');if(label)label.textContent='100%';
+      if(cropper)cropper.classList.add('show');
+    };
+    img.onerror=function(){toast('这张图片暂时无法读取')}; img.src=reader.result;
+  };
+  reader.onerror=function(){toast('头像读取失败，请重试')}; reader.readAsDataURL(file);
+}
+function adjustAvatarZoom(delta){
+  avatarCropScale=Math.max(1,Math.min(2,avatarCropScale+delta));
+  var preview=document.getElementById('avatarCropImage'), label=document.getElementById('avatarZoomText');
+  if(preview)preview.style.transform='scale('+avatarCropScale+')'; if(label)label.textContent=Math.round(avatarCropScale*100)+'%';
+}
+function cancelAvatarCrop(){
+  var cropper=document.getElementById('avatarCropper');if(cropper)cropper.classList.remove('show');
+  avatarCropSource=null;document.querySelectorAll('#setupAvatarInput,#profileAvatarInput').forEach(function(i){i.value=''});
+}
+function confirmAvatarCrop(){
+  if(!avatarCropSource)return;
+  var base=Math.min(avatarCropSource.naturalWidth,avatarCropSource.naturalHeight), size=base/avatarCropScale;
+  var sx=(avatarCropSource.naturalWidth-size)/2, sy=(avatarCropSource.naturalHeight-size)/2;
+  var canvas=document.createElement('canvas');canvas.width=512;canvas.height=512;
+  canvas.getContext('2d').drawImage(avatarCropSource,sx,sy,size,size,0,0,512,512);
+  AvatarStore.set(canvas.toDataURL('image/jpeg',.82));
+  var cropper=document.getElementById('avatarCropper');if(cropper)cropper.classList.remove('show');
+  avatarCropSource=null;toast('照片已保存，会同步到金句卡');
+}
+var quoteBgTimer=0, quoteBgStyle='warm-study';
+function quoteBackgroundRender(state,style){
+  var card=document.getElementById('quoteCard'), status=document.getElementById('quoteBgStatus');
+  if(!card||!status)return;
+  quoteBgStyle=style||quoteBgStyle; card.dataset.quoteBg=quoteBgStyle; card.dataset.quoteState=state;
+  document.querySelectorAll('.quote-bg-style').forEach(function(btn){btn.classList.toggle('on',btn.dataset.quoteBg===quoteBgStyle)});
+  status.classList.toggle('failed',state==='failed');
+  if(state==='generating')status.innerHTML='AI 正在生成回忆背景… <button onclick="quoteBackgroundDemo(\'failed\')">演示失败</button>';
+  else if(state==='failed')status.innerHTML='生成失败，已保留当前背景 <button onclick="quoteBackgroundGenerate()">重试</button>';
+  else status.innerHTML='背景已生成，可直接保存或分享 <button onclick="quoteBackgroundGenerate()">换一张</button>';
+}
+function quoteBackgroundGenerate(style,button){
+  clearTimeout(quoteBgTimer); quoteBackgroundRender('generating',style||(button&&button.dataset.quoteBg)||quoteBgStyle);
+  quoteBgTimer=setTimeout(function(){quoteBackgroundRender('ready',quoteBgStyle)},900);
+}
+function quoteBackgroundDemo(state){
+  go('quotecard'); clearTimeout(quoteBgTimer); quoteBackgroundRender(state||'ready',quoteBgStyle);
+}
 function setupShow(step){
   var s1=document.getElementById('setupStep1');
   if(s1) s1.classList.add('on');
@@ -3797,7 +3894,7 @@ Object.assign(PRD_CONTENT,{
   chapterread:{title:'读这章 PRD',stage:'阅读 · 章节正文',problem:'用户需要按书的方式连续阅读某一章，而不是被卡片切碎。',goal:'提供章节级沉浸阅读体验，并保留继续补充入口。',users:['被记录者、家人读者。'],flow:['从章节详情进入读这章。','阅读正文流。','返回章节或继续讲。'],requirements:['正文排版适合连续阅读。','显示章节编号、标题和简介。','保留回到章节和继续讲。'],edgeCases:['正文较长时支持滚动。','章节内容不足时提示继续补充。'],events:[['chapter_read_viewed','进入章节阅读；属性：chapter_id, word_count。'],['chapter_read_continue_clicked','继续讲；属性：chapter_id。']],acceptance:['能滚动阅读完整章节。','继续讲入口可用。'],metrics:['章节阅读率','阅读停留时长','继续补充率']}
 });
 Object.assign(PRD_CONTENT,{
-  quotecard:{title:'金句卡 PRD',stage:'传播 · 单句分享',problem:'很多故事中最容易传播的是一句话，用户需要把原话快速变成适合家族群或朋友圈的图片卡。',goal:'生成一张有身份、有句子、有视觉记忆点的分享卡。',users:['发起人：分享一句长辈原话。','亲友：被金句吸引后阅读故事或参与补充。'],flow:['从分享页进入金句卡。','查看系统推荐金句和人物信息。','确认样式后分享。'],requirements:['金句必须来自故事内容或用户确认的摘要。','卡片展示人物称呼、故事来源和一句核心话。','适合手机截图和社交分享。','分享后可回到整本书或故事卡。'],edgeCases:['没有可用金句时，从故事卡正文提取一句并允许编辑。','公开分享不得暴露隐私敏感信息。'],events:[['quote_card_viewed','进入金句卡；属性：story_id, source_page。'],['quote_card_shared','分享金句卡；属性：channel, story_id。']],acceptance:['卡片包含金句和人物信息。','从分享页可进入。'],metrics:['金句卡打开率','金句卡分享率']},
+  quotecard:{title:'金句卡 PRD',stage:'传播 · 单句分享',problem:'很多故事中最容易传播的是一句话，用户需要把原话快速变成适合家族群或朋友圈的图片卡。',goal:'生成一张有真实头像、有句子、有视觉记忆点的分享卡。',users:['发起人：分享一句长辈原话。','亲友：被金句吸引后阅读故事或参与补充。'],flow:['从分享页进入金句卡。','复用首次填写的原始头像。','选择背景风格，AI 只生成无字背景。','确认后保存或分享。'],requirements:['金句必须来自故事内容或用户确认的摘要。','头像仅轻度居中裁切，AI 不处理人脸。','提供暖光书房、旧时光、水墨记忆三种背景。','背景生成中、成功、失败状态清晰；失败不阻断保存和分享。','背景模型不接收头像、姓名、手机号或完整访谈原文。'],edgeCases:['没有头像时展示姓名首字兜底。','生成失败时保留当前默认背景并允许重试。','公开分享不得暴露隐私敏感信息。'],events:[['quote_card_viewed','进入金句卡；属性：story_id, source_page。'],['quote_background_generated','背景生成完成；属性：style, result。'],['quote_card_shared','分享金句卡；属性：channel, story_id。']],acceptance:['卡片包含金句、人物信息和头像区域。','三种背景可切换并展示生成状态。','生成失败仍可保存或分享。'],metrics:['金句卡打开率','背景生成率','金句卡分享率']},
   contriblist:{title:'我补录的人 PRD',stage:'协作 · 补录对象列表',problem:'贡献者可能给多个人补录，原页面只展示单个人内容时，用户看不出来自己给谁写过。',goal:'先按被补录的人聚合，让用户点进某个人后再看具体内容。',users:['家人/亲友贡献者。'],flow:['从书房或我的进入我补录的人。','查看老周、兰秀英、小姨等被补录对象。','点击某个人进入 TA 的补录明细。'],requirements:['列表按人聚合，不直接混排所有内容。','每个人展示已补录数量、已进书数量和待查看/待确认状态。','点击人卡进入 contribperson。','本页不放继续补录一段按钮，避免不知道补给谁。'],edgeCases:['只有一个补录对象时仍展示人卡，保持层级一致。','没有补录对象时展示邀请/开始补录入口。'],events:[['contribution_people_viewed','进入我补录的人；属性：people_count。'],['contribution_person_clicked','点击被补录人；属性：target_user_id, relation。']],acceptance:['能一眼看出给多个人补录过。','点击老周后进入老周补录明细。'],metrics:['补录对象列表访问率','补录对象点击率','继续补录率']},
   contribperson:{title:'某个人的补录明细 PRD',stage:'协作 · 单人补录明细',problem:'贡献者点开某个人后，需要查看自己给 TA 补过的每段内容，并能继续给这个人补录。',goal:'承接“我补录的人”列表，展示单个被补录人的内容明细和继续补录入口。',users:['家人/亲友贡献者。'],flow:['从我补录的人点击老周。','查看给老周补过的内容和状态。','点击某条内容进入贡献详情。','点击继续给老周补录，直接进入亲友录入第二步。'],requirements:['顶部说明当前被补录人和贡献者身份。','展示总补录数、已进书数、待查看数。','每条内容展示标题、状态和章节/下一步说明。','点击条目进入 contribdetail。','底部按钮继续给当前人补录，不再选择身份。'],edgeCases:['状态为待查看时显示对方尚未查看。','状态为待确认时提示确认后更新到书里。','被补录人切换后，继续补录按钮必须同步姓名和身份。'],events:[['contribution_person_viewed','进入某个人补录明细；属性：target_user_id, relation, contribution_count。'],['contribution_item_clicked','点击贡献；属性：status, contribution_id。'],['contribution_person_continue_clicked','继续给当前人补录；属性：target_user_id, relation。']],acceptance:['点击给老周内容后看到老周的内容列表。','点击单条内容进入贡献详情。','继续补录直接进入亲友录入第二步。'],metrics:['单人补录明细访问率','贡献详情点击率','继续补录率']},
   contribdetail:{title:'贡献详情 PRD',stage:'协作 · 内容确认',problem:'贡献者需要看到某段内容的完整文本、状态和下一步动作，避免不知道是否还需要补充。',goal:'让贡献者能查看、继续补充或等待主账号采纳。',users:['家人/亲友贡献者。'],flow:['从贡献列表点击某条内容。','查看完整贡献、状态和收录位置。','需要时点击补充这段。'],requirements:['展示贡献标题、正文、提交身份、状态。','已收录内容显示章节位置。','待确认内容说明“老周确认后更新到书里”。','提供补充入口。'],edgeCases:['已收录内容再次补充需重新进入审核。','被拒绝内容显示原因和重新提交入口。'],events:[['contribution_detail_viewed','进入贡献详情；属性：contribution_id, status。'],['contribution_supplement_clicked','点击补充；属性：contribution_id, status。']],acceptance:['状态和下一步动作明确。','补充按钮可进入补充页第二步。'],metrics:['贡献详情访问率','补充点击率','重新提交率']},
@@ -3808,7 +3905,7 @@ Object.assign(PRD_CONTENT,{
   devhandoff:{title:'开发交付设计稿 PRD',stage:'交付 · 高保真原型转开发设计稿',problem:'当前原型已经能演示产品体验，但开发落地还需要明确页面真源、视觉规则、状态覆盖、字段交互和验收边界。',goal:'把 prototype-v17.html 升级为开发可用设计稿入口，让开发按页面、组件、状态和验收标准实现，而不是只照截图还原。',status:['已具备高保真页面、PRD 面板、UI 设计规范和主要异常状态。','本页作为开发交付总入口，串联原型、PRD、UI 规范和文档。'],inScope:['主链路页面清单和 screen id。','页面状态覆盖清单。','组件复用规则。','开发验收尺寸和交互边界。','与 docs/开发交付设计稿.md 对齐。'],deferred:['不在本仓库实现正式小程序组件。','不在原型里定义后端接口完整字段，只给出页面交互字段和埋点。','不替代后续 Figma 组件库，但可作为 Figma 重建依据。'],users:['前端开发：按页面和组件实现。','测试/验收：按状态和验收清单覆盖。','产品/设计：用同一入口确认开发边界。'],flow:['从左侧屏幕地图进入开发交付模式。','查看页面真源、视觉真源、交互真源、状态真源。','按 docs/开发交付设计稿.md 拆实现任务。','开发完成后用原型截图和验收清单逐页对照。'],requirements:['开发不得只按静态截图实现，必须覆盖 PRD 面板里的字段、异常、埋点和验收。','所有新增页面先补 screen id、地图入口和 PRD_CONTENT。','所有新增颜色、字号、按钮样式先落到 docs/UI设计规范.md 或复用现有 token。','讲述、书房、故事卡、协作、我的页必须组件化拆分。'],edgeCases:['如果原型视觉和 UI 规范冲突，先以 UI 规范为准，再回修原型。','如果演示态和真实开发态冲突，优先真实业务状态，不保留纯演示假交互。','如果某状态无法在原型中点击触达，必须在开发交付文档中列为待补。'],events:[['design_handoff_viewed','进入开发交付模式；属性：source_page。'],['handoff_section_checked','查看交付模块；属性：section_name。'],['handoff_acceptance_completed','开发验收完成；属性：screen_id, result。']],acceptance:['左侧屏幕地图有开发交付入口。','本页能说明页面、视觉、交互、状态四类真源。','右侧 PRD 面板能展示开发交付说明。','docs/开发交付设计稿.md 与本页内容一致。'],metrics:['交付入口访问率','开发返工率','状态漏实现数','逐页验收通过率']}
 });
 Object.assign(PRD_CONTENT,{
-  setup:{title:'新用户信息收集 PRD',stage:'首次使用 · 建立采访上下文',problem:'AI 采访需要知道被记录人的基础背景，但首次采集不能让长辈感觉像在填复杂档案。',goal:'用一屏内的轻量信息采集完成最小必要上下文，并让用户可以直接开启人生回忆。',users:['长辈/被记录者：自己开始记录。','子女/发起人：帮父母或家人建档。'],flow:['进入新用户信息收集页。','选择这本书写谁，并填写称呼、年龄。','点击出生年代字段，通过下拉选项选择年代。','点击老家或现住地，打开通用省市区地址选择器。','地址选择器顶部显示取消、居中标题、右侧保存；保存后回填对应字段。','点击开启人生回忆进入采访页；也可点击弱化的跳过进入通用采访。'],requirements:['页面保持一屏一任务，不做长表单平铺。','出生年代使用下拉选择，不要求手动输入。','老家和现住地必须调用通用地址选择器组件，不写页面专用选择器。','通用地址选择器为底部弹层，支持省 / 市 / 区三列选择。','地址选择器标题栏采用左取消、中标题、右保存，并用底部分隔线区分标题区和内容区。','地址选择器内容区不使用额外背景框，只保留滚轮文字和选中高亮。','底部主按钮为“开启人生回忆”，位于“跳过”上方；跳过弱化处理。'],edgeCases:['用户未填写称呼时，用“您”或“家人”兜底。','用户跳过时不强阻断，进入采访页并标记上下文不完整。','重复进入时保留已选基础信息。','地址选择器取消时不改变原字段值。'],events:[['profile_collection_started','进入资料采集页；属性：source_page。'],['profile_field_selected','选择字段时触发；属性：field_name, option_type。'],['profile_birth_decade_selected','选择出生年代；属性：birth_decade。'],['address_picker_opened','打开通用地址选择器；属性：field_name, title。'],['address_picker_saved','保存地址；属性：field_name, province, city, district。'],['profile_collection_completed','点击开启人生回忆；属性：fields_completed_count。'],['profile_collection_skipped','点击跳过；属性：fields_completed_count。']],acceptance:['出生年代点击后展示下拉选项。','老家和现住地点击后打开同一个通用地址选择器。','地址选择器不在 setup 页面内部定义专用组件。','地址选择器标题栏左取消、中标题、右保存。','开启人生回忆按钮在跳过上方，跳过视觉弱化。','跳过也能进入采访页。'],metrics:['信息收集完成率','跳过率','出生年代选择率','地址选择器打开率','地址保存率']},
+  setup:{title:'新用户信息收集 PRD',stage:'首次使用 · 建立采访上下文',problem:'AI 采访需要知道被记录人的基础背景，但首次采集不能让长辈感觉像在填复杂档案。',goal:'用一屏内的轻量信息采集完成最小必要上下文，并让用户可以直接开启人生回忆。',users:['长辈/被记录者：自己开始记录。','子女/发起人：帮父母或家人建档。'],flow:['进入新用户信息收集页。','选择这本书写谁，可选上传一张头像。','填写称呼和基础信息。','点击开启人生回忆进入采访页；也可跳过。'],requirements:['头像为选填，不得阻断首次使用。','原始头像只做 1:1 轻度居中裁切，不做 AI 改脸。','头像保存后同步到我的页、个人资料和分享金句卡。','底部主按钮为“开启人生回忆”，跳过弱化处理。'],edgeCases:['未上传头像时使用姓名首字兜底。','头像读取失败时保留兜底头像并允许重试。','重复进入时保留已选基础信息和头像。'],events:[['profile_collection_started','进入资料采集页；属性：source_page。'],['profile_avatar_selected','头像读取完成；属性：source, crop_mode。'],['profile_collection_completed','点击开启人生回忆；属性：fields_completed_count, has_avatar。'],['profile_collection_skipped','点击跳过；属性：fields_completed_count, has_avatar。']],acceptance:['不上传头像也能开始。','上传后我的页和金句卡同步显示。','头像不经过 AI 人脸处理。','跳过也能进入采访页。'],metrics:['信息收集完成率','头像选择率','跳过率']},
   share:{title:'分享底部弹窗 PRD',stage:'传播 · 当前片段轻分享',problem:'用户只需要分享当前片段，不应被带到整本书、纸质书或复制链接等额外选择里。',goal:'用底部弹窗承接当前片段分享，让用户快速选择金句卡、片段或保存长图。',users:['发起人：把当前片段发给家人或朋友圈。','亲友：通过片段了解故事并继续补充。'],flow:['从故事卡或回忆小结点击分享。','底部弹窗打开，并展示当前片段摘要。','选择金句卡、片段或保存长图。','完成分享、进入片段落地页或看到保存反馈。'],requirements:['分享以底部弹窗呈现，不作为独立主页面。','只分享当前片段，不公开整本书。','分享方式为金句卡、片段、保存长图。','不显示复制链接。','整本书分享和纸质书仍回到书详情处理。'],edgeCases:['点击遮罩或关闭按钮收起弹窗。','保存长图失败时给出可重试反馈。','片段含敏感内容时后续正式版应提示先编辑。'],events:[['share_sheet_opened','打开分享弹窗；属性：story_id, source_page。'],['share_option_clicked','点击分享方式；属性：option_name。'],['share_sheet_closed','关闭分享弹窗；属性：close_type。']],acceptance:['点击分享只出现底部弹窗。','弹窗内只有金句卡、片段、保存长图三个入口。','不出现复制链接和整本书公开说明。','关闭弹窗后停留在原页面。'],metrics:['分享弹窗打开率','分享方式点击率','保存长图成功率','片段分享完成率']},
   contribute:{title:'亲友视角录入 PRD',stage:'协作 · 我来补充',problem:'亲友被邀请后往往不知道写什么，系统要根据身份给出具体问题，并让补充过程和采访录音页一样轻。',goal:'让亲友用语音、文字和图片视频完成一段可审核的补充回忆。',users:['亲友/同事/孙辈：补充自己的视角。','发起人：审核并收录。'],flow:['从邀请落地页进入时先选择身份。','从某个人补录明细或贡献详情补充时，直接进入第二步并沿用已知身份。','在补充页查看身份条和问题卡。','上传照片/视频，或用语音/文字补充。','提交后写入贡献列表，状态为待确认或待查看。'],requirements:['补充回忆的录入逻辑与采访录音页一致。','第一步只在身份未知时出现。','已知身份补录时不再要求选择身份。','补充页支持多张照片和视频上传、横向展示和拖拽排序。','图片/视频上传后再展示素材条。','提交失败时保留草稿。'],edgeCases:['身份未选且不是已知身份进入时，停留第一步。','重新补充已收录内容时，新增内容进入审核。','上传失败的素材可保留失败态并重试。'],events:[['contribute_started','进入补充流程；属性：source, invite_id, has_known_role。'],['contribute_role_selected','选择身份；属性：role。'],['contribute_media_uploaded','上传素材；属性：media_type, media_count。'],['contribution_submitted','提交补充；属性：input_mode, content_length, media_count。'],['contribution_save_failed','保存失败；属性：error_code。']],acceptance:['已知身份进入时直接显示第二步。','补充页可上传多张图片/视频并排序。','问题卡、身份条、录入区层级清楚。','提交后能在贡献列表看到记录。'],metrics:['身份选择率','补充提交率','素材上传率','保存成功率']},
   contribperson:{title:'某个人的补录明细 PRD',stage:'协作 · 单人补录明细',problem:'贡献者点开某个人后，需要查看自己给 TA 补过的每段内容，并能继续给这个人补录。',goal:'承接“我补录的人”列表，展示单个被补录人的内容明细和继续补录入口。',users:['家人/亲友贡献者。'],flow:['从我补录的人点击老周。','查看给老周补过的内容、数量和状态。','点击某条内容进入贡献详情。','点击继续给老周补录，直接进入亲友录入第二步。'],requirements:['顶部说明当前被补录人和贡献者身份。','展示总补录数、已进书数、待查看数。','每条内容展示标题、状态和章节/下一步说明。','点击条目进入 contribdetail。','底部按钮继续给当前人补录，不再选择身份。'],edgeCases:['状态为待查看时显示对方尚未查看。','状态为待确认时提示确认后更新到书里。','被补录人切换后，继续补录按钮必须同步姓名和身份。'],events:[['contribution_person_viewed','进入某个人补录明细；属性：target_user_id, relation, contribution_count。'],['contribution_item_clicked','点击贡献；属性：status, contribution_id。'],['contribution_person_continue_clicked','继续给当前人补录；属性：target_user_id, relation。']],acceptance:['点击给老周内容后看到老周的内容列表。','点击单条内容进入贡献详情。','继续补录直接进入亲友录入第二步。'],metrics:['单人补录明细访问率','贡献详情点击率','继续补录率']},
@@ -3887,6 +3984,7 @@ function go(id){
   renderPrd(id);
   closeTopics(); closeDrawer(); closeToc();
   if(id==='setup') setupShow(1);
+  if(id==='mine'||id==='profile'||id==='quotecard') syncAvatarViews();
   if(id==='session'){ var rb=document.getElementById('recoverBar'); if(rb) rb.style.display = hasDraft ? 'flex' : 'none'; ivEnter(); }
   if(id==='book'){ bookShowPreview(); bookSkeleton(); } /* 进「我的书」默认显示成书视图（预览）+ 骨架屏 */
   if(id==='review') rvSwitch('pending');
@@ -4895,6 +4993,7 @@ function applyHash(){var h=(location.hash||'').slice(1);if(!h)return;var p=h.spl
   go(p[0]);
   if(p[0]==='book'&&p[1]==='read'){ bookOpenRead(); if(p[2]){fbPage=Math.min(+p[2]||0,fbLeaves.length);fbRender();} }}
 window.addEventListener('load',function(){
+  syncAvatarViews();
   applyHash();
   var active=document.querySelector('.screen.on');
   renderPrd(active?active.id:'session');
