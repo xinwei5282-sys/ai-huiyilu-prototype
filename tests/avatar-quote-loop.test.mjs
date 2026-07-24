@@ -37,6 +37,10 @@ test('background prompt uses article context and reserves card layout', () => {
   assert.match(prompts, /不把完整文章直接发送给图片模型/);
   assert.match(html, /背景必须结合金句内容与所在文章语境/);
   assert.match(html, /文章相关人物可以出现在背景中/);
+  assert.match(prompts, /金句内容不设字数上限/);
+  assert.match(html, /金句','可编辑文本，用于金句卡和分享','不限制字数；可为空/);
+  assert.match(html, /不限制字数，卡片自动换行适配/);
+  assert.doesNotMatch(html, /金句[^\n]{0,80}(?:0-40|1-40) 字/);
 });
 
 test('persona prompt locks identity while allowing controlled styling', () => {
