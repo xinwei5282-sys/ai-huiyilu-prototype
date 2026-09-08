@@ -1,5 +1,14 @@
 # AI Huiyilu Prototype - Agent Rules
 
+## V20 branch scope (2026-09-08)
+
+- This branch implements `prototype-v20.html`: minimal independent praise integration on the user-confirmed online-final V17.
+- Canonical baseline: `https://xinwei5282-sys.github.io/ai-huiyilu-prototype/prototype-v17.html`; SHA-256 `45b990dcf86031bfdb8c317f7783f6ba992461e00d7c7e75d116031e7ebfb651`.
+- Keep `prototype-v17.html` unchanged. Its 31 screens and existing scripts are retained in V20; additive behavior/styles live in `v20/praise.js` and `v20/praise.css`.
+- Praise has no age restriction. Existing memoir flows and agreed shelf rules remain in force. Do not substitute the V19 exploration or the older `ai-huiyilu-prototype-uifix` V17.
+- Current plan and launch boundary: `v20/docs/PLAN.md`, `v20/docs/LAUNCH-SCOPE.md`; version metadata: `v20/version.json`.
+- Focused acceptance: `node v20/qa/verify.cjs`; visuals: `node v20/qa/capture.cjs`, with the local HTTP server on port 8880. These scripts use the documented local headless-shell helper.
+
 ## Project scope
 
 - This repo is a high-fidelity HTML prototype, not the formal miniapp codebase.

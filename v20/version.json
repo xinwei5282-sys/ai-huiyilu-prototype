@@ -1,0 +1,18 @@
+{
+  "version": "20.0.0",
+  "date": "2026-09-08",
+  "scope": "Minimal praise integration on the user-confirmed online-final memoir",
+  "entry": "prototype-v20.html",
+  "default_screen": "session",
+  "praise_deep_link": "prototype-v20.html#praise",
+  "baseline_url": "https://xinwei5282-sys.github.io/ai-huiyilu-prototype/prototype-v17.html",
+  "baseline_file": "prototype-v17.html",
+  "baseline_sha256": "45b990dcf86031bfdb8c317f7783f6ba992461e00d7c7e75d116031e7ebfb651",
+  "baseline_commit": "c60bd06",
+  "branch": "prototype/v20-praise-integration",
+  "preserved_screens": 31,
+  "added_screens": ["praise", "praise-result", "praise-history"],
+  "supersedes": "V19 design exploration; not used as the implementation baseline",
+  "generation": "local demonstration only; not connected to a real AI service",
+  "storage": "yunyi.praise.v20; existing memoir storage keys are unchanged"
+}

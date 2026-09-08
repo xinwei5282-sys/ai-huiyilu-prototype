@@ -1,0 +1,73 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const {launchBrowser,closeBrowser}=require('/Users/xinwei/weiran-env/projects/ai-huiyilu-prototype-v19/render-browser.js');
+const ROOT=path.resolve(__dirname,'../..'), BASE='http://127.0.0.1:8880/', KEY='yunyi.praise.v20';
+const checks=[],errors=[],consoleErrors=[];
+const check=(name,condition)=>{assert.ok(condition,name);checks.push(name);};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+(async()=>{
+ const old=fs.readFileSync(path.join(ROOT,'prototype-v17.html'),'utf8'),next=fs.readFileSync(path.join(ROOT,'prototype-v20.html'),'utf8');
+ check('V17 与用户线上最终版哈希一致',crypto.createHash('sha256').update(old).digest('hex')==='45b990dcf86031bfdb8c317f7783f6ba992461e00d7c7e75d116031e7ebfb651');
+ const restored=next.replace('<title>云忆 · 夸一夸与回忆录 · V20 最小接入版</title>','<title>云忆 · 生命故事 · 可交互原型（改后 · 最新方案）</title>').replace('<link rel="stylesheet" href="v20/praise.css">\n','').replace('<script src="v20/praise.js"></script>\n','');
+ check('除标题与两个扩展引用外，V20 逐字保留最终版 HTML 与所有原脚本',old===restored);
+ const ids=[...old.matchAll(/<section\b[^>]*\bid="([^"]+)"/g)].map(x=>x[1]);check('最终版31个页面保留',ids.length===31);
+ const b=await launchBrowser();try{
+  const p=await b.newPage();p.on('pageerror',e=>errors.push(e.message));p.on('console',m=>{if(m.type()==='error')consoleErrors.push(m.text());});
+  await p.setViewport({width:390,height:844,deviceScaleFactor:1});await p.goto(BASE+'prototype-v20.html',{waitUntil:'networkidle2'});
+  const go=async id=>{await p.evaluate(id=>go(id),id);await sleep(330);};
+  const click=async sel=>{await p.waitForSelector(sel,{visible:true});await p.click(sel);await sleep(100);};
+  const db=()=>p.evaluate(k=>JSON.parse(localStorage.getItem(k)||'{"records":[],"memories":[],"allowMemory":false}'),KEY);
+  const write=async text=>p.$eval('#kk-text',(e,t)=>{e.value=t;e.dispatchEvent(new Event('input',{bubbles:true}));},text);
+  const visible=sel=>p.$eval(sel,e=>!!(e.getBoundingClientRect().height&&getComputedStyle(e).display!=='none'));
+  const shot=async name=>{await sleep(350);await p.screenshot({path:path.join(ROOT,'v20/qa/'+name+'.png')});};
+  await p.evaluate(()=>localStorage.setItem('v17-sentinel','keep'));
+  check('默认仍进入原讲述页',await p.$eval('.screen.on',e=>e.id)==='session');
+  const shelfBefore=await p.$eval('#shelf .body',e=>e.innerHTML);
+  check('原入口与夸夸形成四个底部入口',await p.$$eval('#session .tabbar button',es=>es.map(e=>e.innerText).join('|'))==='夸一夸|讲述|书房|我的');
+  await click('#session .tabbar [data-go="praise"]');check('直接进入夸夸无需资料采集或开书',await visible('#praise'));
+  await click('#kk-generate');check('照片和配文均必填',await p.$eval('.kk-error',e=>e.innerText.includes('选一张照片')));
+  await click('#kk-example');const caption=await p.$eval('#kk-text',e=>e.value);
+  check('示例提供照片与配文',!!caption && await p.$eval('.kk-upload img',e=>e.naturalWidth>0));
+  await go('mine');await go('praise');check('切换保留夸夸草稿',await p.$eval('#kk-text',e=>e.value)===caption);
+  await click('#kk-generate');await click('#kk-cancel');await sleep(950);check('取消生成后停在输入页',await p.$eval('.screen.on',e=>e.id)==='praise' && await visible('#kk-generate'));
+  await p.setOfflineMode(true);await click('#kk-generate');check('离线错误保留草稿',await p.$eval('.kk-error',e=>e.innerText.includes('网络暂时不可用')) && await p.$eval('#kk-text',e=>e.value)===caption);await p.setOfflineMode(false);
+  await click('#kk-generate');await p.waitForSelector('#praise-result.on #kk-save');
+  check('预览不自动收藏或入库',(await db()).records.length===0&&(await db()).memories.length===0);
+  check('原文共享默认关闭',await p.$eval('#kk-share-original',e=>!e.checked));await shot('result-mobile');
+  await click('#kk-save');check('默认收藏仅生成夸夸记录',(await db()).records.length===1&&(await db()).memories.length===0);
+  check('夸夸收藏不改变原书房成果',(await p.$eval('#shelf .body',e=>e.innerHTML))===shelfBefore);
+  const downloads=fs.mkdtempSync('/private/tmp/yunyi-v20-download-'),cdp=await p.createCDPSession();await cdp.send('Page.setDownloadBehavior',{behavior:'allow',downloadPath:downloads});
+  await click('#kk-download');await sleep(450);const png=path.join(downloads,'云忆-夸夸卡.png');check('导出真实PNG夸夸卡',fs.existsSync(png)&&fs.readFileSync(png).subarray(0,8).toString('hex')==='89504e470d0a1a0a');
+  await go('praise');await click('#kk-example');await click('#kk-generate');await p.waitForSelector('#praise-result.on #kk-save');await click('#kk-share-original');await click('#kk-save');let data=await db();
+  check('授权后只将配文原文入库',data.records.length===2&&data.memories.length===1&&data.memories[0].original===caption&&data.memories[0].original!==data.records[0].text);
+  await go('praise');await p.$eval('.kk-context',e=>e.open=true);await click('#kk-use-memory');await click('#kk-generate');await p.waitForSelector('#praise-result.on #kk-save');
+  check('共享授权原文可用于夸夸',await p.$eval('#praise-result',e=>e.innerText.includes('参考了 1 条已授权原文')));
+  await go('praise-history');await p.$eval('.kk-memory-settings',e=>e.open=true);await click('[data-kk-memory]');await go('praise');await click('#kk-generate');await p.waitForSelector('#praise-result.on #kk-save');
+  check('撤销授权后未来生成停止引用',await p.$eval('#praise-result',e=>!e.innerText.includes('条已授权原文')));
+  await go('praise');const file=await p.$('#kk-photo');await file.uploadFile(path.join(ROOT,'v20/assets/travel.jpg'));await sleep(300);
+  check('本机选图可用',await p.$eval('.kk-upload img',e=>e.src.startsWith('data:image/jpeg')));await write('今天做了一件让我开心的小事。');await click('#kk-generate');await p.waitForSelector('#praise-result.on #kk-save');
+  check('自选照片不会冒充真实识别',await p.$eval('#praise-result',e=>e.innerText.includes('尚未识别你上传的实际照片')));
+  await p.evaluate(()=>{window.realSet=Storage.prototype.setItem;Storage.prototype.setItem=function(){throw new DOMException('Quota exceeded','QuotaExceededError');};});await click('#kk-save');
+  check('存储失败不显示收藏成功',await p.$eval('#kk-save',e=>!e.disabled));await p.evaluate(()=>Storage.prototype.setItem=window.realSet);
+  await go('mine');await click('#mine [data-go="praise-history"]');check('我的可进入独立夸夸记录',await visible('#praise-history')&&await p.$$eval('[data-kk-record]',es=>es.length)===2);await shot('history-mobile');
+  await click('[data-kk-record]');check('历史记录可回看与导出',await visible('#praise-result')&&await p.$eval('#kk-save',e=>e.disabled));
+  await p.reload({waitUntil:'networkidle2'});check('刷新后收藏与授权持久化',(await db()).records.length===2&&(await db()).memories.length===1);
+  // Existing screens: compare visibility, then exercise the original state functions.
+  for(const id of ids){await go(id);check('原页面可达：'+id,id==='share'?await p.$eval('#shareSheet',e=>e.classList.contains('show')):await p.$eval('#'+id,e=>e.classList.contains('on')));}
+  await go('session');await p.evaluate(()=>ivStructuredStart());await sleep(330);check('原按问题讲述进入选题',await visible('#ivSelectPane'));await p.evaluate(()=>ivCloseQuestionSelect());
+  await go('session');await p.evaluate(()=>ivFreeEntry());await sleep(330);check('原自由讲述进入录音状态',await visible('#ivListenPane'));await go('session');
+  const photo=await p.$('#ivPhotoPick');await photo.uploadFile(path.join(ROOT,'v20/assets/travel.jpg'));await sleep(800);check('原照片讲述可选图并进入录音',await visible('#ivListenPane')&&await p.$eval('#ivPhotoPreviewImg',e=>e.naturalWidth>0));
+  await go('session');await go('summary');const said=await p.evaluate(()=>ivSaidText());const prior=await db();await p.click('#kk-memoir-consent');await click('#summary [data-go="shelf"]');data=await db();
+  check('回忆录明确授权后共享原始讲述',data.memories.length===prior.memories.length+1&&data.memories.at(-1).original===said&&data.memories.at(-1).source==='回忆录');
+  check('回忆录收录不生成夸夸',data.records.length===prior.records.length);
+  await go('praise');await click('#kk-example');await write('爷爷给我取的名字，是一份珍贵的礼物。');await click('#kk-generate');await p.waitForSelector('#praise-result.on #kk-save');
+  await p.$eval('#praise-result .kk-context',e=>e.open=true);
+  check('夸夸引用同一底座的回忆录授权原文',await p.$eval('#praise-result',e=>e.innerText.includes('参考了 1 条已授权原文'))&&await p.$eval('#praise-result blockquote b',e=>e.innerText)==='回忆录');
+  await p.evaluate(k=>{const d=JSON.parse(localStorage.getItem(k));d.memories.push({id:'family-only',personId:'another-person',source:'回忆录',original:'旅行和运动是家人的爱好',enabled:true});localStorage.setItem(k,JSON.stringify(d));},KEY);await p.reload({waitUntil:'networkidle2'});await go('praise');await click('#kk-example');await click('#kk-generate');await p.waitForSelector('#praise-result.on #kk-save');
+  check('其他人物资料不用于本人夸夸',await p.$eval('#praise-result',e=>!e.innerText.includes('条已授权原文')));
+  for(const width of [360,390]){await p.setViewport({width,height:844,deviceScaleFactor:1});for(const id of ['praise','praise-result','praise-history','session','shelf','mine']){await go(id);check(width+'px 无横向溢出：'+id,await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)&&await p.$eval('.screen.on',e=>e.scrollWidth<=e.clientWidth+1));}}
+  check('原存储键未被更改',await p.evaluate(()=>localStorage.getItem('v17-sentinel'))==='keep');
+  check('浏览器无脚本错误',errors.length===0);
+  fs.writeFileSync(path.join(ROOT,'v20/qa/report.json'),JSON.stringify({date:new Date().toISOString(),passed:checks.length,checks,pageErrors:errors,consoleErrors,downloads},null,2)+'\n');
+  console.log(JSON.stringify({passed:checks.length,pageErrors:errors,consoleErrors},null,2));
+ }finally{await closeBrowser(b);}
+})().catch(e=>{console.error(e);console.error('Passed before failure:',checks);process.exitCode=1;});
