@@ -3,6 +3,7 @@
 ## V21 current branch scope (2026-09-08)
 
 - Entry: `prototype-v21.html`; branch: `prototype/v21-product-architecture`.
+- 文案和常规 UI 调整直接更新当前 V21，不另建原型版本；Git 保留修改历史。首页仅保留一句 slogan「每一刻，都值得被看见」，其余页面避免描述性文案堆叠。用户当前要求先调整原型，UI 生图后续继续。
 - User requested an overall product architecture Demo before PRDs, then explicitly confirmed this is a mobile product. Always render mobile UI; desktop is only a centered phone preview. No PC sidebar or desktop adaptation.
 - Shared navigation: 首页 / 珍藏 / 我的. Praise and memoir are separate intents in one home composer, with independent outcomes and opt-in shared original-source memory.
 - Canonical V17 and prior V20 remain untouched. V21.1 contains all 31 canonical V17 screens, overlays and original business scripts in the same document. `v21/qa/build-runtime.py` generates the isolated runtime; adaptations live in `v21/memoir-bridge.js` and `v21/memoir-theme.css`. Preserve full prototype functionality; do not reduce it to a main-flow demo. Real AI, voice, payment and external sharing remain at V17 prototype scope.

@@ -1,0 +1,17 @@
+/* Content cleanup only: maintain feature/state controls and eliminate empty spacing. */
+.greeting,.home-title,.personal-note{display:none}
+.home-header{margin-bottom:24px}.intent-tabs button{min-height:58px}.intent-tabs small{display:none}
+.composer-heading{margin-bottom:16px}.composer-heading>span{font-size:14px;color:#66725c}
+.composer-helper{justify-content:flex-end;margin:6px 0 10px}.question-invitation{min-height:92px;display:flex;align-items:center}.question-invitation strong{font:500 19px/1.5 -apple-system,"PingFang SC",sans-serif}.question-invitation .round-arrow{bottom:28px}.question-invitation::after{display:none}
+.home-page>.section-title{margin-top:28px}.home-page .demo-foot{margin-top:18px}
+.profile-card{margin:22px 0 24px}.profile-card h2{line-height:1.5}.profile-card>div>p:empty{display:none}
+.section-header{margin-top:8px}.collection-copy h3:empty{display:none}.collection-copy .type-pill{margin-bottom:7px}.collection-copy small{display:block}
+#memoir-runtime .v21-demo-note:empty,#memoir-runtime .hm2-greet:has(h1:empty),#memoir-runtime .sh2-sub:empty{display:none}
+#memoir-runtime #session .hm2-entry-card::before{display:none}
+#memoir-runtime #summary .thick-fb,#memoir-runtime #summary .sum2-toast,#memoir-runtime #userpath .path-k,#memoir-runtime #userpath .path-note{display:none}
+#memoir-runtime #session .iv2-qsub{display:none}
+#memoir-runtime #session .hm2-entry-card{margin-top:20px}
+
+/* 首页仅保留一句品牌表达。 */
+.home-slogan{font:500 25px/1.5 var(--serif);color:var(--ink,#303b31);letter-spacing:.2px;margin:0 0 24px}
+@media(max-width:370px){.home-slogan{font-size:23px}}

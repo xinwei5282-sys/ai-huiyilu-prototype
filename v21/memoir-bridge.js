@@ -17,7 +17,7 @@
   root.querySelectorAll('.screen.on').forEach(x=>x.classList.remove('on'));
   function syncIdentity(){
     const db=read();if(!db)return;
-    root.querySelector('.hm2-greet h1').textContent='这次，想讲些什么？';
+    root.querySelector('.hm2-greet h1').textContent='';
     root.querySelectorAll('.me3-name>b').forEach(e=>e.textContent=db.name);
     const lines=root.querySelectorAll('#profile .profile-line');
     [0,1].forEach(i=>{if(lines[i])lines[i].querySelector('span').textContent=db.name;});
@@ -132,7 +132,7 @@
     bar.innerHTML='<button type="button" data-yunyi-home>‹ 首页</button><span>'+(screen==='session'?'回忆录':'云忆')+'</span><button type="button" data-yunyi-me>我的 ›</button>';
     root.querySelector('#'+screen).prepend(bar);
   });
-  const sessionNote=document.createElement('div');sessionNote.className='v21-demo-note';sessionNote.textContent='交互原型 · 语音转写与 AI 回应为演示';
+  const sessionNote=document.createElement('div');sessionNote.className='v21-demo-note';sessionNote.textContent='';sessionNote.hidden=true;
   root.querySelector('#session .v21-return').after(sessionNote);
   const recovery=document.createElement('div');recovery.id='v21-draft-recovery';recovery.className='v21-draft-row';recovery.hidden=true;
   recovery.innerHTML='<span>上次的讲述还在</span><button data-memoir-resume>接着讲 ›</button>';
@@ -140,7 +140,7 @@
   const saveDraftButton=document.createElement('button');saveDraftButton.type='button';saveDraftButton.className='v21-save-draft';saveDraftButton.textContent='先存草稿';saveDraftButton.onclick=()=>{if(captureDraft()){ivLiveStop();window.Yunyi.go('drafts');}};
   root.querySelector('#session .v21-return span').replaceWith(saveDraftButton);
   const shelf=root.querySelector('#shelf .sh2-hero');
-  shelf.querySelector('.sh2-title').textContent='珍藏';shelf.querySelector('.sh2-sub').textContent='好好收着，这些属于你的时刻。';
+  shelf.querySelector('.sh2-title').textContent='珍藏';shelf.querySelector('.sh2-sub').textContent='';
   const tabs=document.createElement('div');tabs.className='v21-collection-tabs';tabs.innerHTML='<button data-yunyi-library="all">全部</button><button data-yunyi-library="praise">夸夸卡</button><button class="selected">回忆录</button>';shelf.after(tabs);
   const label=document.createElement('label');label.className='v21-memory-consent';label.innerHTML='<input id="memoir-allow-original" type="checkbox"><span>允许云忆记住这段原文<small>仅使用你亲自讲述的内容；可在「我的」撤回授权。</small></span>';
   root.querySelector('#summary .body').append(label);
