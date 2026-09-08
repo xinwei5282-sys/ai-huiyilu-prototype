@@ -5,8 +5,8 @@
 - Entry: `prototype-v21.html`; branch: `prototype/v21-product-architecture`.
 - User requested an overall product architecture Demo before PRDs, then explicitly confirmed this is a mobile product. Always render mobile UI; desktop is only a centered phone preview. No PC sidebar or desktop adaptation.
 - Shared navigation: 首页 / 珍藏 / 我的. Praise and memoir are separate intents in one home composer, with independent outcomes and opt-in shared original-source memory.
-- Canonical V17 and prior V20 remain untouched. V21 demonstrates the memoir main flow with canonical seed content; it does not claim a complete migration of 31 screens or a production AI service.
-- Scope and decisions: `v21/version.json`. Local preview port 8881. Verification: `node v21/qa/verify.cjs`; renders use isolated headless-shell.
+- Canonical V17 and prior V20 remain untouched. V21.1 contains all 31 canonical V17 screens, overlays and original business scripts in the same document. `v21/qa/build-runtime.py` generates the isolated runtime; adaptations live in `v21/memoir-bridge.js` and `v21/memoir-theme.css`. Preserve full prototype functionality; do not reduce it to a main-flow demo. Real AI, voice, payment and external sharing remain at V17 prototype scope.
+- Scope and decisions: `v21/version.json`. Local preview port 8881. Verification: `node v21/qa/verify-parity.cjs` (31-screen/function preservation), `node v21/qa/verify.cjs` (joined product flows); renders use isolated headless-shell. Prior simplified V21 is recoverable at commit `8385f62`.
 - PRD and external publication are deferred. Older scope statements below apply to their respective versions.
 
 ## V20 branch scope (2026-09-08)

@@ -1,10 +1,10 @@
 {
-  "version": "21.0.0",
+  "version": "21.1.0",
   "branch": "prototype/v21-product-architecture",
   "baseline": "V17 online final / c60bd06",
   "baseline_sha256": "45b990dcf86031bfdb8c317f7783f6ba992461e00d7c7e75d116031e7ebfb651",
   "entry": "prototype-v21.html",
-  "scope": "整体产品架构交互Demo；不是31屏完整迁移或正式小程序",
+  "scope": "V17完整原型功能迁入V21统一移动端；保留31个screen及原交互，非正式小程序服务",
   "navigation": [
     "首页：表达与回应",
     "珍藏：夸夸卡与回忆录成果",
@@ -24,8 +24,24 @@
   "prd": "按用户要求暂缓",
   "platform": "移动端；宽屏仅显示390px手机预览，无PC界面",
   "verification": {
-    "checks": 36,
-    "result": "passed",
-    "baseline_unchanged": true
-  }
+    "screen_count": 31,
+    "parity_checks": 126,
+    "integration_checks": 43,
+    "book_layout_check": "passed",
+    "baseline_unchanged": true,
+    "inventory": "v21/qa/v17-inventory.json"
+  },
+  "previous_v21_commit": "8385f62",
+  "runtime": {
+    "source": "prototype-v17.html",
+    "generated": [
+      "v21/memoir.css",
+      "v21/memoir.js",
+      "prototype-v21.html 内 memoir-runtime"
+    ],
+    "adapter": "v21/memoir-bridge.js",
+    "same_document": true,
+    "external_v17_link_required": false
+  },
+  "service_boundary": "V17既有语音、AI、支付、分享等原型演示边界不变；V21本地草稿、原文授权与珍藏数据已接通。"
 }

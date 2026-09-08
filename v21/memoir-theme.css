@@ -1,0 +1,60 @@
+/* One mobile shell, one set of actions. Preserve the full V17 interaction DOM. */
+#memoir-runtime[hidden],#app[hidden]{display:none!important}
+#memoir-runtime{position:absolute;inset:0;overflow:hidden;background:#f7f5ed;isolation:isolate;--cream:#f7f5ed;--cream-2:#fffef8;--brown:#303c32;--brown-h:#303c32;--text:#303c32;--text-2:#76816b;--text-3:#7f886f;--gold:#6f875c;--gold-btn1:#48634e;--gold-btn2:#48634e;--gold-deep:#48634e;--gold-ink:#48634e;--green:#48634e;--line:#e3e7d9;--serif:"Songti SC",STSong,serif;--sans:-apple-system,"PingFang SC",sans-serif;--A-terra:#6f875c;--A-terra-d:#48634e;--A-mic:linear-gradient(135deg,#718966,#48634e);--A-brand:linear-gradient(135deg,#98aa80,#5e7750);--A-cream:#edf0e3;--A-cream2:#e3e9d6}
+#memoir-runtime .phone{width:100%;height:100%;padding:0;border-radius:0;background:transparent;box-shadow:none;transform:translateZ(0)}
+#memoir-runtime .phone::after{display:none}
+#memoir-runtime .screens{height:100%;width:100%;border-radius:0}
+#memoir-runtime .screen{background:#f7f5ed}
+#memoir-runtime .sbar,#memoir-runtime .wxcap,#memoir-runtime .tabbar{display:none!important}
+#memoir-runtime .navbar{padding-top:16px;min-height:66px;background:#f7f5ed}
+#memoir-runtime .navbar .h{font-size:15px;font-weight:500}
+#memoir-runtime .primary,#memoir-runtime .btnp,#memoir-runtime .p,#memoir-runtime .addr-picker-head .save{background:#48634e;color:#fffdf4;border-color:#48634e;box-shadow:none}
+#memoir-runtime .ghost,#memoir-runtime .btng{color:#48634e;border-color:#d5deca;background:#f9faf2}
+#memoir-runtime .body{min-height:0}
+#memoir-runtime .toastc{position:absolute;bottom:95px;left:50%;max-width:85%;z-index:100}
+#memoir-runtime .v21-return{display:flex;align-items:center;justify-content:space-between;flex-shrink:0;min-height:52px;padding:8px 18px;background:#f7f5ed;position:relative;z-index:21;border-bottom:1px solid #e5e9db;color:#526b49;font:13px/1.5 -apple-system,"PingFang SC",sans-serif}
+#memoir-runtime .v21-return button{min-height:38px;min-width:44px;color:inherit;padding:4px 8px}
+#memoir-runtime .v21-return small{font-size:10px;color:#97a18a}
+#memoir-runtime #session .ss-brand{display:none!important}
+#memoir-runtime #session.sess-imm::before{opacity:.28}
+#memoir-runtime #session .iv-qbox{background:#f1f3e7!important;box-shadow:none!important}
+#memoir-runtime #session .iv-qbox::before{background:#f1f3e7!important}
+#memoir-runtime .sh2-body{padding-bottom:85px}
+#memoir-runtime .sh2-hero{height:auto;min-height:0;padding:26px 22px 8px;background:none}
+#memoir-runtime .sh2-hero::before,#memoir-runtime .sh2-hero::after{display:none}
+#memoir-runtime .sh2-title{font:500 30px/1.5 "Songti SC",serif;color:#303c32;text-shadow:none}
+#memoir-runtime .sh2-sub{color:#839174;font-size:12px;text-shadow:none;margin-top:8px}
+#memoir-runtime .v21-collection-tabs{display:flex;gap:26px;min-height:49px;margin:12px 22px 22px;border-bottom:1px solid #dfe5d3}
+#memoir-runtime .v21-collection-tabs button{min-height:48px;padding:0 2px;color:#8b957d;font-size:14px;border-radius:0}
+#memoir-runtime .v21-collection-tabs .selected{color:#48634e;border-bottom:3px solid #48634e;font-weight:600}
+#memoir-runtime .v21-memory-consent{display:flex;gap:9px;margin:25px 20px;padding:16px;background:#edf1e4;border-radius:10px;font:12px/1.8 -apple-system,sans-serif;color:#768767}
+#memoir-runtime .v21-memory-consent input{width:18px;height:18px;accent-color:#48634e;flex-shrink:0;margin:2px 0}
+#memoir-runtime .v21-memory-consent small{display:block;font-size:10px;color:#93a181}
+#memoir-runtime .v21-draft-row{display:flex;justify-content:space-between;gap:15px;padding:18px;margin:14px 20px;border:1px solid #e0e6d4;border-radius:10px;background:#fdfdf6;color:#526b49;font-size:13px}
+#memoir-runtime .v21-draft-row button{font-size:12px;color:#48634e}
+#memoir-runtime .v21-demo-note{font:10px/1.8 -apple-system,sans-serif;color:#919c84;text-align:center;padding:8px 18px}
+.profile-card .profile-avatar img,.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.account-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}
+.account-actions button{padding:18px 14px;text-align:left;background:#edf0e3;border:1px solid #e1e7d5;border-radius:12px;min-height:88px}
+.account-actions b{display:block;font-size:13px;font-weight:500;margin:8px 0 5px}.account-actions small{font-size:10px;color:#8b987a}.account-actions .icon{width:21px;height:21px;color:#82966d}
+#memoir-runtime{padding:0;margin:0;min-height:0;display:block;line-height:1.6;color:#303c32;font-family:-apple-system,"PingFang SC",sans-serif}
+#memoir-runtime .v21-draft-row[hidden]{display:none}
+#memoir-runtime .v21-save-draft{font-size:12px;color:#6c825a}
+
+#memoir-runtime #session.sess-imm::before{display:none}
+#memoir-runtime #session .hm2-greet{padding:28px 0 20px}
+#memoir-runtime #session .hm2-greet h1{max-width:100%;font:500 29px/1.55 "Songti SC",serif;text-shadow:none}
+#memoir-runtime #session .hm2-entry-card{margin:20px 0 0;background:#fffdf6;box-shadow:none;border-radius:18px}
+#memoir-runtime #session .hm2-entry-card::before{content:"从一个问题、一张照片，或一段自由讲述开始";font-size:11px;font-weight:400;color:#8c997c;line-height:1.8}
+#memoir-runtime #session .hm2-cta.primary{background:#48634e!important}
+#memoir-runtime #session .hm2-cta:not(.primary){background:#eff2e5!important}
+#memoir-runtime #session .hm2-cta .mic{color:inherit;background:transparent}
+#memoir-runtime .toastc{background:#43583e;color:#fffdf5;box-shadow:none}
+/* Only inner page bodies scroll; closed off-canvas panels cannot move the shell. */
+#memoir-runtime,#memoir-runtime .phone,#memoir-runtime .screens,#memoir-runtime .screen{overflow:clip}
+#memoir-runtime .hmodal:not(.open),#memoir-runtime .dw:not(.open){visibility:hidden;pointer-events:none}
+#memoir-runtime .hmodal.open,#memoir-runtime .dw.open{visibility:visible}
+#memoir-runtime .iv2-ctrls .main,#memoir-runtime .iv2-ctrls .main .ic{background:#48634e;color:#fff}
+#memoir-runtime #bookRead .fb-top{position:relative;top:0;flex:none;background:#3d513c;min-height:62px}
+#memoir-runtime #bookRead .fb-stage{min-height:0}
+#memoir-runtime #bookRead .cover3d{background:linear-gradient(135deg,#677b52,#40583c);color:#fbf8e9}
