@@ -1,0 +1,31 @@
+{
+  "version": "21.0.0",
+  "branch": "prototype/v21-product-architecture",
+  "baseline": "V17 online final / c60bd06",
+  "baseline_sha256": "45b990dcf86031bfdb8c317f7783f6ba992461e00d7c7e75d116031e7ebfb651",
+  "entry": "prototype-v21.html",
+  "scope": "整体产品架构交互Demo；不是31屏完整迁移或正式小程序",
+  "navigation": [
+    "首页：表达与回应",
+    "珍藏：夸夸卡与回忆录成果",
+    "我的：人物、草稿、共同记忆"
+  ],
+  "decisions": [
+    "夸夸与回忆录为首页同一开始入口的不同意图",
+    "共同身份、资料授权与成果空间",
+    "两条业务独立完成，不自动转换或强制导流",
+    "回忆录保留讲述、追问、预览、章节与成书主链路"
+  ],
+  "storage": "yunyi.architecture.v21",
+  "previous_versions": [
+    "prototype-v17.html",
+    "prototype-v20.html"
+  ],
+  "prd": "按用户要求暂缓",
+  "platform": "移动端；宽屏仅显示390px手机预览，无PC界面",
+  "verification": {
+    "checks": 36,
+    "result": "passed",
+    "baseline_unchanged": true
+  }
+}
