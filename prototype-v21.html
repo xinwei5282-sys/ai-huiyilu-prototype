@@ -104,7 +104,7 @@
       <div class="iv-pane ask-hero" id="ivAskPane">
         <!-- P0-2 家人回音：顶部一行轻量 pill，仅开场第一问出现，可点展开 -->
         <button class="fam-pill" id="ivFamEcho" data-toast="晓晓看了您讲的《门口的老槐树》，说她也记得那棵树"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg> 晓晓看过您的故事 ›</button>
-        <div class="free-badge" id="ivFreeBadge" style="display:none"><svg viewBox="0 0 24 24"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg> 自由讲述</div>
+        <div class="free-badge" id="ivFreeBadge" style="display:none"><svg viewBox="0 0 24 24"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg> 随便讲讲 · 我帮您归类</div>
 
         <!-- 问候语（叠在书房照片上） -->
         <div class="hm2-greet">
@@ -237,7 +237,7 @@
           </div>
         </div>
         <div class="ivfs-foot2">
-          <button class="ivfs-see" onclick="ivViewSummary()"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg> 查看小结</button>
+          <button class="ivfs-see" onclick="ivViewSummary()"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg> 看看这段小结</button>
           <button class="ivfs-skip" id="ivFlashResume" onclick="ivConfirm()">接着聊 →</button>
         </div>
       </div>
@@ -296,7 +296,7 @@
         <div class="iv-foot">
           <button class="iv-say" onclick="ivListen()"><span class="em"><svg class="ico-ph" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/><path d="M8.5 21h7"/></svg></span>点这里，跟我说</button>
           <div class="iv-subrow">
-            <button class="iv-sub" data-go="summary"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg> 查看小结</button>
+            <button class="iv-sub" data-go="summary"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg> 看看这段小结</button>
             <button class="iv-sub" data-go="shelf">今天先到这儿</button>
           </div>
         </div>
@@ -472,7 +472,7 @@
           <svg class="sum2-sprig" viewBox="0 0 118 150" aria-hidden="true"><path d="M68 140 C68 90 76 55 106 30" stroke="#8a9a63" stroke-width="2.4" stroke-linecap="round" fill="none"/><g fill="#a7b982" opacity=".92"><path d="M72 118 C58 112 50 96 58 82 C74 88 80 104 72 118Z"/><path d="M76 100 C64 92 60 74 70 62 C84 72 86 90 76 100Z"/><path d="M82 80 C72 70 72 52 84 44 C96 56 94 72 82 80Z"/><path d="M90 60 C82 50 84 34 97 28 C106 40 102 54 90 60Z"/></g><g fill="#c2d0a3" opacity=".85"><path d="M68 116 C80 108 98 108 106 120 C92 128 76 126 68 116Z"/><path d="M74 96 C86 88 102 88 110 100 C97 108 82 106 74 96Z"/></g></svg>
           <div class="sum2-photo" onclick="storyUpload()">
             <svg class="clip" viewBox="0 0 24 50" fill="none" stroke="#9c8a72" stroke-width="2.4" stroke-linecap="round"><path d="M7 15 V37 a5 5 0 0 0 10 0 V10 a3 3 0 0 0 -6 0 V35"/></svg>
-            <div class="inner">＋ 换 / 加照片<br><span style="opacity:.7;font-size:12px">给这段配张老照片</span></div>
+            <div class="inner">＋ 添加照片<br><span style="opacity:.7;font-size:12px">上传流程演示</span></div>
             <div class="up-state" id="storyUp"><span class="sp"></span>照片上传中…</div>
             <div class="up-state fail" id="storyUpFail"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M9 9.3A11 11 0 0 0 5 12M2 8.8A16 16 0 0 1 8.5 6M15.5 6A16 16 0 0 1 22 8.8M15 15.2A6 6 0 0 0 12 14.5"/><circle cx="12" cy="19" r="0.6" fill="currentColor" stroke="none"/></svg> 没传上，网络不太稳<span class="retry" onclick="event.stopPropagation();storyUpload()">重试</span></div>
           </div>
@@ -495,8 +495,8 @@
     <div class="body">
       <div class="inv2">
         <div class="inv2-lead">
-          <div class="inv2-h">一起帮兰秀英，<br>把她这一辈子的故事记下来</div>
-          <div class="inv2-sub">发给想来帮忙记录的人。</div>
+          <div class="inv2-h">邀请一起记录</div>
+          <div class="inv2-sub" id="memoir-subject-badge">正在记录：秀英</div>
         </div>
 
         <!-- 要分享的邀请卡（本屏主体） -->
@@ -505,7 +505,7 @@
             <div class="ic-av">忆</div>
             <div class="ic-tt"><div class="n">兰秀英的时光印记</div><div class="d">生命故事 · 邀你一起记录</div></div>
           </div>
-          <div class="ic-body">“想请你帮个忙，把兰秀英这一辈子的故事，一段一段记下来，给她留一本书。”</div>
+          <div class="ic-body">“一起补充兰秀英的故事。”</div>
           <div class="ic-foot" data-go="collaborators">
             <span class="joined"><i style="background:linear-gradient(140deg,#DAB97E,#B8894F)">兰</i><i style="background:linear-gradient(140deg,#6E8F6A,#3D5A4C)">晓</i><i style="background:linear-gradient(140deg,#C88,#A55)">军</i></span>
             <span class="jt">已有 4 位家人加入 ›</span>
@@ -513,9 +513,9 @@
         </div>
 
         <!-- 唯一主行动 -->
-        <button class="btnp inv2-share" data-toast="已生成邀请卡，可转发微信"><svg viewBox="0 0 24 24"><path d="M9.3 3C5.3 3 2 5.8 2 9.3c0 2 1.1 3.8 2.9 5L4.1 17l2.7-1.4c.8.2 1.6.4 2.5.4h.4a5.7 5.7 0 0 1-.2-1.5c0-3.3 3.2-5.9 7.1-5.9h.4C16.3 5.1 13.1 3 9.3 3Z"/><path d="M22 13.9c0-2.8-2.9-5.1-6.4-5.1s-6.4 2.3-6.4 5.1 2.9 5.1 6.4 5.1c.8 0 1.6-.1 2.3-.4l2.3 1.2-.6-1.9c1.4-.9 2.4-2.4 2.4-4Z"/></svg> 分享到微信 · 喊大家来帮忙</button>
+        <button class="btnp inv2-share" data-toast="已生成邀请卡，可转发微信"><svg viewBox="0 0 24 24"><path d="M9.3 3C5.3 3 2 5.8 2 9.3c0 2 1.1 3.8 2.9 5L4.1 17l2.7-1.4c.8.2 1.6.4 2.5.4h.4a5.7 5.7 0 0 1-.2-1.5c0-3.3 3.2-5.9 7.1-5.9h.4C16.3 5.1 13.1 3 9.3 3Z"/><path d="M22 13.9c0-2.8-2.9-5.1-6.4-5.1s-6.4 2.3-6.4 5.1 2.9 5.1 6.4 5.1c.8 0 1.6-.1 2.3-.4l2.3 1.2-.6-1.9c1.4-.9 2.4-2.4 2.4-4Z"/></svg> 分享邀请卡</button>
 
-        <div class="inv2-preview" data-go="landing">预览家人点开后看到的样子 ›</div>
+        <div class="inv2-preview" data-go="landing">预览邀请页 ›</div>
       </div>
     </div>
   </section>
@@ -527,8 +527,8 @@
     <div class="body co-body">
       <div class="co-collab-hero">
         <div class="ey">家人协作</div>
-        <div class="h">4 个人正在一起完成这本书</div>
-        <div class="s">还有 2 项等您确认。</div>
+        <div class="h">一起记录的人</div>
+        <div class="s">家人已经补充了 11 段故事，还有 2 项等您看看。</div>
         <div class="co-collab-summary"><span>✓</span>大家写下的内容都会先由您确认</div>
       </div>
       <div class="co-collab-list">
@@ -551,7 +551,7 @@
       <div class="print-hero">
         <div class="print-k">下载打印 · 纸质成品预览</div>
         <div class="print-h">我的时光印记<br>可以装订成书了</div>
-        <div class="print-s">先看纸质样张，满意后再生成可打印 PDF。</div>
+        <div class="print-s">排版样张 · 演示</div>
         <div class="print-spec">
           <div><b>A5</b><span>成品</span></div>
           <div><b>86</b><span>页</span></div>
@@ -569,7 +569,7 @@
             <p>我家在村头一间土坯房，门口有一棵很老很老的槐树。夏天傍晚，全村人都搬着小板凳到树下乘凉。</p>
           </div>
           <div class="print-page">
-            <div class="print-photo">老照片位</div>
+            <div class="print-photo">照片占位 · 示例</div>
             <p>“夏天全村人都爱在树下乘凉，那是我一辈子最凉快的地方。”</p>
           </div>
         </div>
@@ -607,10 +607,10 @@
       </div>
       <div class="hub-lbl">选择分享方式</div>
       <div class="co-share-grid">
-        <div class="co-share-opt" data-go="quotecard"><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 7h4v5c0 2.2-1.4 3.6-4 4.2"/><path d="M14 7h4v5c0 2.2-1.4 3.6-4 4.2"/></svg></span><div><b>金句卡</b><span>一句话 + 老照片，适合发朋友圈</span></div><span class="co-tag">可公开</span></div>
-        <div class="co-share-opt" data-toast="已打开小程序分享，可发送当前章节"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg></span><div><b>分享章节</b><span>直接发送小程序章节卡片</span></div><span class="co-tag">微信</span></div>
+        <div class="co-share-opt" data-go="quotecard"><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 7h4v5c0 2.2-1.4 3.6-4 4.2"/><path d="M14 7h4v5c0 2.2-1.4 3.6-4 4.2"/></svg></span><div><b>金句卡</b><span>图片分享</span></div><span class="co-tag">可公开</span></div>
+        <div class="co-share-opt" data-toast="已打开小程序分享，可发送当前章节"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l2.4 5.9L20.8 9.6l-4.9 4.1L17.6 20 12 16.6 6.4 20l1.7-6.3L3.2 9.6l6.4-.7L12 3Z"/></svg></span><div><b>分享章节</b><span>当前章节</span></div><span class="co-tag">微信</span></div>
       </div>
-      <div class="co-note">可分享当前片段；整本书和纸质打印请到书详情。</div>
+      <div class="co-note">整本书和纸质打印放在书详情里处理；这里专注当前片段的轻分享，避免误把全本公开出去。</div>
     </div>
   </section>
 
@@ -618,7 +618,7 @@
   <section class="screen" id="quotecard">
     <div class="sbar" style="color:var(--brown)"><span>9:41</span><span class="bat"></span></div><div class="wxcap">··· ◉</div>
     <div class="navbar"><span class="b" data-go="share">‹</span><span class="h">金句卡</span></div>
-    <div class="body"><div class="pad">
+    <div class="body"><div class="prototype-label">分享卡 · 演示</div><div class="pad">
       <div class="qcard" id="quoteCard" data-quote-bg="warm-study" data-quote-state="ready">
         <div class="qc-generating">AI 正在生成回忆背景…</div>
         <div class="qc-head">
@@ -631,7 +631,7 @@
           <span class="qc-av" data-avatar-view>兰</span>
           <div><div class="n">兰秀英</div><div class="s">《我的时光印记 · 门口的老槐树》</div></div>
         </div>
-        <div class="qc-foot"><div class="qr"></div><div class="qc-cta"><div class="a">扫码，也给父母做一本</div><div class="b">云忆 · 记录长辈的一生</div></div></div>
+        <div class="qc-foot"><div class="qr"></div><div class="qc-cta"><div class="a">示意码 · 不可扫码</div><div class="b">云忆 · 分享示例</div></div></div>
       </div>
       <div class="quote-bg-panel">
         <div class="quote-bg-head"><b>AI 回忆背景</b></div>
@@ -681,8 +681,8 @@
         <div class="ct-shell">
           <div class="ct-hero">
             <div class="ey">帮兰秀英补充一段</div>
-            <div class="title">从你的视角，讲一件记得住的小事</div>
-            <div class="desc">不用写长篇，选好关系后回答一个问题。她确认后，这段会作为亲友补充收进书里。</div>
+            <div class="title">补充一段回忆</div>
+            <div class="desc">由被记录人确认后收录。</div>
           </div>
           <div class="ct-role-card">
             <div class="ct-role-title"><span class="n">1</span><span>你是兰秀英的谁？</span></div>
@@ -740,8 +740,8 @@
     <div class="body co-body">
       <div class="myc-hero">
         <div class="ey">我的补录</div>
-        <div class="h">你帮谁写过，都在这里</div>
-        <div class="s">按被记录的人归档；点开某个人，再看你给 TA 补过哪些内容。</div>
+        <div class="h">我补录的人</div>
+        <div class="s"></div>
         <div class="myc-stats"><div><b>3</b><span>补录对象</span></div><div><b>12</b><span>已提交</span></div><div><b>4</b><span>待查看</span></div></div>
       </div>
       <div class="myc-list">
@@ -760,7 +760,7 @@
       <div class="myc-hero">
         <div class="ey" id="mycDetailEy">你以老同事身份补录</div>
         <div class="h" id="mycDetailTitle">给老周补了 5 段</div>
-        <div class="s" id="mycDetailSub">这里是你给 TA 写过的内容和当前状态。</div>
+        <div class="s" id="mycDetailSub"></div>
         <div class="myc-stats"><div><b id="mycDetailTotal">5</b><span>已补录</span></div><div><b id="mycDetailDone">1</b><span>已进书</span></div><div><b id="mycDetailPending">3</b><span>待查看</span></div></div>
       </div>
       <div class="myc-list">
@@ -798,11 +798,11 @@
   <section class="screen" id="upload">
     <div class="sbar" style="color:var(--brown)"><span>9:41</span><span class="bat"></span></div><div class="wxcap">··· ◉</div>
     <div class="navbar"><span class="b" data-go="book">‹</span><span class="h">上传素材</span></div>
-    <div class="body up3-body">
+    <div class="body up3-body"><div class="prototype-label">素材整理 · 演示</div>
       <div class="up3-hero">
         <div class="up3-k">充实这本书</div>
-        <div class="up3-h">把老照片、信件、录像收进故事里</div>
-        <div class="up3-s">文档、照片、视频都可以上传。</div>
+        <div class="up3-h">上传素材</div>
+        <div class="up3-s">上传后自动识别文字、人物和时间线，合适的内容会归入对应章节。</div>
         <button class="up3-drop" onclick="uploadMaterialPicked()">
           <span class="ic"><svg viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1-.5-7.97 5.5 5.5 0 0 1 10.7-1.2A3.75 3.75 0 0 1 18 18"/><path d="M12 19v-6M9.5 15.5L12 13l2.5 2.5"/></svg></span>
           <span><b>点这里上传素材</b><span>文档、照片、视频都可以</span></span>
@@ -928,16 +928,16 @@
     <div class="ob-hero"></div>
     <div class="ob-brand"></div>
     <div class="ob-sheet">
-      <div class="ob-kick"></div>
-      <div class="ob-h1">记录你的故事</div>
-      <div class="ob-sub"></div>
+      <div class="ob-kick">趁 还 来 得 及</div>
+      <div class="ob-h1">把父母的一生，<br>讲成一本传家的书</div>
+      <div class="ob-sub">他们的故事和声音，值得被<b>好好记下来</b>——<br>不用打字、张口就说，慢慢讲给我听。</div>
       <div class="ob-benes">
         <div class="ob-bene"><div class="ic"><svg class="ico-ph" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/><path d="M8.5 21h7"/></svg></div><div class="t">开口就说</div></div>
         <div class="ob-bene"><div class="ic"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5V4.5Z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 21H19"/></svg></div><div class="t">自动成书</div></div>
         <div class="ob-bene"><div class="ic"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M4 7V5h9v2M8.5 5v13M6 18h5"/><path d="M14.5 13v-1.4h6V13M17.5 11.6V19M15.8 19h3.4"/></svg></div><div class="t">字大声清</div></div>
       </div>
       <button class="ob-cta" data-go="setup">开始，先认识一下 →</button>
-      <div class="ob-skip" data-go="session">先看看</div>
+      <div class="ob-skip" data-go="session">先随便看看</div>
     </div>
   </section>
 
@@ -948,7 +948,7 @@
       <div class="setup-head">
         <div class="setup-brand"></div>
         <div class="setup-title">先认识一下您</div>
-        <div class="setup-sub">可跳过，稍后补充。</div>
+        <div class="setup-sub">填写资料，也可以跳过。</div>
         <div class="setup-progress" id="setupProgress"><i></i><span id="setupProgressText">1 / 2</span></div>
       </div>
       <div class="setup-stack">
@@ -963,8 +963,8 @@
             </div>
           </div>
           <div class="setup-field">
-            <div class="setup-label">怎么称呼您？</div>
-            <div class="setup-input">秀英</div>
+            <div class="setup-label">被记录人的称呼</div>
+            <input class="setup-input" id="memoir-subject-name" aria-label="被记录人的称呼" maxlength="20" value="秀英">
           </div>
           <div class="setup-row">
             <div class="setup-field">
@@ -1147,7 +1147,7 @@
         </div>
         <div class="sum2-addwrap">
           <button class="sum2-addmedia" onclick="sumMediaAdd()"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M12 9v6M9 12h6"/></svg> 加图片 / 视频</button>
-          <div class="sum2-mediahint">长按拖动可排序 · 第一张作封面</div>
+          <div class="sum2-mediahint">拖动排序 · 首张为封面</div>
         </div>
 
         <!-- 「书变厚」沉淀反馈 -->
@@ -1160,7 +1160,7 @@
       <div class="sum2-tools">
         <button id="sumInvite" data-go="invite"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 15.2A6 6 0 0 1 21.5 20"/></svg>邀请帮写</button>
         <button data-go="share"><svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.5"/><circle cx="17" cy="6" r="2.5"/><circle cx="17" cy="18" r="2.5"/><path d="M8.2 10.9l6.6-3.8M8.2 13.1l6.6 3.8"/></svg>分享</button>
-        <button data-go="shelf"><svg viewBox="0 0 24 24"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5V4.5Z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 21H19"/></svg>收进书房</button>
+        <button data-go="shelf"><svg viewBox="0 0 24 24"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5V4.5Z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 21H19"/></svg>保存到珍藏</button>
         <button class="go" data-go="session"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-4 3v-3H4V5Z"/><path d="M8 9h8M8 12h5"/></svg>接着聊</button>
       </div>
     </div>
@@ -1224,11 +1224,11 @@
   <section class="screen" id="personaposter">
     <div class="sbar" style="color:var(--brown)"><span>9:41</span><span class="bat"></span></div><div class="wxcap">··· ◉</div>
     <div class="navbar"><span class="b" data-go="persona">‹</span><span class="h">分享人物形象</span></div>
-    <div class="body persona-poster-wrap">
+    <div class="body persona-poster-wrap"><div class="prototype-label">人物海报 · 演示</div>
       <div class="persona-poster">
         <div class="pp-brand"><i></i><span>云忆 · 生命故事</span></div>
-        <div class="pp-copy"><h2></h2><p></p></div>
-        <div class="pp-foot"><div class="pp-qr"></div><div class="pp-cta"><b></b><span></span></div></div>
+        <div class="pp-copy"><h2>把一生，<br>讲成一本书</h2><p>每一个普通人的故事，<br>都值得被好好记住。</p></div>
+        <div class="pp-foot"><div class="pp-qr"></div><div class="pp-cta"><b>扫码，也为父母留下一本</b><span>开口讲述，AI 帮您整理成书</span></div></div>
       </div>
       <div class="persona-poster-note">分享的是品牌人物海报，不会公开您的完整故事内容。</div>
       <div class="persona-poster-actions"><button class="save" data-toast="人物海报已保存到相册">保存图片</button><button class="share" data-toast="已打开微信分享，可发送人物海报">分享到微信</button></div>
@@ -1243,7 +1243,7 @@
       <div class="perm-wrap">
         <div class="perm-ic"><svg class="ico-ph" viewBox="0 0 24 24" style="width:22px;height:22px"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/><path d="M8.5 21h7"/></svg><span class="slash"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M4 4l16 16"/></svg></span></div>
         <div class="perm-h">还没拿到"说话"的权限</div>
-        <div class="perm-s">请允许使用麦克风，录制讲述。</div>
+        <div class="perm-s">要把您讲的话录下来，得先让微信允许云忆用麦克风。开一下就好，很简单：</div>
         <div class="perm-steps">
           <div class="st"><span class="k">1</span><div>点下面的按钮，打开设置</div></div>
           <div class="st"><span class="k">2</span><div>找到「<b>麦克风</b>」这一项</div></div>

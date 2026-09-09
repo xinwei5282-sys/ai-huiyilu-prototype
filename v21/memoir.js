@@ -409,6 +409,7 @@ var CHAPTERS=[
   {no:'第五章',name:'成家立业',done:false,stories:['和老伴第一次见面','盖起自己的房子']},
   {no:'第六章',name:'儿女绕膝',done:false,stories:['老大出生那天','一家人的年夜饭']}
 ];
+function memoirEscape(value){return String(value).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function chapterStoryText(chapter,story,idx){
   var lead=idx===0?'这一段像是这章的开场，顺着讲下去，人物和场景一下就立住了。':'这一段把前后的日子接了起来，读起来已经像书里的一节。';
   return '“'+story+'”这一段，已经被小云理进《'+chapter.name+'》里。'+lead+' 现在先按单章阅读的方式收着，后面还可以继续往这一章里补故事、补照片、补家人的记忆。';
@@ -423,7 +424,7 @@ function openChapter(i){
   document.getElementById('chCount').textContent='已讲 '+c.stories.length+' 段';
   var ico='<span class="ci-ico"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h5v16H6a2 2 0 0 0-2 2V5Z"/><path d="M20 5a2 2 0 0 0-2-2h-5v16h5a2 2 0 0 1 2 2V5Z"/></svg></span>';
   document.getElementById('chList').innerHTML = c.stories.map(function(s,idx){
-    return '<button class="ch-item" onclick="openChapterRead('+idx+')">'+ico+'<span class="ci-t">'+s+'</span><span class="ci-chev">›</span></button>';
+    return '<button class="ch-item" onclick="openChapterRead('+idx+')">'+ico+'<span class="ci-t">'+memoirEscape(s)+'</span><span class="ci-chev">›</span></button>';
   }).join('');
   go('chapter');
 }
@@ -432,9 +433,9 @@ function openChapterRead(focusIdx){
   var focus=(typeof focusIdx==='number'&&focusIdx>=0)?focusIdx:0;
   document.getElementById('crNo').textContent=c.no;
   document.getElementById('crTitle').textContent=c.name;
-  document.getElementById('crMeta').textContent='这一章现在收了 '+c.stories.length+' 段，先按单章往下读；想看全书，再从下面进整本书。';
+  document.getElementById('crMeta').textContent=c.stories.length+' 段故事';
   document.getElementById('crFlow').innerHTML=c.stories.map(function(story,idx){
-    return '<div class="cr-card'+(idx===focus?' current':'')+'"><div class="eyebrow"><b>第 '+(idx+1)+' 段</b>'+(idx===focus?'<span class="tag">当前这段</span>':'')+'</div><div class="ttl">'+story+'</div><div class="txt">'+chapterStoryText(c,story,idx)+'</div></div>';
+    return '<div class="cr-card'+(idx===focus?' current':'')+'"><div class="eyebrow"><b>第 '+(idx+1)+' 段</b>'+(idx===focus?'<span class="tag">当前这段</span>':'')+'</div><div class="ttl">'+memoirEscape(story)+'</div><div class="txt">'+chapterStoryText(c,story,idx)+'</div></div>';
   }).join('');
   go('chapterread');
 }

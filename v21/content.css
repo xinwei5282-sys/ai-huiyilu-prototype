@@ -15,3 +15,92 @@
 /* 首页仅保留一句品牌表达。 */
 .home-slogan{font:500 25px/1.5 var(--serif);color:var(--ink,#303b31);letter-spacing:.2px;margin:0 0 24px}
 @media(max-width:370px){.home-slogan{font-size:23px}}
+
+/* V21 audit fixes: keep the mobile shell usable at 360–390px. */
+#memoir-runtime button,
+#memoir-runtime [role="button"]{box-sizing:border-box}
+#memoir-runtime .btnp,
+#memoir-runtime .btng,
+#memoir-runtime .setup-cta{min-height:44px;line-height:1.35}
+#memoir-runtime .cr-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:stretch}
+#memoir-runtime .cr-actions .btnp,
+#memoir-runtime .cr-actions .btng{width:100%;min-width:0;max-width:100%;min-height:52px;padding:10px 8px;justify-content:center;white-space:normal}
+#memoir-runtime .cr-actions .btng{flex:initial}
+#memoir-runtime .cr-actions .ico-ph{width:18px;height:18px;flex:none}
+
+/* Fixed bottom controls must leave the last field/content visible and tappable. */
+#memoir-runtime #summary .body,
+#memoir-runtime #setup .setup-body,
+#memoir-runtime #mine .body,
+#memoir-runtime #preferences .body{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
+#memoir-runtime #summary .sum2{padding-bottom:28px}
+#memoir-runtime #setup .setup-stack{padding-bottom:24px}
+#memoir-runtime #setup .setup-actions{bottom:calc(14px + env(safe-area-inset-bottom,0px));padding-bottom:2px}
+#memoir-runtime .v21-memory-consent{margin-bottom:calc(28px + env(safe-area-inset-bottom,0px));padding:16px 14px;font-size:13px;line-height:1.65;color:#53664f}
+#memoir-runtime .v21-memory-consent small{font-size:12px;line-height:1.55;color:#71826a;margin-top:3px}
+
+/* Readability and touch targets across the legacy and new mobile surfaces. */
+#memoir-runtime .v21-return small,
+#memoir-runtime .v21-demo-note,
+#memoir-runtime .account-actions small,
+#memoir-runtime .setup-hint{font-size:12px}
+#memoir-runtime .sh-book{min-height:100px;min-width:44px}
+#memoir-runtime .sh-book .bno{font-size:12px}
+#memoir-runtime .sh-book .bst{font-size:11px}
+#memoir-runtime .me3-row,
+#memoir-runtime .me3-tile,
+#memoir-runtime .mine-row{min-height:44px}
+#memoir-runtime .me3-row .tx span,
+#memoir-runtime .me3-tile>span:last-child,
+#memoir-runtime .mine-row .b{font-size:12px}
+#memoir-runtime .media .del,
+#memoir-runtime .sum2-fig .del,
+#memoir-runtime [data-action="remove-media"]{width:44px;height:44px;min-width:44px;min-height:44px}
+
+/* Strong primary action contrast (session question / save). */
+#memoir-runtime #session .hm2-cta.primary,
+#memoir-runtime #session .iv2-ctrls .main,
+#memoir-runtime #summary [data-go="shelf"]{background:#48634e!important;color:#fffdf4!important;text-shadow:none}
+#memoir-runtime #session .hm2-cta.primary .txt b,
+#memoir-runtime #session .hm2-cta.primary .txt i{color:#fffdf4!important;text-shadow:none}
+#memoir-runtime #session .hm2-cta.primary .txt,
+#memoir-runtime #session .hm2-cta.primary .txt *{color:#fffdf4!important}
+#memoir-runtime #session .hm2-cta.primary .mic{background:rgba(255,255,255,.12);color:#fffdf4}
+#memoir-runtime #summary [data-go="shelf"]{min-height:52px;font-weight:700;box-shadow:0 8px 18px -12px rgba(48,76,52,.55)}
+
+/* Future preferences panel contract supplied by memoir-bridge.js. */
+#memoir-runtime .preferences-panel{padding:16px 20px calc(28px + env(safe-area-inset-bottom,0px))}
+#memoir-runtime .preferences-panel label{display:block;margin-top:14px;font-size:13px;font-weight:600;color:#53664f}
+#memoir-runtime .preferences-panel select{width:100%;min-height:44px;margin-top:6px;padding:8px 12px;border:1px solid #d5deca;border-radius:12px;background:#f9faf2;color:#303c32;font-size:14px}
+#memoir-runtime html.reading-large .sum2-body,
+#memoir-runtime.reading-large .sum2-body,
+#memoir-runtime.reading-large .preferences-panel{font-size:20px;line-height:2.05}
+#memoir-runtime.reading-large .sum2-quote{font-size:18px}
+/* Shared controls and reading preferences apply to the current app shell. */
+.preferences-panel{margin:28px 0;padding:20px 0;border-top:1px solid #dce2d4}
+.preferences-panel h2{font:600 18px/1.5 -apple-system,"PingFang SC",sans-serif;margin:0 0 18px}
+.preferences-panel select{width:100%;min-height:48px;padding:10px 12px;border:1px solid #d5deca;border-radius:10px;background:#fffef8;color:#303c32;font:16px/1.5 -apple-system,"PingFang SC",sans-serif}
+.preferences-panel .field{font-size:15px;margin-bottom:20px}
+.reading-large #memoir-runtime .sum2-body,.reading-large #memoir-runtime #sumMedia>p,.reading-large #memoir-runtime .cr-card .txt,.reading-large #memoir-runtime #ivLiveTxt,.reading-large .reading-paper p,.reading-large .artifact-copy p{font-size:22px!important;line-height:1.9!important}
+.avatar{width:44px;height:44px}.expression-text textarea{font-size:16px}.photo-tile{font-size:13px}
+.composer-helper .text-button{font-size:13px;min-height:44px}.recent-item small,.recent-date,.demo-foot,.collection-copy small{font-size:12px;color:#68775f}
+.recent-item strong{font-size:16px}.recent-item{min-height:84px}.menu-row small,.setting-switch small,.consent small,.account-actions small{font-size:13px;line-height:1.6;color:#68775f}
+.account-actions b{font-size:15px}.primary,.secondary,.light-action{font-size:16px;min-height:52px}
+#bottom-nav a{font-size:12px}#bottom-nav a:not([aria-current]){color:#69765e}
+#memoir-runtime .v21-return button{min-height:44px}
+#memoir-runtime .sum2-fig .sm-del{width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:20px;top:-12px;right:-12px;border-radius:50%;background:#54614d;color:#fff}
+#memoir-runtime .sum2-title span{overflow-wrap:anywhere;min-width:0;font-size:26px;line-height:1.5}
+#memoir-runtime .sum2-orn{width:24px;flex:none}
+#memoir-runtime #story .sum2-photo{height:144px;min-height:0;transform:none}
+#memoir-runtime #story .sum2-photo .inner{padding:24px;line-height:1.8}
+#memoir-runtime #story .sum2-sprig,#memoir-runtime #story .sum2-photo .clip{display:none}
+#memoir-runtime .prototype-label{font:12px/1.6 -apple-system,"PingFang SC",sans-serif;color:#66735e;padding:0 2px 12px}
+#memoir-runtime .up3-hero,#memoir-runtime .co-collab-hero,#memoir-runtime .co-hero,#memoir-runtime .me3-plan-card{box-shadow:none;background:#f2f3e9;border:1px solid #e0e5d7}
+#memoir-runtime .up3-hero::before,#memoir-runtime .co-collab-hero::before{display:none}
+#memoir-runtime .up3-s:empty,#memoir-runtime .co-collab-hero .s:empty{display:none}
+#memoir-runtime .inv2-h{font-size:24px}.collection-paper>strong{font-size:20px}
+
+/* Keep setup actions in the scroll flow so the final tags remain reachable. */
+#memoir-runtime #setup .setup-actions{position:static;margin-top:24px;background:none;padding:0}
+#memoir-runtime #setup .setup-stack{padding-bottom:24px}
+#memoir-runtime #setup .setup-body{padding-bottom:32px}
