@@ -62,7 +62,10 @@
   let uploadedStory={title:'',text:''};
   let cardSelection=null,cardGroup='',cardReturn='story',historyIndex=0,novelEditing=false,shotPhotosOpen=false,shotOriginal='';
   let returnTo='session',rangeOpen=false,editIndex=0,readingScroll=0,sceneIndex=0,sceneReturn='production',adjustReturn='story',activeShotId='',directoryChapter=0;
-  function protagonistReady(p){return p?.protagonistApproval?.revision===p?.revision&&Array.isArray(p?.protagonistApproval?.people);}
+  function characterReferenceKey(p,id){const text=p.characterPhotos?.[id]?.url||'';let h=2166136261;for(let i=0;i<text.length;i++){h^=text.charCodeAt(i);h=Math.imul(h,16777619);}return text?'photo-'+(h>>>0).toString(36)+'-'+text.length:'story-only';}
+  function characterImageReady(p,id){const item=p.characterGeneration?.items?.[id];return p.characterGeneration?.revision===p.revision&&item?.referenceKey===characterReferenceKey(p,id)&&item.status==='ready'&&typeof item.imageUrl==='string'&&/^(https?:\/\/|data:image\/)/i.test(item.imageUrl);}
+  function allCharacterImagesReady(p){return !!p&&storyPeople(p).every(person=>characterImageReady(p,person.id));}
+  function protagonistReady(p){return p?.protagonistApproval?.revision===p?.revision&&Array.isArray(p?.protagonistApproval?.people)&&allCharacterImagesReady(p);}
   function resumeView(p){return !p?'home':p.stage==='brief'?'choose':p.editorDraft||p.sourcePending||!core.isApproved(p)?'story':!protagonistReady(p)?'people':p.visualApproval?.revision===p.revision?'video-demo':p.visualStep==='waiting'?'preview-wait':'production';}
   function phases(n){return '<ol class="mf-phases" aria-label="制作进度">'+['故事','人物','预览调整','影片'].map((label,i)=>'<li'+(i===n?' aria-current="step"':'')+'><button data-mf="phase" data-phase="'+i+'" '+(i===n?'aria-current="step"':'')+'>'+label+'</button></li>').join('')+'</ol>';}
 
@@ -274,10 +277,12 @@
   }
   function filmRoles(p){return storyPeople(p).map(person=>person.id);}
   function people(p){
-    const persons=storyPeople(p),current=persons.find(person=>person.id===p.visualRole)||persons[0],role=current.id,photo=p.characterPhotos?.[role];
-    const supplied=persons.filter(person=>p.characterPhotos?.[person.id]).length;
-    const cards='<div class="mf-people-summary"><span>'+persons.length+' 位故事人物</span><span>'+supplied+' 位已有照片</span></div><div class="mf-character-picker" aria-label="选择故事人物">'+persons.map(person=>'<button type="button" data-mf="select-person" data-role="'+esc(person.id)+'" aria-pressed="'+(person.id===role)+'"><b>'+esc(person.id==='我'?(p.caseId?'蒋老师':'我'):person.id)+'</b><small class="'+(p.characterPhotos?.[person.id]?'has-photo':'')+'">'+(p.characterPhotos?.[person.id]?'已有照片':'暂无照片')+'</small></button>').join('')+'</div>';
-    return header('故事中的人物')+'<div class="body mf-body mf-mobile-step mf-people-page">'+phases(1)+'<h1>故事里的重要人物</h1>'+cards+'<article class="mf-person-choice"><h2>'+esc(current.name)+'</h2>'+(photo?'<img class="mf-board-photo" src="'+esc(photoUrl(photo))+'" alt="'+esc(current.name)+'的参考照片">':'')+'<label class="mf-upload-photo">'+(photo?'更换此人物照片':'添加此人物照片')+'<input type="file" accept="image/jpeg,image/png,image/webp" data-character-photo="'+esc(role)+'"></label></article></div>'+footer('<button class="mf-primary" data-mf="confirm-protagonist">生成影片预览 '+svg('arrow')+'</button>');
+    const persons=storyPeople(p),current=persons.find(person=>person.id===p.visualRole)||persons[0],role=current.id,photo=p.characterPhotos?.[role],item=p.characterGeneration?.items?.[role],ready=characterImageReady(p,role),allReady=allCharacterImagesReady(p);
+    const readyCount=persons.filter(person=>characterImageReady(p,person.id)).length;
+    const label=person=>characterImageReady(p,person.id)?'已生成':p.characterGeneration?.revision===p.revision&&p.characterGeneration.items?.[person.id]?.status==='not_connected'?'未接入':'待生成';
+    const cards='<div class="mf-people-summary"><span>'+persons.length+' 位故事人物</span><span>已生成 '+readyCount+' / '+persons.length+'</span></div><div class="mf-character-picker" aria-label="选择故事人物">'+persons.map(person=>'<button type="button" data-mf="select-person" data-role="'+esc(person.id)+'" aria-pressed="'+(person.id===role)+'"><b>'+esc(person.id==='我'?(p.caseId?'蒋老师':'我'):person.id)+'</b><small>'+label(person)+'</small></button>').join('')+'</div>';
+    const image=ready?'<figure class="mf-person-result"><img src="'+esc(item.imageUrl)+'" alt="'+esc(current.name)+'的人物形象"><figcaption>'+(photo?'根据参考照片生成':'根据故事生成的示意形象')+'</figcaption></figure>':'<div class="mf-person-pending"><b>'+(item?.status==='not_connected'?'形象生成服务尚未接入':'人物形象待生成')+'</b><span>'+(photo?'将参考这张照片':'没有照片时，将根据故事生成示意形象')+'</span></div>';
+    return header('故事中的人物')+'<div class="body mf-body mf-mobile-step mf-people-page">'+phases(1)+'<h1>故事里的重要人物</h1>'+cards+'<article class="mf-person-choice"><h2>'+esc(current.name)+'</h2>'+image+(photo?'<img class="mf-board-photo" src="'+esc(photoUrl(photo))+'" alt="'+esc(current.name)+'的参考照片">':'')+'<label class="mf-upload-photo">'+(photo?'更换此人物照片':'添加此人物照片')+'<input type="file" accept="image/jpeg,image/png,image/webp" data-character-photo="'+esc(role)+'"></label></article></div>'+footer('<div class="mf-person-actions"><button class="mf-secondary" data-mf="generate-characters" '+(allReady?'disabled':'')+'>生成人物形象</button><button class="mf-primary" data-mf="confirm-protagonist" '+(!allReady?'disabled':'')+'>生成影片预览</button></div>');
   }
   // The prototype persists a blocked request; a service must supply actual generated results.
   function preparePreview(p){
@@ -435,8 +440,13 @@
       if(action==='story-overview'){novelEditing=false;view='story';render();return;}
       if(action==='story-prev'||action==='story-next'){const p=project(),n=core.reviewScenes(p).length,index=Math.max(0,Math.min(n-1,(p.storyPage||0)+(action==='story-next'?1:-1)));if(storeProject({...p,storyPage:index},true))render();return;}
       if(action==='select-person'){if(storeProject({...project(),visualRole:button.dataset.role},true))render();return;}
+      if(action==='generate-characters'){
+        let p=clone(checkedProject());if(!core.isApproved(p))throw Error('请先确认故事。');const people=storyPeople(p),old=p.characterGeneration;
+        const items=Object.fromEntries(people.map(person=>{const key=characterReferenceKey(p,person.id),previous=old?.revision===p.revision?old.items?.[person.id]:null;return [person.id,previous?.referenceKey===key&&characterImageReady(p,person.id)?previous:{referenceKey:key,mode:p.characterPhotos?.[person.id]?'photo':'story',status:'not_connected'}];}));
+        p.characterGeneration={revision:p.revision,items};if(storeProject(p,true)){render();notify('人物形象生成服务尚未接入，暂不能进入下一步。');}return;
+      }
       if(action==='confirm-protagonist'){
-        let p=clone(checkedProject());if(!core.isApproved(p))throw Error('请先确认故事。');
+        let p=clone(checkedProject());if(!core.isApproved(p))throw Error('请先确认故事。');if(!allCharacterImagesReady(p))throw Error('请先完成人物形象生成。');
         p.protagonistApproval={revision:p.revision,at:Date.now(),people:storyPeople(p).map(person=>({id:person.id,reference:p.characterPhotos?.[person.id]?.url||null}))};
         p=preparePreview(p);p.visualStep='waiting';
         if(storeProject(p,true)){view='preview-wait';render();}return;
@@ -447,7 +457,7 @@
         if(n===0){view='story';render();return;}
         if(!core.isApproved(p)||!canConfirm(p)){notify('请先保存并确认故事，再进入后续步骤。');return;}
         if(n===1){view='people';render();return;}
-        if(!protagonistReady(p)){notify('请先核对故事中的人物。');return;}
+        if(!protagonistReady(p)){notify('请先完成人物形象生成。');return;}
         if(n===2){view='production';render();return;}
         if(!p.filmJob||p.filmJob.revision!==p.revision||p.visualApproval?.revision!==p.revision){notify('镜头画面准备好并确认制作后，才能查看影片。');return;}
         view='video-demo';render();return;
@@ -657,7 +667,7 @@
     if(unsaved){notify('其他窗口更新了草稿。本页有未保存文字，请先备份，避免覆盖。');return;}
     if(e.newValue){try{const incoming=decodeStorage(e.newValue);if(incoming.version===1&&Array.isArray(incoming.projects)&&Array.isArray(incoming.sources)){db=incoming;if(root.classList.contains('on'))render();}}catch(err){notify('其他窗口的草稿无法读取，请刷新前先保存当前文字。');}}
   });
-  if(window.PRD_CONTENT)window.PRD_CONTENT.film={"title":"人生微电影 · 本期 PRD","stage":"故事 → 人物 → 预览调整 → 影片","problem":"把用户的回忆整理成可核对的故事和影片，减少专业脚本操作。","goal":"确认故事与人物后，由 AI 视频服务返回脚本拆解与画面，用户在同一预览中查看和调整。","promptDocs":[["查看本期完整 PRD","docs/codex/prd/v17-microfilm-current.md"],["查看故事与分镜提示词","docs/ai/microfilm-story-prompts.md"],["查看案例故事提示词","docs/ai/jiang-story-writing-prompt-v2.md"]],"status":["当前为本地原型；AI 视频、人物三视图、预览画面和影片服务尚未接入。","本地规则片段仅供演示，不代表 AI 视频服务结果。"],"users":["本人","家人／整理者"],"flow":["选择人生纪事、岁月片段或上传自己的故事。","生成并确认完整故事；可阅读、编辑、调整选材及查看原稿。","核对故事人物及参考照片。","提交预览任务；后台生成脚本拆解与画面，等待后查看结果。","同页查看画面与讲述，调整受影响片段，满意后提交影片制作。"],"requirements":["写故事及重选故事提示词、人物提取和三视图提示词见完整 PRD 与提示词文档。","人物三视图由后台按需处理，用户无需逐张确认；缺少照片不冒充真实人物。","生产环境的脚本拆解及对应图片由 AI 视频服务返回，本应用按章节、片段和版本直接展示。","用户修改当前故事或人物后，撤销受影响的旧确认与生成结果。","任务状态来自服务，支持离开恢复、失败重试和防重复提交。"],"edgeCases":["生成失败保留输入及旧成果。","部分片段失败不伪称全部完成。","素材缺失、地址过期、版本变更及旧结果晚到需正确处理。"],"acceptance":["以真实服务返回验证每个片段与对应图片。","验证人物参考、三视图和提示词版本可追溯。","验证选材、故事编辑、确认、等待、局部调整和恢复。","本地原型、演示视频和截图不能代替真实生成验收。"]};
+  if(window.PRD_CONTENT)window.PRD_CONTENT.film={"title":"人生微电影 · 本期 PRD","stage":"故事 → 人物 → 预览调整 → 影片","problem":"把用户的回忆整理成可核对的故事和影片，减少专业脚本操作。","goal":"确认故事与人物后，由 AI 视频服务返回脚本拆解与画面，用户在同一预览中查看和调整。","promptDocs":[["查看本期完整 PRD","docs/codex/prd/v17-microfilm-current.md"],["查看故事与分镜提示词","docs/ai/microfilm-story-prompts.md"],["查看案例故事提示词","docs/ai/jiang-story-writing-prompt-v2.md"]],"status":["当前为本地原型；AI 视频、人物三视图、预览画面和影片服务尚未接入。","本地规则片段仅供演示，不代表 AI 视频服务结果。"],"users":["本人","家人／整理者"],"flow":["选择人生纪事、岁月片段或上传自己的故事。","生成并确认完整故事；可阅读、编辑、调整选材及查看原稿。","核对故事人物，有照片以照片为参考，无照片根据故事生成示意形象；全部人物形象生成完成后才能继续。","提交预览任务；后台生成脚本拆解与画面，等待后查看结果。","同页查看画面与讲述，调整受影响片段，满意后提交影片制作。"],"requirements":["写故事及重选故事提示词、人物提取和三视图提示词见完整 PRD 与提示词文档。","人物形象生成完成是进入预览前置条件；三视图后台按需处理，无照片生成示意形象，不冒充真实人物。","生产环境的脚本拆解及对应图片由 AI 视频服务返回，本应用按章节、片段和版本直接展示。","用户修改当前故事或人物后，撤销受影响的旧确认与生成结果。","任务状态来自服务，支持离开恢复、失败重试和防重复提交。"],"edgeCases":["生成失败保留输入及旧成果。","部分片段失败不伪称全部完成。","素材缺失、地址过期、版本变更及旧结果晚到需正确处理。"],"acceptance":["以真实服务返回验证每个片段与对应图片。","验证人物参考、三视图和提示词版本可追溯。","验证选材、故事编辑、确认、等待、局部调整和恢复。","本地原型、演示视频和截图不能代替真实生成验收。"]};
   // Preserve the earlier seven-section draft and open a separate complete version once.
   const priorCase=project();
   if(priorCase?.caseId===realCase?.id&&(priorCase.caseVersion!==realCase.version||!priorCase.literaryFormat||priorCase.storyEdition!==casePreview.storyEdition)){
