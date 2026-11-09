@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>云忆 · 生命故事 · 可交互原型（改后 · 最新方案）</title>
+<title>云忆 · V17 最终版 · 微电影增量原型</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -2264,6 +2264,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 #contribdetail .co-question::before{background:#FFF7EC;color:#314D3F}
 #contribdetail .co-meta span{background:var(--cream-2);border-color:var(--paper-line);color:var(--text-2)}
 </style>
+<link rel="stylesheet" href="v17/microfilm.css?v=2e90abc876fa4f9a">
 </head>
 <body>
 
@@ -2293,13 +2294,13 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 
 <div class="head">
   <div class="k">云忆 · 生命故事 · 可交互原型</div>
-  <h1>云忆 · 生命故事 · v8（讲述 / 书房 / 我的 · 3 Tab 树）</h1>
+  <h1>云忆 · V17 最终版（讲述 / 书房 / 我的）</h1>
   <p>按最新方案输出 · 可点击跳转 · 真实素材</p>
   <div class="hint">↖ 左上「屏幕地图」可跳任意屏；或直接在原型内点击导航、点「目录」看抽屉、点「点击说话」试录音</div>
 </div>
 
 <div class="map">
-  <div class="mt">屏幕地图 · v8（3 Tab 树）</div>
+  <div class="mt">屏幕地图 · V17</div>
   <button data-go="userpath">· 项目路径图（客户介绍）</button>
   <button data-go="setup">· 新用户信息收集（手机页）</button>
   <button data-go="session" class="act">【讲述】采访·访谈式（默认首页）</button>
@@ -2309,6 +2310,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
   <button data-go="shelf">【书房】书架</button>
   <button data-go="book">· 书详情聚合页</button>
   <button data-go="printbook">· 纸质成书 / 下载打印</button>
+  <button data-go="film" data-film-entry="home">· 云忆拾光 · 微电影</button>
   <button data-go="story">· 故事卡·图文</button>
   <button data-go="invite">· 邀请家人帮录</button>
   <button data-go="collaborators">· 一起记录的人</button>
@@ -2403,6 +2405,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
       <div class="hub-lbl">现在可以做</div>
       <button class="me3-task" data-go="review"><span class="ic"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-4 3v-3H4V5Z"/><path d="M8 9h8M8 12h5"/></svg></span><span class="tx"><b>看看家人补充的故事</b><span>有 2 段新内容等您确认</span></span><span class="tag">去看看</span></button>
       <button class="me3-task" data-go="persona"><span class="ic"><svg class="ico-ph" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/><path d="M18 4l.7 1.6L20.5 6l-1.8.7L18 8.5l-.7-1.8L15.5 6l1.8-.4L18 4Z"/></svg></span><span class="tx"><b>制作我的人物形象</b><span>用一张照片，生成有故事感的半身形象</span></span><span class="tag">去制作</span></button>
+      <button class="me3-task" data-go="film" data-film-entry="home"><span class="ic"><svg class="ico-ph" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3V9Z"/></svg></span><span class="tx"><b>我的微电影</b><span>云忆拾光 · 把回忆拍成电影</span></span><span class="tag">去看看</span></button>
       <div class="hub-lbl">账户功能</div>
       <div class="me3-grid">
         <button class="me3-tile" data-go="plans"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 11h16v9H4z"/><path d="M2 7h20v4H2z"/><path d="M12 7v13"/></svg></span><b>我的套餐</b><span>当前：人生长卷 · 100 题</span></button>
@@ -2469,6 +2472,10 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
             <span class="txt"><b>看着照片，讲讲当时</b></span>
           </button>
           <input type="file" id="ivPhotoPick" accept="image/*" hidden onchange="ivPhotoPicked(this)">
+          </div>
+          <div class="hm2-create-entries" aria-label="回忆作品">
+            <button type="button" id="home-microfilm" data-go="film" data-film-entry="home"><span class="hm2-create-title"><svg class="ico-ph" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3V9Z"/></svg><b>人生微电影</b></span><span class="hm2-create-sub">把回忆拍成电影</span></button>
+            <button type="button" id="home-daily-poster" data-toast="每日分享海报（九宫格）暂未开放，后续将在这里制作。"><span class="hm2-create-title"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18"/></svg><b>每日分享海报</b></span><span class="hm2-create-sub">九宫格 · 待开放</span></button>
           </div>
         </div>
       </div>
@@ -3789,6 +3796,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 
 <div class="toastc" id="toastc"></div>
 
+<script src="v17/memoir-catalog.js?v=a724d4d5218ab827"></script>
 <script>
 var AvatarStore={
   key:'huiyilu.avatar.v1',
@@ -4191,15 +4199,12 @@ function shelfEmptyDemo(on){ var f=document.getElementById('shelfFull'),e=docume
 function shelfTab(b){ var p=b.parentNode; for(var i=0;i<p.children.length;i++) p.children[i].classList.remove('on'); b.classList.add('on'); }
 /* 章节详情：从书房点一本书（=一个章节）进入，按章填充内容 */
 var currentChapterIndex=0;
-var CHAPTERS=[
-  {no:'第一章',name:'出生与家族',done:true,stories:['我的名字是谁取的','门口的老槐树','爷爷奶奶的老屋']},
-  {no:'第二章',name:'童年时光',done:true,stories:['过年的新棉袄','头一天上学','村口的那口井']},
-  {no:'第三章',name:'求学的日子',done:true,stories:['上学要走过一条河','启蒙老师','同桌的一块橡皮']},
-  {no:'第四章',name:'参军岁月',done:false,stories:['新兵连的第一课','高原上的那场雪']},
-  {no:'第五章',name:'成家立业',done:false,stories:['和老伴第一次见面','盖起自己的房子']},
-  {no:'第六章',name:'儿女绕膝',done:false,stories:['老大出生那天','一家人的年夜饭']}
-];
+var CHAPTERS=window.YunyiMemoirCatalog.chapters.map(function(ch,i){
+  var sampleStories=[['我的名字是谁取的','爷爷奶奶的老屋'],['启蒙老师','同桌的一块橡皮'],['第一份工作'],['和老伴第一次见面'],['一家人的年夜饭']];
+  return {id:ch.id,no:'第'+['一','二','三','四','五','六','七','八','九','十'][i]+'章',name:ch.name,done:i<3,stories:sampleStories[i]||[]};
+});
 function chapterStoryText(chapter,story,idx){
+  if(chapter.sources&&chapter.sources[idx])return chapter.sources[idx].text.replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}).replace(/\n/g,'<br>');
   var lead=idx===0?'这一段像是这章的开场，顺着讲下去，人物和场景一下就立住了。':'这一段把前后的日子接了起来，读起来已经像书里的一节。';
   return '“'+story+'”这一段，已经被小云理进《'+chapter.name+'》里。'+lead+' 现在先按单章阅读的方式收着，后面还可以继续往这一章里补故事、补照片、补家人的记忆。';
 }
@@ -4209,7 +4214,7 @@ function openChapter(i){
   document.getElementById('chH').textContent=c.no;
   document.getElementById('chNo').textContent=c.no;
   document.getElementById('chName').textContent=c.name;
-  var st=document.getElementById('chSt'); st.textContent=c.done?'已成稿':'整理中'; st.className='ch-pill '+(c.done?'done':'wait');
+  var st=document.getElementById('chSt'); st.textContent=c.caseId?'原故事卡':c.done?'已成稿':'整理中'; st.className='ch-pill '+(c.done?'done':'wait');
   document.getElementById('chCount').textContent='已讲 '+c.stories.length+' 段';
   var ico='<span class="ci-ico"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h5v16H6a2 2 0 0 0-2 2V5Z"/><path d="M20 5a2 2 0 0 0-2-2h-5v16h5a2 2 0 0 1 2 2V5Z"/></svg></span>';
   document.getElementById('chList').innerHTML = c.stories.map(function(s,idx){
@@ -4925,9 +4930,15 @@ var IV_CHAPTER_QUESTIONS=[
   ]},
   {title:'想留给家人的话',desc:'不按问题也可以，讲给家里人听',questions:[]}
 ];
+var ivLegacyQuestions=IV_CHAPTER_QUESTIONS;
+IV_CHAPTER_QUESTIONS=window.YunyiMemoirCatalog.chapters.map(function(ch){
+  var byChapter={1:[0,1],2:[2],3:[3],4:[4],9:[5]};
+  var questions=(byChapter[ch.id]||[]).reduce(function(all,index){return all.concat(ivLegacyQuestions[index].questions);},[]);
+  return {id:ch.id,title:ch.name,desc:ch.subtitle,questions:questions};
+});
 var ivQuestionMode='chapters';
 var ivQuestionChapter=0;
-var ivSelectedChapterTitle='出生与家族';
+var ivSelectedChapterTitle=window.YunyiMemoirCatalog.chapters[0].name;
 var ivSelectedQuestion=null;
 function ivSet(id,html){var e=document.getElementById(id);if(e)e.innerHTML=html;}
 function ivMood(s){var e=document.getElementById('ivMood');if(e)e.textContent=s;}
@@ -5004,7 +5015,7 @@ function ivRecUI(){
 function ivRender(){
   var t=ivTurns[ivTurn]||ivTurns[0], q=(ivSelectedQuestion&&ivSelectedQuestion.q)||t.q;
   ivSet('ivQ',q);ivSet('ivQmini',q);ivSet('ivRecap',t.recap);
-  var ch=document.getElementById('ivChapterTitle'); if(ch)ch.textContent=ivSelectedChapterTitle||'出生与家族';
+  var ch=document.getElementById('ivChapterTitle'); if(ch)ch.textContent=ivSelectedChapterTitle||window.YunyiMemoirCatalog.chapters[0].name;
 }
 /* 进入采访页：展示“开场/当前一问” */
 function ivEnter(){ivFree=false;var b=document.getElementById('ivFreeBadge');if(b)b.style.display='none';ivRender();ivShowPane('Ask');ivMood('在陪您聊天');ivAskHero();}
@@ -5185,5 +5196,10 @@ window.addEventListener('load',function(){
 });
 window.addEventListener('hashchange',applyHash);
 </script>
+<script src="v17/microfilm-core.js?v=ea692cf0f499a4b4"></script>
+<script src="v17/jiang-teacher-data.js?v=3c9837c6e0ee29bb"></script>
+<script src="v17/jiang-teacher-generated-story.js?v=ab7190b4381d2eda"></script>
+<script src="v17/jiang-teacher-case.js?v=e73fe5b556d239d5"></script>
+<script src="v17/microfilm.js?v=4b1e85e8c6c81101"></script>
 </body>
 </html>
