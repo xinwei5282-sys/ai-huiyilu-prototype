@@ -1100,3 +1100,13 @@
 #film[data-layout="mobile-v2"] .mf-script-top .mf-script-nav .mf-directory-entry{background:#fffaf5;border:1px solid #ead8ca;padding:6px 4px}
 #film[data-layout="mobile-v2"] .mf-script-top .mf-directory-entry b{font-size:15px;line-height:1.35;color:#4b372b;font-weight:700}
 #film[data-layout="mobile-v2"] .mf-script-top .mf-directory-entry span{font-size:13px;line-height:1.4;color:#a25539;margin-top:2px}
+
+/* 人物形象准备 */
+#film[data-layout="mobile-v2"] .mf-person-pending{display:flex;flex-direction:column;gap:5px;margin:14px 0;padding:16px;border:1px solid #eadccf;border-radius:12px;background:#fffaf5;color:#725c4c}
+#film[data-layout="mobile-v2"] .mf-person-pending b{font-size:15px;color:#49372c}
+#film[data-layout="mobile-v2"] .mf-person-pending span{font-size:14px;line-height:1.6}
+#film[data-layout="mobile-v2"] .mf-person-result{margin:14px 0;text-align:center}
+#film[data-layout="mobile-v2"] .mf-person-result img{display:block;max-width:100%;max-height:220px;margin:auto;object-fit:contain;border-radius:12px}
+#film[data-layout="mobile-v2"] .mf-person-result figcaption{margin-top:6px;font-size:13px;color:#78685a}
+#film[data-layout="mobile-v2"] .mf-person-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#film[data-layout="mobile-v2"] .mf-person-actions button{font-size:15px;line-height:1.4}
