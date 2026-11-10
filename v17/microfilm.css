@@ -1110,3 +1110,14 @@
 #film[data-layout="mobile-v2"] .mf-person-result figcaption{margin-top:6px;font-size:13px;color:#78685a}
 #film[data-layout="mobile-v2"] .mf-person-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 #film[data-layout="mobile-v2"] .mf-person-actions button{font-size:15px;line-height:1.4}
+
+/* Film preview: clearly identified prototype example. */
+#film[data-layout="mobile-v2"] .mf-final-preview{background:#faf4ee;padding:16px 22px 28px}
+#film[data-layout="mobile-v2"] .mf-final-heading{text-align:center;padding:28px 8px 24px}
+#film[data-layout="mobile-v2"] .mf-final-heading h1{font:600 25px/1.45 "Songti SC",STSong,serif;color:#42271b;margin:10px 0}
+#film[data-layout="mobile-v2"] .mf-final-heading p{color:#8e7869;font-size:14px;margin:0}
+#film[data-layout="mobile-v2"] .mf-final-player{position:relative;overflow:hidden;border-radius:16px;background:#32251d;box-shadow:0 10px 26px rgba(74,44,25,.16)}
+#film[data-layout="mobile-v2"] .mf-final-player video{width:100%;display:block;aspect-ratio:16/9;object-fit:contain}
+#film[data-layout="mobile-v2"] .mf-final-badge{position:absolute;top:12px;left:12px;background:rgba(48,34,25,.72);color:white;border-radius:20px;padding:5px 11px;font-size:12px;pointer-events:none}
+
+#film[data-layout="mobile-v2"] .mf-final-heading>span{color:#b16b3d;font-size:13px;letter-spacing:.14em}

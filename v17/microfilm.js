@@ -66,7 +66,7 @@
   function characterImageReady(p,id){const item=p.characterGeneration?.items?.[id];return p.characterGeneration?.revision===p.revision&&item?.referenceKey===characterReferenceKey(p,id)&&item.status==='ready'&&typeof item.imageUrl==='string'&&(/^(https?:\/\/|data:image\/)/i.test(item.imageUrl)||(item.simulated===true&&item.imageUrl==='v17/assets/film-three-views-example.png'));}
   function allCharacterImagesReady(p){return !!p&&storyPeople(p).every(person=>characterImageReady(p,person.id));}
   function protagonistReady(p){return p?.protagonistApproval?.revision===p?.revision&&Array.isArray(p?.protagonistApproval?.people)&&allCharacterImagesReady(p);}
-  function resumeView(p){return !p?'home':p.stage==='brief'?'choose':p.editorDraft||p.sourcePending||!core.isApproved(p)?'story':!protagonistReady(p)?'people':p.visualApproval?.revision===p.revision?'video-demo':p.visualStep==='waiting'?'preview-wait':'production';}
+  function resumeView(p){return !p?'home':p.stage==='brief'?'choose':p.editorDraft||p.sourcePending||!core.isApproved(p)?'story':!protagonistReady(p)?'people':p.visualApproval?.revision===p.revision?(p.filmJob?.simulated?'film-preview':'video-demo'):p.visualStep==='waiting'?'preview-wait':'production';}
   function phases(n){return '<ol class="mf-phases" aria-label="制作进度">'+['故事','人物','预览调整','影片'].map((label,i)=>'<li'+(i===n?' aria-current="step"':'')+'><button data-mf="phase" data-phase="'+i+'" '+(i===n?'aria-current="step"':'')+'>'+label+'</button></li>').join('')+'</ol>';}
 
   const initialBody=$('#story [data-story-edit="body"]')?.textContent.trim()||'';
@@ -332,7 +332,7 @@
     const scenes=p.screenplay.scenes,i=Math.min(p.visualIndex||0,scenes.length-1),scene=scenes[i],shots=chapterShots(p,scene);
     const nav='<div class="mf-script-nav"><button class="mf-chapter-prev" data-mf="frame-prev" '+(!i?'disabled':'')+'>‹ 上一章</button><button class="mf-directory-entry" data-mf="preview-toc" aria-label="选择章节和片段，当前第 '+(i+1)+' 章"><b>第 '+(i+1)+' / '+scenes.length+' 章</b><span>选择章节 ▾</span></button><button class="mf-chapter-next" data-mf="frame-next" '+(i===scenes.length-1?'disabled':'')+'>下一章 ›</button></div>';
     const cards=shots.map((shot,j)=>{const assets=shotAssets(p,shot),request=p.shotAssets?.[shot.id]?.request;return '<article class="mf-script-shot" id="film-shot-'+esc(shot.id)+'"><div class="mf-shot-heading"><h2>片段 '+String(j+1).padStart(2,'0')+'</h2><span>'+assets.length+' 张参考素材</span></div><div class="mf-shot-pending">'+svg('film')+'<span>预览画面尚未生成</span></div><h3 class="mf-narration-label">讲述</h3><p class="mf-shot-narration">'+esc(shot.narration)+'</p><div class="mf-linked-assets"><div class="mf-asset-heading"><h3>参考素材</h3><button data-mf="shot-assets" data-shot="'+esc(shot.id)+'">选择 / 调整</button></div>'+(assets.length?'<div class="mf-asset-grid">'+assets.map(photo=>'<figure><img src="'+esc(photoUrl(photo))+'" alt="'+esc(photo.name||'本段参考素材')+'" loading="lazy"><figcaption>参考素材 · '+esc(photo.name||'照片')+'</figcaption></figure>').join(''):'<p class="mf-no-linked-assets">尚未关联参考素材</p>')+''+(request?'<p class="mf-shot-request">画面要求：'+esc(request)+'</p>':'')+'</div></article>';}).join('');
-    return header('预览与调整')+'<div class="mf-script-top">'+phases(2)+nav+'</div><div class="body mf-body mf-script-reader"><div class="mf-chapter-heading"><h1>'+esc(scene.title)+'</h1></div><section class="mf-chapter-direction"><div class="mf-direction-heading"><h2>本章场景与画面安排</h2><button class="mf-text-link" data-mf="edit-scene" data-index="'+i+'">调整 ›</button></div><p>'+esc(scene.setting)+'</p><p>'+esc(scene.action)+'</p></section>'+cards+'</div>'+footer('<button class="mf-primary" data-mf="confirm-demo-assets" disabled>满意，制作影片</button>');
+    return header('预览与调整')+'<div class="mf-script-top">'+phases(2)+nav+'</div><div class="body mf-body mf-script-reader"><div class="mf-chapter-heading"><h1>'+esc(scene.title)+'</h1></div><section class="mf-chapter-direction"><div class="mf-direction-heading"><h2>本章场景与画面安排</h2><button class="mf-text-link" data-mf="edit-scene" data-index="'+i+'">调整 ›</button></div><p>'+esc(scene.setting)+'</p><p>'+esc(scene.action)+'</p></section>'+cards+'</div>'+footer('<button class="mf-primary" data-mf="confirm-demo-assets">满意，制作影片</button>');
   }
   function shotAssetEditor(p){
     const scene=p.screenplay.scenes[p.visualIndex||0],shot=chapterShots(p,scene).find(x=>x.id===activeShotId);if(!shot)return header('片段已变化')+'<div class="body mf-body">原讲述已调整，请返回重新选择片段。</div>';
@@ -365,7 +365,10 @@
 
   function videoDemo(){return generationPage(project(),true);}
 
-  function filmPreview(p){if(p.caseId)return header('影片预览')+'<div class="body mf-body mf-mobile-step"><h1>'+esc(p.title)+'</h1><p class="mf-step-intro">蒋老师的影片尚未生成</p><p>已准备真实故事稿和画面构想，待接入制作服务。</p><button class="mf-primary" data-mf="edit-film-shots">查看故事段落</button><button class="mf-text-link" data-mf="review-demo-assets">查看制作素材 ›</button></div>';return header('微电影预览')+'<div class="body mf-body mf-film-preview"><div class="mf-page-intro"><h1>'+esc(p.title)+'</h1><p><b class="mf-demo-tag">演示预览</b>以下为示例片段，并非您的正式影片。</p></div><div class="mf-video-stage"><video controls playsinline preload="metadata" src="v17/assets/film-demo-preview.mp4" aria-label="微电影演示片段"></video><button class="mf-video-poster" data-mf="play-demo" aria-label="播放演示片段">'+referenceArt('preview')+'<span>▷　播放演示片段</span></button></div><div class="mf-film-actions"><button class="mf-primary" data-mf="save-film-demo">保存演示预览</button><button class="mf-secondary" data-mf="edit-film-shots">改一改</button></div><button class="mf-text-link" data-mf="review-demo-assets">查看制作素材 ›</button><p class="mf-muted">当前视频仅演示播放流程，生成与片段重制尚未接入。</p></div>';}
+  function filmPreview(p){
+    return header('影片预览')+'<div class="body mf-body mf-final-preview">'+phases(3)+'<div class="mf-final-heading"><span>光影留住时光</span><h1>'+esc(p.title)+'</h1><p>一段珍贵的故事，一部属于自己的电影</p></div><div class="mf-final-player"><video controls playsinline preload="metadata" poster="v17/assets/film-family-illustration.png" src="v17/assets/film-demo-preview.mp4" aria-label="微电影示例视频"></video><span class="mf-final-badge">示例影片</span></div></div>'+footer('<button class="mf-secondary" data-mf="back-board">返回预览与调整</button>');
+  }
+
   function filmShots(p){
     const cards=p.screenplay.scenes.map((scene,i)=>'<button class="mf-section-row" data-mf="edit-film-scene" data-index="'+i+'"><span>'+String(i+1).padStart(2,'0')+'</span><span><b>'+esc(scene.title)+'</b><small>'+esc(scene.narration)+'</small></span><span>›</span></button>').join('');
     return header('改一改影片')+'<div class="body mf-body mf-sections"><h1>哪段故事想改一改？</h1><p>先选一段，再告诉我们哪里不满意。</p>'+cards+'<p class="mf-muted">当前为故事段落预览，影片生成与片段重制尚未接入。</p></div>'+footer('<button class="mf-primary" data-mf="show-film-preview">返回影片预览</button>');
@@ -459,8 +462,8 @@
         if(n===1){view='people';render();return;}
         if(!protagonistReady(p)){notify('请先完成人物形象生成。');return;}
         if(n===2){view='production';render();return;}
-        if(!p.filmJob||p.filmJob.revision!==p.revision||p.visualApproval?.revision!==p.revision){notify('镜头画面准备好并确认制作后，才能查看影片。');return;}
-        view='video-demo';render();return;
+        if(!p.filmJob||p.filmJob.revision!==p.revision||p.visualApproval?.revision!==p.revision){notify('请先在预览调整中确认制作影片。');return;}
+        view=p.filmJob.simulated?'film-preview':'video-demo';render();return;
       }
       if(action==='preview-chapter'){const top=root.querySelector('.mf-chapter-list')?.scrollTop||0;directoryChapter=Number(button.dataset.index);render();root.querySelector('.mf-chapter-list').scrollTop=top;return;}
       if(action==='preview-toc'){directoryChapter=project().visualIndex||0;view='preview-toc';render();return;}
@@ -498,7 +501,7 @@
       if(action==='confirm-person-demo'){const p=clone(project());if(p.characterPhotos?.[personRole])p.characterPhotos[personRole].demoConfirmed=true;if(storeProject(p,true)){view='production';render();notify('演示已确认，画布传输尚未接入。');}return;}
       if(action==='generate-person'||action==='generate-all'){notify('AI 图片生成服务尚未接入，暂未生成资产。');return;}
       if(action==='generate-assets'){view='review-assets';render();return;}
-      if(action==='confirm-demo-assets'){const p=clone(checkedProject());if(!p.previewJob?.items?.length||p.previewJob.items.some(item=>item.status!=='ready'||!item.url)||p.editorDraft||Object.keys(p.narrationDrafts||{}).length)throw Error('请先完成讲述调整并等待各段预览图生成。');p.visualApproval={revision:p.revision,at:Date.now()};p.demoAssetsConfirmed=true;p.filmJob=p.filmJob||{id:'film-'+Date.now(),revision:p.revision,status:'not_connected'};if(storeProject(p,true)){view='video-demo';render();}return;}
+      if(action==='confirm-demo-assets'){const p=clone(checkedProject());if(p.editorDraft||Object.keys(p.narrationDrafts||{}).length)throw Error('请先完成讲述调整。');p.visualApproval={revision:p.revision,at:Date.now()};p.filmJob={id:'film-demo-'+Date.now(),revision:p.revision,status:'ready',simulated:true};if(storeProject(p,true)){view='film-preview';render();}return;}
       if(action==='review-demo-assets'){view='review-assets';render();return;}
       if(action==='show-film-preview'){view='film-preview';render();return;}
       if(action==='edit-film-shots'){view='film-shots';render();return;}
