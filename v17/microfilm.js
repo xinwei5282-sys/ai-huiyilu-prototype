@@ -63,7 +63,7 @@
   let cardSelection=null,cardGroup='',cardReturn='story',historyIndex=0,novelEditing=false,shotPhotosOpen=false,shotOriginal='';
   let returnTo='session',rangeOpen=false,editIndex=0,readingScroll=0,sceneIndex=0,sceneReturn='production',adjustReturn='story',activeShotId='',directoryChapter=0;
   function characterReferenceKey(p,id){const text=p.characterPhotos?.[id]?.url||'';let h=2166136261;for(let i=0;i<text.length;i++){h^=text.charCodeAt(i);h=Math.imul(h,16777619);}return text?'photo-'+(h>>>0).toString(36)+'-'+text.length:'story-only';}
-  function characterImageReady(p,id){const item=p.characterGeneration?.items?.[id];return p.characterGeneration?.revision===p.revision&&item?.referenceKey===characterReferenceKey(p,id)&&item.status==='ready'&&typeof item.imageUrl==='string'&&/^(https?:\/\/|data:image\/)/i.test(item.imageUrl);}
+  function characterImageReady(p,id){const item=p.characterGeneration?.items?.[id];return p.characterGeneration?.revision===p.revision&&item?.referenceKey===characterReferenceKey(p,id)&&item.status==='ready'&&typeof item.imageUrl==='string'&&(/^(https?:\/\/|data:image\/)/i.test(item.imageUrl)||(item.simulated===true&&item.imageUrl==='v17/assets/film-three-views-example.png'));}
   function allCharacterImagesReady(p){return !!p&&storyPeople(p).every(person=>characterImageReady(p,person.id));}
   function protagonistReady(p){return p?.protagonistApproval?.revision===p?.revision&&Array.isArray(p?.protagonistApproval?.people)&&allCharacterImagesReady(p);}
   function resumeView(p){return !p?'home':p.stage==='brief'?'choose':p.editorDraft||p.sourcePending||!core.isApproved(p)?'story':!protagonistReady(p)?'people':p.visualApproval?.revision===p.revision?'video-demo':p.visualStep==='waiting'?'preview-wait':'production';}
@@ -281,7 +281,7 @@
     const readyCount=persons.filter(person=>characterImageReady(p,person.id)).length;
     const label=person=>characterImageReady(p,person.id)?'已生成':p.characterGeneration?.revision===p.revision&&p.characterGeneration.items?.[person.id]?.status==='not_connected'?'未接入':'待生成';
     const cards='<div class="mf-people-summary"><span>'+persons.length+' 位故事人物</span><span>已生成 '+readyCount+' / '+persons.length+'</span></div><div class="mf-character-picker" aria-label="选择故事人物">'+persons.map(person=>'<button type="button" data-mf="select-person" data-role="'+esc(person.id)+'" aria-pressed="'+(person.id===role)+'"><b>'+esc(person.id==='我'?(p.caseId?'蒋老师':'我'):person.id)+'</b><small>'+label(person)+'</small></button>').join('')+'</div>';
-    const image=ready?'<figure class="mf-person-result"><img src="'+esc(item.imageUrl)+'" alt="'+esc(current.name)+'的人物形象"><figcaption>'+(photo?'根据参考照片生成':'根据故事生成的示意形象')+'</figcaption></figure>':'<div class="mf-person-pending"><b>'+(item?.status==='not_connected'?'形象生成服务尚未接入':'人物形象待生成')+'</b><span>'+(photo?'将参考这张照片':'没有照片时，将根据故事生成示意形象')+'</span></div>';
+    const image=ready?'<figure class="mf-person-result"><img src="'+esc(item.imageUrl)+'" alt="'+esc(current.name)+'的人物形象"><figcaption>'+(item.simulated?'人物形象示例 · 原型模拟生成':photo?'根据参考照片生成':'根据故事生成的示意形象')+'</figcaption></figure>':'<div class="mf-person-pending"><b>'+(item?.status==='not_connected'?'形象生成服务尚未接入':'人物形象待生成')+'</b><span>'+(photo?'将参考这张照片':'没有照片时，将根据故事生成示意形象')+'</span></div>';
     return header('故事中的人物')+'<div class="body mf-body mf-mobile-step mf-people-page">'+phases(1)+'<h1>故事里的重要人物</h1>'+cards+'<article class="mf-person-choice"><h2>'+esc(current.name)+'</h2>'+image+(photo?'<img class="mf-board-photo" src="'+esc(photoUrl(photo))+'" alt="'+esc(current.name)+'的参考照片">':'')+'<label class="mf-upload-photo">'+(photo?'更换此人物照片':'添加此人物照片')+'<input type="file" accept="image/jpeg,image/png,image/webp" data-character-photo="'+esc(role)+'"></label></article></div>'+footer('<div class="mf-person-actions"><button class="mf-secondary" data-mf="generate-characters" '+(allReady?'disabled':'')+'>生成人物形象</button><button class="mf-primary" data-mf="confirm-protagonist" '+(!allReady?'disabled':'')+'>生成影片预览</button></div>');
   }
   // The prototype persists a blocked request; a service must supply actual generated results.
@@ -442,8 +442,8 @@
       if(action==='select-person'){if(storeProject({...project(),visualRole:button.dataset.role},true))render();return;}
       if(action==='generate-characters'){
         let p=clone(checkedProject());if(!core.isApproved(p))throw Error('请先确认故事。');const people=storyPeople(p),old=p.characterGeneration;
-        const items=Object.fromEntries(people.map(person=>{const key=characterReferenceKey(p,person.id),previous=old?.revision===p.revision?old.items?.[person.id]:null;return [person.id,previous?.referenceKey===key&&characterImageReady(p,person.id)?previous:{referenceKey:key,mode:p.characterPhotos?.[person.id]?'photo':'story',status:'not_connected'}];}));
-        p.characterGeneration={revision:p.revision,items};if(storeProject(p,true)){render();notify('人物形象生成服务尚未接入，暂不能进入下一步。');}return;
+        const items=Object.fromEntries(people.map(person=>{const key=characterReferenceKey(p,person.id),previous=old?.revision===p.revision?old.items?.[person.id]:null;return [person.id,previous?.referenceKey===key&&characterImageReady(p,person.id)?previous:{referenceKey:key,mode:p.characterPhotos?.[person.id]?'photo':'story',status:'ready',simulated:true,imageUrl:'v17/assets/film-three-views-example.png'}];}));
+        p.characterGeneration={revision:p.revision,items};if(storeProject(p,true)){render();notify('人物示例形象已准备好，可以继续。');}return;
       }
       if(action==='confirm-protagonist'){
         let p=clone(checkedProject());if(!core.isApproved(p))throw Error('请先确认故事。');if(!allCharacterImagesReady(p))throw Error('请先完成人物形象生成。');
