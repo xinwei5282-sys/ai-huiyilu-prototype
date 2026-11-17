@@ -2265,6 +2265,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 #contribdetail .co-meta span{background:var(--cream-2);border-color:var(--paper-line);color:var(--text-2)}
 </style>
 <link rel="stylesheet" href="v17/microfilm.css?v=75215db653abf3af">
+<link rel="stylesheet" href="v17/daily-posters.css?v=1eecb796beaf7dfd">
 </head>
 <body>
 
@@ -2475,7 +2476,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
           </div>
           <div class="hm2-create-entries" aria-label="回忆作品">
             <button type="button" id="home-microfilm" data-go="film" data-film-entry="home"><span class="hm2-create-title"><svg class="ico-ph" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3V9Z"/></svg><b>人生微电影</b></span><span class="hm2-create-sub">把回忆拍成电影</span></button>
-            <button type="button" id="home-daily-poster" data-toast="每日分享海报（九宫格）暂未开放，后续将在这里制作。"><span class="hm2-create-title"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18"/></svg><b>每日分享海报</b></span><span class="hm2-create-sub">九宫格 · 待开放</span></button>
+            <button type="button" id="home-daily-poster" data-go="daily-posters"><span class="hm2-create-title"><svg class="ico-ph" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18"/></svg><b>每日分享海报</b></span><span class="hm2-create-sub">每日九张 · 为你精选</span></button>
           </div>
         </div>
       </div>
@@ -4103,6 +4104,7 @@ Object.assign(PRD_FIELDS,{
   review:[['审核分类','顶部切换列表状态','待确认 / 已采纳'],['列表条目','点击进入详情，不在列表采纳','贡献者 / 标题摘要 / 时间 / 状态'],['待确认数','顶部只读统计','0-N'],['审核状态','列表标签','待确认 / 已采纳']],
   reviewdetail:[['贡献者','只读展示家人身份和时间','女儿 / 儿子 / 孙辈 / 亲友'],['来源问题','只读展示本段对应问题','1 条问题文本'],['补充正文','完整展示家人补充内容','20-1200 字'],['素材列表','图片和视频统一横向展示，可点击放大','0-N 张图片 / 0-N 段视频'],['详情状态','只读状态标签','待确认 / 已采纳'],['详情动作','待确认时显示','先放着 / 采纳进书']]
 });
+Object.assign(PRD_CONTENT,{"daily-posters": {"title": "每日分享海报 PRD V1.2", "stage": "单图原型 · 日期历史与生图待接入", "goal": "每日九张独立成品，按日期倒序浏览，由用户选择单张保存或分享。", "promptDocs": [["完整PRD与生成提示词", "v17/daily-posters.md"]], "status": ["当前11张成品图库：两列九图、同页无标题栏图片浮层、左右滑动/鼠标拖动/箭头切换、单图保存；无多选、批量保存、喜好、换图和缩放。", "多日期7天历史、默认参考回忆、九栏内容、健康审核与平台自动生成均待开发。", "目标图片规格9:16、720×1280；现有样例仍为3:4、导出900×1200，待重新生成素材及同步导出。"], "requirements": ["按所属日期倒序，每日9张、两列；只展示今天及前6自然日实际发布过的分组，不补缺失日期。", "滑动仅在当前日期内切换，首尾循环；关闭恢复原列表位置。", "生图复用视频生成平台能力，提交、回传、审核、存储与发布分离；本文不标注模型和价格。", "默认参考回忆录可用内容，无授权弹窗或开启步骤；无回忆仍推荐通用九张，每日最多1张直接引用。", "近3天使用者6点前准备；4—7天暂停专属生成；超过7天停止个人定时生成和提醒。", "同日固定，刷新和保存不重复生图；已取消手动换图及每日3次额度。", "健康知识须专业审核，图片直接生成完整文字；近30天核对主题、句子、构图与引用事实。", "海报成品与保存均为720×1280、9:16竖图，完整展示；不拉伸或裁切旧3:4素材充数。"], "edgeCases": ["无回忆使用公共九张；无城市省略天气；历史日期天气图保存前提示时效。", "平台成功不代表审核通过；任务创建不代表生成成功；下载和系统分享不代表朋友圈发布。"], "acceptance": ["当前可验证单图浏览与导出；多日期、平台任务和调度按完整PRD验收表另行实测。"]}});
 function renderPrd(id){
   var data=PRD_CONTENT[id]||PRD_CONTENT.default;
   var fields=PRD_FIELDS[id]||PRD_FIELDS.default;
@@ -5201,5 +5203,7 @@ window.addEventListener('hashchange',applyHash);
 <script src="v17/jiang-teacher-generated-story.js?v=ab7190b4381d2eda"></script>
 <script src="v17/jiang-teacher-case.js?v=e73fe5b556d239d5"></script>
 <script src="v17/microfilm.js?v=758ff8f393ea7d65"></script>
+<script src="v17/daily-poster-assets.js?v=bd6f4373a0ba6adf"></script>
+<script src="v17/daily-posters.js?v=83158a79b9912b92"></script>
 </body>
 </html>
