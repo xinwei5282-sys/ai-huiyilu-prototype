@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..'),entry=path.join(root,'prototype-v17.html');
 const before=fs.readFileSync(entry,'utf8');let after=before;
-const assets=['v17/daily-poster-assets.js','v17/daily-posters.css','v17/daily-posters.js','v17/microfilm.css','v17/microfilm-core.js','v17/microfilm.js','v17/jiang-teacher-data.js','v17/jiang-teacher-case.js','v17/jiang-teacher-generated-story.js','v17/memoir-catalog.js'];
+const assets=['v17/daily-poster-studio.js','v17/daily-posters-core.js','v17/daily-poster-assets.js','v17/daily-posters.css','v17/daily-posters.js','v17/microfilm.css','v17/microfilm-core.js','v17/microfilm.js','v17/jiang-teacher-data.js','v17/jiang-teacher-case.js','v17/jiang-teacher-generated-story.js','v17/memoir-catalog.js'];
 for(const asset of assets){
   const version=crypto.createHash('sha256').update(fs.readFileSync(path.join(root,asset))).digest('hex').slice(0,16);
   const escaped=asset.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
