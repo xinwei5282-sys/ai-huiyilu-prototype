@@ -381,7 +381,7 @@ function composeSource(d){
 function renderStudio(body){
  const d=studio.draft;
  if(mode==='feed'){
-  body.innerHTML=`<div class="dp-feed-top"><span>${Number(today().slice(5,7))}月${Number(today().slice(8))}日</span><nav>${button('subscriptions','订阅内容')}${button('identity','署名')}</nav></div><section class="dp-create-intro"><small>把日子，写成自己的作品</small><h1>今天，想分享点什么？</h1><p>一句话、一张照片，都是你的故事。</p><div class="dp-create-choices">${button('compose','我想分享','dp-primary')}</div></section><div class="dp-section-line"><h2>分享海报</h2></div><p class="dp-field-help">当前图片为原型样例，非每日新生成。</p>${renderTimeline()}`;body.scrollTop=gridScroll;return;
+  body.innerHTML=`<div class="dp-feed-top"><span>${Number(today().slice(5,7))}月${Number(today().slice(8))}日</span><nav>${button('subscriptions','订阅内容')}${button('identity','署名')}</nav></div><section class="dp-create-intro"><small>把日子，写成自己的作品</small><h1>今天，想分享点什么？</h1><p>一句话、一张照片，都是你的故事。</p><div class="dp-create-choices">${button('compose','我想分享','dp-primary')}</div></section><div class="dp-section-line"><h2>分享海报</h2></div><p class="dp-field-help">挑一张，分享心情</p>${renderTimeline()}`;body.scrollTop=gridScroll;return;
  }
  if(mode==='compose'){
   const category=d.category||'随心分享',hint={随心分享:'例如：退休以后，更想把日子过得从容些。',热点资讯:'你怎么看这件事？不写也可以。',每日健康:'可以说说自己的日常习惯或关心的问题。',怀旧往事:'这段往事或照片，让你想起了什么？',每日一卦:'这段卦意，让你想到了什么？',每日诗句:'这句诗为什么打动你？',节日关怀:'想对谁说些什么？比如：重阳节，祝父母平安顺遂。',每日祝福:'想给谁送上一句什么样的祝福？'}[category];
