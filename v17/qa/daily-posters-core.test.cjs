@@ -1,0 +1,28 @@
+const assert=require('node:assert/strict');
+const c=require('../daily-posters-core.js');
+const assets=Array.from({length:9},(_,i)=>({id:'b'+i,cat:'每日祝福',identityName:'云山'}));
+let s=c.prepare(c.init(null,assets,'2026-11-17'),'2026-11-17',assets);
+assert.equal(s.groups[0].ids.length,9);assert.ok(s.groups[0].plan.every(p=>p.requested==='每日祝福'));
+const original=JSON.stringify(s.groups[0]);
+s=c.update(s,{subscriptions:['health','poetry'],healthTopics:['睡眠']},'2026-11-17');
+assert.deepEqual(s.active.subscriptions,[]);assert.equal(s.pending.effectiveDate,'2026-11-18');assert.equal(JSON.stringify(s.groups[0]),original);
+s=c.prepare(s,'2026-11-18',assets);assert.deepEqual(s.active.subscriptions,['health','poetry']);assert.equal(s.groups[0].plan.filter(p=>p.requested==='每日祝福').length,7);assert.equal(s.groups[0].plan.find(p=>p.requested==='每日健康').healthTopic,'睡眠');assert.equal(s.groups[0].plan.filter(p=>p.fallback).length,2);
+s=c.update(s,{subscriptions:['poetry']},'2026-11-18');assert.deepEqual(s.active.subscriptions,['health','poetry'],'future changes preserve active preferences');s=c.prepare(s,'2026-11-19',assets);assert.deepEqual(s.active.subscriptions,['poetry']);
+s=c.update(s,{penName:'清风'},'2026-11-19');s=c.prepare(s,'2026-11-20',assets);assert.equal(s.groups[0].status,'preparing');assert.equal(s.groups[0].ids.length,0);assert.equal(s.groups[1].status,'ready');
+const completed=c.prepare(s,'2026-11-20',assets.map(a=>({...a,identityName:'清风'})));assert.equal(completed.groups[0].status,'ready','new matching inventory can complete a preparing date');
+s=c.update(s,{penName:'云山'},'2026-11-20');s=c.prepare(s,'2026-11-20',assets);assert.equal(s.groups[0].status,'ready','unpublished day uses changes immediately');
+const stable=JSON.stringify(s);assert.equal(JSON.stringify(c.prepare(s,'2026-11-20',assets)),stable,'refresh is idempotent');
+s=c.prepare(s,'2026-11-27',assets);assert.deepEqual(s.groups.map(g=>g.date),['2026-11-27'],'no historical backfill');
+for(let n=28;n<=30;n++)s=c.prepare(s,'2026-11-'+n,assets);for(let n=1;n<=5;n++)s=c.prepare(s,'2026-12-0'+n,assets);assert.equal(s.groups.length,7);assert.equal(s.groups.at(-1).date,'2026-11-29');
+let all=c.update(c.init(null,assets,'2026-11-17'),{subscriptions:c.TYPES},'2026-11-17');assert.equal(c.prepare(all,'2026-11-17',assets).groups[0].plan.filter(p=>p.requested==='每日祝福').length,4,'no festival without verified date');assert.equal(c.prepare(all,'2026-11-17',assets,{verifiedFestival:true}).groups[0].plan.filter(p=>p.requested==='每日祝福').length,3);
+const migrated=c.init({version:2,day:'2026-11-17',ids:assets.map(a=>a.id),subscriptions:['poetry'],effectiveDate:'2026-11-18'},assets,'2026-11-17');assert.equal(migrated.groups[0].status,'ready');assert.deepEqual(migrated.active.subscriptions,[]);assert.deepEqual(migrated.pending.settings.subscriptions,['poetry']);
+assert.equal(c.init({version:3,groups:[{date:'2026-11-17',status:'ready',ids:Array(9).fill('b0')}]},assets,'2026-11-17').groups.length,0);
+console.log('PASS daily rules: snapshots, pending settings, allocation, health focus, signature fallback, rollover, retention, migration');
+
+let news=c.prepare(c.update(c.init(null,assets,'2026-11-17'),{subscriptions:['news'],newsTopics:['科技新知','文化文史','无效主题']},'2026-11-17'),'2026-11-17',assets);
+assert.deepEqual(news.groups[0].plan.find(p=>p.requested==='热点资讯').newsTopics,['科技新知','文化文史']);
+const newsImages=[...assets,{id:'news-sport',cat:'热点资讯',newsTopic:'体育赛事'},{id:'news-tech',cat:'热点资讯',newsTopic:'科技新知'}];
+news=c.prepare(news,'2026-11-18',newsImages);assert.equal(news.groups[0].plan.find(p=>p.requested==='热点资讯').assetId,'news-tech');
+news=c.update(news,{newsTopics:[]},'2026-11-18');assert.deepEqual(news.active.newsTopics,['科技新知','文化文史']);news=c.prepare(news,'2026-11-19',assets);assert.deepEqual(news.groups[0].plan.find(p=>p.requested==='热点资讯').newsTopics,['综合资讯']);
+assert.deepEqual(c.init({version:3,active:{subscriptions:['news']}},assets,'2026-11-17').active.newsTopics,[]);
+console.log('PASS news topics: persistence schema, selected-topic filtering, next-day snapshot, general default');

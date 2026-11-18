@@ -2265,7 +2265,7 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 #contribdetail .co-meta span{background:var(--cream-2);border-color:var(--paper-line);color:var(--text-2)}
 </style>
 <link rel="stylesheet" href="v17/microfilm.css?v=75215db653abf3af">
-<link rel="stylesheet" href="v17/daily-posters.css?v=1eecb796beaf7dfd">
+<link rel="stylesheet" href="v17/daily-posters.css?v=ed527e1eedbf33ad">
 </head>
 <body>
 
@@ -4104,7 +4104,7 @@ Object.assign(PRD_FIELDS,{
   review:[['审核分类','顶部切换列表状态','待确认 / 已采纳'],['列表条目','点击进入详情，不在列表采纳','贡献者 / 标题摘要 / 时间 / 状态'],['待确认数','顶部只读统计','0-N'],['审核状态','列表标签','待确认 / 已采纳']],
   reviewdetail:[['贡献者','只读展示家人身份和时间','女儿 / 儿子 / 孙辈 / 亲友'],['来源问题','只读展示本段对应问题','1 条问题文本'],['补充正文','完整展示家人补充内容','20-1200 字'],['素材列表','图片和视频统一横向展示，可点击放大','0-N 张图片 / 0-N 段视频'],['详情状态','只读状态标签','待确认 / 已采纳'],['详情动作','待确认时显示','先放着 / 采纳进书']]
 });
-Object.assign(PRD_CONTENT,{"daily-posters": {"title": "每日分享海报 PRD V1.2", "stage": "单图原型 · 日期历史与生图待接入", "goal": "每日九张独立成品，按日期倒序浏览，由用户选择单张保存或分享。", "promptDocs": [["完整PRD与生成提示词", "v17/daily-posters.md"]], "status": ["当前11张成品图库：两列九图、同页无标题栏图片浮层、左右滑动/鼠标拖动/箭头切换、单图保存；无多选、批量保存、喜好、换图和缩放。", "多日期7天历史、默认参考回忆、九栏内容、健康审核与平台自动生成均待开发。", "目标图片规格9:16、720×1280；现有样例仍为3:4、导出900×1200，待重新生成素材及同步导出。"], "requirements": ["按所属日期倒序，每日9张、两列；只展示今天及前6自然日实际发布过的分组，不补缺失日期。", "滑动仅在当前日期内切换，首尾循环；关闭恢复原列表位置。", "生图复用视频生成平台能力，提交、回传、审核、存储与发布分离；本文不标注模型和价格。", "默认参考回忆录可用内容，无授权弹窗或开启步骤；无回忆仍推荐通用九张，每日最多1张直接引用。", "近3天使用者6点前准备；4—7天暂停专属生成；超过7天停止个人定时生成和提醒。", "同日固定，刷新和保存不重复生图；已取消手动换图及每日3次额度。", "健康知识须专业审核，图片直接生成完整文字；近30天核对主题、句子、构图与引用事实。", "海报成品与保存均为720×1280、9:16竖图，完整展示；不拉伸或裁切旧3:4素材充数。"], "edgeCases": ["无回忆使用公共九张；无城市省略天气；历史日期天气图保存前提示时效。", "平台成功不代表审核通过；任务创建不代表生成成功；下载和系统分享不代表朋友圈发布。"], "acceptance": ["当前可验证单图浏览与导出；多日期、平台任务和调度按完整PRD验收表另行实测。"]}});
+Object.assign(PRD_CONTENT,{"daily-posters": {"title": "每日分享 PRD V2.2", "stage": "主动制作＋订阅推荐 · 本机原型", "goal": "每日祝福1张＋每订阅类型1张，后台提前准备；站内更新与微信合并提醒。主动选择类型和素材，系统创作整张海报，无标题正文确认页。", "promptDocs": [["完整PRD与采集说明", "v17/daily-posters.md"], ["分类提示词与生成规则", "v17/daily-poster-prompts.md"]], "status": ["八类型制作、六订阅及关注、落款设置、1＋N数量计划、本机草稿和制作请求可操作；请求状态not_connected。", "现有九张祝福图片为固定样例，不是当日自动推荐。", "个人签章生成、实时资讯及知识采集审核、整图生成、任务回流、微信推送与云端同步待接入。"], "requirements": ["未订阅不推荐该类型，但允许主动制作；取消订阅不删除历史。", "推荐提前自动准备，缺素材不凑数；站内成品可看后，每天合并一条微信提醒。", "资讯选择参考原文或自带来源；怀旧直接写或从章节故事带入，感受选填。", "回忆弹层复用现有采访选择器，左章节右故事，底部仅取消，选中即带入；无个人内容提供标明身份的示例。", "个人笔名与签章绑定身份版本，资讯/健康/诗句/卦象保留可核验来源。", "列表按日期倒序，缩略图4:5；完整图片720×1280、9:16，文案和落款整图生成。"], "edgeCases": ["空白或缺必需来源阻止提交；失败保留输入，不将样例当成新作品或个人经历。", "生成受理、校验入库和微信发送分别记录，不伪称已送达或已发朋友圈。"], "acceptance": ["验证64种订阅组合、手机及桌面弹框、草稿恢复、来源带入、请求去重和PNG；真实采集、生图、推送另行验收。"]}});
 function renderPrd(id){
   var data=PRD_CONTENT[id]||PRD_CONTENT.default;
   var fields=PRD_FIELDS[id]||PRD_FIELDS.default;
@@ -5203,7 +5203,9 @@ window.addEventListener('hashchange',applyHash);
 <script src="v17/jiang-teacher-generated-story.js?v=ab7190b4381d2eda"></script>
 <script src="v17/jiang-teacher-case.js?v=e73fe5b556d239d5"></script>
 <script src="v17/microfilm.js?v=758ff8f393ea7d65"></script>
-<script src="v17/daily-poster-assets.js?v=bd6f4373a0ba6adf"></script>
-<script src="v17/daily-posters.js?v=83158a79b9912b92"></script>
+<script src="v17/daily-poster-assets.js?v=0f7300d64a53fc3a"></script>
+<script src="v17/daily-posters-core.js?v=4bc50dcf5ac8b156"></script>
+<script src="v17/daily-poster-studio.js?v=40ba64768456d03d"></script>
+<script src="v17/daily-posters.js?v=eb10b4f4f24be44d"></script>
 </body>
 </html>
