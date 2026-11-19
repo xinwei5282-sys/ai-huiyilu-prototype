@@ -2302,6 +2302,8 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
 
 <div class="map">
   <div class="mt">屏幕地图 · V17</div>
+  <button type="button" onclick="document.getElementById('requirementsReader').showModal()" style="font-weight:800;color:#314d3f">新增需求 PRD</button>
+  <button data-go="daily-posters">· 每日分享海报</button>
   <button data-go="userpath">· 项目路径图（客户介绍）</button>
   <button data-go="setup">· 新用户信息收集（手机页）</button>
   <button data-go="session" class="act">【讲述】采访·访谈式（默认首页）</button>
@@ -2334,6 +2336,10 @@ body{font-family:var(--sans);color:var(--text);line-height:1.6;
   <button data-go="devhandoff">开发交付模式</button>
 </div>
 
+<dialog id="requirementsReader" aria-labelledby="requirementsTitle" style="margin:auto;inset:0;width:min(1120px,94vw);height:90vh;max-height:90vh;padding:0;border:1px solid #ded5c8;border-radius:16px;background:#fffbf5">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid #ded5c8"><strong id="requirementsTitle">新增需求 PRD</strong><button type="button" onclick="document.getElementById('requirementsReader').close()" style="font:inherit;padding:8px 14px;border:1px solid #ded5c8;border-radius:8px;background:white">关闭</button></div>
+  <iframe src="v17/requirements.html?v=d3be89e5291c4491" title="新增需求完整文档" style="display:block;width:100%;height:calc(100% - 72px);border:0"></iframe>
+</dialog>
 <aside class="prd-panel" id="prdPanel">
   <div class="prd-head" onclick="togglePrdPanel()">
     <div class="prd-badge">PRD</div>
@@ -5206,6 +5212,6 @@ window.addEventListener('hashchange',applyHash);
 <script src="v17/daily-poster-assets.js?v=0f7300d64a53fc3a"></script>
 <script src="v17/daily-posters-core.js?v=4bc50dcf5ac8b156"></script>
 <script src="v17/daily-poster-studio.js?v=40ba64768456d03d"></script>
-<script src="v17/daily-posters.js?v=0ad330bbc6bcf359"></script>
+<script src="v17/daily-posters.js?v=ccb3a77ad2fadf3a"></script>
 </body>
 </html>
